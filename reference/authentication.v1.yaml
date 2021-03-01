@@ -1,7 +1,10 @@
 openapi: 3.0.0
 info:
-  title: authentication
-  version: '1.0'
+  title: Authentication
+  version: '1.8'
+  description: |-
+    **test** <br>
+    what this shows
 servers:
   - url: 'http://localhost:3000'
 paths:
@@ -180,6 +183,41 @@ paths:
               type: object
               properties: {}
       description: this is a test description of a cool thing
+  /api/oauth/token:
+    post:
+      summary: Create Access and Refresh tokens
+      tags:
+        - Authorization
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: post-api-oauth-token
+      description: |-
+        Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.<br>
+        **Note:** An authorization code can be used for up to 1 min after being issued.<br>
+        **Rate Limit:** 3/second, 60/minute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Exchange-Authorization-Code-for-Access-and-Refresh-Tokens.v1.8.yaml
+            examples:
+              example:
+                value: {
+                  grant_type: test,
+                  client_id: test,
+                  client_secret: test,
+                }
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: ''
 components:
   schemas:
     User:
@@ -223,8 +261,4 @@ components:
         - lastName
         - email
         - emailVerified
-  securitySchemes:
-    API Key - 1:
-      name: API Key
-      type: apiKey
-      in: query
+  securitySchemes: {}
