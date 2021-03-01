@@ -1,0 +1,51 @@
+{
+  "items": [
+    {
+      "type": "item",
+      "title": "Getting Started",
+      "uri": "docs/getting-started.md"
+    },
+    {
+      "type": "item",
+      "title": "Authentication",
+      "uri": "docs/authentication.md"
+    },
+    {
+      "type": "item",
+      "title": "Subscriptions",
+      "uri": "docs/subscriptions.md"
+    },
+    {
+      "type": "divider",
+      "title": "test"
+    },
+    {
+      "type": "item",
+      "title": "Test-article",
+      "uri": "docs/test/Test-article.md"
+    },
+    {
+      "type": "divider",
+      "title": "APIS"
+    },
+    {
+      "type": "item",
+      "title": "authentication",
+      "uri": "reference/authentication.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Versature Integrate",
+      "uri": "spec-v1.json"
+    },
+    {
+      "type": "divider",
+      "title": "Schemas"
+    },
+    {
+      "type": "item",
+      "title": "from",
+      "uri": "models/from.v1.yaml"
+    }
+  ]
+}
