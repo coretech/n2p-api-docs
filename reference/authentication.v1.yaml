@@ -13,39 +13,9 @@ tags:
   - name: Authorization
     description: test description
 paths:
-  /api/oauth/token:
-    post:
-      summary: Create Access and Refresh tokens
-      tags:
-        - Authorization
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-      operationId: post-api-oauth-token
-      description: |-
-        Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.<br>
-        **Note:** An authorization code can be used for up to 1 min after being issued.<br>
-        **Rate Limit:** 3/second, 60/minute
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/client'
-            examples:
-              example:
-                value:
-                  grant_type: test
-                  client_id: test
-                  client_secret: test
-        description: ''
   /api/oauth/authorize:
     get:
-      summary: Your GET endpoint
+      summary: Backend API for initiating authentication
       tags:
         - Authorization
       responses:
@@ -85,6 +55,37 @@ paths:
             schema:
               type: object
               properties: {}
+        description: ''
+  /api/oauth/token:
+    post:
+      summary: Create Access and Refresh tokens
+      tags:
+        - Authorization
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: post-api-oauth-token
+      description: |-
+        Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.<br>
+        **Note:** An authorization code can be used for up to 1 min after being issued.<br>
+        **Rate Limit:** 3/second, 60/minute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/client'
+            examples:
+              example:
+                value:
+                  grant_type: test
+                  client_id: test
+                  client_secret: test
+        description: ''
 components:
   schemas:
     client:
