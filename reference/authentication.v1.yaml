@@ -1,188 +1,18 @@
 openapi: 3.0.0
 info:
-  title: Authentication
+  title: Authorization for net2phone
   version: '1.8'
   description: |-
     **test** <br>
     what this shows
+  contact:
+    email: support@net2phone.com
 servers:
   - url: 'http://localhost:3000'
+tags:
+  - name: Authorization
+    description: test description
 paths:
-  '/users/{userId}':
-    parameters:
-      - schema:
-          type: integer
-        name: userId
-        in: path
-        required: true
-        description: Id of an existing user.
-    get:
-      summary: Get User Info by User ID
-      tags: []
-      responses:
-        '200':
-          description: User Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Get User Alice Smith:
-                  value:
-                    id: 142
-                    firstName: Alice
-                    lastName: Smith
-                    email: alice.smith@gmail.com
-                    dateOfBirth: '1997-10-31'
-                    emailVerified: true
-                    signUpDate: '2019-08-24'
-        '404':
-          description: User Not Found
-        '500':
-          description: Internal Server Error
-      operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
-    patch:
-      summary: Update User Information
-      operationId: patch-users-userId
-      responses:
-        '200':
-          description: User Updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Updated User Rebecca Baker:
-                  value:
-                    id: 13
-                    firstName: Rebecca
-                    lastName: Baker
-                    email: rebecca@gmail.com
-                    dateOfBirth: '1985-10-02'
-                    emailVerified: false
-                    createDate: '2019-08-24'
-        '404':
-          description: User Not Found
-        '409':
-          description: Email Already Taken
-      description: Update the infromation of an existing user.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                  description: 'If a new email is given, the user''s email verified property will be set to false.'
-                dateOfBirth:
-                  type: string
-            examples:
-              Update First Name:
-                value:
-                  firstName: Rebecca
-              Update Email:
-                value:
-                  email: rebecca@gmail.com
-              Update Last Name & Date of Birth:
-                value:
-                  lastName: Baker
-                  dateOfBirth: '1985-10-02'
-        description: Patch user properties to update.
-  /user:
-    post:
-      summary: Create New User
-      operationId: post-user
-      responses:
-        '200':
-          description: User Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                New User Bob Fellow:
-                  value:
-                    id: 12
-                    firstName: Bob
-                    lastName: Fellow
-                    email: bob.fellow@gmail.com
-                    dateOfBirth: '1996-08-24'
-                    emailVerified: false
-                    createDate: '2020-11-18'
-        '400':
-          description: Missing Required Information
-        '409':
-          description: Email Already Taken
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                dateOfBirth:
-                  type: string
-                  format: date
-              required:
-                - firstName
-                - lastName
-                - email
-                - dateOfBirth
-            examples:
-              Create User Bob Fellow:
-                value:
-                  firstName: Bob
-                  lastName: Fellow
-                  email: bob.fellow@gmail.com
-                  dateOfBirth: '1996-08-24'
-        description: Post the necessary fields for the API to create a new user.
-      description: Create a new user.
-  '/users/test/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-    get:
-      summary: test get
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  test:
-                    type: number
-                required:
-                  - test
-              examples:
-                example-1:
-                  value:
-                    test: 0
-      operationId: get-users-test-id
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
-      description: this is a test description of a cool thing
   /api/oauth/token:
     post:
       summary: Create Access and Refresh tokens
@@ -205,60 +35,78 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/Exchange-Authorization-Code-for-Access-and-Refresh-Tokens.v1.8.yaml
+              $ref: '#/components/schemas/client'
             examples:
               example:
-                value: {
-                  grant_type: test,
-                  client_id: test,
-                  client_secret: test,
-                }
-          application/xml:
+                value:
+                  grant_type: test
+                  client_id: test
+                  client_secret: test
+        description: ''
+  /api/oauth/authorize:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Authorization
+      responses:
+        '200':
+          description: OK
+      operationId: get-api-oauth-authorize
+      description: |-
+        The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and         provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application. Once access has been granted they will be redirected to the Redirect URI with an Authentication Code in the url args.         i.e. https://integrate.versature.com/docs?code=Vb6YKAvTt6VYycU2DcML8Hmrsm4V4t This Authentication Code can be used with the: Redirect URI, Client Id, and Client Secret to obtain an Access and Refresh Token. Before you begin you must obtain a Client Id and Secret: Developer Portal. Once you have provided your redirect uri to us and have obtained your Client Id and Client Secret; direct the authenticating user to: https://integrate.versature.com/api/oauth/authorize be sure to         include the required arguments with your request (See below for arguments).<br>
+        **Rate Limit:** 3/second, 60/minute
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: response_type
+          required: true
+          description: The type of grant being performed
+        - schema:
+            type: string
+          in: query
+          name: redirect_uri
+          description: The redirect URI used to authenticate this user
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: client_id
+          description: The id of the client. The unique identifier for your application
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: state
+          description: '**Recommended** - A value used by the client to maintain state between the request and the callback. Used to help prevent cross-site request forgery'
+      requestBody:
+        content:
+          application/json:
             schema:
               type: object
               properties: {}
-        description: ''
 components:
   schemas:
-    User:
-      title: User
+    client:
+      title: Exchange Authorization Code for Access and Refresh Tokens
       type: object
-      description: This is a model description
-      x-examples:
-        Alice Smith:
-          id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
+      x-tags:
+        - Authentication
       properties:
-        id:
-          type: integer
-          description: Unique identifier for the given user.
-        firstName:
+        grant_type:
           type: string
-        lastName:
+          description: The type of grant being performed
+        client_id:
           type: string
-        email:
+          description: The id of the client. The unique identifier for your application
+        client_secret:
           type: string
-          format: email
-        dateOfBirth:
+          description: The secret provided for your client application
+        state:
           type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
-          type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
-          type: string
-          format: date
-          description: The date that the user was created.
+          description: Recommended - A value used by the client to maintain state between the request and the callback. Used to prevent cross-site request forgery
       required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+        - grant_type
+        - client_id
+        - client_secret
   securitySchemes: {}
