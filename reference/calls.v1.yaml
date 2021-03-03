@@ -246,5 +246,3 @@ components:
       required:
         - id
         - to
-    to:
-      properties: {}
