@@ -15,11 +15,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -44,11 +40,7 @@ paths:
         required: true
         type: string
         description: 'The call queue to log into. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -84,11 +76,7 @@ paths:
         required: true
         type: string
         description: 'The device to log into this queue. (Must start with sip:) '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -107,11 +95,7 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -154,11 +138,7 @@ paths:
         required: true
         schema:
           $ref: #/definitions/Call_Queue_LogoutBody
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -185,11 +165,7 @@ paths:
         required: true
         schema:
           $ref: #/definitions/Call_Queue_LogoutBody
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -215,11 +191,7 @@ paths:
         required: true
         type: string
         description: 'The Call Queue to retrieve the records for. i.e. 8000 '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -257,11 +229,7 @@ paths:
         required: true
         type: string
         description: 'Statistics will end at this point. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -304,11 +272,7 @@ paths:
         required: true
         type: string
         description: 'Split the resulting values into this period. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -351,11 +315,7 @@ paths:
         required: true
         type: string
         description: 'Split the resulting values into this period. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -398,11 +358,7 @@ paths:
         required: true
         type: string
         description: 'Split the resulting values into this period. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -441,11 +397,7 @@ paths:
         required: true
         type: string
         description: 'Statistics will end at this point. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -483,11 +435,7 @@ paths:
         required: true
         type: string
         description: 'Statistics will end at this point. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -526,11 +474,7 @@ paths:
         required: true
         type: string
         description: 'Statistics will end at this point. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -558,11 +502,7 @@ paths:
         type: string
         description: 'The call queue to get details for. Will get all call queues
           if an id is not specified. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -601,11 +541,7 @@ paths:
         required: true
         type: string
         description: 'Statistics will end at this point. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true

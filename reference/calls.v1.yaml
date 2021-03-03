@@ -21,11 +21,7 @@ paths:
           required: true
           schema:
             $ref: null
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          description: 'The media type and version which is acceptable for the response. '
+        - $ref: ../models/accept.header.v1.yaml
         - name: Authorization
           in: header
           required: true
@@ -73,11 +69,7 @@ paths:
           required: false
           type: boolean
           description: 'Should return all calls in the authorized users domain '
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          description: 'The media type and version which is acceptable for the response. '
+        - $ref: ../models/accept.header.v1.yaml
         - name: Authorization
           in: header
           required: true
@@ -102,11 +94,7 @@ paths:
           required: true
           type: string
           description: 'Id of the call to terminate. '
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          description: 'The media type and version which is acceptable for the response. '
+        - $ref: ../models/accept.header.v1.yaml
         - name: Authorization
           in: header
           required: true
@@ -130,11 +118,7 @@ paths:
           required: true
           type: string
           description: 'User from which to read active calls '
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          description: 'The media type and version which is acceptable for the response. '
+        - $ref: ../models/accept.header.v1.yaml
         - name: Authorization
           in: header
           required: true
@@ -161,11 +145,7 @@ paths:
           required: true
           schema:
             $ref: null
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          description: 'The media type and version which is acceptable for the response. '
+        - $ref: ../models/accept.header.v1.yaml
         - name: Authorization
           in: header
           required: true
@@ -190,11 +170,7 @@ paths:
           required: true
           schema:
             $ref: null
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          description: 'The media type and version which is acceptable for the response. '
+        - $ref: ../models/accept.header.v1.yaml
         - name: Authorization
           in: header
           required: true

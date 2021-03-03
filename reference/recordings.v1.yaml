@@ -21,11 +21,7 @@ paths:
         required: true
         type: string
         description: 'The term call id of the recording to fetch '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -52,11 +48,7 @@ paths:
         required: true
         type: string
         description: 'The term call id of the recording to fetch '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
@@ -83,11 +75,7 @@ paths:
         required: true
         type: string
         description: 'The term call id of the recording to fetch '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true

@@ -22,11 +22,7 @@ paths:
         type: number
         description: 'The phone number to verify. E164 format is ideal but a best
           effort will be made to format         the check the number provided. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       responses:
         '200':
           description: Success

@@ -44,11 +44,7 @@ paths:
         required: false
         type: boolean
         description: 'The user to retrieve the call records for. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
+      - $ref: ../models/accept.header.v1.yaml
       - name: Authorization
         in: header
         required: true
