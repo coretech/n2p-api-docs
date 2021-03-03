@@ -5,32 +5,27 @@ info:
 servers:
   - url: 'https://integrate.versature.com'
 paths:
-  /api/voicemails/users/{user}/count:
+  '/api/voicemails/users/{user}/count':
     get:
       tags:
-      - VoicemailsGroup
-      summary: 'Get the voicemail count for a user in a domain.Rate Limit: 1/second,
-        5/minute '
+        - VoicemailsGroup
+      summary: 'Get the voicemail count for a user in a domain.Rate Limit: 1/second, 5/minute '
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: user
-        in: path
-        required: true
-        type: string
-        description: 'The user you want voicemail count for '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+        - name: user
+          in: path
+          required: true
+          type: string
+          description: 'The user you want voicemail count for '
+        - $ref: ../models/accept.header.v1.yaml
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
       responses:
         '200':
           description: Success
@@ -40,4 +35,3 @@ components:
   schemas:
     to:
       properties: {}
-    

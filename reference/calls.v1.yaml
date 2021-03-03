@@ -5,207 +5,201 @@ info:
 servers:
   - url: 'https://integrate.versature.com'
 paths:
-  /api/calls/{call_id}/answer:
+  '/api/calls/{call_id}/answer':
     put:
       tags:
-      - CallsGroup
-      summary: 'Answer a call with a given id on a given device.Rate Limit: 1/second,
-        15/minute '
+        - CallsGroup
+      summary: 'Answer a call with a given id on a given device.Rate Limit: 1/second, 15/minute '
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: Answer_a_CallBody
-        description: 'Answer a call with a given id on a given device.Rate Limit:
-          1/second, 15/minute '
-        required: true
-        schema:
-          $ref: #/definitions/Answer_a_CallBody
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+        - in: body
+          name: Answer_a_CallBody
+          description: 'Answer a call with a given id on a given device.Rate Limit: 1/second, 15/minute '
+          required: true
+          schema:
+            $ref: null
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: 'The media type and version which is acceptable for the response. '
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+        - schema:
+            type: string
+          in: header
+          name: accept
       responses:
         '200':
           description: ''
   /api/calls/users/active:
     get:
       tags:
-      - CallsGroup
-      summary: 'Obtain a list of active calls for the current domain.Rate Limit: 1/second,
-        15/minute '
+        - CallsGroup
+      summary: 'Obtain a list of active calls for the current domain.Rate Limit: 1/second, 15/minute '
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters: []
       responses:
         '200':
           description: Success
           schema:
-            $ref: #/definitions/to
-  /api/calls/{call_id}:
+            $ref: null
+  '/api/calls/{call_id}':
     get:
       tags:
-      - CallsGroup
-      summary: 'Obtain a list of active calls for a given user. If no id is passed
-        then will get the active calls for the authenticated user. '
+        - CallsGroup
+      summary: 'Obtain a list of active calls for a given user. If no id is passed then will get the active calls for the authenticated user. '
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: call_id
-        in: path
-        required: true
-        type: number
-        description: 'Id of the user from which to read active calls '
-      - name: all
-        in: query
-        required: false
-        type: boolean
-        description: 'Should return all calls in the authorized users domain '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+        - name: call_id
+          in: path
+          required: true
+          type: number
+          description: 'Id of the user from which to read active calls '
+        - name: all
+          in: query
+          required: false
+          type: boolean
+          description: 'Should return all calls in the authorized users domain '
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: 'The media type and version which is acceptable for the response. '
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
       responses:
         '200':
           description: Success
           schema:
-            $ref: #/definitions/to
+            $ref: null
     delete:
       tags:
-      - CallsGroup
+        - CallsGroup
       summary: 'Terminate the call with the provided idRate Limit: 1/second, 15/minute '
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: call_id
-        in: path
-        required: true
-        type: string
-        description: 'Id of the call to terminate. '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+        - name: call_id
+          in: path
+          required: true
+          type: string
+          description: 'Id of the call to terminate. '
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: 'The media type and version which is acceptable for the response. '
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
       responses:
         '200':
           description: ''
-  /api/calls/users/{user}/active:
+  '/api/calls/users/{user}/active':
     get:
       tags:
-      - CallsGroup
-      summary: 'Obtain a list of active calls for a given user. If no id is passed
-        then will get the active calls for the authenticated user.Rate Limit: 1/second,
-        15/minute '
+        - CallsGroup
+      summary: 'Obtain a list of active calls for a given user. If no id is passed then will get the active calls for the authenticated user.Rate Limit: 1/second, 15/minute '
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: user
-        in: path
-        required: true
-        type: string
-        description: 'User from which to read active calls '
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+        - name: user
+          in: path
+          required: true
+          type: string
+          description: 'User from which to read active calls '
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: 'The media type and version which is acceptable for the response. '
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
       responses:
         '200':
           description: Success
           schema:
-            $ref: #/definitions/to
+            $ref: null
   /api/calls:
     post:
       tags:
-      - CallsGroup
-      summary: 'Place a call from the provided user/device to a given destination.
-        Destination can be sip address or any valid phone number. E164 format is recommended.Rate
-        Limit: 1/second, 15/minute '
+        - CallsGroup
+      summary: 'Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.Rate Limit: 1/second, 15/minute '
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: Place_a_CallBody
-        description: 'Place a call from the provided user/device to a given destination.
-          Destination can be sip address or any valid phone number. E164 format is
-          recommended.Rate Limit: 1/second, 15/minute '
-        required: true
-        schema:
-          $ref: #/definitions/Place_a_CallBody
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+        - in: body
+          name: Place_a_CallBody
+          description: 'Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.Rate Limit: 1/second, 15/minute '
+          required: true
+          schema:
+            $ref: null
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: 'The media type and version which is acceptable for the response. '
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
       responses:
         '200':
           description: ''
-  /api/calls/{call_id}/reject:
+  '/api/calls/{call_id}/reject':
     put:
       tags:
-      - CallsGroup
+        - CallsGroup
       summary: 'Reject a call with a given id.Rate Limit: 1/second, 15/minute '
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - in: body
-        name: Rehect_a_CallBody
-        description: 'Reject a call with a given id.Rate Limit: 1/second, 15/minute '
-        required: true
-        schema:
-          $ref: #/definitions/Rehect_a_CallBody
-      - name: Accept
-        in: header
-        required: true
-        type: string
-        description: 'The media type and version which is acceptable for the response. '
-      - name: Authorization
-        in: header
-        required: true
-        type: string
-        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+        - in: body
+          name: Rehect_a_CallBody
+          description: 'Reject a call with a given id.Rate Limit: 1/second, 15/minute '
+          required: true
+          schema:
+            $ref: null
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: 'The media type and version which is acceptable for the response. '
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+          description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
       responses:
         '200':
           description: ''
@@ -220,12 +214,10 @@ components:
           description: 'The destination for this call. (Phone number, sip address) '
         from:
           type: string
-          description: 'Where this call originates. Will default to current authenticated
-            user if a value is not provided. '
+          description: 'Where this call originates. Will default to current authenticated user if a value is not provided. '
         auto_answer:
           type: boolean
-          description: 'Auto Answer - Should this caller side be auto answered. (May
-            not be supported by the answering device.) '
+          description: 'Auto Answer - Should this caller side be auto answered. (May not be supported by the answering device.) '
       required:
         - to
     Rehect_a_CallBody:
