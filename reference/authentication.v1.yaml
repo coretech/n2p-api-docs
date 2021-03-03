@@ -8,7 +8,7 @@ info:
   contact:
     email: support@net2phone.com
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'https://integrate.versature.com'
 tags:
   - name: Authorization
     description: test description
@@ -58,7 +58,7 @@ paths:
         description: ''
   /api/oauth/token:
     post:
-      summary: Create Access and Refresh tokens
+      summary: Client Credentials Grant
       tags:
         - Authorization
       responses:

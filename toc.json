@@ -17,35 +17,71 @@
     },
     {
       "type": "divider",
-      "title": "test"
-    },
-    {
-      "type": "item",
-      "title": "Test-article",
-      "uri": "docs/test/Test-article.md"
-    },
-    {
-      "type": "divider",
       "title": "APIS"
     },
     {
       "type": "item",
-      "title": "authentication",
+      "title": "Authentication",
       "uri": "reference/authentication.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "CDRs",
+      "uri": "reference/cdrs.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Call Queues",
+      "uri": "reference/queues.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Calls",
+      "uri": "reference/calls.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Devices",
+      "uri": "reference/devices.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Presence",
+      "uri": "reference/presence.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Portability",
+      "uri": "reference/portability.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Call Recordings",
+      "uri": "reference/recordings.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Subscriptions",
+      "uri": "reference/subscriptions.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Users",
+      "uri": "reference/users.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Voicemails",
+      "uri": "reference/voicemails.v1.yaml"
+    },
+    {
+      "type": "divider",
+      "title": "Original"
     },
     {
       "type": "item",
       "title": "Versature Integrate",
       "uri": "spec-v1.json"
-    },
-    {
-      "type": "divider",
-      "title": "Schemas"
-    },
-    {
-      "type": "item",
-      "title": "from",
-      "uri": "models/from.v1.yaml"
     }
   ]
 }
