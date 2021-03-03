@@ -6,89 +6,311 @@ info:
 servers:
   - url: 'https://integrate.versature.com'
 paths:
-  /api/cdrs:
-    parameters: []
+  /api/cdrs/users/{user}:
     get:
-      summary: Domain CDRs
-      tags: []
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the user specified.
+        The user (extension) will be used to get the call records for that user. Rate
+        Limit: 5/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: user
+        in: path
+        required: true
+        type: string
+        description: 'The user/extension to retrieve the call records for. i.e. 101 '
+      - name: start_date
+        in: query
+        required: true
+        type: string
+        description: 'Get calls which started after this time. '
+      - name: end_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls which ended after this time. '
+      - name: offset
+        in: query
+        required: false
+        type: integer
+        description: 'The offset from the beginning of the date/time period. '
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        description: 'The number of results to be returned. Max value 1000. '
+      - name: Accept
+        in: header
+        required: true
+        type: string
+        description: 'The media type and version which is acceptable for the response. '
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
       responses:
         '200':
-          description: User Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                Get User Alice Smith:
-                  value:
-                    id: 142
-                    firstName: Alice
-                    lastName: Smith
-                    email: alice.smith@gmail.com
-                    dateOfBirth: '1997-10-31'
-                    emailVerified: true
-                    signUpDate: '2019-08-24'
-        '404':
-          description: User Not Found
-      operationId: get-users-userId
-      description: |-
-        Get the call records for a given time period for the users in a domain.<br>
-        ** Rate Limit:** 5/second, 15/minute
+          description: ''
+          schema:
+            $ref: #/definitions/to
+  /api/cdrs/{user}:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the users specified.
+        If provided the id will be used to get the call records for that user. If
+        not specified call records will be fetched for the currently authenticated
+        user. If you wish to retrieve all calls across your domain use the &quot;all&quot;
+        argument. Rate Limit: 5/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
       parameters:
-        - schema:
+      - name: user
+        in: path
+        required: true
+        type: string
+        description: 'The user/extension to retrieve the call records for. i.e. 101 '
+      - name: all
+        in: query
+        required: false
+        type: boolean
+        description: 'Get call records for all users? '
+      - name: start_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls which started after this time. '
+      - name: end_date
+        in: query
+        required: true
+        type: string
+        description: 'Get calls which ended after this time. '
+      - name: offset
+        in: query
+        required: false
+        type: integer
+        description: 'The offset from the beginning of the date/time period. '
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        description: 'The number of results to be returned. Max value 1000. '
+      - name: Accept
+        in: header
+        required: true
+        type: string
+        description: 'The media type and version which is acceptable for the response. '
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: #/definitions/to
+  /api/cdrs/{id}:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the users specified.
+        If provided the id will be used to get the call records for that user. If
+        not specified call records will be fetched for the currently authenticated
+        user. If you wish to retrieve all calls across your domain use the &quot;all&quot;
+        argument. Rate Limit: 5/second, 30/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+        description: 'The user/extension to retrieve the call records for. i.e. 101 '
+      - name: all
+        in: query
+        required: false
+        type: boolean
+        description: 'The user to retrieve the call records for. '
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'The type of calls to extract. Will provide all types if no value
+          is specified. '
+      - name: start_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls from this time forward. '
+      - name: end_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls up to this time. '
+      - name: offset
+        in: query
+        required: false
+        type: integer
+        description: 'The offset from the beginning of the date/time period. '
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        description: 'The number of results to be returned. Max value 200. '
+      - name: Accept
+        in: header
+        required: true
+        type: string
+        description: 'The media type and version which is acceptable for the response. '
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: #/definitions/to
+  /api/cdrs/users:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the users in a domain.     Rate
+        Limit: 5/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: start_date
+        in: query
+        required: true
+        type: string
+        description: 'Get calls which started after this time. In UTC if timezone
+          not specified. '
+      - name: end_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls which ended after this time. In UTC if timezone not
+          specified. If no start date is provided resutls for calls after this end
+          date will be returned. '
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'The type of phone call which took place. '
+      - name: cursor
+        in: query
+        required: false
+        type: string
+        description: 'The cursor/index from which to continue a previous request from '
+      - name: page_size
+        in: query
+        required: false
+        type: number
+        description: 'The number of results to return at once. Maximum is 1,000 '
+      - name: recording_available
+        in: query
+        required: false
+        type: boolean
+        description: 'filter cdrs to only include ones with recordings '
+      - name: min_duration
+        in: query
+        required: false
+        type: number
+        description: 'filter cdrs by minimum  duration '
+      - name: max_duration
+        in: query
+        required: false
+        type: number
+        description: 'filter cdrs by maximum  duration '
+      - name: phone_number
+        in: query
+        required: false
+        type: string
+        description: 'filter cdrs by phone number used '
+      - name: Accept
+        in: header
+        required: true
+        type: string
+        description: 'The media type and version which is acceptable for the response. '
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
             type: string
-          in: header
-          name: Accept
-      security:
-        - Bearer Access Token: [Office Manager]
+  /api/cdrs:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the users in a domain.  Rate
+        Limit: 5/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: start_date
+        in: query
+        required: true
+        type: string
+        description: 'Get calls which started after this time. '
+      - name: end_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls which ended after this time. '
+      - name: offset
+        in: query
+        required: false
+        type: integer
+        description: 'The offset from the beginning of the date/time period. '
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        description: 'The number of results to be returned. Max value 1000. '
+      - name: Accept
+        in: header
+        required: true
+        type: string
+        description: 'The media type and version which is acceptable for the response. '
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: #/definitions/to
 components:
   schemas:
-    User:
-      title: User
-      type: object
-      description: ''
-      x-examples:
-        Alice Smith:
-          id: 142
-          firstName: Alice
-          lastName: Smith
-          email: alice.smith@gmail.com
-          dateOfBirth: '1997-10-31'
-          emailVerified: true
-          signUpDate: '2019-08-24'
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the given user.
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1997-10-31'
-        emailVerified:
-          type: boolean
-          description: Set to true if the user's email has been verified.
-        createDate:
-          type: string
-          format: date
-          description: The date that the user was created.
-      required:
-        - id
-        - firstName
-        - lastName
-        - email
-        - emailVerified
+    to:
+      properties: {}
   securitySchemes:
     Bearer Access Token:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: Authorization value. Generally "Bearer ACCESSTOKEN"
+      description: Authorization value. Generally Bearer ACCESSTOKEN
 security:
   - Bearer Access Token: []
