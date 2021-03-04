@@ -4,12 +4,14 @@ info:
   version: '1.8'
 servers:
   - url: 'https://integrate.versature.com'
+tags:
+  - APIs
 paths:
   '/api/voicemails/users/{user}/count':
     get:
       tags:
-        - VoicemailsGroup
-      summary: 'Get the voicemail count for a user in a domain.Rate Limit: 1/second, 5/minute '
+        - APIs
+      summary: User voicemail count
       consumes:
         - application/json
       produces:
@@ -31,6 +33,35 @@ paths:
           description: Success
           schema:
             type: string
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  new:
+                    type: number
+                    example: 1
+                    minimum: 0
+                    description: The total count of saved voicemails for the specified user
+                  saved:
+                    type: number
+                    description: The total count of new voicemails for the specified user.
+                    minimum: 0
+                    example: 2
+                required:
+                  - new
+                  - saved
+              examples:
+                example:
+                  value:
+                    new: 1
+                    saved: 2
+      operationId: get-voicemail-count
+      description: |-
+        Get the voicemail count for a user in a domain.<br>
+        **Permission** Basic User<br>
+        **Rate Limit:** 1/second, 5/minute
 components:
   schemas:
     to:
