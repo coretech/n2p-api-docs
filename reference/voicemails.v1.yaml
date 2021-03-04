@@ -36,22 +36,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
-                type: object
-                properties:
-                  new:
-                    type: number
-                    example: 1
-                    minimum: 0
-                    description: The total count of saved voicemails for the specified user
-                  saved:
-                    type: number
-                    description: The total count of new voicemails for the specified user.
-                    minimum: 0
-                    example: 2
-                required:
-                  - new
-                  - saved
+                $ref: '#/components/schemas/VoicemailCount'
               examples:
                 example:
                   value:
@@ -64,5 +49,24 @@ paths:
         **Rate Limit:** 1/second, 5/minute
 components:
   schemas:
-    to:
-      properties: {}
+    VoicemailCount:
+      description: ''
+      type: object
+      x-examples:
+        example:
+          new: 1
+          saved: 2
+      properties:
+        new:
+          type: number
+          minimum: 0
+          example: 1
+          description: The total count of new voicemails for the specified user
+        saved:
+          type: number
+          minimum: 0
+          example: 2
+          description: The total count of saved voicemails for the specified user
+      required:
+        - new
+        - saved
