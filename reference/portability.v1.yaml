@@ -8,8 +8,6 @@ servers:
 paths:
   '/api/phone_numbers/{phone_number}/portability':
     get:
-      tags:
-        - NumberPortabilityGroup
       summary: Check phone number portability
       consumes:
         - application/json
@@ -40,6 +38,8 @@ paths:
         Most phone numbers are portable to net2phone but this endpoint can be used to verify portability.<br>
         **Permission:** None<br>
         **Rate Limit:** 5/second, 30/minute
+      tags:
+        - APIs
 components:
   schemas:
     Portability:
