@@ -1,34 +1,57 @@
 openapi: 3.1.0
 info:
-  title: portability
+  title: Phone number portability
   version: '1.8'
+  description: Check if a given phone number is portable to net2phone
 servers:
   - url: 'https://integrate.versature.com'
 paths:
-  /api/phone_numbers/{phone_number}/portability:
+  '/api/phone_numbers/{phone_number}/portability':
     get:
       tags:
-      - NumberPortabilityGroup
-      summary: 'Most phone numbers are portable to Versature but this endpoint can
-        be used to verify portability.Rate Limit: 5/second, 30/minute '
+        - NumberPortabilityGroup
+      summary: Check phone number portability
       consumes:
-      - application/json
+        - application/json
       produces:
-      - application/json
+        - application/json
       parameters:
-      - name: phone_number
-        in: path
-        required: true
-        type: number
-        description: 'The phone number to verify. E164 format is ideal but a best
-          effort will be made to format         the check the number provided. '
-      - $ref: ../models/accept.header.v1.yaml
+        - name: phone_number
+          in: path
+          required: true
+          type: string
+          description: The phone number to verify. E164 format is ideal but a best effort will be made to format the check the number provided.
+        - $ref: ../models/accept.header.v1.yaml
       responses:
         '200':
           description: Success
           schema:
             type: boolean
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portability'
+              examples:
+                example:
+                  value:
+                    portable: true
+      operationId: get-phone-portability
+      description: |-
+        Most phone numbers are portable to net2phone but this endpoint can be used to verify portability.<br>
+        **Permission:** None<br>
+        **Rate Limit:** 5/second, 30/minute
 components:
   schemas:
-    to:
-      properties: {}
+    Portability:
+      description: Is the provided number portable
+      type: object
+      x-examples:
+        example:
+          portable: true
+      title: Phone number portability
+      properties:
+        portable:
+          type: boolean
+          description: Is the provided number portable
+      required:
+        - portable
