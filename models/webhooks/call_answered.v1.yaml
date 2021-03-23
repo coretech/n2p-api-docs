@@ -4,13 +4,13 @@ allOf:
       event:
         type: string
         enum:
-          - call_blind_transfer
-title: 'Call blind transfer'
-description: This event is issued when a Team Member transfers a call via  blind (cold) transfer
+          - call_answered
+title: 'Call answered'
+description: This event is triggered when a Team Member answers an incoming call or when an outgoing call is answered by the dialed destination number
 x-examples:
   example:
     id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-    event: call_blind_transfer
+    event: call_answered
     timestamp: '2019-08-24T14:15:22Z'
     direction: inbound
     user:

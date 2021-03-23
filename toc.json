@@ -80,6 +80,16 @@
     },
     {
       "type": "item",
+      "title": "Call Answered",
+      "uri": "models/webhooks/call_answered.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Call Blocked",
+      "uri": "models/webhooks/call_blocked.v1.yaml"
+    },
+    {
+      "type": "item",
       "title": "Call Blind Transfer",
       "uri": "models/webhooks/call_blind_transfer.v1.yaml"
     },
