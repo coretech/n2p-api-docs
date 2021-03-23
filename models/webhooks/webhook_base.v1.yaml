@@ -1,0 +1,110 @@
+description: ''
+type: object
+properties:
+  id:
+    type: string
+    minLength: 36
+    format: uuid
+    description: Unique ID per webhook notification
+    pattern: '/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm'
+    maxLength: 36
+  event:
+    type: string
+    minLength: 1
+    description: Describes the event that triggered the webhook notification
+    enum:
+      - call_answered
+      - call_blind_transfer
+      - call_blocked
+      - call_busy
+      - call_completed
+      - call_consultative_transfer
+      - call_forward
+      - call_hold
+      - call_missed
+      - call_park
+      - call_pickup
+      - call_recorded
+      - call_resume
+      - call_rg_queue_completed
+      - call_rg_queue_entered
+      - call_rg_queue_tier
+      - call_ringing
+      - call_unpark
+      - message_received
+      - voicemail_missed
+      - voicemail_notify
+      - voicemail_received
+  timestamp:
+    type: string
+    minLength: 1
+    format: date-time
+    description: Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format
+  direction:
+    type: string
+    minLength: 1
+    enum:
+      - outbound
+      - inbound
+    description: Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member
+  user:
+    type: object
+    required:
+      - account_id
+    description: The user object describes information about the user that triggered the event. The id and name will be ommitted if the event was triggered by an account level event
+    properties:
+      id:
+        type: number
+        description: A unqiue identifier assigned to each Team Member
+      name:
+        type: string
+        minLength: 1
+        description: The full display name of the Team member
+      account_id:
+        type: number
+        description: Thi is your net2phone account ID
+  user_name:
+    type: string
+    minLength: 1
+    description: Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.
+    deprecated: true
+  originating_number:
+    type: string
+    minLength: 1
+    description: Describes the number that started the phone call
+  dialed_number:
+    type: string
+    minLength: 1
+    description: The recipient of the phone call
+  call_leg_id:
+    type: string
+    minLength: 32
+    pattern: '/^[0-9a-f]{32}$/gm'
+    maxLength: 32
+    description: |-
+      Describes a unique identifier for the leg of a call that has multiple legs.
+      For example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id
+  call_id:
+    type: string
+    minLength: 32
+    pattern: '/^[0-9a-f]{32}$/gm'
+    maxLength: 32
+    description: Describes a unique identifier for call
+  call_source:
+    type: string
+    minLength: 1
+    enum:
+      - normal
+      - click2call
+    description: 'Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API'
+required:
+  - id
+  - event
+  - timestamp
+  - direction
+  - user
+  - originating_number
+  - dialed_number
+  - call_leg_id
+  - call_id
+  - call_source
