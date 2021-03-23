@@ -76,6 +76,15 @@
     },
     {
       "type": "divider",
+      "title": "Webhooks"
+    },
+    {
+      "type": "item",
+      "title": "Call Blind Transfer",
+      "uri": "models/webhooks/call_blind_transfer.v1.yaml"
+    },
+    {
+      "type": "divider",
       "title": "Original"
     },
     {
