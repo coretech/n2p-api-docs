@@ -1,0 +1,34 @@
+allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/audio.v1.yaml
+  - $ref: ./base/duration.v1.yaml
+  - $ref: ./base/voicemail.v1.yaml
+  - properties:
+      event:
+        type: string
+        enum:
+          - voicemail_received
+      direction:
+        type: string
+        enum:
+          - inbound
+title: Voicemail received
+description: A voicemail was left for a net2phone user. This event will trigger when an incoming (only) call is not answered by any phone in your net2phone account and a voicemail is recorded.
+x-examples:
+  example:
+    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    event: voicemail_notify
+    timestamp: 2019-08-24T14:15:22Z
+    direction: inbound
+    duration: 12
+    user:
+      id: 12345
+      name: James T Kirk
+      account_id: 67890
+    user_name: James T Kirk
+    originating_number: +19734381000
+    dialed_number: '*95'
+    call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
+    call_id: 818787cc58e3043c4b4721ed0c157735
+    call_source: normal
+    audio_message_id: 123456789
