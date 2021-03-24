@@ -1,0 +1,29 @@
+allOf:
+  - $ref: ./base/message.v1.yaml
+  - properties:
+      event:
+        type: string
+        enum:
+          - message_received
+title: Call answered
+description: This event is triggered when a Team Member or Account receives a message
+x-examples:
+  example:
+    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    event: message_received
+    timestamp: 2019-08-24T14:15:22Z
+    user:
+      id: 12345
+      name: James T Kirk
+      account_id: 67890
+    user_name: Sergey Belavsky
+    messenger_info:
+      message_id: 83da998362ddd2e82b1db315
+      conversation_id: 2c83d34c0e9ec63a2342d98a
+      type: SMS
+      originated: +19734381000
+      terminated: +19739217310
+      origin: external
+      target: user
+      content: hello world
+      from_user_id: ef9d4caed46726d4d57c6460

@@ -1,0 +1,102 @@
+description:
+type: object
+properties:
+  id:
+    type: string
+    minLength: 36
+    format: uuid
+    description: Unique ID per webhook notification
+    pattern: /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm
+    maxLength: 36
+  event:
+    type: string
+    description: Describes the event that triggered the webhook notification
+    enum:
+      - message_received
+  timestamp:
+    type: string
+    format: date-time
+    description: Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format
+  user:
+    type: object
+    required:
+      - id
+      - name
+      - account_id
+    description: The user object describes information about the user that triggered the event. The id and name will be ommitted if the event was triggered by an account level event
+    properties:
+      id:
+        type: number
+        description: A unqiue identifier assigned to each Team Member
+      name:
+        type: string
+        description: The full display name of the Team member
+      account_id:
+        type: number
+        description: Thi is your net2phone account ID
+  user_name:
+    type: string
+    description: Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.
+    deprecated: true
+  messenger_info:
+    description: Information about the message
+    type: object
+    properties:
+      message_id:
+        type: string
+        description: Unique identifier of the message
+        minLength: 24
+        pattern: ^[0-9a-f]{24}$
+        maxLength: 24
+      conversation_id:
+        type: string
+        description: Unique identifier of the conversation
+        minLength: 24
+        pattern: ^[0-9a-f]{24}$
+        maxLength: 24
+      type:
+        type: string
+        description: Type of message sent
+        enum:
+          - SMS
+          - MMS
+      originated:
+        type: string
+        description: Describes the number that send the message
+    terminated:
+        type: string
+        description: Describes the number that recieved the message
+      origin:
+        type: string
+        description: Source of the message
+        enum:
+          - external
+      target:
+        type: string
+        description: Message was sent to
+        enum:
+          - user
+          - account
+      content:
+        type: string
+        description: Text content of the message
+      from_user_id:
+        type: string
+        minLength: 24
+        pattern: ^[0-9a-f]{24}$
+        maxLength: 24
+      required:
+        - message_id
+        - conversation_id
+        - type
+        - originated
+        - terminated
+        - origin
+        - target
+        - content
+        - from_user_id
+required:
+  - id
+  - event
+  - timestamp
+  - user
