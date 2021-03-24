@@ -17,6 +17,15 @@
     },
     {
       "type": "divider",
+      "title": "Documentation"
+    },
+    {
+      "type": "item",
+      "title": "Webhooks",
+      "uri": "reference/webhooks.v1.yaml"
+    },
+    {
+      "type": "divider",
       "title": "APIS"
     },
     {
