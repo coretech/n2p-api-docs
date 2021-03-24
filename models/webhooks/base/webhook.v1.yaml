@@ -1,4 +1,4 @@
-description: ''
+description:
 type: object
 properties:
   id:
@@ -6,7 +6,7 @@ properties:
     minLength: 36
     format: uuid
     description: Unique ID per webhook notification
-    pattern: '/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm'
+    pattern: /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm
     maxLength: 36
   event:
     type: string
@@ -72,7 +72,7 @@ properties:
   call_leg_id:
     type: string
     minLength: 32
-    pattern: '/^[0-9a-f]{32}$/gm'
+    pattern: /^[0-9a-f]{32}$/gm
     maxLength: 32
     description: |-
       Describes a unique identifier for the leg of a call that has multiple legs.
@@ -80,7 +80,7 @@ properties:
   call_id:
     type: string
     minLength: 32
-    pattern: '/^[0-9a-f]{32}$/gm'
+    pattern: /^[0-9a-f]{32}$/gm
     maxLength: 32
     description: Describes a unique identifier for call
   call_source:
@@ -88,7 +88,7 @@ properties:
     enum:
       - normal
       - click2call
-    description: 'Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API'
+    description: Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API
 required:
   - id
   - event
