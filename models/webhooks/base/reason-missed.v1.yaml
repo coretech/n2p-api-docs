@@ -1,0 +1,11 @@
+description:
+type: object
+properties:
+  reason:
+    type: string
+    required: true
+    description: Why the call was missed
+    enum:
+      - user_did_not_answer
+      - user_not_logged_in
+      - user_rejected_call

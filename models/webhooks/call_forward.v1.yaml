@@ -1,27 +1,29 @@
 allOf:
   - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/reason-transfer.v1.yaml
   - properties:
       event:
         type: string
         enum:
-          - call_consultative_transfer
-title: Call consultative_transfer
-description: This event is issued when a Team Member transfers a call via  consultative (warm) transfer
+          - call_forward
+      forward_number:
+        type: string
+        description: The number the call was forwarded to
+title: Call forward
+description: This event is triggered when a Team Member forwards a call
 x-examples:
-  user-example:
+  example:
     id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-    event: call_consultative_transfer
+    event: call_forward
     timestamp: 2019-08-24T14:15:22Z
-    direction: outbound
+    direction: inbound
     user:
       id: 12345
       name: James T Kirk
       account_id: 67890
     user_name: James T Kirk
-    reason: transferer
     originating_number: +19734381000
     dialed_number: +19739217310
+    forward_number: +19739212598
     call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
     call_id: 818787cc58e3043c4b4721ed0c157735
     call_source: normal

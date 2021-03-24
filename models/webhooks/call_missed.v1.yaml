@@ -1,0 +1,29 @@
+allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/reason-missed.v1.yaml
+  - properties:
+      event:
+        type: string
+        enum:
+          - call_missed
+title: Call missed
+description: |
+  This event is triggered when an incoming call isn’t answered by any phone in your net2phone account.
+  The reason field indicates the reason the call was missed and can be `user_did_not_answer` if the Team Member didn’t answer, `user_rejected_call` if the Team Member actively rejected the call, or `user_not_logged_in` if calling another net2phone user who is not logged in
+x-examples:
+  user-example:
+    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    event: call_missed
+    timestamp: 2019-08-24T14:15:22Z
+    direction: outbound
+    user:
+      id: 12345
+      name: James T Kirk
+      account_id: 67890
+    user_name: James T Kirk
+    reason: user_did_not_answer
+    originating_number: +19734381000
+    dialed_number: +19739217310
+    call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
+    call_id: 818787cc58e3043c4b4721ed0c157735
+    call_source: normal
