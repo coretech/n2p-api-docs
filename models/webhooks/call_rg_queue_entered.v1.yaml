@@ -1,0 +1,27 @@
+allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - properties:
+      event:
+        type: string
+        enum:
+          - call_rg_queue_entered
+      direction:
+        type: string
+        enum:
+          - inbound
+title: Call ring group entered
+description: The event is issued when a call enters a RG with call queue enabled
+x-examples:
+  example:
+    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    event: call_rg_queue_entered
+    timestamp: 2019-08-24T14:15:22Z
+    direction: inbound
+    user:
+      account_id: 67890
+    user_name: James T Kirk
+    originating_number: +19734381000
+    dialed_number: +19739217310
+    call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
+    call_id: 818787cc58e3043c4b4721ed0c157735
+    call_source: normal
