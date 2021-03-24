@@ -1,4 +1,7 @@
-type: number
-name: Accept
-required: true
-description: Length of time in seconds of the call or voicemail
+description:
+type: object
+properties:
+  duration:
+    type: number
+    required: true
+    description: Length of time in seconds of the call or voicemail
