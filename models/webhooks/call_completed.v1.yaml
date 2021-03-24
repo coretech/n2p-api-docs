@@ -1,18 +1,20 @@
 allOf:
   - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/duration.v1.yaml
   - properties:
       event:
         type: string
         enum:
-          - call_blind_transfer
-title: 'Call blind transfer'
-description: This event is issued when a Team Member transfers a call via  blind (cold) transfer
+          - call_completed
+title: 'Call completed'
+description: Event is triggered when a call is successfully completed. This event will trigger for both inbound and outbound calls.
 x-examples:
   example:
     id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-    event: call_blind_transfer
+    event: call_completed
     timestamp: '2019-08-24T14:15:22Z'
-    direction: inbound
+    direction: outbound
+    duration: 36
     user:
       id: 12345
       name: James T Kirk

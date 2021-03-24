@@ -1,0 +1,4 @@
+type: number
+name: Accept
+required: true
+description: Length of time in seconds of the call or voicemail

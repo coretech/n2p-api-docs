@@ -4,15 +4,19 @@ allOf:
       event:
         type: string
         enum:
-          - call_blind_transfer
-title: 'Call blind transfer'
-description: This event is issued when a Team Member transfers a call via  blind (cold) transfer
+          - call_busy
+      direction:
+        type: string
+        enum:
+          - outbound
+title: 'Call busy'
+description: The event is triggered when an outbound call receives a 4xx or 5xx error response to the INVITE indicating the call failed for some reason
 x-examples:
   example:
     id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-    event: call_blind_transfer
+    event: call_busy
     timestamp: '2019-08-24T14:15:22Z'
-    direction: inbound
+    direction: outbound
     user:
       id: 12345
       name: James T Kirk

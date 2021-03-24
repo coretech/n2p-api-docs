@@ -1,5 +1,5 @@
 allOf:
-  - $ref: ./webhook_base.v1.yaml
+  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
