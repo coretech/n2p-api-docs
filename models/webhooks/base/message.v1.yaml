@@ -63,7 +63,7 @@ properties:
       originated:
         type: string
         description: Describes the number that send the message
-    terminated:
+      terminated:
         type: string
         description: Describes the number that recieved the message
       origin:
@@ -100,3 +100,4 @@ required:
   - event
   - timestamp
   - user
+  - messenger_info

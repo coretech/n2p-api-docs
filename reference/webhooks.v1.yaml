@@ -2,55 +2,53 @@ openapi: 3.0.0
 info:
   title: webhooks
   version: '1.0'
-servers:
-  - url: 'http://localhost:3000'
+servers: {}
+paths: {}
+tags: {}
 components:
   schemas:
-    call_answered:
-      $ref: ../models/webhooks/call_answered.v1.yaml
-    call_blind_transfer:
-      $ref: ../models/webhooks/call_blind_transfer.v1.yaml
+      $ref: '../../models/webhooks/call_blind_transfer.v1.yaml'
     call_blocked:
-      $ref: ../models/webhooks/call_blocked.v1.yaml
+      $ref: '../../models/webhooks/call_blocked.v1.yaml'
     call_busy:
-      $ref: ../models/webhooks/call_busy.v1.yaml
+      $ref: '../../models/webhooks/call_busy.v1.yaml'
     call_completed:
-      $ref: ../models/webhooks/call_completed.v1.yaml
+      $ref: '../../models/webhooks/call_completed.v1.yaml'
     call_consultative_transfer:
-      $ref: ../models/webhooks/call_consultative_transfer.v1.yaml
+      $ref: '../../models/webhooks/call_consultative_transfer.v1.yaml'
     call_forward:
-      $ref: ../models/webhooks/call_forward.v1.yaml
+      $ref: '../../models/webhooks/call_forward.v1.yaml'
     call_hold:
-      $ref: ../models/webhooks/call_hold.v1.yaml
+      $ref: '../../models/webhooks/call_hold.v1.yaml'
     call_missed:
-      $ref: ../models/webhooks/call_missed.v1.yaml
+      $ref: '../../models/webhooks/call_missed.v1.yaml'
     call_park:
-      $ref: ../models/webhooks/call_park.v1.yaml
+      $ref: '../../models/webhooks/call_park.v1.yaml'
     call_pickup:
-      $ref: ../models/webhooks/call_pickup.v1.yaml
+      $ref: '../../models/webhooks/call_pickup.v1.yaml'
     call_recorded:
-      $ref: ../models/webhooks/call_recorded.v1.yaml
+      $ref: '../../models/webhooks/call_recorded.v1.yaml'
     call_recording_failed:
-      $ref: ../models/webhooks/call_recording_failed.v1.yaml
+      $ref: '../../models/webhooks/call_recording_failed.v1.yaml'
     call_resume:
-      $ref: ../models/webhooks/call_resume.v1.yaml
+      $ref: '../../models/webhooks/call_resume.v1.yaml'
     call_rg_queue_completed:
-      $ref: ../models/webhooks/call_rg_queue_completed.v1.yaml
+      $ref: '../../models/webhooks/call_rg_queue_completed.v1.yaml'
     call_rg_queue_entered:
-      $ref: ../models/webhooks/call_rg_queue_entered.v1.yaml
+      $ref: '../../models/webhooks/call_rg_queue_entered.v1.yaml'
     call_rg_queue_tier:
-      $ref: ../models/webhooks/call_rg_queue_tier.v1.yaml
+      $ref: '../../models/webhooks/call_rg_queue_tier.v1.yaml'
     call_ringing:
-      $ref: ../models/webhooks/call_ringing.v1.yaml
+      $ref: '../../models/webhooks/call_ringing.v1.yaml'
     call_unpark:
-      $ref: ../models/webhooks/call_unpark.v1.yaml
+      $ref: '../../models/webhooks/call_unpark.v1.yaml'
     emergency_call:
-      $ref: ../models/webhooks/emergency_call.v1.yaml
+      $ref: '../../models/webhooks/emergency_call.v1.yaml'
     message_received:
-      $ref: ../models/webhooks/message_received.v1.yaml
+      $ref: '../../models/webhooks/message_received.v1.yaml'
     voicemail_missed:
-      $ref: ../models/webhooks/voicemail_missed.v1.yaml
+      $ref: '../../models/webhooks/voicemail_missed.v1.yaml'
     voicemail_notify:
-      $ref: ../models/webhooks/voicemail_notify.v1.yaml
+      $ref: '../../models/webhooks/voicemail_notify.v1.yaml'
     voicemail_received:
-      $ref: ../models/webhooks/voicemail_received.v1.yaml
+      $ref: '../../models/webhooks/voicemail_received.v1.yaml'
