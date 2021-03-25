@@ -1,10 +1,10 @@
 allOf:
-  - $ref: ./base/message.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - message_received
+  - $ref: ./base/message.v1.yaml
 title: Call answered
 description: This event is triggered when a Team Member or Account receives a message
 x-examples:

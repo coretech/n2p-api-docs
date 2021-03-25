@@ -1,10 +1,10 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_blind_transfer
+  - $ref: ./base/webhook.v1.yaml
 title: Call blind transfer
 description: This event is issued when a Team Member transfers a call via  blind (cold) transfer
 x-examples:

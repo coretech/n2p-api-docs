@@ -1,11 +1,11 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/slot.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_unpark
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/slot.v1.yaml
 title: Call unpark
 description: This event is triggered when a Team Member unparks a call. NOTE The team member that unparks a call will also get a call_answered event
 x-examples:

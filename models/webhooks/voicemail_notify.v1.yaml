@@ -1,11 +1,11 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/voicemail.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - voicemail_notify
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/voicemail.v1.yaml
 title: Voicemail notify
 description: |-
   This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>

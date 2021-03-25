@@ -1,10 +1,10 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - emergency_call
+  - $ref: ./base/webhook.v1.yaml
 title: Emergency call
 description: This event is triggered when a call is placed to an emergency serivce
 x-examples:

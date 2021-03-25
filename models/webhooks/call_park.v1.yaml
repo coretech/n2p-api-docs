@@ -1,11 +1,11 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/slot.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_park
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/slot.v1.yaml
 title: Call park
 description: This event is triggered when a Team Member parks a call
 x-examples:

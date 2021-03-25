@@ -1,11 +1,11 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/reason-resume.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_resume
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/reason-resume.v1.yaml
 title: Call resume
 description: This event is triggered when a Team Member resumes a call
 x-examples:

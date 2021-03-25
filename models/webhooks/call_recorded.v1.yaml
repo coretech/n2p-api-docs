@@ -1,11 +1,11 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/audio.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_recorded
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/audio.v1.yaml
 title: Call recorded
 description: This event is triggered when an inbound or outbound call has been successfully recorded.
 x-examples:

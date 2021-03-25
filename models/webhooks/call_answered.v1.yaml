@@ -1,10 +1,10 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_answered
+  - $ref: ./base/webhook.v1.yaml
 title: Call answered
 description: This event is triggered when a Team Member answers an incoming call or when an outgoing call is answered by the dialed destination number
 x-examples:

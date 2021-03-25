@@ -1,10 +1,10 @@
 allOf:
-  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_ringing
+  - $ref: ./base/webhook.v1.yaml
 title: Call ringing
 description: This event is triggered when a call is ringing. This event will trigger for both inbound and outbound calls and is typically followed by by a `call_answered` or `call_missed` event
 x-examples:
