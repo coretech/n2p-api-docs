@@ -1,0 +1,1 @@
+runGlobalBuildPipeline(this)
