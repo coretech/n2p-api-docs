@@ -1,0 +1,61 @@
+openapi: 3.1.0
+info:
+  title: users
+  version: '1.8'
+servers:
+  - url: 'https://integrate.versature.com'
+paths:
+  /api/users/current:
+    get:
+      tags:
+      - UsersGroup
+      summary: 'Get the user details for the authenticated user.Rate Limit: 1/second,
+        15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: string
+  /api/users/{user}:
+    get:
+      tags:
+      - UsersGroup
+      summary: 'Get the user details. If provided the id will be used to get a specific
+        user. If not specified the authenticated user details will be returned. If
+        you wish to retrieve all users across your domain use the &quot;all&quot;
+        argument.Rate Limit: 1/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: user
+        in: path
+        required: true
+        type: string
+        description: 'The user/extension to retrieve the call records for. i.e. 101 '
+      - name: all
+        in: query
+        required: false
+        type: boolean
+        description: 'The user to retrieve the call records for. '
+      - $ref: ../models/accept.header.v1.yaml
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: string
+components:
+  schemas:
+    to:
+      properties: {}

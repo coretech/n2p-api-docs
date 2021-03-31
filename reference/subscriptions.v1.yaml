@@ -1,0 +1,81 @@
+openapi: 3.1.0
+info:
+  title: subscriptions
+  version: '1.8'
+servers:
+  - url: 'https://integrate.versature.com'
+paths:
+  /api/subscriptions:
+    post:
+      tags:
+      - SubscriptionGroup
+      summary: 'A Recording subscription will result in Post request to your subscribed
+        endpoint once a Recording has been processed as well as if it is ever updated. '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: #/definitions/to
+  /api/subscriptions/{subscriptions_id}:
+    delete:
+      tags:
+      - SubscriptionGroup
+      summary: 'Delete a subscription with the given id. Updates will no longer be
+        sent the subscription         endpoint Note: Users can only delete subscriptions
+        that they created.Rate Limit: 1/second, 5/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: subscriptions_id
+        in: path
+        required: true
+        type: string
+        description: 'Id of the subscription to remove '
+      - $ref: ../models/accept.header.v1.yaml
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: ''
+    get:
+      tags:
+      - SubscriptionGroup
+      summary: 'Get the subscription details for a given id. Can be used to verify
+        subscribed events         as well the subscription expiry date/time. Note:
+        Users can only read subscriptions that they created.Rate Limit: 1/second,
+        5/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: subscriptions_id
+        in: path
+        required: true
+        type: string
+        description: 'Id of the subscription. '
+      - $ref: ../models/accept.header.v1.yaml
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: number
+components:
+  schemas:
+    to:
+      properties: {}

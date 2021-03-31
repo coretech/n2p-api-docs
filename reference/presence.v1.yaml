@@ -1,0 +1,72 @@
+openapi: 3.1.0
+info:
+  title: Presence
+  version: '1.8'
+  description: Domain presence
+servers:
+  - url: 'https://integrate.versature.com'
+paths:
+  /api/presence:
+    get:
+      summary: 'Get a list of users with their presence on device.Rate Limit: 1/second, 6/minute'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPresence'
+      operationId: get-user-presence
+      description: |-
+        Get a list of users with their presence on device..<br>
+        **Permission** Basic User
+        **Rate Limit:** 1/second, 6/minute
+      tags:
+        - APIs
+components:
+  schemas:
+    UserPresence:
+      description: Presence of a single user
+      type: object
+      x-examples:
+        example:
+          first_name: Ihtisham
+          last_name: Mazhar
+          presence: open
+          domain: net2phone.com
+          user: '151'
+          email: imazhar@net2phone.com
+      title: UserPresence
+      properties:
+        first_name:
+          type: string
+          minLength: 1
+        last_name:
+          type: string
+          minLength: 1
+        presence:
+          type: string
+          minLength: 1
+          enum:
+            - open
+        domain:
+          type: string
+          minLength: 1
+        user:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          minLength: 1
+      required:
+        - first_name
+        - last_name
+        - presence
+        - domain
+        - user
+        - email

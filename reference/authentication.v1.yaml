@@ -1,0 +1,107 @@
+openapi: 3.1.0
+info:
+  title: Authorization for net2phone
+  version: '1.8'
+  description: |-
+    **test** <br>
+    what this shows
+  contact:
+    email: support@net2phone.com
+servers:
+  - url: 'https://integrate.versature.com'
+tags:
+  - name: Authorization
+    description: test description
+paths:
+  /api/oauth/authorize:
+    get:
+      summary: Backend API for initiating authentication
+      tags:
+        - Authorization
+      responses:
+        '200':
+          description: OK
+      operationId: get-api-oauth-authorize
+      description: |-
+        The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and         provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application. Once access has been granted they will be redirected to the Redirect URI with an Authentication Code in the url args.         i.e. https://integrate.versature.com/docs?code=Vb6YKAvTt6VYycU2DcML8Hmrsm4V4t This Authentication Code can be used with the: Redirect URI, Client Id, and Client Secret to obtain an Access and Refresh Token. Before you begin you must obtain a Client Id and Secret: Developer Portal. Once you have provided your redirect uri to us and have obtained your Client Id and Client Secret; direct the authenticating user to: https://integrate.versature.com/api/oauth/authorize be sure to         include the required arguments with your request (See below for arguments).<br>
+        **Rate Limit:** 3/second, 60/minute
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: response_type
+          required: true
+          description: The type of grant being performed
+        - schema:
+            type: string
+          in: query
+          name: redirect_uri
+          description: The redirect URI used to authenticate this user
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: client_id
+          description: The id of the client. The unique identifier for your application
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: state
+          description: '**Recommended** - A value used by the client to maintain state between the request and the callback. Used to help prevent cross-site request forgery'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+  /api/oauth/token:
+    post:
+      summary: Client Credentials Grant
+      tags:
+        - Authorization
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      operationId: post-api-oauth-token
+      description: |-
+        Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.<br>
+        **Note:** An authorization code can be used for up to 1 min after being issued.<br>
+        **Rate Limit:** 3/second, 60/minute
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-tags:
+                - Authentication
+              properties:
+                grant_type:
+                  type: string
+                  description: The type of grant being performed
+                client_id:
+                  type: string
+                  description: The id of the client. The unique identifier for your application
+                client_secret:
+                  type: string
+                  description: The secret provided for your client application
+                state:
+                  type: string
+                  description: Recommended - A value used by the client to maintain state between the request and the callback. Used to prevent cross-site request forgery
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+            examples:
+              example:
+                value:
+                  grant_type: test
+                  client_id: test
+                  client_secret: test
+        description: ''

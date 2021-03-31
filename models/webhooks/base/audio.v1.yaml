@@ -1,0 +1,7 @@
+description:
+type: object
+properties:
+  audio_message_id:
+    type: number
+    required: true
+    description: ID of the audio message for a call recording or voicemail

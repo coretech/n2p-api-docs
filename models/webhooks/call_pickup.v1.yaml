@@ -1,0 +1,46 @@
+allOf:
+  - properties:
+      event:
+        type: string
+        enum:
+          - call_pickup
+      pickup_event_info:
+        type: object
+        description: Info about the Team Member who used the Pick Up feature
+        properties:
+          id:
+            type: number
+            description: The unqiue identifier assigned to each Team Member
+          name:
+            type: string
+            description: The full display name of the Team member
+          extension:
+            type: string
+            description: Extension of the Team member
+        required:
+          - id
+          - name
+          - extension
+  - $ref: ./base/webhook.v1.yaml
+title: Call pickup
+description: This notification is triggered when a Team Member uses the Pick Up feature (*21) to answer a call ringing on another Team Members extension
+x-examples:
+  user-example:
+    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    event: call_pickup
+    timestamp: 2019-08-24T14:15:22Z
+    direction: outbound
+    user:
+      id: 12345
+      name: James T Kirk
+      account_id: 67890
+    user_name: James T Kirk
+    originating_number: +19734381000
+    dialed_number: +19739217310
+    call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
+    call_id: 818787cc58e3043c4b4721ed0c157735
+    pickup_event_info:
+      id: 98765
+      name: Peter Parker
+      extension: 4321
+    call_source: normal

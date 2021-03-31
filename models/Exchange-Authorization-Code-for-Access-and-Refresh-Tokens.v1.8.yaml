@@ -1,0 +1,21 @@
+title: Exchange Authorization Code for Access and Refresh Tokens
+type: object
+x-tags:
+  - Authentication
+properties:
+  grant_type:
+    type: string
+    description: The type of grant being performed
+  client_id:
+    type: string
+    description: The id of the client. The unique identifier for your application
+  client_secret:
+    type: string
+    description: The secret provided for your client application
+  state:
+    type: string
+    description: Recommended - A value used by the client to maintain state between the request and the callback. Used to prevent cross-site request forgery
+required:
+  - grant_type
+  - client_id
+  - client_secret

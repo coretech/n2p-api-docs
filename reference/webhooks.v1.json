@@ -1,0 +1,243 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "net2phone webhooks",
+    "description": "<h2>Introduction</h2>The net2phone webhooks give you the ability to receive a structured payload of data at the URL of your choice when certain events occur. For example, you can use the webhooks to notify your CRM application that a call has been completed or notify your messaging application that a call has been parked or unparked<br /><br /><h2>Getting started</h2>Log into https://app.net2phone.com and go to Settings / API, click on the ‘Webhook’ tab, and click on ‘Add Webhook’, follow the on screen directions to set up the webhook.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "call_answered",
+      "x-displayName": "call_answered",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_answered\" />"
+    },
+    {
+      "name": "call_blind_transfer",
+      "x-displayName": "call_blind_transfer",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_blind_transfer\" />"
+    },
+    {
+      "name": "call_blocked",
+      "x-displayName": "call_blocked",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_blocked\" />"
+    },
+    {
+      "name": "call_busy",
+      "x-displayName": "call_busy",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_busy\" />"
+    },
+    {
+      "name": "call_completed",
+      "x-displayName": "call_completed",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_completed\" />"
+    },
+    {
+      "name": "call_consultative_transfer",
+      "x-displayName": "call_consultative_transfer",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_consultative_transfer\" />"
+    },
+    {
+      "name": "call_forward",
+      "x-displayName": "call_forward",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_forward\" />"
+    },
+    {
+      "name": "call_hold",
+      "x-displayName": "call_hold",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_hold\" />"
+    },
+    {
+      "name": "call_missed",
+      "x-displayName": "call_missed",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_missed\" />"
+    },
+    {
+      "name": "call_park",
+      "x-displayName": "call_park",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_park\" />"
+    },
+    {
+      "name": "call_pickup",
+      "x-displayName": "call_pickup",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_pickup\" />"
+    },
+    {
+      "name": "call_recorded",
+      "x-displayName": "call_recorded",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_recorded\" />"
+    },
+    {
+      "name": "call_recording_failed",
+      "x-displayName": "call_recording_failed",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_recording_failed\" />"
+    },
+    {
+      "name": "call_resume",
+      "x-displayName": "call_resume",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_resume\" />"
+    },
+    {
+      "name": "call_rg_queue_completed",
+      "x-displayName": "call_rg_queue_completed",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_rg_queue_completed\" />"
+    },
+    {
+      "name": "call_rg_queue_entered",
+      "x-displayName": "call_rg_queue_entered",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_rg_queue_entered\" />"
+    },
+    {
+      "name": "call_rg_queue_tier",
+      "x-displayName": "call_rg_queue_tier",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_rg_queue_tier\" />"
+    },
+    {
+      "name": "call_ringing",
+      "x-displayName": "call_ringing",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_ringing\" />"
+    },
+    {
+      "name": "call_unpark",
+      "x-displayName": "call_unpark",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_unpark\" />"
+    },
+    {
+      "name": "emergency_call",
+      "x-displayName": "emergency_call",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/emergency_call\" />"
+    },
+    {
+      "name": "message_received",
+      "x-displayName": "message_received",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/message_received\" />"
+    },
+    {
+      "name": "voicemail_missed",
+      "x-displayName": "voicemail_missed",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/voicemail_missed\" />"
+    },
+    {
+      "name": "voicemail_notify",
+      "x-displayName": "voicemail_notify",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/voicemail_notify\" />"
+    },
+    {
+      "name": "voicemail_received",
+      "x-displayName": "voicemail_received",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/voicemail_received\" />"
+    }
+  ],
+  "paths": {},
+  "components": {
+    "schemas": {
+      "call_answered": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_answered.v1.yaml"
+      },
+      "call_blind_transfer": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_blind_transfer.v1.yaml"
+      },
+      "call_blocked": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_blocked.v1.yaml"
+      },
+      "call_busy": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_busy.v1.yaml"
+      },
+      "call_completed": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_completed.v1.yaml"
+      },
+      "call_consultative_transfer": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_consultative_transfer.v1.yaml"
+      },
+      "call_forward": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_forward.v1.yaml"
+      },
+      "call_hold": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_hold.v1.yaml"
+      },
+      "call_missed": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_missed.v1.yaml"
+      },
+      "call_park": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_park.v1.yaml"
+      },
+      "call_pickup": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_pickup.v1.yaml"
+      },
+      "call_recorded": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_recorded.v1.yaml"
+      },
+      "call_recording_failed": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_recording_failed.v1.yaml"
+      },
+      "call_resume": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_resume.v1.yaml"
+      },
+      "call_rg_queue_completed": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_completed.v1.yaml"
+      },
+      "call_rg_queue_entered": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_entered.v1.yaml"
+      },
+      "call_rg_queue_tier": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_tier.v1.yaml"
+      },
+      "call_ringing": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_ringing.v1.yaml"
+      },
+      "call_unpark": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_unpark.v1.yaml"
+      },
+      "emergency_call": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/emergency_call.v1.yaml"
+      },
+      "message_received": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/message_received.v1.yaml"
+      },
+      "voicemail_missed": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_missed.v1.yaml"
+      },
+      "voicemail_notify": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_notify.v1.yaml"
+      },
+      "voicemail_received": {
+        "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_received.v1.yaml"
+      }
+    }
+  },
+  "x-tagGroups": [
+    {
+      "name": "Models",
+      "tags": [
+        "call_answered",
+        "call_blind_transfer",
+        "call_blocked",
+        "call_busy",
+        "call_completed",
+        "call_consultative_transfer",
+        "call_forward",
+        "call_hold",
+        "call_missed",
+        "call_park",
+        "call_pickup",
+        "call_recorded",
+        "call_recording_failed",
+        "call_resume",
+        "call_rg_queue_completed",
+        "call_rg_queue_entered",
+        "call_rg_queue_tier",
+        "call_ringing",
+        "call_unpark",
+        "emergency_call",
+        "message_received",
+        "voicemail_missed",
+        "voicemail_notify",
+        "voicemail_received"
+      ]
+    }
+  ]
+}

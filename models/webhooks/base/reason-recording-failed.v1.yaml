@@ -1,0 +1,9 @@
+description:
+type: object
+properties:
+  reason:
+    type: string
+    required: true
+    description: Why the call recording failed
+    enum:
+      - maxCallRecordings

@@ -1,0 +1,296 @@
+openapi: 3.1.0
+info:
+  title: CDRs - Call Detail Records
+  version: '1.8'
+  description: 'Get a list of the Call Detail Records (CDRs) for a specific member of your company or for the entire company. Filter your calls by Inbound, Outbound, Missed and get calls for a specific date range.'
+servers:
+  - url: 'https://integrate.versature.com'
+paths:
+  /api/cdrs/users/{user}:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the user specified.
+        The user (extension) will be used to get the call records for that user. Rate
+        Limit: 5/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: user
+        in: path
+        required: true
+        type: string
+        description: 'The user/extension to retrieve the call records for. i.e. 101 '
+      - name: start_date
+        in: query
+        required: true
+        type: string
+        description: 'Get calls which started after this time. '
+      - name: end_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls which ended after this time. '
+      - name: offset
+        in: query
+        required: false
+        type: integer
+        description: 'The offset from the beginning of the date/time period. '
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        description: 'The number of results to be returned. Max value 1000. '
+      - $ref: ../models/accept.header.v1.yaml
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: #/definitions/to
+  /api/cdrs/{user}:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the users specified.
+        If provided the id will be used to get the call records for that user. If
+        not specified call records will be fetched for the currently authenticated
+        user. If you wish to retrieve all calls across your domain use the &quot;all&quot;
+        argument. Rate Limit: 5/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: user
+        in: path
+        required: true
+        type: string
+        description: 'The user/extension to retrieve the call records for. i.e. 101 '
+      - name: all
+        in: query
+        required: false
+        type: boolean
+        description: 'Get call records for all users? '
+      - name: start_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls which started after this time. '
+      - name: end_date
+        in: query
+        required: true
+        type: string
+        description: 'Get calls which ended after this time. '
+      - name: offset
+        in: query
+        required: false
+        type: integer
+        description: 'The offset from the beginning of the date/time period. '
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        description: 'The number of results to be returned. Max value 1000. '
+      - $ref: ../models/accept.header.v1.yaml
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: #/definitions/to
+  /api/cdrs/{id}:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the users specified.
+        If provided the id will be used to get the call records for that user. If
+        not specified call records will be fetched for the currently authenticated
+        user. If you wish to retrieve all calls across your domain use the &quot;all&quot;
+        argument. Rate Limit: 5/second, 30/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+        description: 'The user/extension to retrieve the call records for. i.e. 101 '
+      - name: all
+        in: query
+        required: false
+        type: boolean
+        description: 'The user to retrieve the call records for. '
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'The type of calls to extract. Will provide all types if no value
+          is specified. '
+      - name: start_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls from this time forward. '
+      - name: end_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls up to this time. '
+      - name: offset
+        in: query
+        required: false
+        type: integer
+        description: 'The offset from the beginning of the date/time period. '
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        description: 'The number of results to be returned. Max value 200. '
+      - $ref: ../models/accept.header.v1.yaml
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: #/definitions/to
+  /api/cdrs/users:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the users in a domain.     Rate
+        Limit: 5/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: start_date
+        in: query
+        required: true
+        type: string
+        description: 'Get calls which started after this time. In UTC if timezone
+          not specified. '
+      - name: end_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls which ended after this time. In UTC if timezone not
+          specified. If no start date is provided resutls for calls after this end
+          date will be returned. '
+      - name: type
+        in: query
+        required: false
+        type: string
+        description: 'The type of phone call which took place. '
+      - name: cursor
+        in: query
+        required: false
+        type: string
+        description: 'The cursor/index from which to continue a previous request from '
+      - name: page_size
+        in: query
+        required: false
+        type: number
+        description: 'The number of results to return at once. Maximum is 1,000 '
+      - name: recording_available
+        in: query
+        required: false
+        type: boolean
+        description: 'filter cdrs to only include ones with recordings '
+      - name: min_duration
+        in: query
+        required: false
+        type: number
+        description: 'filter cdrs by minimum  duration '
+      - name: max_duration
+        in: query
+        required: false
+        type: number
+        description: 'filter cdrs by maximum  duration '
+      - name: phone_number
+        in: query
+        required: false
+        type: string
+        description: 'filter cdrs by phone number used '
+      - $ref: ../models/accept.header.v1.yaml
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: string
+  /api/cdrs:
+    get:
+      tags:
+      - CDRsGroup
+      summary: 'Get the call records for a given time period for the users in a domain.  Rate
+        Limit: 5/second, 15/minute '
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: start_date
+        in: query
+        required: true
+        type: string
+        description: 'Get calls which started after this time. '
+      - name: end_date
+        in: query
+        required: false
+        type: string
+        description: 'Get calls which ended after this time. '
+      - name: offset
+        in: query
+        required: false
+        type: integer
+        description: 'The offset from the beginning of the date/time period. '
+      - name: limit
+        in: query
+        required: false
+        type: integer
+        description: 'The number of results to be returned. Max value 1000. '
+      - $ref: ../models/accept.header.v1.yaml
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 'Authorization value. Generally &quot;Bearer ACCESSTOKEN&quot; '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: #/definitions/to
+components:
+  schemas:
+    to:
+      properties: {}
+  securitySchemes:
+    Bearer Access Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Authorization value. Generally Bearer ACCESSTOKEN
+security:
+  - Bearer Access Token: []
