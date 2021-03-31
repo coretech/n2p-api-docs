@@ -2,7 +2,6 @@ import shell from 'shelljs';
 import path from 'path';
 import chalk from 'chalk';
 import fs from 'fs';
-import { merge } from 'openapi-merge';
 
 console.log(__dirname)
 
