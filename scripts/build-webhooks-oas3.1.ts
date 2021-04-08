@@ -2,9 +2,7 @@ import shell from 'shelljs';
 import path from 'path';
 import chalk from 'chalk';
 import fs from 'fs';
-import yaml from 'js-yaml'
-
-console.log(__dirname)
+import yaml from 'js-yaml';
 
 const basePath = path.join(__dirname, '../');
 const docsPath = path.join(basePath, './models/webhooks/')
@@ -73,17 +71,17 @@ function buildSpecFile (tags: any[]) {
         }
       }
     }
-    // // tag
-    // outSpec.tags.push({
-    //   name: tag,
-    //   'x-displayName': tag,
-    //   description: `<SchemaDefinition schemaRef="#/components/schemas/${tag}" />`,
-    // });
-    // outSpec['x-tagGroups'][0].tags.push(tag);
-    // // ref
-    // outSpec.components.schemas[tag] = {
-    //   $ref: `${gitBase}/models/webhooks/${tag}.v1.yaml`,
-    // };
+    // tag
+    outSpec.tags.push({
+      name: tag,
+      'x-displayName': tag,
+      description: `<SchemaDefinition schemaRef="#/components/schemas/${tag}" />`,
+    });
+    outSpec['x-tagGroups'][0].tags.push(tag);
+    // ref
+    outSpec.components.schemas[tag] = {
+      $ref: `${gitBase}/models/webhooks/${tag}.v1.yaml`,
+    };
   });
 
   // write file

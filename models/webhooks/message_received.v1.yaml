@@ -5,7 +5,7 @@ allOf:
         enum:
           - message_received
   - $ref: ./base/message.v1.yaml
-title: Call answered
+title: Message Received
 description: This event is triggered when a Team Member or Account receives a message
 x-examples:
   example:
