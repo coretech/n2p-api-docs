@@ -1,4 +1,5 @@
-# Privacy Polidy
+# Privacy Policy
+
 This policy applies only to the NET2PHONE Web Site and mobile app (collectively, the “Site”) and not to other companies' or organizations' sites to which we may link. By accessing the Site and using the products and services offered by Net2Phone through the Site (“Services”), you agree to the terms and conditions of this Privacy Policy. If you do not agree with any term of this Privacy Policy, you may not access or use the Site or the Services. Net2Phone will occasionally update this Privacy Policy. When we do, we will revise the “updated” date at the bottom of this page.
 
 Net2Phone is committed to respecting our customer's privacy. We may share Your personally identifiable information, in compliance with applicable law, with third parties (who have similarly restrictive privacy policies) as necessary to provide You with Services and for any other lawful business purposes. We may also share Your personally identifiable information with our parent, subsidiaries and affiliates for marketing and other lawful business purposes.
