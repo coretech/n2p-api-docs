@@ -2,29 +2,39 @@ import shell from 'shelljs';
 import path from 'path';
 import chalk from 'chalk';
 import fs from 'fs';
-
-console.log(__dirname)
+import yaml from 'js-yaml';
+import { quit, print } from './helpers'
 
 const basePath = path.join(__dirname, '../');
 const docsPath = path.join(basePath, './models/webhooks/')
 const outFile = path.join(basePath, './reference/webhooks.v1.json');
 const inRoot = path.join(basePath, './scripts/base/webhooks.json');
 
-const gitBase = 'https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev';
-
 process.chdir(basePath);
 
-function quit(err: string, param?: string) {
-  const message = param ? `: ${param}` : '';
-  shell.echo(chalk.red(err + message));
-  shell.exit(1);
+interface Options {
+  type: 'local' | 'remote';
 }
 
-function print(str: string, color: string = 'blue') {
-  shell.echo(chalk[color](str));
+const defaultOptions: Options = {
+  type: 'remote',
+};
+
+const paths = {
+  local: 'http://localhost:8080',
+  remote: 'https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev'
 }
 
-function main() {
+function main(opts: Options = defaultOptions) {
+  const type =
+    process.argv[ 2 ] as unknown as Options || opts.type
+  // @ts-ignore
+  const base = paths[type]
+
+  if (!base) {
+    quit('Invalid type [local | remote]')
+  }
+
   if (!shell.test('-d', docsPath)) {
     quit('Directory does not exist', docsPath);
   }
@@ -42,14 +52,36 @@ function main() {
     quit('Empty directory');
   }
 
-  buildSpecFile(specs);
+  buildSpecFile(specs, base);
 }
 
-function buildSpecFile(tags: any[]) {
+function buildSpecFile (tags: any[], refBase) {
   const baseSpec = JSON.parse(fs.readFileSync(inRoot, 'utf8'));
   const outSpec = { ...baseSpec};
 
+  outSpec.openapi = '3.1.0'
+  outSpec.webhooks = {}
+
   tags.forEach(tag => {
+    const spec = yaml.load(fs.readFileSync(path.join(docsPath, `${tag}.v1.yaml`), 'utf8'))
+
+    outSpec.webhooks[tag] = {
+      summary: 'this is a summary',
+      description: spec['description'],
+      get: {
+        responses: {
+          200: {
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: `${refBase}/models/webhooks/${tag}.v1.yaml`
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     // tag
     outSpec.tags.push({
       name: tag,
@@ -59,7 +91,7 @@ function buildSpecFile(tags: any[]) {
     outSpec['x-tagGroups'][0].tags.push(tag);
     // ref
     outSpec.components.schemas[tag] = {
-      $ref: `${gitBase}/models/webhooks/${tag}.v1.yaml`,
+      $ref: `${refBase}/models/webhooks/${tag}.v1.yaml`,
     };
   });
 
