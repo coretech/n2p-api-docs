@@ -9,7 +9,7 @@ allOf:
         enum:
           - inbound
   - $ref: ./base/webhook.v1.yaml
-title: Call ring group queue entered
+title: Call ring group queue sent to tier
 description: The event is issued when a call waiting in a RG with call queue enabled enters a Tier which results in calls being sent to TM in that Tier.
 x-examples:
   example:
