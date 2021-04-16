@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "net2phone webhooks",
     "description": "<h2>Introduction</h2>The net2phone webhooks give you the ability to receive a structured payload of data at the URL of your choice when certain events occur. For example, you can use the webhooks to notify your CRM application that a call has been completed or notify your messaging application that a call has been parked or unparked<br /><br /><h2>Getting started</h2>Log into https://app.net2phone.com and go to Settings / API, click on the ‘Webhook’ tab, and click on ‘Add Webhook’, follow the on screen directions to set up the webhook.",
@@ -239,5 +239,415 @@
         "voicemail_received"
       ]
     }
-  ]
+  ],
+  "webhooks": {
+    "call_answered": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a Team Member answers an incoming call or when an outgoing call is answered by the dialed destination number",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_answered.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_blind_transfer": {
+      "summary": "this is a summary",
+      "description": "This event is issued when a Team Member transfers a call via  blind (cold) transfer",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_blind_transfer.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_blocked": {
+      "summary": "this is a summary",
+      "description": "Event is triggered when an incoming call to a Team Member is blocked",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_blocked.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_busy": {
+      "summary": "this is a summary",
+      "description": "The event is triggered when an outbound call receives a 4xx or 5xx error response to the INVITE indicating the call failed for some reason",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_busy.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_completed": {
+      "summary": "this is a summary",
+      "description": "Event is triggered when a call is successfully completed. This event will trigger for both inbound and outbound calls.",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_completed.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_consultative_transfer": {
+      "summary": "this is a summary",
+      "description": "This event is issued when a Team Member transfers a call via  consultative (warm) transfer",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_consultative_transfer.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_forward": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a Team Member forwards a call",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_forward.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_hold": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a Team Member puts a call on hold",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_hold.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_missed": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when an incoming call isn’t answered by any phone in your net2phone account.\nThe reason field indicates the reason the call was missed and can be `user_did_not_answer` if the Team Member didn’t answer, `user_rejected_call` if the Team Member actively rejected the call, or `user_not_logged_in` if calling another net2phone user who is not logged in",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_missed.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_park": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a Team Member parks a call",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_park.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_pickup": {
+      "summary": "this is a summary",
+      "description": "This notification is triggered when a Team Member uses the Pick Up feature (*21) to answer a call ringing on another Team Members extension",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_pickup.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_recorded": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when an inbound or outbound call has been successfully recorded.",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_recorded.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_recording_failed": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a call fails to record",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_recording_failed.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_resume": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a Team Member resumes a call",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_resume.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_rg_queue_completed": {
+      "summary": "this is a summary",
+      "description": "The event is issued when a call in a RG completes by either being answered in a Tier or the caller hangs up.",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_completed.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_rg_queue_entered": {
+      "summary": "this is a summary",
+      "description": "The event is issued when a call enters a RG with call queue enabled",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_entered.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_rg_queue_tier": {
+      "summary": "this is a summary",
+      "description": "The event is issued when a call waiting in a RG with call queue enabled enters a Tier which results in calls being sent to TM in that Tier.",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_tier.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_ringing": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a call is ringing. This event will trigger for both inbound and outbound calls and is typically followed by by a `call_answered` or `call_missed` event",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_ringing.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_unpark": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a Team Member unparks a call. NOTE The team member that unparks a call will also get a call_answered event",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_unpark.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "emergency_call": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a call is placed to an emergency serivce",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/emergency_call.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "message_received": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when a Team Member or Account receives a message",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/message_received.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "voicemail_missed": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>\nThe reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_missed.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "voicemail_notify": {
+      "summary": "this is a summary",
+      "description": "This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>\nThe reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_notify.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "voicemail_received": {
+      "summary": "this is a summary",
+      "description": "A voicemail was left for a net2phone user. This event will trigger when an incoming (only) call is not answered by any phone in your net2phone account and a voicemail is recorded.",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_received.v1.yaml"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
