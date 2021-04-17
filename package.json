@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "serve": "http-server --port=8080 --cors=*",
-    "build:webhooks": "ts-node ./scripts/build-webhooks.ts",
-    "dev:webhooks": "ts-node ./scripts/build-webhooks.ts local",
-    "start:webhooks": "yarn serve & yarn watch:webhooks",
-    "watch:webhooks": "nodemon --watch ./models/webhooks --ext yaml --exec yarn dev:webhooks"
+    "server:start": "http-server --port=8080 --cors=*",
+    "server:stop": "pkill -f http-server",
+    "webhooks:build": "ts-node ./scripts/build-webhooks.ts",
+    "webhooks:build:dev": "ts-node ./scripts/build-webhooks.ts local",
+    "webhooks:watch": "nodemon --config ./nodemon.webhooks.json",
+    "webhooks:start": "yarn server:start & yarn webhooks:watch  && yarn server:stop"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.0",

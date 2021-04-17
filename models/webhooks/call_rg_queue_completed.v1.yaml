@@ -11,16 +11,17 @@ allOf:
   - $ref: ./base/webhook.v1.yaml
 title: Call ring group queue completed
 description: The event is issued when a call in a RG completes by either being answered in a Tier or the caller hangs up.
-x-examples:
+examples:
   example:
-    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-    event: call_rg_queue_completed
-    timestamp: 2019-08-24T14:15:22Z
-    direction: inbound
-    user:
-      account_id: 67890
-    originating_number: +19734381000
-    dialed_number: +19739217310
-    call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
-    call_id: 818787cc58e3043c4b4721ed0c157735
-    call_source: normal
+    value:
+      id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      event: call_rg_queue_completed
+      timestamp: 2019-08-24T14:15:22Z
+      direction: inbound
+      user:
+        account_id: 67890
+      originating_number: +19734381000
+      dialed_number: +19739217310
+      call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
+      call_id: 818787cc58e3043c4b4721ed0c157735
+      call_source: normal

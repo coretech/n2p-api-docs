@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "./models/webhooks",
+    "./scripts/build-webhooks.ts"
+  ],
+  "ext": "yaml,ts,json",
+  "exec": "yarn webhooks:build:dev"
+}
