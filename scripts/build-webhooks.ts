@@ -75,7 +75,8 @@ function buildSpecFile (tags: any[], refBase) {
               'application/json': {
                 schema: {
                   $ref: `${refBase}/models/webhooks/${tag}.v1.yaml`
-                }
+                },
+                examples: spec['examples']
               }
             }
           }
@@ -83,12 +84,12 @@ function buildSpecFile (tags: any[], refBase) {
       }
     }
     // tag
-    outSpec.tags.push({
-      name: tag,
-      'x-displayName': tag,
-      description: `<SchemaDefinition schemaRef="#/components/schemas/${tag}" />`,
-    });
-    outSpec['x-tagGroups'][0].tags.push(tag);
+    // outSpec.tags.push({
+    //   name: tag,
+    //   'x-displayName': tag,
+    //   description: `<SchemaDefinition schemaRef="#/components/schemas/${tag}" />`,
+    // });
+    // outSpec['x-tagGroups'][0].tags.push(tag);
     // ref
     outSpec.components.schemas[tag] = {
       $ref: `${refBase}/models/webhooks/${tag}.v1.yaml`,

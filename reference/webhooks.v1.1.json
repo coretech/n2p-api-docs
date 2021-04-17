@@ -10,128 +10,7 @@
       "url": ""
     }
   ],
-  "tags": [
-    {
-      "name": "call_answered",
-      "x-displayName": "call_answered",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_answered\" />"
-    },
-    {
-      "name": "call_blind_transfer",
-      "x-displayName": "call_blind_transfer",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_blind_transfer\" />"
-    },
-    {
-      "name": "call_blocked",
-      "x-displayName": "call_blocked",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_blocked\" />"
-    },
-    {
-      "name": "call_busy",
-      "x-displayName": "call_busy",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_busy\" />"
-    },
-    {
-      "name": "call_completed",
-      "x-displayName": "call_completed",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_completed\" />"
-    },
-    {
-      "name": "call_consultative_transfer",
-      "x-displayName": "call_consultative_transfer",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_consultative_transfer\" />"
-    },
-    {
-      "name": "call_forward",
-      "x-displayName": "call_forward",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_forward\" />"
-    },
-    {
-      "name": "call_hold",
-      "x-displayName": "call_hold",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_hold\" />"
-    },
-    {
-      "name": "call_missed",
-      "x-displayName": "call_missed",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_missed\" />"
-    },
-    {
-      "name": "call_park",
-      "x-displayName": "call_park",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_park\" />"
-    },
-    {
-      "name": "call_pickup",
-      "x-displayName": "call_pickup",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_pickup\" />"
-    },
-    {
-      "name": "call_recorded",
-      "x-displayName": "call_recorded",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_recorded\" />"
-    },
-    {
-      "name": "call_recording_failed",
-      "x-displayName": "call_recording_failed",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_recording_failed\" />"
-    },
-    {
-      "name": "call_resume",
-      "x-displayName": "call_resume",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_resume\" />"
-    },
-    {
-      "name": "call_rg_queue_completed",
-      "x-displayName": "call_rg_queue_completed",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_rg_queue_completed\" />"
-    },
-    {
-      "name": "call_rg_queue_entered",
-      "x-displayName": "call_rg_queue_entered",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_rg_queue_entered\" />"
-    },
-    {
-      "name": "call_rg_queue_tier",
-      "x-displayName": "call_rg_queue_tier",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_rg_queue_tier\" />"
-    },
-    {
-      "name": "call_ringing",
-      "x-displayName": "call_ringing",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_ringing\" />"
-    },
-    {
-      "name": "call_unpark",
-      "x-displayName": "call_unpark",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/call_unpark\" />"
-    },
-    {
-      "name": "emergency_call",
-      "x-displayName": "emergency_call",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/emergency_call\" />"
-    },
-    {
-      "name": "message_received",
-      "x-displayName": "message_received",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/message_received\" />"
-    },
-    {
-      "name": "voicemail_missed",
-      "x-displayName": "voicemail_missed",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/voicemail_missed\" />"
-    },
-    {
-      "name": "voicemail_notify",
-      "x-displayName": "voicemail_notify",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/voicemail_notify\" />"
-    },
-    {
-      "name": "voicemail_received",
-      "x-displayName": "voicemail_received",
-      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/voicemail_received\" />"
-    }
-  ],
+  "tags": [],
   "paths": {},
   "components": {
     "schemas": {
@@ -212,32 +91,7 @@
   "x-tagGroups": [
     {
       "name": "Models",
-      "tags": [
-        "call_answered",
-        "call_blind_transfer",
-        "call_blocked",
-        "call_busy",
-        "call_completed",
-        "call_consultative_transfer",
-        "call_forward",
-        "call_hold",
-        "call_missed",
-        "call_park",
-        "call_pickup",
-        "call_recorded",
-        "call_recording_failed",
-        "call_resume",
-        "call_rg_queue_completed",
-        "call_rg_queue_entered",
-        "call_rg_queue_tier",
-        "call_ringing",
-        "call_unpark",
-        "emergency_call",
-        "message_received",
-        "voicemail_missed",
-        "voicemail_notify",
-        "voicemail_received"
-      ]
+      "tags": []
     }
   ],
   "webhooks": {
@@ -251,6 +105,27 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_answered.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_answered",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -268,6 +143,27 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_blind_transfer.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_blind_transfer",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -285,6 +181,43 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_blocked.v1.yaml"
+                },
+                "examples": {
+                  "user example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_blocked",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "account example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_blocked",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -302,6 +235,27 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_busy.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_busy",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -319,6 +273,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_completed.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_completed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "duration": 36,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -336,6 +312,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_consultative_transfer.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_consultative_transfer",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "transferer",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -353,6 +351,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_forward.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_forward",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "forward_number": 19739212598,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -370,6 +390,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_hold.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_hold",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "holder",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -387,6 +429,29 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_missed.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_missed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "duration": 0,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "user_did_not_answer",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -404,6 +469,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_park.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_park",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal",
+                      "slot": 1
+                    }
+                  }
                 }
               }
             }
@@ -421,6 +508,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_pickup.v1.yaml"
+                },
+                "examples": {
+                  "user-example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_pickup",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "pickup_event_info": {
+                        "id": 98765,
+                        "name": "Peter Parker",
+                        "extension": 4321
+                      },
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -438,6 +551,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_recorded.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_recorded",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal",
+                      "audio_message_id": 123456789
+                    }
+                  }
                 }
               }
             }
@@ -455,6 +590,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_recording_failed.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_recording_failed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "maxCallRecordings",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -472,6 +629,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_resume.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_resume",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "resumer",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -489,6 +668,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_completed.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_completed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -506,6 +703,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_entered.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_entered",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -523,6 +738,24 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_rg_queue_tier.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_tier",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -540,6 +773,27 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_ringing.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_ringing",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -557,6 +811,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/call_unpark.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_unpark",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal",
+                      "slot": 1
+                    }
+                  }
                 }
               }
             }
@@ -574,6 +850,27 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/emergency_call.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "emergency_call",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": 911,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -591,6 +888,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/message_received.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "message_received",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "Sergey Belavsky",
+                      "messenger_info": {
+                        "message_id": "83da998362ddd2e82b1db315",
+                        "conversation_id": "2c83d34c0e9ec63a2342d98a",
+                        "type": "SMS",
+                        "originated": 19734381000,
+                        "terminated": 19739217310,
+                        "origin": "external",
+                        "target": "user",
+                        "content": "hello world",
+                        "from_user_id": "ef9d4caed46726d4d57c6460"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -608,6 +931,29 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_missed.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "voicemail_missed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "duration": 12,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "caller_hungup",
+                      "originating_number": 19734381000,
+                      "dialed_number": 19739217310,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -625,6 +971,28 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_notify.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "voicemail_notify",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "voicemail": true,
+                      "originating_number": 19734381000,
+                      "dialed_number": "*95",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
                 }
               }
             }
@@ -642,6 +1010,30 @@
               "application/json": {
                 "schema": {
                   "$ref": "https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev/models/webhooks/voicemail_received.v1.yaml"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "voicemail_received",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "duration": 12,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": 19734381000,
+                      "dialed_number": "*95",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal",
+                      "audio_message_id": 123456789,
+                      "voicemail": true
+                    }
+                  }
                 }
               }
             }
