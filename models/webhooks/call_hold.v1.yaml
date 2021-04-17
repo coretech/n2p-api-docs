@@ -1,11 +1,11 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/reason-hold.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_hold
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/reason-hold.v1.yaml
 title: Call hold
 description: This event is triggered when a Team Member puts a call on hold
 examples:

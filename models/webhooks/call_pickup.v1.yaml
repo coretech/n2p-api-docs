@@ -1,4 +1,5 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
@@ -21,7 +22,6 @@ allOf:
           - id
           - name
           - extension
-  - $ref: ./base/webhook.v1.yaml
 title: Call pickup
 description: This notification is triggered when a Team Member uses the Pick Up feature (*21) to answer a call ringing on another Team Members extension
 examples:

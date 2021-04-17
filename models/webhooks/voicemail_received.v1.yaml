@@ -1,4 +1,8 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/audio.v1.yaml
+  - $ref: ./base/duration.v1.yaml
+  - $ref: ./base/voicemail.v1.yaml
   - properties:
       event:
         type: string
@@ -8,10 +12,6 @@ allOf:
         type: string
         enum:
           - inbound
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/audio.v1.yaml
-  - $ref: ./base/duration.v1.yaml
-  - $ref: ./base/voicemail.v1.yaml
 title: Voicemail received
 description: A voicemail was left for a net2phone user. This event will trigger when an incoming (only) call is not answered by any phone in your net2phone account and a voicemail is recorded.
 examples:

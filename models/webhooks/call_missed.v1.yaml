@@ -1,12 +1,12 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/reason-missed.v1.yaml
+  - $ref: ./base/duration.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_missed
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/reason-missed.v1.yaml
-  - $ref: ./base/duration.v1.yaml
 title: Call missed
 description: |-
   This event is triggered when an incoming call isn’t answered by any phone in your net2phone account.

@@ -1,11 +1,11 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/reason-transfer.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_consultative_transfer
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/reason-transfer.v1.yaml
 title: Call consultative_transfer
 description: This event is issued when a Team Member transfers a call via  consultative (warm) transfer
 examples:

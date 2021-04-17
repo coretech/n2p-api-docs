@@ -1,4 +1,5 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
@@ -7,7 +8,6 @@ allOf:
       forward_number:
         type: string
         description: The number the call was forwarded to
-  - $ref: ./base/webhook.v1.yaml
 title: Call forward
 description: This event is triggered when a Team Member forwards a call
 examples:

@@ -1,10 +1,10 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_blocked
-  - $ref: ./base/webhook.v1.yaml
 title: Call blocked
 description: Event is triggered when an incoming call to a Team Member is blocked
 examples:

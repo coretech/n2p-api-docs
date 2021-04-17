@@ -1,11 +1,11 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/duration.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_completed
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/duration.v1.yaml
 title: Call completed
 description: Event is triggered when a call is successfully completed. This event will trigger for both inbound and outbound calls.
 examples:

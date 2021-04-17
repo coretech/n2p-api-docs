@@ -1,4 +1,5 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
@@ -8,7 +9,6 @@ allOf:
         type: string
         enum:
           - outbound
-  - $ref: ./base/webhook.v1.yaml
 title: Call busy
 description: The event is triggered when an outbound call receives a 4xx or 5xx error response to the INVITE indicating the call failed for some reason
 examples:
