@@ -1,4 +1,5 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
   - properties:
       event:
         type: string
@@ -8,7 +9,6 @@ allOf:
         type: string
         enum:
           - inbound
-  - $ref: ./base/webhook.v1.yaml
 title: Call ring group queue completed
 description: The event is issued when a call in a RG completes by either being answered in a Tier or the caller hangs up.
 examples:

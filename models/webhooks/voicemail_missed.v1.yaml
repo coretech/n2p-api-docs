@@ -1,12 +1,12 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/duration.v1.yaml
+  - $ref: ./base/reason-missed-voicemail.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - voicemail_missed
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/duration.v1.yaml
-  - $ref: ./base/reason-missed-voicemail.v1.yaml
 title: Voicemail missed
 description: |-
   This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>

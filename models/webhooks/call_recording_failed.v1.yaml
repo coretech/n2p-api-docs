@@ -1,11 +1,11 @@
 allOf:
+  - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/reason-recording-failed.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_recording_failed
-  - $ref: ./base/webhook.v1.yaml
-  - $ref: ./base/reason-recording-failed.v1.yaml
 title: Call recording failed
 description: This event is triggered when a call fails to record
 examples:
