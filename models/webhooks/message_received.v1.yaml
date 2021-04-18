@@ -5,7 +5,7 @@ allOf:
         type: string
         enum:
           - message_received
-title: Message Received
+summary: Message Received
 description: This event is triggered when a Team Member or Account receives a message
 examples:
   example:

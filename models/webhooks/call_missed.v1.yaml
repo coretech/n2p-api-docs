@@ -7,7 +7,7 @@ allOf:
         type: string
         enum:
           - call_missed
-title: Call missed
+summary: Call missed
 description: |-
   This event is triggered when an incoming call isn’t answered by any phone in your net2phone account.
   The reason field indicates the reason the call was missed and can be `user_did_not_answer` if the Team Member didn’t answer, `user_rejected_call` if the Team Member actively rejected the call, or `user_not_logged_in` if calling another net2phone user who is not logged in
@@ -25,8 +25,8 @@ examples:
         account_id: 67890
       user_name: James T Kirk
       reason: user_did_not_answer
-      originating_number: +19734381000
-      dialed_number: +19739217310
+      originating_number: '+19734381000'
+      dialed_number: '+19739217310'
       call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
       call_id: 818787cc58e3043c4b4721ed0c157735
       call_source: normal

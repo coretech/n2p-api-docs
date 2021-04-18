@@ -5,7 +5,7 @@ allOf:
         type: string
         enum:
           - call_blocked
-title: Call blocked
+summary: Call blocked
 description: Event is triggered when an incoming call to a Team Member is blocked
 examples:
   user example:
@@ -19,8 +19,8 @@ examples:
         name: James T Kirk
         account_id: 67890
       user_name: James T Kirk
-      originating_number: +19734381000
-      dialed_number: +19739217310
+      originating_number: '+19734381000'
+      dialed_number: '+19739217310'
       call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
       call_id: 818787cc58e3043c4b4721ed0c157735
       call_source: normal
@@ -32,8 +32,8 @@ examples:
       direction: inbound
       user:
         account_id: 67890
-      originating_number: +19734381000
-      dialed_number: +19739217310
+      originating_number: '+19734381000'
+      dialed_number: '+19739217310'
       call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
       call_id: 818787cc58e3043c4b4721ed0c157735
       call_source: normal
