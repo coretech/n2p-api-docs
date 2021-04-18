@@ -7,7 +7,7 @@ allOf:
         type: string
         enum:
           - voicemail_missed
-title: Voicemail missed
+summary: Voicemail missed
 description: |-
   This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>
   The reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time
@@ -25,8 +25,8 @@ examples:
         account_id: 67890
       user_name: James T Kirk
       reason: caller_hungup
-      originating_number: +19734381000
-      dialed_number: +19739217310
+      originating_number: '+19734381000'
+      dialed_number: '+19739217310'
       call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
       call_id: 818787cc58e3043c4b4721ed0c157735
       call_source: normal

@@ -8,7 +8,7 @@ allOf:
       forward_number:
         type: string
         description: The number the call was forwarded to
-title: Call forward
+summary: Call forward
 description: This event is triggered when a Team Member forwards a call
 examples:
   example:
@@ -22,8 +22,8 @@ examples:
         name: James T Kirk
         account_id: 67890
       user_name: James T Kirk
-      originating_number: +19734381000
-      dialed_number: +19739217310
+      originating_number: '+19734381000'
+      dialed_number: '+19739217310'
       forward_number: +19739212598
       call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
       call_id: 818787cc58e3043c4b4721ed0c157735

@@ -5,7 +5,7 @@ allOf:
         type: string
         enum:
           - emergency_call
-title: Emergency call
+summary: Emergency call
 description: This event is triggered when a call is placed to an emergency serivce
 examples:
   example:
@@ -19,7 +19,7 @@ examples:
         name: James T Kirk
         account_id: 67890
       user_name: James T Kirk
-      originating_number: +19734381000
+      originating_number: '+19734381000'
       dialed_number: 911
       call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
       call_id: 818787cc58e3043c4b4721ed0c157735
