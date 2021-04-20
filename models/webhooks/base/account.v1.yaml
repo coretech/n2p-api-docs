@@ -1,0 +1,10 @@
+description:
+type: object
+properties:
+  user:
+    type: object
+    description: The information of the account that triggered the event
+    properties:
+      account_id:
+        type: number
+        description: This is your net2phone account ID

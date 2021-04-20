@@ -3,7 +3,6 @@ type: object
 properties:
   reason:
     type: string
-    required: true
     description: Who initiated the transfer
     enum:
       - transferer

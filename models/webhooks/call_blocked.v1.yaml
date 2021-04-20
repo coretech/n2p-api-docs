@@ -1,14 +1,17 @@
 allOf:
   - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/user.v1.yaml
   - properties:
       event:
         type: string
         enum:
           - call_blocked
 summary: Call blocked
-description: Event is triggered when an incoming call to a Team Member is blocked
+description: |-
+  This event is triggered when an incoming call is blocked.<br/>
+  If the number is blocked at the account level only the `user.account_id` field is present - see examples.
 examples:
-  user example:
+  user level blocked example:
     value:
       id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
       event: call_blocked
@@ -24,7 +27,7 @@ examples:
       call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
       call_id: 818787cc58e3043c4b4721ed0c157735
       call_source: normal
-  account example:
+  account level blocked example:
     value:
       id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
       event: call_blocked

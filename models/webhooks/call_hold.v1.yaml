@@ -1,6 +1,7 @@
 allOf:
   - $ref: ./base/webhook.v1.yaml
   - $ref: ./base/reason-hold.v1.yaml
+  - $ref: ./base/user.v1.yaml
   - properties:
       event:
         type: string

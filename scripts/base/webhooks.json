@@ -10,11 +10,5 @@
   "paths": {},
   "components": {
     "schemas": {}
-  },
-  "x-tagGroups": [
-    {
-      "name": "Models",
-      "tags": []
-    }
-  ]
+  }
 }

@@ -1,5 +1,6 @@
 allOf:
   - $ref: ./base/webhook.v1.yaml
+  - $ref: ./base/user.v1.yaml
   - $ref: ./base/audio.v1.yaml
   - properties:
       event:
