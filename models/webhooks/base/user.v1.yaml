@@ -1,0 +1,20 @@
+description:
+type: object
+properties:
+  user:
+    type: object
+    description: The user object describes information about the user and account that triggered the event
+    properties:
+      id:
+        type: number
+        description: A unqiue identifier assigned to each Team Member
+      name:
+        type: string
+        description: The full display name of the Team member
+      account_id:
+        type: number
+        description: This is your net2phone account ID
+  user_name:
+    type: string
+    description: Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.
+    deprecated: true

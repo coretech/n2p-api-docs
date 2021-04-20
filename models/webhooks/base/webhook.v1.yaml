@@ -44,25 +44,6 @@ properties:
       - outbound
       - inbound
     description: Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member
-  user:
-    type: object
-    required:
-      - account_id
-    description: The user object describes information about the user that triggered the event. The id and name will be ommitted if the event was triggered by an account level event
-    properties:
-      id:
-        type: number
-        description: A unqiue identifier assigned to each Team Member
-      name:
-        type: string
-        description: The full display name of the Team member
-      account_id:
-        type: number
-        description: Thi is your net2phone account ID
-  user_name:
-    type: string
-    description: Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.
-    deprecated: true
   originating_number:
     type: string
     description: Describes the number that started the phone call
@@ -89,14 +70,3 @@ properties:
       - normal
       - click2call
     description: Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API
-required:
-  - id
-  - event
-  - timestamp
-  - direction
-  - user
-  - originating_number
-  - dialed_number
-  - call_leg_id
-  - call_id
-  - call_source

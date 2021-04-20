@@ -66,9 +66,9 @@ function buildSpecFile (tags: any[], refBase) {
     const spec = yaml.load(fs.readFileSync(path.join(docsPath, `${tag}.v1.yaml`), 'utf8'))
 
     outSpec.webhooks[tag] = {
-      summary: 'this is a summary',
+      summary: spec['summary'],
       description: spec['description'],
-      get: {
+      post: {
         responses: {
           200: {
             content: {

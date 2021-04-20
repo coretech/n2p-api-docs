@@ -3,5 +3,4 @@ type: object
 properties:
   slot:
     type: number
-    required: true
     description: Parking slot number

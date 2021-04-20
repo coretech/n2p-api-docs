@@ -3,5 +3,4 @@ type: object
 properties:
   voicemail:
     type: boolean
-    required: true
     description: Was a voicemail left

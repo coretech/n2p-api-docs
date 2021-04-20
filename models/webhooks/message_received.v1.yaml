@@ -1,5 +1,6 @@
 allOf:
   - $ref: ./base/message.v1.yaml
+  - $ref: ./base/user.v1.yaml
   - properties:
       event:
         type: string
