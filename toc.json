@@ -1,115 +1,69 @@
 {
-  "items": [
-    {
-      "type": "item",
-      "title": "Getting Started",
-      "uri": "docs/getting-started.md"
-    },
-    {
-      "type": "item",
-      "title": "Authentication",
-      "uri": "docs/authentication.md"
-    },
-    {
-      "type": "item",
-      "title": "Subscriptions",
-      "uri": "docs/subscriptions.md"
-    },
-    {
-      "type": "divider",
-      "title": "Documentation"
-    },
-    {
-      "type": "item",
-      "title": "Webhooks",
-      "uri": "reference/webhooks.v1.json"
-    },
-    {
-      "type": "divider",
-      "title": "APIS"
-    },
-    {
-      "type": "item",
-      "title": "Authentication",
-      "uri": "reference/authentication.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "CDRs",
-      "uri": "reference/cdrs.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Call Queues",
-      "uri": "reference/queues.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Calls",
-      "uri": "reference/calls.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Devices",
-      "uri": "reference/devices.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Presence",
-      "uri": "reference/presence.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Portability",
-      "uri": "reference/portability.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Call Recordings",
-      "uri": "reference/recordings.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Subscriptions",
-      "uri": "reference/subscriptions.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Users",
-      "uri": "reference/users.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Voicemails",
-      "uri": "reference/voicemails.v1.yaml"
-    },
-    {
-      "type": "divider",
-      "title": "Webhooks"
-    },
-    {
-      "type": "item",
-      "title": "Call Answered",
-      "uri": "models/webhooks/call_answered.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Call Blocked",
-      "uri": "models/webhooks/call_blocked.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "Call Blind Transfer",
-      "uri": "models/webhooks/call_blind_transfer.v1.yaml"
-    },
-    {
-      "type": "divider",
-      "title": "Original"
-    },
-    {
-      "type": "item",
-      "title": "Versature Integrate",
-      "uri": "spec-v1.json"
-    }
-  ]
+  "header": {
+    "right": [
+      {
+        "type": "item",
+        "title": {
+          "en": "webhooks"
+        },
+        "external": false,
+        "uri": "/docs/webhooks"
+      }
+    ]
+  },
+  "sidebar": [],
+  "footer": {
+    "content": [
+      {
+        "type": "section",
+        "title": {
+          "en": "Tools"
+        },
+        "items": [
+          {
+            "type": "item",
+            "title": {
+              "en": "Zapier"
+            },
+            "external": true,
+            "uri": "https://zapier.com/apps/net2phone/integrations"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "title": {
+          "en": "Resources"
+        },
+        "items": [
+          {
+            "type": "item",
+            "title": {
+              "en": "The importance of innovation"
+            },
+            "external": true,
+            "uri": "https://info.net2phone.com/blog/why-innovation-is-important-in-unified-communications"
+          }
+        ]
+      }
+    ],
+    "legal": [
+      {
+        "type": "item",
+        "title": {
+          "en": "Privacy Policy"
+        },
+        "external": false,
+        "uri": "/privacy-policy"
+      },
+      {
+        "type": "item",
+        "title": {
+          "en": "Terms of Service"
+        },
+        "external": false,
+        "uri": "/terms-of-service"
+      }
+    ]
+  }
 }
