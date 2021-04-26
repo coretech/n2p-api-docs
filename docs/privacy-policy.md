@@ -18,9 +18,9 @@ Sometimes, we may specifically ask for information about You -- such as name, ag
 
 ## Third Party Disclosure
 
-Net2Phone may disclose Your personal information to third parties as set forth above and/or if it is required to do so by law or in the good faith belief that such action is necessary to:<br />
-(a) conform to the law or comply with legal process served on Net2Phone or the Site;<br />
-(b) protect and defend the rights or property of Net2Phone and the Site; or<br />
+Net2Phone may disclose Your personal information to third parties as set forth above and/or if it is required to do so by law or in the good faith belief that such action is necessary to:  
+(a) conform to the law or comply with legal process served on Net2Phone or the Site;  
+(b) protect and defend the rights or property of Net2Phone and the Site; or  
 (c) act under exigent circumstances to protect the personal safety of users of the Service, the Site, or the public.
 
 ## Security Measures
