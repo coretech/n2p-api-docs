@@ -8,6 +8,14 @@
         },
         "external": false,
         "uri": "/docs/webhooks"
+      },
+      {
+        "type": "item",
+        "title": {
+          "en": "zapier"
+        },
+        "external": false,
+        "uri": "/zapier"
       }
     ]
   },
