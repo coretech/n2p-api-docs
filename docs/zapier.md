@@ -21,4 +21,4 @@ If you have any additional questions, you can reach out to [integrations@net2pho
 
 ## Popular use cases
 
-[comment]: <> (<script src="https://zapier.com/apps/embed/widget.js?services=net2phone&limit=5&theme=dark&html_id=zapier-widget"></script>)
+[comment]: <> (script: {"name": "zapier", "url": "https://zapier.com/apps/embed/widget.js?services=net2phone&limit=6&theme=THEME&html_id=ID"})
