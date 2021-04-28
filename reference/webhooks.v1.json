@@ -119,6 +119,29 @@
                       "call_id": "818787cc58e3043c4b4721ed0c157735",
                       "call_source": "normal"
                     }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_answered",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
                   }
                 }
               }
@@ -288,6 +311,30 @@
                       "call_id": "818787cc58e3043c4b4721ed0c157735",
                       "call_source": "normal"
                     }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_completed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "duration": 36,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
                   }
                 }
               }
@@ -444,6 +491,31 @@
                       "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
                       "call_id": "818787cc58e3043c4b4721ed0c157735",
                       "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_missed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "duration": 0,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "user_did_not_answer",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
                     }
                   }
                 }
@@ -787,6 +859,29 @@
                       "call_id": "818787cc58e3043c4b4721ed0c157735",
                       "call_source": "normal"
                     }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_ringing",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
                   }
                 }
               }
@@ -946,6 +1041,31 @@
                       "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
                       "call_id": "818787cc58e3043c4b4721ed0c157735",
                       "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "voicemail_missed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "duration": 12,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "caller_hungup",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
                     }
                   }
                 }
