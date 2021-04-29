@@ -1,0 +1,17 @@
+description:
+type: object
+properties:
+  click_to_call_info:
+    type: object
+    description: Information about the click to call event. Present only when the `call_source = click2call`
+    properties:
+      c2c_api_request_id:
+        description: Unique ID of the click2call api request
+        type: string
+        format: uuid
+        pattern: /^[0-9a-f]{8}-[0-9a-f]{16}$/gm
+      c2c_client_id:
+        description: Name of the client that
+        type: string
+        enum:
+          - n2p-api
