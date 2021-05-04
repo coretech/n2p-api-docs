@@ -3,7 +3,6 @@ import path from 'path';
 import chalk from 'chalk';
 import fs from 'fs';
 import yaml from 'js-yaml';
-import { merge } from 'openapi-merge';
 import {
   quit,
   print,

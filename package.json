@@ -16,7 +16,6 @@
     "http-server": "^0.12.3",
     "js-yaml": "^4.0.0",
     "nodemon": "^2.0.7",
-    "openapi-merge": "^1.0.29",
     "shelljs": "^0.8.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
