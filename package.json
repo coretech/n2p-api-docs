@@ -6,7 +6,6 @@
     "server:start": "http-server --port=8080 --cors=*",
     "server:stop": "pkill -f http-server",
     "webhooks:build": "ts-node ./scripts/build-webhooks.ts",
-    "webhooks:build:dev": "ts-node ./scripts/build-webhooks.ts local",
     "webhooks:watch": "nodemon --config ./nodemon.webhooks.json",
     "webhooks:start": "yarn server:start & yarn webhooks:watch  && yarn server:stop"
   },
