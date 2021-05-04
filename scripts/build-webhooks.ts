@@ -3,7 +3,11 @@ import path from 'path';
 import chalk from 'chalk';
 import fs from 'fs';
 import yaml from 'js-yaml';
-import { quit, print } from './helpers'
+import {
+  quit,
+  print,
+  flattenAllOf,
+} from './helpers'
 
 const basePath = path.join(__dirname, '../');
 const docsPath = path.join(basePath, './models/webhooks/')
@@ -12,29 +16,11 @@ const inRoot = path.join(basePath, './scripts/base/webhooks.json');
 
 process.chdir(basePath);
 
-interface Options {
-  type: 'local' | 'remote';
-}
+interface Options {}
 
-const defaultOptions: Options = {
-  type: 'remote',
-};
-
-const paths = {
-  local: 'http://localhost:8080',
-  remote: 'https://raw.githubusercontent.com/coretech/n2p-i2-docs/dev'
-}
+const defaultOptions: Options = {};
 
 function main(opts: Options = defaultOptions) {
-  const type =
-    process.argv[ 2 ] as unknown as Options || opts.type
-  // @ts-ignore
-  const base = paths[type]
-
-  if (!base) {
-    quit('Invalid type [local | remote]')
-  }
-
   if (!shell.test('-d', docsPath)) {
     quit('Directory does not exist', docsPath);
   }
@@ -52,19 +38,22 @@ function main(opts: Options = defaultOptions) {
     quit('Empty directory');
   }
 
-  buildSpecFile(specs, base);
+  buildSpecFile(specs);
 }
 
-function buildSpecFile (tags: any[], refBase) {
+function buildSpecFile (tags: any[]) {
   const baseSpec = JSON.parse(fs.readFileSync(inRoot, 'utf8'));
   const outSpec = { ...baseSpec};
 
   outSpec.openapi = '3.1.0'
   outSpec.webhooks = {}
 
-  tags.forEach(tag => {
+  tags.forEach((tag, i) => {
     const spec = yaml.load(fs.readFileSync(path.join(docsPath, `${tag}.v1.yaml`), 'utf8'))
 
+    const properties = flattenAllOf(spec['allOf'], docsPath)
+
+    // build webhook
     outSpec.webhooks[tag] = {
       summary: spec['summary'],
       description: spec['description'],
@@ -74,7 +63,7 @@ function buildSpecFile (tags: any[], refBase) {
             content: {
               'application/json': {
                 schema: {
-                  $ref: `${refBase}/models/webhooks/${tag}.v1.yaml`
+                  '$ref': `#/components/schemas/${tag}`
                 },
                 examples: spec['examples']
               }
@@ -83,16 +72,12 @@ function buildSpecFile (tags: any[], refBase) {
         }
       }
     }
-    // tag
-    // outSpec.tags.push({
-    //   name: tag,
-    //   'x-displayName': tag,
-    //   description: `<SchemaDefinition schemaRef="#/components/schemas/${tag}" />`,
-    // });
-    // outSpec['x-tagGroups'][0].tags.push(tag);
-    // ref
+    // build schema
     outSpec.components.schemas[tag] = {
-      $ref: `${refBase}/models/webhooks/${tag}.v1.yaml`,
+      type: 'object',
+      title: spec['summary'],
+      description: spec['description'],
+      properties,
     };
   });
 

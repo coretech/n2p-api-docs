@@ -1,8 +1,0 @@
-# https://idtjira.atlassian.net/wiki/spaces/NET/pages/369033307/CI
-projectSettings:
-  buildNodeLabel: qa_linux_awscli
-  skipEmailNotifications: false
-  slackChannel: n2p-template-job-test # change this
-repoSettings:
-  imageName: "n2p-template-job-image" # change this
-  artifactoryDockerRepoUrl: "idt-n2p-docker.jfrog.io"

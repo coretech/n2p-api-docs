@@ -4,5 +4,5 @@
     "./scripts/build-webhooks.ts"
   ],
   "ext": "yaml,ts,json",
-  "exec": "yarn webhooks:build:dev"
+  "exec": "yarn webhooks:build"
 }

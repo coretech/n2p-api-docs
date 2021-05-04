@@ -78,14 +78,6 @@ async@^2.6.2:
   dependencies:
     lodash "^4.17.14"
 
-atlassian-openapi@^1.0.8:
-  version "1.0.12"
-  resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/atlassian-openapi/-/atlassian-openapi-1.0.12.tgz#c81dfab4e270502dda84a5f28e2c4241a8c33a73"
-  integrity sha1-yB36tOJwUC3ahKXyjixCQajDOnM=
-  dependencies:
-    jsonpointer "^4.0.1"
-    urijs "^1.18.10"
-
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -503,6 +495,11 @@ http-server@^0.12.3:
     secure-compare "3.0.1"
     union "~0.5.0"
 
+husky@^6.0.0:
+  version "6.0.0"
+  resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/husky/-/husky-6.0.0.tgz#810f11869adf51604c32ea577edbc377d7f9319e"
+  integrity sha1-gQ8RhprfUWBMMupXftvDd9f5MZ4=
+
 ignore-by-default@^1.0.1:
   version "1.0.1"
   resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/ignore-by-default/-/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"
@@ -639,11 +636,6 @@ json-buffer@3.0.0:
   resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
   integrity sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=
 
-jsonpointer@^4.0.1:
-  version "4.1.0"
-  resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/jsonpointer/-/jsonpointer-4.1.0.tgz#501fb89986a2389765ba09e6053299ceb4f2c2cc"
-  integrity sha1-UB+4mYaiOJdlugnmBTKZzrTywsw=
-
 keyv@^3.0.0:
   version "3.1.0"
   resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/keyv/-/keyv-3.1.0.tgz#ecc228486f69991e49e9476485a5be1e8fc5c4d9"
@@ -658,7 +650,7 @@ latest-version@^5.0.0:
   dependencies:
     package-json "^6.3.0"
 
-lodash@^4.17.14, lodash@^4.17.15:
+lodash@^4.17.14:
   version "4.17.21"
   resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
@@ -768,15 +760,6 @@ once@^1.3.0, once@^1.3.1, once@^1.4.0:
   integrity sha1-WDsap3WWHUsROsF9nFC6753Xa9E=
   dependencies:
     wrappy "1"
-
-openapi-merge@^1.0.29:
-  version "1.0.29"
-  resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/openapi-merge/-/openapi-merge-1.0.29.tgz#57b971b81d48c38f5275ffe0f3355f230e74ab06"
-  integrity sha1-V7lxuB1Iw49Sdf/g8zVfIw50qwY=
-  dependencies:
-    atlassian-openapi "^1.0.8"
-    lodash "^4.17.15"
-    ts-is-present "^1.1.1"
 
 opener@^1.5.1:
   version "1.5.2"
@@ -1045,11 +1028,6 @@ touch@^3.1.0:
   dependencies:
     nopt "~1.0.10"
 
-ts-is-present@^1.1.1:
-  version "1.2.1"
-  resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/ts-is-present/-/ts-is-present-1.2.1.tgz#38faeef8c59a890c0f876c86a46397fab236e21c"
-  integrity sha1-OPru+MWaiQwPh2yGpGOX+rI24hw=
-
 ts-node@^9.1.1:
   version "9.1.1"
   resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/ts-node/-/ts-node-9.1.1.tgz#51a9a450a3e959401bda5f004a72d54b936d376d"
@@ -1118,11 +1096,6 @@ update-notifier@^4.1.0:
     pupa "^2.0.1"
     semver-diff "^3.1.1"
     xdg-basedir "^4.0.0"
-
-urijs@^1.18.10:
-  version "1.19.6"
-  resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/urijs/-/urijs-1.19.6.tgz#51f8cb17ca16faefb20b9a31ac60f84aa2b7c870"
-  integrity sha1-UfjLF8oW+u+yC5oxrGD4SqK3yHA=
 
 url-join@^2.0.5:
   version "2.0.5"
