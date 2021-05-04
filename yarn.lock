@@ -495,6 +495,11 @@ http-server@^0.12.3:
     secure-compare "3.0.1"
     union "~0.5.0"
 
+husky@^6.0.0:
+  version "6.0.0"
+  resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/husky/-/husky-6.0.0.tgz#810f11869adf51604c32ea577edbc377d7f9319e"
+  integrity sha1-gQ8RhprfUWBMMupXftvDd9f5MZ4=
+
 ignore-by-default@^1.0.1:
   version "1.0.1"
   resolved "https://idt.jfrog.io/idt/api/npm/n2p-npm/ignore-by-default/-/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"
