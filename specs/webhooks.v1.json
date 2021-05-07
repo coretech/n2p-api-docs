@@ -1,0 +1,3619 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "net2phone webhooks",
+    "description": "<h2>Introduction</h2>The net2phone webhooks give you the ability to receive a structured payload of data at the URL of your choice when certain events occur. For example, you can use the webhooks to notify your CRM application that a call has been completed or notify your messaging application that a call has been parked or unparked<br /><br /><h2>Getting started</h2>Log into https://app.net2phone.com and go to Settings / API, click on the ‘Webhook’ tab, and click on ‘Add Webhook’, follow the on screen directions to set up the webhook.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "tags": [],
+  "paths": {},
+  "components": {
+    "schemas": {
+      "call_answered": {
+        "type": "object",
+        "title": "Call answered",
+        "description": "This event is triggered when a Team Member answers an incoming call or when an outgoing call is answered by the dialed destination number",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_answered"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_blind_transfer": {
+        "type": "object",
+        "title": "Call blind transfer",
+        "description": "This event is issued when a Team Member transfers a call via  blind (cold) transfer",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_blind_transfer"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          }
+        }
+      },
+      "call_blocked": {
+        "type": "object",
+        "title": "Call blocked",
+        "description": "This event is triggered when an incoming call is blocked.<br/>\nIf the number is blocked at the account level only the `user.account_id` field is present - see examples.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_blocked"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_busy": {
+        "type": "object",
+        "title": "Call busy",
+        "description": "The event is triggered when an outbound call receives a 4xx or 5xx error response to the INVITE indicating the call failed for some reason",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_busy"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound"
+            ]
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          }
+        }
+      },
+      "call_completed": {
+        "type": "object",
+        "title": "Call completed",
+        "description": "Event is triggered when a call is successfully completed. This event will trigger for both inbound and outbound calls.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_completed"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "duration": {
+            "type": "number",
+            "description": "Length of time in seconds of the call or voicemail"
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_consultative_transfer": {
+        "type": "object",
+        "title": "Call consultative_transfer",
+        "description": "This event is issued when a Team Member transfers a call via  consultative (warm) transfer",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_consultative_transfer"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "reason": {
+            "type": "string",
+            "description": "Who initiated the transfer",
+            "enum": [
+              "transferer",
+              "transferee"
+            ]
+          }
+        }
+      },
+      "call_forward": {
+        "type": "object",
+        "title": "Call forward",
+        "description": "This event is triggered when a Team Member forwards a call",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_forward"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "forward_number": {
+            "type": "string",
+            "description": "The number the call was forwarded to"
+          }
+        }
+      },
+      "call_hold": {
+        "type": "object",
+        "title": "Call hold",
+        "description": "This event is triggered when a Team Member puts a call on hold",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_hold"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Who initiated the hold",
+            "enum": [
+              "holder",
+              "holdee"
+            ]
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_missed": {
+        "type": "object",
+        "title": "Call missed",
+        "description": "This event is triggered when an incoming call isn’t answered by any phone in your net2phone account.\nThe reason field indicates the reason the call was missed and can be `user_did_not_answer` if the Team Member didn’t answer, `user_rejected_call` if the Team Member actively rejected the call, or `user_not_logged_in` if calling another net2phone user who is not logged in",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_missed"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the call was missed",
+            "enum": [
+              "user_did_not_answer",
+              "user_not_logged_in",
+              "user_rejected_call"
+            ]
+          },
+          "duration": {
+            "type": "number",
+            "description": "Length of time in seconds of the call or voicemail"
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_park": {
+        "type": "object",
+        "title": "Call park",
+        "description": "This event is triggered when a Team Member parks a call",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_park"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "slot": {
+            "type": "number",
+            "description": "Parking slot number"
+          }
+        }
+      },
+      "call_pickup": {
+        "type": "object",
+        "title": "Call pickup",
+        "description": "This notification is triggered when a Team Member uses the Pick Up feature (*21) to answer a call ringing on another Team Members extension",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_pickup"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "pickup_event_info": {
+            "type": "object",
+            "description": "Info about the Team Member who used the Pick Up feature",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "The unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "extension": {
+                "type": "string",
+                "description": "Extension of the Team member"
+              }
+            }
+          }
+        }
+      },
+      "call_recorded": {
+        "type": "object",
+        "title": "Call recorded",
+        "description": "This event is triggered when an inbound or outbound call has been successfully recorded.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_recorded"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "audio_message_id": {
+            "type": "number",
+            "description": "ID of the audio message for a call recording or voicemail"
+          }
+        }
+      },
+      "call_recording_failed": {
+        "type": "object",
+        "title": "Call recording failed",
+        "description": "This event is triggered when a call fails to record",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_recording_failed"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the call recording failed",
+            "enum": [
+              "maxCallRecordings"
+            ]
+          }
+        }
+      },
+      "call_resume": {
+        "type": "object",
+        "title": "Call resume",
+        "description": "This event is triggered when a Team Member resumes a call",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_resume"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the call was resumed",
+            "enum": [
+              "resumer",
+              "resumee"
+            ]
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_rg_queue_completed": {
+        "type": "object",
+        "title": "Call ring group queue completed",
+        "description": "The event is issued when a call in a RG completes by either being answered in a Tier or the caller hangs up.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_rg_queue_completed"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "inbound"
+            ]
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The information of the account that triggered the event",
+            "properties": {
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_rg_queue_entered": {
+        "type": "object",
+        "title": "Call ring group queue entered",
+        "description": "The event is issued when a call enters a RG with call queue enabled",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_rg_queue_entered"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "inbound"
+            ]
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The information of the account that triggered the event",
+            "properties": {
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_rg_queue_tier": {
+        "type": "object",
+        "title": "Call ring group queue sent to tier",
+        "description": "The event is issued when a call waiting in a RG with call queue enabled enters a Tier which results in calls being sent to TM in that Tier.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_rg_queue_tier"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "inbound"
+            ]
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The information of the account that triggered the event",
+            "properties": {
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_ringing": {
+        "type": "object",
+        "title": "Call ringing",
+        "description": "This event is triggered when a call is ringing. This event will trigger for both inbound and outbound calls and is typically followed by by a `call_answered` or `call_missed` event",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_ringing"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "call_unpark": {
+        "type": "object",
+        "title": "Call unpark",
+        "description": "This event is triggered when a Team Member unparks a call. NOTE The team member that unparks a call will also get a call_answered event",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "call_unpark"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "slot": {
+            "type": "number",
+            "description": "Parking slot number"
+          }
+        }
+      },
+      "emergency_call": {
+        "type": "object",
+        "title": "Emergency call",
+        "description": "This event is triggered when a call is placed to an emergency serivce",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "emergency_call"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          }
+        }
+      },
+      "message_received": {
+        "type": "object",
+        "title": "Message Received",
+        "description": "This event is triggered when a Team Member or Account receives a message",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "message_received"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "messenger_info": {
+            "description": "Information about the message",
+            "type": "object",
+            "properties": {
+              "message_id": {
+                "type": "string",
+                "description": "Unique identifier of the message",
+                "minLength": 24,
+                "pattern": "^[0-9a-f]{24}$",
+                "maxLength": 24
+              },
+              "conversation_id": {
+                "type": "string",
+                "description": "Unique identifier of the conversation",
+                "minLength": 24,
+                "pattern": "^[0-9a-f]{24}$",
+                "maxLength": 24
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of message sent",
+                "enum": [
+                  "SMS",
+                  "MMS"
+                ]
+              },
+              "originated": {
+                "type": "string",
+                "description": "Describes the number that send the message"
+              },
+              "terminated": {
+                "type": "string",
+                "description": "Describes the number that recieved the message"
+              },
+              "origin": {
+                "type": "string",
+                "description": "Source of the message",
+                "enum": [
+                  "external"
+                ]
+              },
+              "target": {
+                "type": "string",
+                "description": "Message was sent to",
+                "enum": [
+                  "user",
+                  "account"
+                ]
+              },
+              "content": {
+                "type": "string",
+                "description": "Text content of the message"
+              },
+              "from_user_id": {
+                "type": "string",
+                "minLength": 24,
+                "pattern": "^[0-9a-f]{24}$",
+                "maxLength": 24
+              }
+            }
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          }
+        }
+      },
+      "voicemail_missed": {
+        "type": "object",
+        "title": "Voicemail missed",
+        "description": "This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>\nThe reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "voicemail_missed"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "duration": {
+            "type": "number",
+            "description": "Length of time in seconds of the call or voicemail"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the voicemail was missed",
+            "enum": [
+              "caller_hungup",
+              "vm_disabled"
+            ]
+          },
+          "click_to_call_info": {
+            "type": "object",
+            "description": "Information about the click to call event. Present only when the `call_source = click2call`",
+            "properties": {
+              "c2c_api_request_id": {
+                "description": "Unique ID of the click2call api request",
+                "type": "string",
+                "format": "uuid",
+                "pattern": "/^[0-9a-f]{8}-[0-9a-f]{16}$/gm"
+              },
+              "c2c_client_id": {
+                "description": "Name of the client that",
+                "type": "string",
+                "enum": [
+                  "n2p-api"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "voicemail_notify": {
+        "type": "object",
+        "title": "Voicemail notify",
+        "description": "This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>\nThe reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "voicemail_notify"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "voicemail": {
+            "type": "boolean",
+            "description": "Was a voicemail left"
+          }
+        }
+      },
+      "voicemail_received": {
+        "type": "object",
+        "title": "Voicemail received",
+        "description": "A voicemail was left for a net2phone user. This event will trigger when an incoming (only) call is not answered by any phone in your net2phone account and a voicemail is recorded.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 36,
+            "format": "uuid",
+            "description": "Unique ID per webhook notification",
+            "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm",
+            "maxLength": 36
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "voicemail_received"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and timestamp of the trigger event. Date and time are in ISO8601 UTC format"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "inbound"
+            ]
+          },
+          "originating_number": {
+            "type": "string",
+            "description": "Describes the number that started the phone call"
+          },
+          "dialed_number": {
+            "type": "string",
+            "description": "The recipient of the phone call"
+          },
+          "call_leg_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for the leg of a call that has multiple legs.\nFor example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id"
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 32,
+            "pattern": "/^[0-9a-f]{32}$/gm",
+            "maxLength": 32,
+            "description": "Describes a unique identifier for call"
+          },
+          "call_source": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "click2call"
+            ],
+            "description": "Can be either Normal or click2call. Normal describes a standard call via phone or web dialer, click2call describes a call initiated via the net2phone Click2Call API"
+          },
+          "user": {
+            "type": "object",
+            "description": "The user object describes information about the user and account that triggered the event",
+            "properties": {
+              "id": {
+                "type": "number",
+                "description": "A unqiue identifier assigned to each Team Member"
+              },
+              "name": {
+                "type": "string",
+                "description": "The full display name of the Team member"
+              },
+              "account_id": {
+                "type": "number",
+                "description": "This is your net2phone account ID"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "description": "Is provided for backwards compatibility with previous versions of webhooks only. It’s strongly suggested that you avoid using this field.",
+            "deprecated": true
+          },
+          "audio_message_id": {
+            "type": "number",
+            "description": "ID of the audio message for a call recording or voicemail"
+          },
+          "duration": {
+            "type": "number",
+            "description": "Length of time in seconds of the call or voicemail"
+          },
+          "voicemail": {
+            "type": "boolean",
+            "description": "Was a voicemail left"
+          }
+        }
+      }
+    }
+  },
+  "webhooks": {
+    "call_answered": {
+      "summary": "Call answered",
+      "description": "This event is triggered when a Team Member answers an incoming call or when an outgoing call is answered by the dialed destination number",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_answered"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_answered",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_answered",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_blind_transfer": {
+      "summary": "Call blind transfer",
+      "description": "This event is issued when a Team Member transfers a call via  blind (cold) transfer",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_blind_transfer"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_blind_transfer",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_blocked": {
+      "summary": "Call blocked",
+      "description": "This event is triggered when an incoming call is blocked.<br/>\nIf the number is blocked at the account level only the `user.account_id` field is present - see examples.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_blocked"
+                },
+                "examples": {
+                  "user level blocked example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_blocked",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "account level blocked example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_blocked",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call user level example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_blocked",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  },
+                  "click2call account level example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_blocked",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_busy": {
+      "summary": "Call busy",
+      "description": "The event is triggered when an outbound call receives a 4xx or 5xx error response to the INVITE indicating the call failed for some reason",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_busy"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_busy",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_completed": {
+      "summary": "Call completed",
+      "description": "Event is triggered when a call is successfully completed. This event will trigger for both inbound and outbound calls.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_completed"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_completed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "duration": 36,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_completed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "duration": 36,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_consultative_transfer": {
+      "summary": "Call consultative_transfer",
+      "description": "This event is issued when a Team Member transfers a call via  consultative (warm) transfer",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_consultative_transfer"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_consultative_transfer",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "transferer",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_forward": {
+      "summary": "Call forward",
+      "description": "This event is triggered when a Team Member forwards a call",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_forward"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_forward",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "forward_number": 19739212598,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_hold": {
+      "summary": "Call hold",
+      "description": "This event is triggered when a Team Member puts a call on hold",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_hold"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_hold",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "holder",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_hold",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "holder",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_missed": {
+      "summary": "Call missed",
+      "description": "This event is triggered when an incoming call isn’t answered by any phone in your net2phone account.\nThe reason field indicates the reason the call was missed and can be `user_did_not_answer` if the Team Member didn’t answer, `user_rejected_call` if the Team Member actively rejected the call, or `user_not_logged_in` if calling another net2phone user who is not logged in",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_missed"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_missed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "duration": 0,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "user_did_not_answer",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_missed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "duration": 0,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "user_did_not_answer",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_park": {
+      "summary": "Call park",
+      "description": "This event is triggered when a Team Member parks a call",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_park"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_park",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal",
+                      "slot": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_pickup": {
+      "summary": "Call pickup",
+      "description": "This notification is triggered when a Team Member uses the Pick Up feature (*21) to answer a call ringing on another Team Members extension",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_pickup"
+                },
+                "examples": {
+                  "user-example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_pickup",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "pickup_event_info": {
+                        "id": 98765,
+                        "name": "Peter Parker",
+                        "extension": 4321
+                      },
+                      "call_source": "normal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_recorded": {
+      "summary": "Call recorded",
+      "description": "This event is triggered when an inbound or outbound call has been successfully recorded.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_recorded"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_recorded",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal",
+                      "audio_message_id": 123456789
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_recording_failed": {
+      "summary": "Call recording failed",
+      "description": "This event is triggered when a call fails to record",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_recording_failed"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_recording_failed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "maxCallRecordings",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_resume": {
+      "summary": "Call resume",
+      "description": "This event is triggered when a Team Member resumes a call",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_resume"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_resume",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "resumer",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_resume",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "resumer",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_rg_queue_completed": {
+      "summary": "Call ring group queue completed",
+      "description": "The event is issued when a call in a RG completes by either being answered in a Tier or the caller hangs up.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_rg_queue_completed"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_completed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_completed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_rg_queue_entered": {
+      "summary": "Call ring group queue entered",
+      "description": "The event is issued when a call enters a RG with call queue enabled",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_rg_queue_entered"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_entered",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_entered",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_rg_queue_tier": {
+      "summary": "Call ring group queue sent to tier",
+      "description": "The event is issued when a call waiting in a RG with call queue enabled enters a Tier which results in calls being sent to TM in that Tier.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_rg_queue_tier"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_tier",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_rg_queue_tier",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "account_id": 67890
+                      },
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_ringing": {
+      "summary": "Call ringing",
+      "description": "This event is triggered when a call is ringing. This event will trigger for both inbound and outbound calls and is typically followed by by a `call_answered` or `call_missed` event",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_ringing"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_ringing",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_ringing",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_unpark": {
+      "summary": "Call unpark",
+      "description": "This event is triggered when a Team Member unparks a call. NOTE The team member that unparks a call will also get a call_answered event",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/call_unpark"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "call_unpark",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "outbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal",
+                      "slot": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "emergency_call": {
+      "summary": "Emergency call",
+      "description": "This event is triggered when a call is placed to an emergency serivce",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/emergency_call"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "emergency_call",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": 911,
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "message_received": {
+      "summary": "Message Received",
+      "description": "This event is triggered when a Team Member or Account receives a message",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/message_received"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "message_received",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "Sergey Belavsky",
+                      "messenger_info": {
+                        "message_id": "83da998362ddd2e82b1db315",
+                        "conversation_id": "2c83d34c0e9ec63a2342d98a",
+                        "type": "SMS",
+                        "originated": 19734381000,
+                        "terminated": 19739217310,
+                        "origin": "external",
+                        "target": "user",
+                        "content": "hello world",
+                        "from_user_id": "ef9d4caed46726d4d57c6460"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "voicemail_missed": {
+      "summary": "Voicemail missed",
+      "description": "This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>\nThe reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voicemail_missed"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "voicemail_missed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "duration": 12,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "caller_hungup",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  },
+                  "click2call example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "voicemail_missed",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "duration": 12,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "reason": "caller_hungup",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "+19739217310",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "click2call",
+                      "click_to_call_info": {
+                        "c2c_api_request_id": "932b34fc-fb110c6bc859c542",
+                        "c2c_client_id": "n2p-api"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "voicemail_notify": {
+      "summary": "Voicemail notify",
+      "description": "This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>\nThe reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voicemail_notify"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "voicemail_notify",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "voicemail": true,
+                      "originating_number": "+19734381000",
+                      "dialed_number": "*95",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "voicemail_received": {
+      "summary": "Voicemail received",
+      "description": "A voicemail was left for a net2phone user. This event will trigger when an incoming (only) call is not answered by any phone in your net2phone account and a voicemail is recorded.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voicemail_received"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                      "event": "voicemail_received",
+                      "timestamp": "2019-08-24T14:15:22.000Z",
+                      "direction": "inbound",
+                      "duration": 12,
+                      "user": {
+                        "id": 12345,
+                        "name": "James T Kirk",
+                        "account_id": 67890
+                      },
+                      "user_name": "James T Kirk",
+                      "originating_number": "+19734381000",
+                      "dialed_number": "*95",
+                      "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
+                      "call_id": "818787cc58e3043c4b4721ed0c157735",
+                      "call_source": "normal",
+                      "audio_message_id": 123456789,
+                      "voicemail": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

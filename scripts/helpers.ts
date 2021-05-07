@@ -10,8 +10,23 @@ export function quit(err: string, param?: string) {
   shell.exit(1);
 }
 
-export function print(str: string, color: string = 'blue') {
-  shell.echo(chalk[color](str));
+export function print(str: string, newLine = true, color: string = 'blue') {
+  newLine
+    ? shell.echo(chalk[color](str))
+    : shell.echo('-n', chalk[color](str));
+}
+
+export const readFile = (path: string) => {
+  let parser: Function
+  if (path.endsWith('yaml') || path.endsWith('yml')) {
+    parser = yaml.load
+  } else if (path.endsWith('json')) {
+    parser = JSON.parse
+  } else {
+    throw Error('file does not exist or is not of type yaml or json')
+  }
+
+  return parser(fs.readFileSync(path, 'utf-8'))
 }
 
 export const flattenAllOf = (allOf: Array<{ '$ref': string} | { properties: object}>, basePath: string) => {
@@ -19,18 +34,9 @@ export const flattenAllOf = (allOf: Array<{ '$ref': string} | { properties: obje
 
   allOf.reverse().forEach(refObj => {
     const ref = refObj['$ref']
-    if (ref) {
-      let parser: Function
-      if (ref.includes('yaml') || ref.includes('yml')) {
-        parser = yaml.load
-      } else if (ref.includes('json')) {
-        parser = JSON.parse
-      } else {
-        print('skipping' + ref)
-        return
-      }
 
-      const spec = parser(fs.readFileSync(path.join(basePath, ref), 'utf8'))
+    if (ref) {
+      const spec = readFile(path.join(basePath, ref))
       properties = Object.assign(spec['properties'], properties)
     }
   })
