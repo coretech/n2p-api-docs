@@ -1,0 +1,24 @@
+description:
+type: object
+properties:
+  status:
+    type: integer
+    format: int32
+    required: true
+    enum:
+      - 401
+      - 403
+      - 404
+      - 422
+      - 429 # TODO [i1] verify response
+      - 500
+  message:
+    type: string
+    required: true
+    enum:
+      - Invalid Vendor
+      - Access Forbidden, you do not have the correct permissions.
+      - Resource does not exist.
+      - An invalid version number was provided.
+      - ''
+      - An error occurred while marshalling the response.

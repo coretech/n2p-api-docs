@@ -1,0 +1,403 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "net2phone integrate apis",
+    "description": "<h2>Introduction</h2>This is going to be a really cool description",
+    "version": "1.8"
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "tags": [
+    {
+      "name": "Subscriptions",
+      "description": "Subscribe and receive updates for the events you are interested in. Provide a URI which can receive POST requests. When updates occur your endpoint will then be notified. (All notifications requests contain JSON.)"
+    },
+    {
+      "name": "Voicemails",
+      "description": "Get information about Voicemails for users in a domain"
+    }
+  ],
+  "paths": {
+    "/subscriptions": {
+      "post": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "summary": "A Recording subscription will result in Post request to your subscribed\n  endpoint once a Recording has been processed as well as if it is ever updated.",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": null
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/voicemails/users/{userId}/count": {
+      "get": {
+        "summary": "Get the voicemail count for a user in a domain.",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voicemail_count"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/voicemail_count"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Voicemails"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "voicemail_count": {
+        "title": "Voicemail Count",
+        "type": "object",
+        "description": "Count of all voicemails for a given user",
+        "properties": {
+          "new": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The total count of new voicemails for the specified user"
+          },
+          "saved": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The total count of saved voicemails for the specified user"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    401
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "Invalid Vendor"
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 401,
+              "message": "Invalid Vendor"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    403
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "Access Forbidden, you do not have the correct permissions."
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 403,
+              "message": "Access Forbidden, you do not have the correct permissions."
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    404
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "Resource does not exist."
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 404,
+              "message": "Resource does not exist."
+            }
+          }
+        }
+      },
+      "InvalidVersion": {
+        "description": "Invalid Version",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    422
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "An invalid version number was provided."
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 422,
+              "message": "An invalid version number was provided."
+            }
+          }
+        }
+      },
+      "RateLimitExceeded": {
+        "description": "Rate Limit Exceeded",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    429
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    ""
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 429,
+              "message": ""
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    500
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "An error occurred while marshalling the response."
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 500,
+              "message": "An error occurred while marshalling the response."
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "callId": {
+        "name": "callId",
+        "in": "path",
+        "description": "The ID of the call",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      "recordingId": {
+        "name": "recordingId",
+        "in": "path",
+        "description": "Id of the recording",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "nullable": true
+        }
+      },
+      "subscriptionId": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "The ID of the subscription",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "userId": {
+        "name": "userId",
+        "in": "path",
+        "description": "Id of the user",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "nullable": true
+        }
+      }
+    },
+    "headers": {
+      "Accept": {
+        "name": "Accept",
+        "required": true,
+        "in": "header",
+        "description": "The media type and version which is acceptable for the response",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "application/vnd.integrate.v1.1.0+json",
+            "application/vnd.integrate.v1.2.0+json",
+            "application/vnd.integrate.v1.3.0+json",
+            "application/vnd.integrate.v1.4.0+json",
+            "application/vnd.integrate.v1.5.0+json",
+            "application/vnd.integrate.v1.6.0+json",
+            "application/vnd.integrate.v1.7.0+json",
+            "application/vnd.integrate.v1.8.0+json"
+          ]
+        },
+        "examples": {
+          "latest": {
+            "value": "application/vnd.integrate.v1.8.0+json"
+          }
+        }
+      }
+    },
+    "examples": {
+      "voicemail_count": {
+        "value": {
+          "new": 2,
+          "saved": 3
+        }
+      }
+    }
+  },
+  "webhooks": {}
+}

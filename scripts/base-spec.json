@@ -9,7 +9,11 @@
   "tags": [],
   "paths": {},
   "components": {
-    "schemas": {}
+    "schemas": {},
+    "responses": {},
+    "parameters": {},
+    "headers": {},
+    "examples": {}
   },
   "webhooks": {}
 }

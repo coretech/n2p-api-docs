@@ -1,0 +1,9 @@
+recordingId:
+  name: recordingId
+  in: path
+  description: Id of the recording
+  required: true
+  schema:
+    type: integer
+    format: int32
+    nullable: true # TODO [i1] is valid for all?

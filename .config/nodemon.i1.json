@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "./references/i1",
+    "./scripts"
+  ],
+  "ext": "yaml,ts,json",
+  "exec": "yarn build:i1"
+}

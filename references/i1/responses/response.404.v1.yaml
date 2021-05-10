@@ -1,0 +1,20 @@
+description: Not Found
+name: NotFound
+summary: The `id` was not found.
+content:
+  application/json:
+    schema:
+      allOf:
+        - $ref: ./base/response.error.v1.yaml
+        - properties:
+            status:
+              type: integer
+              enum:
+                - 404
+            message:
+              type: string
+              enum:
+                - Resource does not exist.
+    example:
+      status: 404
+      message: Resource does not exist.

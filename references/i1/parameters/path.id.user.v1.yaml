@@ -1,0 +1,9 @@
+userId:
+  name: userId
+  in: path
+  description: Id of the user
+  required: true
+  schema:
+    type: integer
+    format: int32
+    nullable: true # TODO [i1] is valid for all?

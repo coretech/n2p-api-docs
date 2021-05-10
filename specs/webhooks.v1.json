@@ -29,6 +29,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_answered"
             ]
@@ -135,6 +136,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_blind_transfer"
             ]
@@ -222,6 +224,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_blocked"
             ]
@@ -328,6 +331,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_busy"
             ]
@@ -341,7 +345,8 @@
             "type": "string",
             "enum": [
               "outbound"
-            ]
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
           },
           "originating_number": {
             "type": "string",
@@ -413,6 +418,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_completed"
             ]
@@ -523,6 +529,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_consultative_transfer"
             ]
@@ -618,6 +625,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_forward"
             ]
@@ -709,6 +717,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_hold"
             ]
@@ -823,6 +832,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_missed"
             ]
@@ -942,6 +952,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_park"
             ]
@@ -1033,6 +1044,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_pickup"
             ]
@@ -1138,6 +1150,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_recorded"
             ]
@@ -1229,6 +1242,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_recording_failed"
             ]
@@ -1323,6 +1337,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_resume"
             ]
@@ -1437,6 +1452,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_rg_queue_completed"
             ]
@@ -1450,7 +1466,8 @@
             "type": "string",
             "enum": [
               "inbound"
-            ]
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
           },
           "originating_number": {
             "type": "string",
@@ -1528,6 +1545,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_rg_queue_entered"
             ]
@@ -1541,7 +1559,8 @@
             "type": "string",
             "enum": [
               "inbound"
-            ]
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
           },
           "originating_number": {
             "type": "string",
@@ -1619,6 +1638,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_rg_queue_tier"
             ]
@@ -1632,7 +1652,8 @@
             "type": "string",
             "enum": [
               "inbound"
-            ]
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
           },
           "originating_number": {
             "type": "string",
@@ -1710,6 +1731,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_ringing"
             ]
@@ -1816,6 +1838,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "call_unpark"
             ]
@@ -1907,6 +1930,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "emergency_call"
             ]
@@ -1994,6 +2018,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "message_received"
             ]
@@ -2104,6 +2129,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "voicemail_missed"
             ]
@@ -2222,6 +2248,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "voicemail_notify"
             ]
@@ -2313,6 +2340,7 @@
           },
           "event": {
             "type": "string",
+            "description": "Describes the event that triggered the webhook notification",
             "enum": [
               "voicemail_received"
             ]
@@ -2326,7 +2354,8 @@
             "type": "string",
             "enum": [
               "inbound"
-            ]
+            ],
+            "description": "Can be either inbound or outbound. Inbound describes an incoming call answered by any Team Member. Outbound describes an outgoing call made by any Team Member"
           },
           "originating_number": {
             "type": "string",
@@ -2395,7 +2424,11 @@
           }
         }
       }
-    }
+    },
+    "responses": {},
+    "parameters": {},
+    "headers": {},
+    "examples": {}
   },
   "webhooks": {
     "call_answered": {

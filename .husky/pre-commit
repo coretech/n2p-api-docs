@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn webhooks:build
-git add "$(dirname "$0")/../reference/webhooks.v1.json"
+yarn build
+git add "$(dirname "$0")/../specs"

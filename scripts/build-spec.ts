@@ -8,6 +8,8 @@ import {
   print,
   flattenAllOf,
   readFile,
+  readSpecFile,
+  getSpecFiles,
 } from './helpers'
 
 const basePath = path.join(__dirname, '../');
@@ -28,6 +30,7 @@ const options: Options = {
 // global vars
 let outSpec: any = {};
 let docsPath: string;
+let sharedResponses: any = {};
 
 /**
  *
@@ -51,9 +54,13 @@ function main() {
   shell.cd(docsPath)
 
   buildBase();
-
+  buildResponses()
+  dirToComponents('parameters')
+  dirToComponents('headers')
+  dirToComponents('schemas')
+  dirToComponents('examples')
+  buildPaths();
   buildWebhooks();
-
   saveSpecFile();
 }
 
@@ -74,15 +81,11 @@ function buildBase(): void {
   Object.assign(outSpec, baseSpec)
   Object.assign(outSpec.info, info)
 
-  print('done')
-}
-
-function getSpecFiles(subDir: string = ''): string[] {
-  if (subDir) {
-    shell.cd(path.join(docsPath, subDir))
+  if (info.version) {
+    outSpec.info.version = info.version.toString()
   }
 
-  return shell.ls('*.yaml').map(file => file.split('.v')[0]);
+  print('done')
 }
 
 function saveSpecFile(): void {
@@ -98,7 +101,133 @@ function saveSpecFile(): void {
   print(`Successfully wrote ${outFile}`, true, 'greenBright');
 }
 
-function buildWebhooks () {
+function finish(reason: string) {
+  shell.cd(docsPath)
+  print(reason)
+}
+
+function buildResponses() {
+  print(`building responses...`, false)
+  if (!shell.test('-d', `./responses`)) {
+    finish('skipped')
+    return
+  }
+
+  shell.cd('./responses')
+
+  const responseNames = getSpecFiles()
+
+  responseNames.forEach(responseName => {
+    const response = readSpecFile(responseName)
+
+    // flatten
+    let { schema } = response.content['application/json']
+    if (schema['allOf']) {
+       schema = flattenAllOf(schema['allOf'], shell.pwd().toString())
+      response.content['application/json'].schema = {
+        type: 'object',
+        properties: schema,
+      }
+    }
+    // build components.responses
+    outSpec.components.responses[response.name] = {
+      description: response.description,
+      content: response.content
+    }
+
+    // build shared for reuse
+    sharedResponses[responseName.split('.')[1]] = { $ref: `#/components/responses/${response.name}`}
+  })
+
+  finish('done')
+}
+
+function dirToComponents(directory: string) {
+  print(`building ${directory}...`, false)
+  if (!shell.test('-d', `./${directory}`)) {
+    finish('skipped')
+    return
+  }
+
+  shell.cd(directory)
+
+  const specNames = getSpecFiles()
+
+  getSpecFiles().forEach(specName => {
+    const spec = readSpecFile(specName)
+    Object.assign(outSpec.components[directory], spec)
+  })
+
+  finish('done')
+}
+
+function buildPaths() {
+  print(`building paths...`)
+  // print(`building endpoints...`, false)
+  if (!shell.test('-d', './paths')) {
+    finish('skipped')
+    return
+  }
+
+  // build models
+  shell.cd('./paths')
+
+  // build endpoints
+  const specNames = getSpecFiles()
+
+  if (!specNames.length) {
+    finish('skipped')
+    return
+  }
+
+  specNames.forEach((specName, index) => {
+    const spec = readSpecFile(specName)
+
+    const tag = spec?.tags?.[0]
+
+    // add tag to tags array
+    if (tag) {
+      outSpec.tags.push(tag)
+    }
+
+    // validate paths exist
+    if (!spec?.paths) {
+      return
+    }
+
+    // process paths
+    Object.keys(spec.paths).forEach(pathName => {
+      // get path
+      const path = spec.paths[pathName]
+      // loop through methods
+      Object.keys(path).forEach(methodName => {
+        const method = path[methodName]
+        // add tag to path if not exists
+        if (!method.tags && tag) {
+          method.tags = [tag.name]
+        }
+        // add responses
+        if (method.responses['200']) {
+          method.responses['200'].description = 'Success'
+        }
+        Object.assign(method.responses, sharedResponses)
+        // standardize parameters
+        method.parameters.unshift({$ref: '#/components/headers/Accept'})
+        // update original path
+        path[methodName] = method
+      })
+
+      // update spec with parsed path
+      spec.paths[pathName] = path
+    })
+
+    Object.assign(outSpec.paths, spec.paths)
+  })
+
+  finish('done')
+}
+
+function buildWebhooks() {
   print(`building webhooks...`, false)
   shell.cd('./webhooks')
 
@@ -106,12 +235,12 @@ function buildWebhooks () {
   const specNames = getSpecFiles()
 
   if (!specNames.length) {
-    print('skipped')
+    finish('skipped')
     return
   }
 
   specNames.forEach((specName, i) => {
-    const spec = readFile(path.join(shell.pwd().toString(), `${specName}.v1.yaml`))
+    const spec = readSpecFile(specName)
 
     if (!spec) return
 
@@ -148,8 +277,7 @@ function buildWebhooks () {
     };
   });
 
-  shell.cd('-')
-  print('done')
+  finish('done')
 }
 
 (function () {

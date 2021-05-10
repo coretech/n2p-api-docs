@@ -16,6 +16,8 @@ export function print(str: string, newLine = true, color: string = 'blue') {
     : shell.echo('-n', chalk[color](str));
 }
 
+export const readSpecFile = (spec: string) => readFile(path.join(shell.pwd().toString(), `${spec}.v1.yaml`))
+
 export const readFile = (path: string) => {
   let parser: Function
   if (path.endsWith('yaml') || path.endsWith('yml')) {
@@ -43,8 +45,28 @@ export const flattenAllOf = (allOf: Array<{ '$ref': string} | { properties: obje
 
   const originalProperties = allOf.filter(spec => spec['properties'])?.[0]?.['properties']
   if (originalProperties) {
-    Object.assign(properties, originalProperties)
+    Object.entries(originalProperties).forEach(([key, value]) => {
+      // @ts-ignore
+      const enumVal = value?.enum
+      if (enumVal) {
+        properties[key].enum = enumVal
+      }
+      if (!properties[key]) {
+        properties[key] = value
+      }
+    })
   }
 
   return properties
+}
+
+export const getSpecFiles = (prefix = ''): string[] => {
+  const fileGlob = `${prefix}*.yaml`
+
+  // check if yaml files exist
+  if (!shell.ls('-A').length || !shell.ls('-A', fileGlob).length) {
+    return []
+  }
+
+  return shell.ls(fileGlob).map(file => file.split('.v')[0]);
 }

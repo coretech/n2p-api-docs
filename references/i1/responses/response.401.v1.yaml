@@ -1,0 +1,20 @@
+description: Unauthorized
+name: Unauthorized
+summary: The associated `vendor` was not found.
+content:
+  application/json:
+    schema:
+      allOf:
+        - $ref: ./base/response.error.v1.yaml
+        - properties:
+            status:
+              type: integer
+              enum:
+                - 401
+            message:
+              type: string
+              enum:
+                - Invalid Vendor
+    example:
+      status: 401
+      message: Invalid Vendor

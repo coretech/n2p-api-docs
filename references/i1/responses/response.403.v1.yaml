@@ -1,0 +1,20 @@
+description: Forbidden
+name: Forbidden
+summary: Your permission level was insufficient to access the requested resource and/or perform the given action.
+content:
+  application/json:
+    schema:
+      allOf:
+        - $ref: ./base/response.error.v1.yaml
+        - properties:
+            status:
+              type: integer
+              enum:
+                - 403
+            message:
+              type: string
+              enum:
+                - Access Forbidden, you do not have the correct permissions.
+    example:
+      status: 403
+      message: Access Forbidden, you do not have the correct permissions.
