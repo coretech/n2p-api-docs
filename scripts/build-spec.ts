@@ -212,6 +212,9 @@ function buildPaths() {
         }
         Object.assign(method.responses, sharedResponses)
         // standardize parameters
+        if (!method.parameters) {
+          method.parameters = []
+        }
         method.parameters.unshift({$ref: '#/components/headers/Accept'})
         // update original path
         path[methodName] = method

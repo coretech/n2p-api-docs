@@ -1,0 +1,18 @@
+users:
+  value:
+    - username: 110@example.com
+      user: '100'
+      domain: example.com
+      last_name: Smith
+      first_name: John
+      email: noreply@versature.com
+      time_zone: US/Pacific
+      scope: Basic User
+    - username: 220@example.com
+      user: '220'
+      domain: example.com
+      last_name: Brown
+      first_name: Jane
+      email: yesreply@versature.com
+      time_zone: US/Eastern
+      scope: Office Manager

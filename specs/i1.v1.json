@@ -16,8 +16,16 @@
       "description": "Subscribe and receive updates for the events you are interested in. Provide a URI which can receive POST requests. When updates occur your endpoint will then be notified. (All notifications requests contain JSON.)"
     },
     {
+      "name": "Users",
+      "description": "Get a list of the Users for your company or details aobut a specific user."
+    },
+    {
       "name": "Voicemails",
       "description": "Get information about Voicemails for users in a domain"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Subscribe and receive webhook updates for the events you are interested in. Provide a URI which can receive POST requests. When updates occur your endpoint will then be notified. (All notifications requests contain JSON.)"
     }
   ],
   "paths": {
@@ -60,7 +68,157 @@
         }
       }
     },
-    "/voicemails/users/{userId}/count": {
+    "/users/": {
+      "get": {
+        "summary": "Get details list of all users of an account",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/user"
+                  }
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/users"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ]
+      }
+    },
+    "/users/{userId}/": {
+      "get": {
+        "summary": "Get the user details. If provided the id will be used to get a specific user. If not specified the authenticated user details will be returned. If you wish to retrieve all users across your domain use the \"all\" argument.",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/user"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users/current/": {
+      "get": {
+        "summary": "Get the user details for the authenticated user.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/user"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ]
+      }
+    },
+    "/voicemails/users/{userId}/count/": {
       "get": {
         "summary": "Get the voicemail count for a user in a domain.",
         "parameters": [
@@ -110,10 +268,110 @@
           "Voicemails"
         ]
       }
+    },
+    "/voicemails/users/{userId}/count": {
+      "get": {
+        "summary": "Get the voicemail count for a user in a domain.",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/voicemail_count"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/voicemail_count"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      }
     }
   },
   "components": {
     "schemas": {
+      "user": {
+        "title": "User Details",
+        "type": "object",
+        "description": "Details of the user",
+        "required": [
+          "username",
+          "user",
+          "first_name",
+          "last_name",
+          "email",
+          "time_zone",
+          "scope"
+        ],
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The user identifier"
+          },
+          "user": {
+            "type": "string",
+            "description": "The user's extension"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "The first name of the user"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "The last name of the user"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the user"
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "The time zone this user resides in"
+          },
+          "scope": {
+            "type": "string",
+            "description": "The role of this user",
+            "enum": [
+              "Basic User",
+              "Office Manager",
+              "Call Center Supervisor"
+            ]
+          }
+        }
+      },
       "voicemail_count": {
         "title": "Voicemail Count",
         "type": "object",
@@ -391,6 +649,42 @@
       }
     },
     "examples": {
+      "user": {
+        "value": {
+          "username": "110@example.com",
+          "user": "100",
+          "domain": "example.com",
+          "last_name": "Smith",
+          "first_name": "John",
+          "email": "noreply@versature.com",
+          "time_zone": "Canada/Eastern",
+          "scope": "Office Manager"
+        }
+      },
+      "users": {
+        "value": [
+          {
+            "username": "110@example.com",
+            "user": "100",
+            "domain": "example.com",
+            "last_name": "Smith",
+            "first_name": "John",
+            "email": "noreply@versature.com",
+            "time_zone": "US/Pacific",
+            "scope": "Basic User"
+          },
+          {
+            "username": "220@example.com",
+            "user": "220",
+            "domain": "example.com",
+            "last_name": "Brown",
+            "first_name": "Jane",
+            "email": "yesreply@versature.com",
+            "time_zone": "US/Eastern",
+            "scope": "Office Manager"
+          }
+        ]
+      },
       "voicemail_count": {
         "value": {
           "new": 2,

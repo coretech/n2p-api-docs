@@ -1,0 +1,38 @@
+user:
+  title: User Details
+  type: object
+  description: Details of the user
+  required:
+    - username
+    - user
+    - first_name
+    - last_name
+    - email
+    - time_zone
+    - scope
+  properties:
+    username:
+      type: string
+      description: The user identifier
+    user:
+      type: string
+      description: The user's extension
+    first_name:
+      type: string
+      description: The first name of the user
+    last_name:
+      type: string
+      description: The last name of the user
+    email:
+      type: string
+      description: The email address of the user
+    time_zone:
+      type: string
+      description: The time zone this user resides in
+    scope:
+      type: string
+      description: The role of this user
+      enum:
+        - Basic User
+        - Office Manager
+        - Call Center Supervisor

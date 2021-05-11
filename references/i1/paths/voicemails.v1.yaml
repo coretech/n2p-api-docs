@@ -2,7 +2,7 @@ tags:
   - name: Voicemails
     description: Get information about Voicemails for users in a domain
 paths:
-  /voicemails/users/{userId}/count:
+  /voicemails/users/{userId}/count/:
     get:
       summary: Get the voicemail count for a user in a domain.
       parameters:
