@@ -12,6 +12,10 @@
   ],
   "tags": [
     {
+      "name": "Devices",
+      "description": "Lists of registered devices"
+    },
+    {
       "name": "Number Portability",
       "description": "Check if a given phone number is portable to Versature"
     },
@@ -37,6 +41,150 @@
     }
   ],
   "paths": {
+    "/devices/users/": {
+      "get": {
+        "summary": "Get a list of user devices in an account.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/devices"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/devices"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ]
+      }
+    },
+    "/devices/users/current/": {
+      "get": {
+        "summary": "Get a list of devices for the authenticated user.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/devices"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/devices"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ]
+      }
+    },
+    "/devices/users/{userId}/": {
+      "get": {
+        "summary": "Get a list of devices for the specified user.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/devices"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/devices"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Devices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ]
+      }
+    },
     "/phone_numbers/{phone_number}/portability/": {
       "get": {
         "parameters": [
@@ -540,6 +688,38 @@
   },
   "components": {
     "schemas": {
+      "devices": {
+        "title": "Devices list",
+        "type": "array",
+        "description": "List of devices",
+        "uniqueItems": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "aor": {
+              "type": "string",
+              "description": "The address of record for this device."
+            },
+            "aor_user": {
+              "type": "string",
+              "description": "The user portion of the address of record for this device."
+            },
+            "mac": {
+              "type": "string",
+              "description": "The mac address of the device."
+            },
+            "model": {
+              "type": "string",
+              "description": "The model of the device"
+            },
+            "registration_time": {
+              "type": "string",
+              "description": "The time when the device was registered. `YYYY-MM-DDTHH:MM:SS+00:00`",
+              "format": "date-time"
+            }
+          }
+        }
+      },
       "portability": {
         "title": "Portability",
         "type": "object",
@@ -1035,6 +1215,17 @@
       }
     },
     "examples": {
+      "devices": {
+        "value": [
+          {
+            "aor": "sip:100@yourdomain.com",
+            "aor_user": "100",
+            "mac": "1004c84c49ca",
+            "model": "Polycom 550",
+            "registration_time": "2017-05-23T14:59:59.000Z"
+          }
+        ]
+      },
       "portability": {
         "value": {
           "portable": true

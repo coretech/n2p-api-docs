@@ -162,8 +162,7 @@ function dirToComponents(directory: string) {
 }
 
 function buildPaths() {
-  print(`building paths...`)
-  // print(`building endpoints...`, false)
+  print(`building endpoints...`, false)
   if (!shell.test('-d', './paths')) {
     finish('skipped')
     return
@@ -264,7 +263,7 @@ function buildWebhooks() {
                 schema: {
                   '$ref': `#/components/schemas/${specName}`
                 },
-                examples: spec['examples']
+                examples: spec['examples'] // TODO separate out examples
               }
             }
           }

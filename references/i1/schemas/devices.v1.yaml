@@ -1,0 +1,24 @@
+devices:
+  title: Devices list
+  type: array
+  description: List of devices
+  uniqueItems: true
+  items:
+    type: object
+    properties:
+      aor:
+        type: string
+        description: The address of record for this device.
+      aor_user:
+        type: string
+        description: The user portion of the address of record for this device.
+      mac:
+        type: string
+        description: The mac address of the device.
+      model:
+        type: string
+        description: The model of the device
+      registration_time:
+        type: string
+        description: The time when the device was registered. `YYYY-MM-DDTHH:MM:SS+00:00`
+        format: date-time

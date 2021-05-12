@@ -1,0 +1,40 @@
+tags:
+  - name: Devices
+    description: Lists of registered devices
+paths:
+  /devices/users/:
+    get:
+      summary: Get a list of user devices in an account.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/devices"
+              examples:
+                example:
+                  $ref: "#/components/examples/devices"
+  /devices/users/current/:
+    get:
+      summary: Get a list of devices for the authenticated user.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/devices"
+              examples:
+                example:
+                  $ref: "#/components/examples/devices"
+  /devices/users/{userId}/:
+    get:
+      summary: Get a list of devices for the specified user.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/devices"
+              examples:
+                example:
+                  $ref: "#/components/examples/devices"
