@@ -59,7 +59,6 @@ function main() {
   dirToComponents('headers')
   dirToComponents('schemas')
   dirToComponents('examples')
-  dirToComponents('requestBodies')
   buildPaths();
   buildWebhooks();
   saveSpecFile();
@@ -124,7 +123,7 @@ function buildResponses() {
     // flatten
     let { schema } = response.content['application/json']
     if (schema['allOf']) {
-       schema = flattenAllOf(schema['allOf'], shell.pwd().toString())
+      schema = flattenAllOf(schema['allOf'], shell.pwd().toString())
       response.content['application/json'].schema = {
         type: 'object',
         properties: schema,

@@ -11,7 +11,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/requestBodies/webhook_settings"
+              $ref: "#/components/schemas/webhook_settings"
             examples:
               example:
                 $ref: "#/components/examples/webhook_settings"

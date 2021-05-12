@@ -12,8 +12,16 @@
   ],
   "tags": [
     {
-      "name": "Subscriptions",
-      "description": "Subscribe and receive updates for the events you are interested in. Provide a URI which can receive POST requests. When updates occur your endpoint will then be notified. (All notifications requests contain JSON.)"
+      "name": "Number Portability",
+      "description": "Check if a given phone number is portable to Versature"
+    },
+    {
+      "name": "Presence",
+      "description": "Presence of users for a given domain"
+    },
+    {
+      "name": "Recordings",
+      "description": "Get the recordings for a CDR"
     },
     {
       "name": "Users",
@@ -29,23 +37,31 @@
     }
   ],
   "paths": {
-    "/subscriptions": {
-      "post": {
-        "tags": [
-          "Subscriptions"
-        ],
-        "summary": "A Recording subscription will result in Post request to your subscribed\n  endpoint once a Recording has been processed as well as if it is ever updated.",
+    "/phone_numbers/{phone_number}/portability/": {
+      "get": {
         "parameters": [
           {
             "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/phone_number"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": null
-            }
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/portability"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/portability"
+                  }
+                }
+              }
+            },
+            "description": "Success"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -65,7 +81,109 @@
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
-        }
+        },
+        "tags": [
+          "Number Portability"
+        ]
+      }
+    },
+    "/presence/": {
+      "get": {
+        "summary": "Get a list of users with their presence on device.",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/presence"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/presence"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Presence"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ]
+      }
+    },
+    "/recordings/{recordingId}": {
+      "get": {
+        "summary": "Get the recordings for a given call by it's id.",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/recordingId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/recording"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/recording"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Recordings"
+        ]
       }
     },
     "/users/": {
@@ -276,7 +394,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/requestBodies/webhook_settings"
+                "$ref": "#/components/schemas/webhook_settings"
               },
               "examples": {
                 "example": {
@@ -422,6 +540,78 @@
   },
   "components": {
     "schemas": {
+      "portability": {
+        "title": "Portability",
+        "type": "object",
+        "description": "Phone number portablility response",
+        "properties": {
+          "portable": {
+            "type": "boolean",
+            "default": true,
+            "description": "Is the provided phone number portable."
+          }
+        }
+      },
+      "presence": {
+        "title": "User Device Presence",
+        "type": "object",
+        "description": "User device presence",
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "The user's extension"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "The first name of the user"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "The last name of the user"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the user"
+          },
+          "domain": {
+            "type": "string",
+            "description": "The domain for the user"
+          },
+          "presence": {
+            "type": "string",
+            "description": "The presence status of the user",
+            "enum": [
+              "open"
+            ]
+          }
+        }
+      },
+      "recording": {
+        "title": "Recording",
+        "type": "object",
+        "description": "Details of the recording",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the recording. `Available` when it is ready to go. `Processing` when still being processed and `No Recording` when it has been deleted or is not available",
+            "enum": [
+              "available",
+              "processing",
+              "no recording"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The path to the recorded file"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The length of the recording in seconds"
+          }
+        }
+      },
       "user": {
         "title": "User Details",
         "type": "object",
@@ -456,6 +646,10 @@
             "type": "string",
             "description": "The email address of the user"
           },
+          "domain": {
+            "type": "string",
+            "description": "The domain for the user"
+          },
           "time_zone": {
             "type": "string",
             "description": "The time zone this user resides in"
@@ -486,6 +680,46 @@
             "type": "integer",
             "format": "int32",
             "description": "The total count of saved voicemails for the specified user"
+          }
+        }
+      },
+      "webhook_settings": {
+        "required": [
+          "post_uri"
+        ],
+        "type": "object",
+        "properties": {
+          "post_uri": {
+            "type": "string",
+            "description": "The endpoint which is notified when an event occurs.",
+            "format": "uri"
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of seconds until the webhook subscription expires",
+            "default": 7200,
+            "maximum": 604800
+          },
+          "calls": {
+            "type": "boolean",
+            "description": "Subscribe to call events",
+            "default": false
+          },
+          "cdrs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Subscribe to CDR events"
+          },
+          "recordings": {
+            "type": "boolean",
+            "description": "Subscribe to recording events",
+            "default": false
+          },
+          "user": {
+            "type": "string",
+            "description": "One or more users to subscribe to. Omit to subscribe to all users webhooks.\nAppend multiple times to subscribe to multiple users.",
+            "default": "*"
           }
         }
       },
@@ -762,6 +996,16 @@
           "format": "int32",
           "nullable": true
         }
+      },
+      "phone_number": {
+        "name": "phone_number",
+        "in": "path",
+        "description": "The phone number to verify. E164 format is ideal but a best effort will be made to format the check the number provided.",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
       }
     },
     "headers": {
@@ -791,6 +1035,28 @@
       }
     },
     "examples": {
+      "portability": {
+        "value": {
+          "portable": true
+        }
+      },
+      "presence": {
+        "value": {
+          "user": "100",
+          "first_name": "Smith",
+          "last_name": "John",
+          "email": "noreply@yourcompany.com",
+          "domain": "yourcompany.com",
+          "presence": "open"
+        }
+      },
+      "recording": {
+        "value": {
+          "status": "available",
+          "url": "https://example.com",
+          "duration": 54
+        }
+      },
       "user": {
         "value": {
           "username": "110@example.com",
@@ -858,48 +1124,6 @@
               "user": "201"
             }
           ]
-        }
-      }
-    },
-    "requestBodies": {
-      "webhook_settings": {
-        "required": [
-          "post_uri"
-        ],
-        "type": "object",
-        "properties": {
-          "post_uri": {
-            "type": "string",
-            "description": "The endpoint which is notified when an event occurs.",
-            "format": "uri"
-          },
-          "expires_in": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of seconds until the webhook subscription expires",
-            "default": 7200,
-            "maximum": 604800
-          },
-          "calls": {
-            "type": "boolean",
-            "description": "Subscribe to call events",
-            "default": false
-          },
-          "cdrs": {
-            "type": "boolean",
-            "default": false,
-            "description": "Subscribe to CDR events"
-          },
-          "recordings": {
-            "type": "boolean",
-            "description": "Subscribe to recording events",
-            "default": false
-          },
-          "user": {
-            "type": "string",
-            "description": "One or more users to subscribe to. Omit to subscribe to all users webhooks.\nAppend multiple times to subscribe to multiple users.",
-            "default": "*"
-          }
         }
       }
     }

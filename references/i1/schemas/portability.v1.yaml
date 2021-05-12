@@ -1,0 +1,9 @@
+portability:
+  title: Portability
+  type: object
+  description: Phone number portablility response
+  properties:
+    portable:
+      type: boolean
+      default: true
+      description: Is the provided phone number portable.
