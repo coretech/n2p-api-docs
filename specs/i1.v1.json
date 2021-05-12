@@ -269,15 +269,114 @@
         ]
       }
     },
-    "/voicemails/users/{userId}/count": {
-      "get": {
-        "summary": "Get the voicemail count for a user in a domain.",
+    "/subscriptions/": {
+      "post": {
+        "summary": "Creates a webhook subscription for the requested events.\nWhen an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/requestBodies/webhook_settings"
+              },
+              "examples": {
+                "example": {
+                  "$ref": "#/components/examples/webhook_settings"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/webhook_subscription"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/webhook_subscription"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/": {
+      "delete": {
+        "summary": "Delete a webhook subscription with the given id. Updates will no longer be sent the subscription endpoint.\nNote: Users can only delete subscriptions that they created.",
         "parameters": [
           {
             "$ref": "#/components/headers/Accept"
           },
           {
-            "$ref": "#/components/parameters/userId"
+            "$ref": "#/components/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The webhook subscription was deleted successfully."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "get": {
+        "summary": "Get the webhook subscription details for the given id. Can be used to verify subscribed events as well the subscription expiry date/time.\nNote: Users can only read subscriptions that they created.",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionId"
           }
         ],
         "responses": {
@@ -285,11 +384,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/voicemail_count"
+                  "$ref": "#/components/schemas/webhook_subscription"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/voicemail_count"
+                    "$ref": "#/components/examples/webhook_subscription"
                   }
                 }
               }
@@ -367,7 +466,8 @@
             "enum": [
               "Basic User",
               "Office Manager",
-              "Call Center Supervisor"
+              "Call Center Supervisor",
+              "Call Center User"
             ]
           }
         }
@@ -386,6 +486,48 @@
             "type": "integer",
             "format": "int32",
             "description": "The total count of saved voicemails for the specified user"
+          }
+        }
+      },
+      "webhook_subscription": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "required": true,
+            "description": "The unique id of this subscription",
+            "format": "int32"
+          },
+          "post_uri": {
+            "type": "string",
+            "description": "The endpoint which is notified when an event occurs.",
+            "format": "uri"
+          },
+          "events": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "calls",
+                    "cdrs",
+                    "recordings"
+                  ]
+                },
+                "user": {
+                  "type": "string",
+                  "required": true,
+                  "default": "*"
+                }
+              }
+            }
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Indicates if subscription is enabled"
           }
         }
       }
@@ -689,6 +831,75 @@
         "value": {
           "new": 2,
           "saved": 3
+        }
+      },
+      "webhook_settings": {
+        "value": {
+          "post_uri": "https://mydomain.com/webhooks",
+          "expires_in": 604800,
+          "calls": false,
+          "cdrs": false,
+          "recordings": true,
+          "user": "*"
+        }
+      },
+      "webhook_subscription": {
+        "value": {
+          "id": 12345,
+          "post_uri": "https://mydomain.com/webhooks",
+          "expires": "2021-04-29T11:45:11.110000",
+          "events": [
+            {
+              "type": "cdrs",
+              "user": "*"
+            },
+            {
+              "type": "recordings",
+              "user": "201"
+            }
+          ]
+        }
+      }
+    },
+    "requestBodies": {
+      "webhook_settings": {
+        "required": [
+          "post_uri"
+        ],
+        "type": "object",
+        "properties": {
+          "post_uri": {
+            "type": "string",
+            "description": "The endpoint which is notified when an event occurs.",
+            "format": "uri"
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of seconds until the webhook subscription expires",
+            "default": 7200,
+            "maximum": 604800
+          },
+          "calls": {
+            "type": "boolean",
+            "description": "Subscribe to call events",
+            "default": false
+          },
+          "cdrs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Subscribe to CDR events"
+          },
+          "recordings": {
+            "type": "boolean",
+            "description": "Subscribe to recording events",
+            "default": false
+          },
+          "user": {
+            "type": "string",
+            "description": "One or more users to subscribe to. Omit to subscribe to all users webhooks.\nAppend multiple times to subscribe to multiple users.",
+            "default": "*"
+          }
         }
       }
     }

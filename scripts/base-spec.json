@@ -13,7 +13,8 @@
     "responses": {},
     "parameters": {},
     "headers": {},
-    "examples": {}
+    "examples": {},
+    "requestBodies": {}
   },
   "webhooks": {}
 }

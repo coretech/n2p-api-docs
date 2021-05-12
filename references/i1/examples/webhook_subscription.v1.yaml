@@ -1,0 +1,10 @@
+webhook_subscription:
+  value:
+    id: 12345
+    post_uri: https://mydomain.com/webhooks
+    expires: '2021-04-29T11:45:11.110000'
+    events:
+      - type: cdrs
+        user: "*"
+      - type: recordings
+        user: "201"

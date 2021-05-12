@@ -1,0 +1,52 @@
+tags:
+  - name: Webhooks
+    description: Subscribe and receive webhook updates for the events you are interested in. Provide a URI which can receive POST requests. When updates occur your endpoint will then be notified. (All notifications requests contain JSON.)
+paths:
+  /subscriptions/:
+    post:
+      summary: |-
+        Creates a webhook subscription for the requested events.
+        When an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/webhook_settings"
+            examples:
+              example:
+                $ref: "#/components/examples/webhook_settings"
+      responses:
+        202:
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/webhook_subscription"
+              examples:
+                example:
+                  $ref: "#/components/examples/webhook_subscription"
+  /subscriptions/{subscriptionId}/:
+    delete:
+      summary: |-
+        Delete a webhook subscription with the given id. Updates will no longer be sent the subscription endpoint.
+        Note: Users can only delete subscriptions that they created.
+      parameters:
+        - $ref: "#/components/parameters/subscriptionId"
+      responses:
+        204:
+          description: The webhook subscription was deleted successfully.
+    get:
+      summary: |-
+        Get the webhook subscription details for the given id. Can be used to verify subscribed events as well the subscription expiry date/time.
+        Note: Users can only read subscriptions that they created.
+      parameters:
+        - $ref: "#/components/parameters/subscriptionId"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/webhook_subscription"
+              examples:
+                example:
+                  $ref: "#/components/examples/webhook_subscription"

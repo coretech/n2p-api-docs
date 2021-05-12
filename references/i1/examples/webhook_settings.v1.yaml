@@ -1,0 +1,8 @@
+webhook_settings:
+  value:
+    post_uri: https://mydomain.com/webhooks
+    expires_in: 604800
+    calls: false
+    cdrs: false
+    recordings: true
+    user: "*"

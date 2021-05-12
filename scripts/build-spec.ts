@@ -59,6 +59,7 @@ function main() {
   dirToComponents('headers')
   dirToComponents('schemas')
   dirToComponents('examples')
+  dirToComponents('requestBodies')
   buildPaths();
   buildWebhooks();
   saveSpecFile();

@@ -2428,7 +2428,8 @@
     "responses": {},
     "parameters": {},
     "headers": {},
-    "examples": {}
+    "examples": {},
+    "requestBodies": {}
   },
   "webhooks": {
     "call_answered": {
