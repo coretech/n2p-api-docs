@@ -1,0 +1,33 @@
+webhook_settings:
+  required:
+    - post_uri
+  type: object
+  properties:
+    post_uri:
+      type: string
+      description: The endpoint which is notified when an event occurs.
+      format: uri
+    expires_in:
+      type: integer
+      format: int32
+      description: The number of seconds until the webhook subscription expires
+      default: 7200
+      maximum: 604800
+    calls:
+      type: boolean
+      description: Subscribe to call events
+      default: false
+    cdrs:
+      type: boolean
+      default: false
+      description: Subscribe to CDR events
+    recordings:
+      type: boolean
+      description: Subscribe to recording events
+      default: false
+    user: # TODO [i1] verify how this actually works
+      type: string
+      description: |-
+        One or more users to subscribe to. Omit to subscribe to all users webhooks.
+        Append multiple times to subscribe to multiple users.
+      default: "*"

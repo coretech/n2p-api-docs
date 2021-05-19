@@ -1,0 +1,8 @@
+callId:
+  name: callId
+  in: path
+  description: The ID of the call
+  required: true
+  schema:
+    type: string
+    # TODO format? regex same as in webhooks or does it depend on the product?

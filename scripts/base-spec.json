@@ -1,0 +1,19 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "",
+    "description": "",
+    "version": "1.0"
+  },
+  "servers": [{ "url": "" }],
+  "tags": [],
+  "paths": {},
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "parameters": {},
+    "headers": {},
+    "examples": {}
+  },
+  "webhooks": {}
+}

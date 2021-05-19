@@ -1,0 +1,7 @@
+devices:
+  value:
+    - aor: sip:100@yourdomain.com
+      aor_user: '100'
+      mac: 1004c84c49ca
+      model: Polycom 550
+      registration_time: 2017-05-23T14:59:59+00:00

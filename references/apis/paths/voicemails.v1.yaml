@@ -1,0 +1,18 @@
+tags:
+  - name: Voicemails
+    description: Get information about Voicemails for users in a domain
+paths:
+  /voicemails/users/{userId}/count/:
+    get:
+      summary: Get the voicemail count for a user in a domain.
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/voicemail_count"
+              examples:
+                example:
+                  $ref: "#/components/examples/voicemail_count"

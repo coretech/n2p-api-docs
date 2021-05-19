@@ -1,0 +1,31 @@
+webhook_subscription:
+  type: object
+  properties:
+    id:
+      type: integer
+      required: true
+      description: The unique id of this subscription
+      format: int32
+    post_uri:
+      type: string
+      description: The endpoint which is notified when an event occurs.
+      format: uri
+    events:
+      type: array
+      uniqueItems: true
+      items:
+        properties:
+          type:
+            type: string
+            required: true
+            enum:
+              - calls
+              - cdrs
+              - recordings
+          user:
+            type: string
+            required: true
+            default: "*"
+    enabled:
+      type: boolean
+      description: Indicates if subscription is enabled

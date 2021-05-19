@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "server:start": "http-server --port=8080 --cors=*",
-    "server:stop": "pkill -f http-server",
-    "webhooks:build": "ts-node ./scripts/build-webhooks.ts",
-    "webhooks:watch": "nodemon --config ./nodemon.webhooks.json",
-    "webhooks:start": "yarn server:start & yarn webhooks:watch  && yarn server:stop",
+    "serve": "http-server --port=8080 --cors=*",
+    "postserve": "pkill -f http-server",
+    "build:spec": "ts-node ./scripts/build-spec.ts",
+    "build": "yarn build:apis && yarn build:webhooks",
+    "build:apis": "yarn build:spec apis",
+    "build:webhooks": "yarn build:spec webhooks",
+    "start": "yarn serve & yarn watch",
+    "watch": "yarn watch:apis & yarn watch:webhooks",
+    "watch:apis": "nodemon --config .config/nodemon.apis.json",
+    "watch:webhooks": "nodemon --config .config/nodemon.webhooks.json",
     "postinstall": "husky install"
   },
   "devDependencies": {

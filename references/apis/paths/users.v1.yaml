@@ -1,0 +1,44 @@
+tags:
+  - name: Users
+    description: Get a list of the Users for your company or details aobut a specific user.
+paths:
+  /users/:
+    get:
+      summary: Get details list of all users of an account
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/user"
+              examples:
+                example:
+                  $ref: "#/components/examples/users"
+  /users/{userId}/:
+    get:
+      summary: Get the user details. If provided the id will be used to get a specific user. If not specified the authenticated user details will be returned. If you wish to retrieve all users across your domain use the "all" argument.
+      parameters:
+        - $ref: "#/components/parameters/userId"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+              examples:
+                example:
+                  $ref: "#/components/examples/user"
+  /users/current/:
+    get:
+      summary: Get the user details for the authenticated user.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+              examples:
+                example:
+                  $ref: "#/components/examples/user"

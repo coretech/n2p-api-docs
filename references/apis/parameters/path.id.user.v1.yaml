@@ -1,0 +1,8 @@
+userId:
+  name: userId
+  in: path
+  description: Id of the user
+  required: true
+  schema:
+    type: integer
+    format: int32

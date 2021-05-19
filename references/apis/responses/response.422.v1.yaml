@@ -1,0 +1,20 @@
+description: Invalid Version
+name: InvalidVersion
+summary: An invalid version number was provided.
+content:
+  application/json:
+    schema:
+      allOf:
+        - $ref: ./base/response.error.v1.yaml
+        - properties:
+            status:
+              type: integer
+              enum:
+                - 422
+            message:
+              type: string
+              enum:
+                - An invalid version number was provided.
+    example:
+      status: 422
+      message: An invalid version number was provided.
