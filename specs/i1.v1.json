@@ -12,6 +12,10 @@
   ],
   "tags": [
     {
+      "name": "Calls",
+      "description": "Control your phone calls; List Active, Place, Answer, and Terminate your calls."
+    },
+    {
       "name": "Devices",
       "description": "Lists of registered devices"
     },
@@ -41,6 +45,180 @@
     }
   ],
   "paths": {
+    "/calls/": {
+      "post": {
+        "summary": "Place a Call",
+        "description": "Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/call"
+              },
+              "examples": {
+                "example": {
+                  "$ref": "#/components/examples/call"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Calls"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          }
+        ]
+      }
+    },
+    "/calls/{callId}/": {
+      "delete": {
+        "summary": "Terminate an Active Call",
+        "description": "Terminate the call with the provided id",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/callId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Calls"
+        ]
+      }
+    },
+    "/calls/{callId}/answer/": {
+      "put": {
+        "summary": "Answer a Call",
+        "description": "Answer a call with a given id on a given device.",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/callId"
+          },
+          {
+            "$ref": "#/components/parameters/to"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Calls"
+        ]
+      }
+    },
+    "/calls/{callId}/reject/": {
+      "put": {
+        "summary": "Reject a Call",
+        "description": "Reject a call with a given id.",
+        "parameters": [
+          {
+            "$ref": "#/components/headers/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/callId"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Calls"
+        ]
+      }
+    },
     "/devices/users/": {
       "get": {
         "summary": "Get a list of user devices in an account.",
@@ -688,6 +866,37 @@
   },
   "components": {
     "schemas": {
+      "call": {
+        "title": "Create Call",
+        "type": "object",
+        "description": "Body of create call request",
+        "properties": {
+          "to": {
+            "type": "string",
+            "required": true,
+            "description": "The destination for this call. (Phone number, sip address)"
+          },
+          "from": {
+            "type": "string",
+            "description": "Where this call originates. Will default to current authenticated user if a value is not provided."
+          },
+          "auto_answer": {
+            "type": "boolean",
+            "default": false,
+            "description": "Auto Answer - Should this caller side be auto answered. (May not be supported by the answering device)."
+          },
+          "automatic_number_identification": {
+            "type": "boolean",
+            "description": "Auto number identification -",
+            "nullable": true
+          },
+          "caller_id_number": {
+            "type": "string",
+            "description": "Number to show as the call id",
+            "nullable": true
+          }
+        }
+      },
       "devices": {
         "title": "Devices list",
         "type": "array",
@@ -1141,8 +1350,7 @@
         "description": "The ID of the call",
         "required": true,
         "schema": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         }
       },
       "recordingId": {
@@ -1152,8 +1360,7 @@
         "required": true,
         "schema": {
           "type": "integer",
-          "format": "int32",
-          "nullable": true
+          "format": "int32"
         }
       },
       "subscriptionId": {
@@ -1173,8 +1380,7 @@
         "required": true,
         "schema": {
           "type": "integer",
-          "format": "int32",
-          "nullable": true
+          "format": "int32"
         }
       },
       "phone_number": {
@@ -1185,6 +1391,17 @@
         "schema": {
           "type": "integer",
           "format": "int32"
+        }
+      },
+      "to": {
+        "name": "to",
+        "in": "query",
+        "description": "The device where the answered call should go.",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "description": "The device where the answered call should go.",
+          "format": "tel"
         }
       }
     },
@@ -1215,6 +1432,15 @@
       }
     },
     "examples": {
+      "call": {
+        "value": {
+          "to": "1234567890",
+          "from": "100@mydomain.com",
+          "caller_id_number": null,
+          "auto_answer": true,
+          "automatic_number_identification": null
+        }
+      },
       "devices": {
         "value": [
           {

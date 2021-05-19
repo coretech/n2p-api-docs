@@ -8,6 +8,10 @@ Each Zap has one app as the **Trigger**, where your information comes from and w
 
 Sign up for a free [Zapier](https://zapier.com/apps/net2phone/integrations) account, from there you can jump right in. To help you hit the ground running!
 
+## Getting Started with net2phone on Zapier
+
+For a more details [Zapier](https://zapier.com/help/doc/how-to-get-started-with-net2phone-on-zapier)
+
 ## How do I connect net2phone to Zapier?
 
 1. Log in to your [Zapier account](https://zapier.com/sign-up) or create a new account.
