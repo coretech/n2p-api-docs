@@ -206,10 +206,12 @@ function buildPaths() {
           method.tags = [tag.name]
         }
         // add responses
-        if (method.responses['200']) {
+        if (method?.responses?.['200']) {
           method.responses['200'].description = 'Success'
         }
-        Object.assign(method.responses, sharedResponses)
+        if (method?.responses) {
+          Object.assign(method.responses, sharedResponses)
+        }
         // standardize parameters
         if (!method.parameters) {
           method.parameters = []
