@@ -6,4 +6,3 @@ userId:
   schema:
     type: integer
     format: int32
-    nullable: true # TODO [i1] is valid for all?

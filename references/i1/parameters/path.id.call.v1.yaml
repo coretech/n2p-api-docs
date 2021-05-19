@@ -6,4 +6,3 @@ callId:
   schema:
     type: string
     # TODO format? regex same as in webhooks or does it depend on the product?
-    nullable: true # TODO [i1] is valid for all?
