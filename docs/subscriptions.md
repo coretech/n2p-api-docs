@@ -14,7 +14,7 @@ Register your own endpoints to receive notifications for call activity and event
 Subscribing to activities and events ensures you have up to date information without having to consume the additional network and cpu resources which would be required if you continuously polled for the data. To receive notifications you indicate the actives you wish to receive updates for as well as provide an endpoint which Net2Phone can POST data to. 
 **NOTE:** All POST messages will contain JSON data.
 
-![subscriptions data flow](assets/images/subscriptions.svg "subscriptions data flow")
+![subscriptions data flow](assets/images/subscriptions.png "subscriptions data flow")
 
 ## Create A Subscription
 
