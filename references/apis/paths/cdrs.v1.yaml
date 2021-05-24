@@ -1,0 +1,22 @@
+tags:
+  - name: CDRs
+    description: Get a list of the Call Detail Records (CDR's) for a specific member of your company or for the entire company. Filter your calls by Inbound, Outbound, Missed and get calls for a specific date range. If no CDRs are found for the query the repsonse will be empty.
+paths:
+  /cdrs/:
+    get:
+      summary: Get list of all cdrs on the account
+      parameters:
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/startDate"
+        - $ref: "#/components/parameters/endDate"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cdrs"
+              examples:
+                example:
+                  $ref: "#/components/examples/cdrs"
+                recordings example:
+                  $ref: "#/components/examples/cdrs_with_recordings"

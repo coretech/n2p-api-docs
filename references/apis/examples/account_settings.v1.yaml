@@ -1,0 +1,33 @@
+account_settings:
+  value:
+    report_generation_settings:
+      call_queue_split: 'True'
+      call_queue: 'True'
+      call_queue_agent: 'True'
+      reports:
+        - gmt_offset: 4
+          name:
+          interval: 30
+          queue: '8814'
+          key: 646907a3-0a1b-4a19-b03b-2962a65e4dc9
+          timezone: US/Eastern
+          type: call_queue_split_report
+        - gmt_offset: 0
+          name: Test report
+          interval: 30
+          queue: '8814'
+          key: 54ed5415-7536-bd71-c3fc-02e64b190170
+          timezone: Pacific/Niue
+          type: call_queue_agent_report
+        - gmt_offset: 0
+          name: New Report
+          interval: 0
+          queue:
+          key: c4c88231-c02d-435a-9f52-7c07d25cf4af
+          timezone: Pacific/Niue
+          type: call_queue_report
+    long_term_recording_storage: true
+    performance_wallboards: false
+    report_generation: true
+    call_center_web_header: false
+    voice_signature: true

@@ -1,0 +1,83 @@
+account_settings:
+  title: Account Settings
+  description: Details for the settings for the account
+  type: object
+  properties:
+    report_generation_settings:
+      type: object
+      properties:
+        call_queue_split:
+          description: Call queue split report will be generated
+          type: string
+          nullable: true
+          enum:
+            - 'True'
+            - 'False'
+        call_queue:
+          description: Call queue report will be generated
+          type: string
+          nullable: true
+          enum:
+            - 'True'
+            - 'False'
+        call_queue_agent:
+          description: Call queue agent report will be generated
+          type: string
+          nullable: true
+          enum:
+            - 'True'
+            - 'False'
+        reports:
+          description: List of all enabled reports
+          type: array
+          uniqueItems: true
+          items:
+            properties:
+              gmt_offset:
+                description: GMT offset for the report
+                type: number
+              name:
+                description: Name of the report
+                type: string
+                nullable: true
+              interval:
+                description: Interval for the report
+                type: number
+              queue:
+                description: ID of the queue
+                type: string
+                nullable: true
+              key:
+                description: Unique ID of the report
+                type: string
+                pattern: /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm
+              timezone:
+                description: Timezone of the report
+                type: string
+              type:
+                description: Type of the report
+                type: string
+                enum:
+                  - call_queue_split_report
+                  - call_queue_agent_report
+                  - call_queue_report
+    long_term_recording_storage:
+      description: Long term recording storage enabled
+      type: boolean
+      default: false
+    performance_wallboards:
+      description: Performance wallboards enabled
+      type: boolean
+      default: false
+    report_generation:
+      description: Report generation enabled
+      type: boolean
+      default: false
+    call_center_web_header:
+      description: Call center web header enabled
+      type: boolean
+      default: false
+    voice_signature:
+      description: Voice signature enabled
+      type: boolean
+      default: false

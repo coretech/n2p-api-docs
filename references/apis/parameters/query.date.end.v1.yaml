@@ -1,0 +1,7 @@
+endDate:
+  name: endDate
+  in: query
+  description: Get calls which ended after this time. In UTC if timezone not specified. If no start date is provided resutls for calls after this end date will be returned.
+  schema:
+    type: string
+    format: date-time

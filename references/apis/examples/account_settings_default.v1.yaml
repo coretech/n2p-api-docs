@@ -1,0 +1,12 @@
+account_settings_default:
+  value:
+    report_generation_settings:
+      call_queue_split:
+      call_queue:
+      call_queue_agent:
+      reports:
+    long_term_recording_storage: false
+    performance_wallboards: false
+    report_generation: false
+    call_center_web_header: false
+    voice_signature: false

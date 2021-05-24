@@ -1,5 +1,17 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn build
-git add "$(dirname "$0")/../specs"
+build_spec () {
+  [ -z "$1" ] && yarn build || yarn build:$1
+  git add "$(dirname "$0")/../specs"
+}
+
+staged=`git diff --name-only --cached`
+
+if echo $staged | grep 'scripts'; then
+  build_spec
+elif echo $staged | grep 'references/apis'; then
+  build_spec apis
+elif echo $staged | grep 'references/webhooks'; then
+  build_spec webhooks
+fi

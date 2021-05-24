@@ -1,0 +1,38 @@
+cdrs_with_recordings:
+  value:
+    cursor: asdfasdfasdfasdf#asdfasdfs==
+    more: true
+    result:
+      - to:
+          domain:
+          user:
+          has_recording_been_analyzed: false
+          value: '+16133246100'
+          call_id: 20210503030052031111-436c626c08717949a56705103ea809c0
+        domain: yourdomain.com
+        from:
+          domain: yourdomain.com
+          name: Jane Doe
+          recordings:
+            - status:
+                message: null
+                name: Available
+                processing_error: false
+                time: 'Monday, 3 Jun 2018 19:05:45 -0000'
+              is_processed: true
+              url: 'https://versature-integrate.appspot.com/api/recordings/93bc0b9a43a6458acced84a6fc4cf270/recording/'
+              is_available: true
+              processing_error: false
+              recording_id: 93bc0b9a43a6458acced84a6fc4cf270
+              has_recording_been_analyzed: false
+          user: '101'
+          has_recording_been_analyzed: false
+          uri: 'sip:16133246100@yourdomain.com'
+          value: '+16133246100'
+          call_id: 20180503030052031111-436c626c08717949a56705103ea809c0
+        end_time: '2018-05-03T15:08:01+00:00'
+        answer_time: '2018-05-03T14:02:49+00:00'
+        duration: 312
+        start_time: '2018-05-03T14:02:45+00:00'
+        has_recording_been_analyzed: false
+        call_type: Outgoing
