@@ -260,6 +260,7 @@ function buildWebhooks() {
 
     // build webhook
     outSpec.webhooks[specName] = {
+      tags: ['Webhooks'],
       summary: spec['summary'],
       description: spec['description'],
       post: {
@@ -268,7 +269,7 @@ function buildWebhooks() {
             content: {
               'application/json': {
                 schema: {
-                  '$ref': `#/components/schemas/${specName}`
+                  '$ref': spec['allOf'] ? `#/components/schemas/${specName}` : spec['properties'].$ref
                 },
                 examples: spec['examples'] // TODO separate out examples
               }
