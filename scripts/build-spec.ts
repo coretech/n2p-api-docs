@@ -221,7 +221,7 @@ function buildPaths() {
         if (!method.parameters) {
           method.parameters = []
         }
-        method.parameters.unshift({$ref: '#/components/headers/Accept'})
+        method.parameters.unshift({$ref: '#/components/parameters/Accept'})
         // update original path
         path[methodName] = method
       })

@@ -1,6 +1,6 @@
 tags:
   - name: Accounts
-    descriptions: Get details of the account
+    description: Get details of the account
 paths:
   /accounts/services/:
     get:

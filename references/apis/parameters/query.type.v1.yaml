@@ -1,0 +1,10 @@
+type:
+  name: type
+  in: query
+  description: The type of phone call which took place.
+  schema:
+    type: string
+    enum:
+      - incoming
+      - outgoing
+      - on net

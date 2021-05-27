@@ -1,0 +1,8 @@
+min_duration:
+  name: min_duration
+  in: query
+  description: Filter cdrs by minimum duration
+  schema:
+    type: integer
+    format: int32
+    nullable: true

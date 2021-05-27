@@ -13,7 +13,7 @@
   "tags": [
     {
       "name": "Accounts",
-      "descriptions": "Get details of the account"
+      "description": "Get details of the account"
     },
     {
       "name": "Calls",
@@ -84,7 +84,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           }
         ]
       }
@@ -135,7 +135,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           }
         ]
       }
@@ -146,7 +146,7 @@
         "description": "Terminate the call with the provided id",
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           },
           {
             "$ref": "#/components/parameters/callId"
@@ -182,19 +182,272 @@
     },
     "/cdrs/": {
       "get": {
-        "summary": "Get list of all cdrs on the account",
+        "summary": "Account CDRs",
+        "description": "Get list of all cdrs on the account",
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/start_date"
+          },
+          {
+            "$ref": "#/components/parameters/end_date"
+          },
+          {
+            "$ref": "#/components/parameters/cursor"
           },
           {
             "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cdrs"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/cdrs"
+                  },
+                  "recordings example": {
+                    "$ref": "#/components/examples/cdrs_with_recordings"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "CDRs"
+        ]
+      }
+    },
+    "/cdrs/users/": {
+      "get": {
+        "summary": "User CDRs",
+        "description": "Get list of all user cdrs on the account",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#/components/parameters/startDate"
+            "$ref": "#/components/parameters/start_date"
           },
           {
-            "$ref": "#/components/parameters/endDate"
+            "$ref": "#/components/parameters/end_date"
+          },
+          {
+            "$ref": "#/components/parameters/cursor"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "$ref": "#/components/parameters/max_duration"
+          },
+          {
+            "$ref": "#/components/parameters/min_duration"
+          },
+          {
+            "$ref": "#/components/parameters/phone_number"
+          },
+          {
+            "$ref": "#/components/parameters/recording_available"
+          },
+          {
+            "$ref": "#/components/parameters/type"
+          },
+          {
+            "$ref": "#/components/parameters/user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cdrs"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/cdrs"
+                  },
+                  "recordings example": {
+                    "$ref": "#/components/examples/cdrs_with_recordings"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "CDRs"
+        ]
+      }
+    },
+    "/cdrs/users/current/": {
+      "get": {
+        "summary": "Current user CDRs",
+        "description": "Get list of all cdrs on the account for the current user",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/start_date"
+          },
+          {
+            "$ref": "#/components/parameters/end_date"
+          },
+          {
+            "$ref": "#/components/parameters/cursor"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "$ref": "#/components/parameters/max_duration"
+          },
+          {
+            "$ref": "#/components/parameters/min_duration"
+          },
+          {
+            "$ref": "#/components/parameters/phone_number"
+          },
+          {
+            "$ref": "#/components/parameters/recording_available"
+          },
+          {
+            "$ref": "#/components/parameters/type"
+          },
+          {
+            "$ref": "#/components/parameters/user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cdrs"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/cdrs"
+                  },
+                  "recordings example": {
+                    "$ref": "#/components/examples/cdrs_with_recordings"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "CDRs"
+        ]
+      }
+    },
+    "/cdrs/users/{userId}/": {
+      "get": {
+        "summary": "User CDRs by ID",
+        "description": "Get list of all cdrs on the account for the current user",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/start_date"
+          },
+          {
+            "$ref": "#/components/parameters/end_date"
+          },
+          {
+            "$ref": "#/components/parameters/cursor"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "$ref": "#/components/parameters/max_duration"
+          },
+          {
+            "$ref": "#/components/parameters/min_duration"
+          },
+          {
+            "$ref": "#/components/parameters/phone_number"
+          },
+          {
+            "$ref": "#/components/parameters/recording_available"
+          },
+          {
+            "$ref": "#/components/parameters/type"
+          },
+          {
+            "$ref": "#/components/parameters/user"
           }
         ],
         "responses": {
@@ -284,7 +537,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           }
         ]
       }
@@ -335,7 +588,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           }
         ]
       }
@@ -345,7 +598,7 @@
         "summary": "Get the user details. If provided the id will be used to get a specific user. If not specified the authenticated user details will be returned. If you wish to retrieve all users across your domain use the \"all\" argument.",
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           },
           {
             "$ref": "#/components/parameters/userId"
@@ -434,7 +687,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           }
         ]
       }
@@ -496,7 +749,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           }
         ]
       }
@@ -506,7 +759,7 @@
         "summary": "Delete a webhook subscription with the given id. Updates will no longer be sent the subscription endpoint.\nNote: Users can only delete subscriptions that they created.",
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           },
           {
             "$ref": "#/components/parameters/subscriptionId"
@@ -543,7 +796,7 @@
         "summary": "Get the webhook subscription details for the given id. Can be used to verify subscribed events as well the subscription expiry date/time.\nNote: Users can only read subscriptions that they created.",
         "parameters": [
           {
-            "$ref": "#/components/headers/Accept"
+            "$ref": "#/components/parameters/Accept"
           },
           {
             "$ref": "#/components/parameters/subscriptionId"
@@ -1362,6 +1615,30 @@
       }
     },
     "parameters": {
+      "Accept": {
+        "name": "Accept",
+        "required": true,
+        "in": "header",
+        "description": "The media type and version which is acceptable for the response",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "application/vnd.integrate.v1.1.0+json",
+            "application/vnd.integrate.v1.2.0+json",
+            "application/vnd.integrate.v1.3.0+json",
+            "application/vnd.integrate.v1.4.0+json",
+            "application/vnd.integrate.v1.5.0+json",
+            "application/vnd.integrate.v1.6.0+json",
+            "application/vnd.integrate.v1.7.0+json",
+            "application/vnd.integrate.v1.8.0+json"
+          ]
+        },
+        "examples": {
+          "latest": {
+            "value": "application/vnd.integrate.v1.8.0+json"
+          }
+        }
+      },
       "callId": {
         "name": "callId",
         "in": "path",
@@ -1391,8 +1668,16 @@
           "format": "int32"
         }
       },
-      "endDate": {
-        "name": "endDate",
+      "cursor": {
+        "name": "cursor",
+        "in": "query",
+        "description": "The cursor/index from which to continue a previous request from",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "end_date": {
+        "name": "end_date",
         "in": "query",
         "description": "Get calls which ended after this time. In UTC if timezone not specified. If no start date is provided resutls for calls after this end date will be returned.",
         "schema": {
@@ -1400,14 +1685,34 @@
           "format": "date-time"
         }
       },
-      "startDate": {
-        "name": "startDate",
+      "start_date": {
+        "name": "start_date",
         "in": "query",
         "description": "Get calls which started after this time. In UTC if timezone not specified.",
         "required": true,
         "schema": {
           "type": "string",
           "format": "date-time"
+        }
+      },
+      "max_duration": {
+        "name": "max_duration",
+        "in": "query",
+        "description": "Filter cdrs by maximum duration",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "nullable": true
+        }
+      },
+      "min_duration": {
+        "name": "min_duration",
+        "in": "query",
+        "description": "Filter cdrs by minimum duration",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "nullable": true
         }
       },
       "limit": {
@@ -1417,38 +1722,64 @@
         "schema": {
           "type": "integer",
           "format": "int32",
-          "min": 1,
-          "max": 1000,
+          "minimum": 1,
+          "maximum": 1000,
           "default": 10
         }
-      }
-    },
-    "headers": {
-      "Accept": {
-        "name": "Accept",
-        "required": true,
-        "in": "header",
-        "description": "The media type and version which is acceptable for the response",
+      },
+      "page_size": {
+        "name": "page_size",
+        "in": "query",
+        "description": "number of returned items",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 10
+        }
+      },
+      "phone_number": {
+        "name": "phone_number",
+        "in": "query",
+        "description": "Flter cdrs by phone number used",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "recording_available": {
+        "name": "recording_available",
+        "in": "query",
+        "description": "Filter cdrs to only include ones with recordings",
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "type": {
+        "name": "type",
+        "in": "query",
+        "description": "The type of phone call which took place.",
         "schema": {
           "type": "string",
           "enum": [
-            "application/vnd.integrate.v1.1.0+json",
-            "application/vnd.integrate.v1.2.0+json",
-            "application/vnd.integrate.v1.3.0+json",
-            "application/vnd.integrate.v1.4.0+json",
-            "application/vnd.integrate.v1.5.0+json",
-            "application/vnd.integrate.v1.6.0+json",
-            "application/vnd.integrate.v1.7.0+json",
-            "application/vnd.integrate.v1.8.0+json"
+            "incoming",
+            "outgoing",
+            "on net"
           ]
-        },
-        "examples": {
-          "latest": {
-            "value": "application/vnd.integrate.v1.8.0+json"
-          }
+        }
+      },
+      "user": {
+        "name": "user",
+        "in": "query",
+        "description": "The user/extension to retrieve the call records for. Append multiple times to filter by multiple users.",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
+    "headers": {},
     "examples": {
       "account_settings_default": {
         "value": {

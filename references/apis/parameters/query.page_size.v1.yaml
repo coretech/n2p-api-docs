@@ -1,5 +1,5 @@
-limit:
-  name: limit
+page_size:
+  name: page_size
   in: query
   description: number of returned items
   schema:

@@ -1,0 +1,8 @@
+max_duration:
+  name: max_duration
+  in: query
+  description: Filter cdrs by maximum duration
+  schema:
+    type: integer
+    format: int32
+    nullable: true

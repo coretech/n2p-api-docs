@@ -1,0 +1,24 @@
+call:
+  title: Create Call
+  type: object
+  description: Body of create call request
+  properties:
+    to:
+      type: string
+      required: true
+      description: The destination for this call. (Phone number, sip address)
+    from:
+      type: string
+      description: Where this call originates. Will default to current authenticated user if a value is not provided.
+    auto_answer:
+      type: boolean
+      default: false
+      description: Auto Answer - Should this caller side be auto answered. (May not be supported by the answering device).
+    automatic_number_identification:
+      type: boolean
+      description: Auto number identification - # TODO [i1] what does this do
+      nullable: true
+    caller_id_number:
+      type: string
+      description: Number to show as the call id
+      nullable: true

@@ -1,0 +1,7 @@
+call:
+  value:
+    to: '1234567890'
+    from: 100@mydomain.com
+    caller_id_number: null
+    auto_answer: true
+    automatic_number_identification: null
