@@ -120,6 +120,8 @@ function buildResponses() {
   responseNames.forEach(responseName => {
     const response = readSpecFile(responseName)
 
+    if (!response) return
+
     // flatten
     let { schema } = response.content['application/json']
     if (schema['allOf']) {
@@ -155,6 +157,7 @@ function dirToComponents(directory: string) {
 
   getSpecFiles().forEach(specName => {
     const spec = readSpecFile(specName)
+    if (!spec) return
     Object.assign(outSpec.components[directory], spec)
   })
 
@@ -181,6 +184,8 @@ function buildPaths() {
 
   specNames.forEach((specName, index) => {
     const spec = readSpecFile(specName)
+
+    if (!spec) return
 
     const tag = spec?.tags?.[0]
 
@@ -216,7 +221,7 @@ function buildPaths() {
         if (!method.parameters) {
           method.parameters = []
         }
-        method.parameters.unshift({$ref: '#/components/headers/Accept'})
+        method.parameters.unshift({$ref: '#/components/parameters/Accept'})
         // update original path
         path[methodName] = method
       })

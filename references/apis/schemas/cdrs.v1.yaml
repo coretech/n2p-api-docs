@@ -1,0 +1,212 @@
+cdrs:
+  title: CDRs
+  description: List of CDRs that meet the query parameters
+  type: object
+  properties:
+    cursor:
+      description: The cursor/index from which to continue a previous request from
+      type: string
+    more:
+      description: True if there is more data available. If True use the cursor to request the next batch of data.
+      type: boolean
+    result:
+      description: A list of CDR data
+      type: array
+      uniqueItems: true
+      items:
+        properties:
+          start_time:
+            description: Date and time the call was started (in UTC).
+            type: string
+          answer_time:
+            description: Date and time the call was answered (in UTC).
+            type: string
+          end_time:
+            description: Date and time the call was ended (in UTC).
+            type: string
+          duration:
+            description: How many seconds the call lasted.
+            type: number
+          call_type:
+            description: The type of call.
+            type: string
+            enum:
+              - Incoming
+              - Outgoing
+              - On Net
+          domain:
+            description: Domain associated with this call.
+            type: string
+          has_recording_been_analyzed:
+            description: Has cdr been processed for transcription and/or redaction
+            type: boolean
+          to:
+            description: The destination side of the call.
+            type: object
+            properties:
+              username:
+                description: The user@domain for the user associated with a call leg.
+                type: string
+              domain:
+                description: Domain associated with this call.
+                type: string
+              e164:
+                description: The e164 phone number associated with a call leg.
+                type: string
+              user:
+                description: The extension of the user associated with this call leg.
+                type: string
+              recordings:
+                description: A collection of recordings associated with a call leg
+                type: array
+                items:
+                  properties:
+                    status:
+                      description: The status for of this recording.
+                      type: object
+                      properties:
+                        message:
+                          description: Associated message for the status.
+                          type: string
+                          nullable: true
+                        name:
+                          description: The name/state for a given recording.
+                          type: string
+                          enum:
+                            - Processing
+                            - Available
+                            - No Recording
+                            - Deleted
+                            - Archived
+                            - Ignored
+                        processing_error:
+                          description: True if there was an error in processing the recording
+                          type: boolean
+                          default: false
+                        time:
+                          description: Time of recording
+                          type: string
+                          format: date-time
+                      is_processed:
+                        description: Has recording been processed
+                        type: boolean
+                      url:
+                        description: A url to download the recording from
+                        type: string
+                      is_available:
+                        description: True if a recording is available for download
+                        type: boolean
+                      processing_error:
+                        description: True if there was an error in processing the recording
+                        type: boolean
+                      recording_id:
+                        description: A unique id for a given recording
+                        type: string
+                      has_recording_been_analyzed:
+                        description: Has the recording been processed
+                        type: boolean
+              has_recording_been_analyzed:
+                description: Has the recording been processed.
+                type: boolean
+              uri:
+                description: The connected origination/termination device or number in full sip uri format.
+                type: string
+              call_id:
+                description: The unique identifier for one side of the call.
+                type: string
+          from:
+            type: object
+            properties:
+              username:
+                description: The user@domain for the user associated with a call leg.
+                type: string
+              domain:
+                description: Domain associated with this call.
+                type: string
+              name:
+                description: The name of the user associated with a call leg.
+                type: string
+              recordings:
+                description: A collection of recordings associated with a call leg
+                type: array
+                items:
+                  properties:
+                    status:
+                      description: The status for of this recording.
+                      type: object
+                      properties:
+                        message:
+                          description: Associated message for the status.
+                          type: string
+                          nullable: true
+                        name:
+                          description: The name/state for a given recording.
+                          type: string
+                          enum:
+                            - Processing
+                            - Available
+                            - No Recording
+                            - Deleted
+                            - Archived
+                            - Ignored
+                        processing_error:
+                          description: True if there was an error in processing the recording
+                          type: boolean
+                          default: false
+                        time:
+                          description: Time of recording
+                          type: string
+                          format: date-time
+                      is_processed:
+                        description: Has recording been processed
+                        type: boolean
+                      url:
+                        description: A url to download the recording from
+                        type: string
+                      is_available:
+                        description: True if a recording is available for download
+                        type: boolean
+                      processing_error:
+                        description: True if there was an error in processing the recording
+                        type: boolean
+                      recording_id:
+                        description: A unique id for a given recording
+                        type: string
+                      has_recording_been_analyzed:
+                        description: Has the recording been processed
+                        type: boolean
+              user:
+                description: The extension of the user associated with this call leg.
+                type: string
+              e164:
+                description: The e164 phone number associated with a call leg.
+                type: string
+              has_recording_been_analyzed:
+                description: Has the recording been processed.
+                type: boolean
+              uri:
+                description: The connected origination/termination device or number in full sip uri format.
+                type: string
+              call_id:
+                description: The unique identifier for one side of the call.
+                type: string
+          by:
+            description: The by side of the call.
+            type: object
+            properties:
+              username:
+                description: The user@domain for the user associated with a call leg
+                type: string
+                nullable: true
+              domain:
+                description: Domain associated with this call.
+                type: string
+                nullable: true
+              user:
+                description: The extension of the user associated with this call leg.
+                type: string
+                nullable: true
+              value:
+                description: The sip address or e164 number associated with a call leg
+                type: string
+                nullable: true

@@ -1,0 +1,8 @@
+start_date:
+  name: start_date
+  in: query
+  description: Get calls which started after this time. In UTC if timezone not specified.
+  required: true
+  schema:
+    type: string
+    format: date-time

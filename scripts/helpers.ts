@@ -28,7 +28,11 @@ export const readFile = (path: string) => {
     throw Error('file does not exist or is not of type yaml or json')
   }
 
-  return parser(fs.readFileSync(path, 'utf-8'))
+  const file = fs.readFileSync(path, 'utf-8')
+
+  if (file.length === 0) return
+
+  return parser(file)
 }
 
 export const flattenAllOf = (allOf: Array<{ '$ref': string} | { properties: object}>, basePath: string) => {
@@ -39,7 +43,9 @@ export const flattenAllOf = (allOf: Array<{ '$ref': string} | { properties: obje
 
     if (ref) {
       const spec = readFile(path.join(basePath, ref))
-      properties = Object.assign(spec['properties'], properties)
+      if (spec) {
+        properties = Object.assign(spec['properties'], properties)
+      }
     }
   })
 

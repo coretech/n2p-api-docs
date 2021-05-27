@@ -1,0 +1,7 @@
+recording_available:
+  name: recording_available
+  in: query
+  description: Filter cdrs to only include ones with recordings
+  schema:
+    type: boolean
+    default: false

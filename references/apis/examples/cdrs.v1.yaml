@@ -1,0 +1,16 @@
+cdrs:
+  value:
+    - duration: 111
+      start_time: '2021-05-01T03:00:49+00:00'
+      end_time: '2021-05-01T03:02:54+00:00'
+      to:
+        domain: yourdomain.com
+        e164: '+16133246100'
+        user:
+        call_id: 20210503030052031111-436c626c08717949a56705103ea809c0
+      from:
+        domain: yourdomain.com
+        call_id: 20210503030052031111-06f03fea68d5e32ff07831a419fdfcab
+        e164: '+16133246111'
+        user: '111'
+        name: John Doe

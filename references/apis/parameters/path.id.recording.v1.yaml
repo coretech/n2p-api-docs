@@ -1,8 +1,0 @@
-recordingId:
-  name: recordingId
-  in: path
-  description: Id of the recording
-  required: true
-  schema:
-    type: integer
-    format: int32

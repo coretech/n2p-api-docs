@@ -1,0 +1,7 @@
+user:
+  name: user
+  in: query
+  description: The user/extension to retrieve the call records for. Append multiple times to filter by multiple users.
+  schema:
+    type: integer
+    format: int32

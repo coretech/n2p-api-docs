@@ -1,0 +1,6 @@
+cursor:
+  name: cursor
+  in: query
+  description: The cursor/index from which to continue a previous request from
+  schema:
+    type: string

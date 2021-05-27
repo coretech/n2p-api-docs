@@ -1,0 +1,10 @@
+endpoints:
+  value:
+    - password_grant
+    - refresh_token_grant
+    - place_call
+    - read_subscription
+    - delete_subscription
+    - create_subscription
+    - refresh_subscription
+    - cdrs

@@ -1,8 +1,0 @@
-phone_number:
-  name: phone_number
-  in: path
-  description: The phone number to verify. E164 format is ideal but a best effort will be made to format the check the number provided.
-  required: true
-  schema:
-    type: integer # TODO [i1] verify this is true, doesn't seem right
-    format: int32

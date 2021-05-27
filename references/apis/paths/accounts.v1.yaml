@@ -1,0 +1,19 @@
+tags:
+  - name: Accounts
+    description: Get details of the account
+paths:
+  /accounts/services/:
+    get:
+      summary: Account services settings
+      description: List of reports and general account settings
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/account_settings"
+              examples:
+                example:
+                  $ref: "#/components/examples/account_settings"
+                default:
+                  $ref: "#/components/examples/account_settings_default"

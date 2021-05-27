@@ -1,0 +1,28 @@
+tags:
+  - name: Calls
+    description: Control your phone calls; List Active, Place, Answer, and Terminate your calls.
+paths:
+  /calls/:
+    post:
+      summary: Place a Call
+      description: Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/call"
+            examples:
+              example:
+                $ref: "#/components/examples/call"
+      responses:
+        201:
+          description: Success
+#  /calls/{callId}/:
+#    delete:
+#      summary: Terminate an Active Call
+#      description: Terminate the call with the provided id
+#      parameters:
+#        - $ref: "#/components/parameters/callId"
+#      responses:
+#        204:
+#          description: Success

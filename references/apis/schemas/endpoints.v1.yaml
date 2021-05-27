@@ -1,0 +1,17 @@
+endpoints:
+  title: Available endpoints
+  description: List of available endpoints
+  type: array
+  uniqueItems: true
+  items:
+    description: Endpoint descriptions
+    type: string
+    enum:
+      - password_grant
+      - refresh_token_grant
+      - place_call
+      - read_subscription
+      - delete_subscription
+      - create_subscription
+      - refresh_subscription
+      - cdrs

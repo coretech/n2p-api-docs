@@ -1,0 +1,17 @@
+tags:
+  - name: Endpoints
+    description: List of available endpoints
+paths:
+  /available/endpoint/:
+    get:
+      summary: Endpoints list
+      description: Get list of avialable endpoints
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/endpoints"
+              examples:
+                example:
+                  $ref: "#/components/examples/endpoints"
