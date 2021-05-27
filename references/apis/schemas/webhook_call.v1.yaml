@@ -1,0 +1,86 @@
+webhook_call:
+  title: Call Webhook
+  description: |-
+    A call subscription will result in Post request to your subscribed endpoint on call state changes for the subscribed user and company. The ringing event will show one side as `ringing` and the other as `progressing`.
+    * `progressing` - call is waiting for the other side
+    * `ringing` - endpoint is ringing
+    * `active` - call is up
+    * `ended` - call terminated
+  type: object
+  properties:
+    calls:
+      type: object
+      properties:
+        on_net:
+          description: If call was between net2phone sip devices.
+          type: boolean
+        from:
+          desciption: Where the call originated
+          type: object
+          properties:
+            call_id:
+              description: The unique id of this call.
+              type: string
+            id:
+              description: The phone number or device/ext. Phone numbers will be in E164 notation.
+              type: string
+            user:
+              description: The extension/user id. `null` if a net2phone user is not involved.
+              type: string
+              nullable: true
+            name:
+              description: Name of the extension/user
+              type: string
+              nullable: true
+            domain:
+              description: The customer/company associated with this call. Null if a net2phone domain is not involved on the given endpoint.
+              nullable: true
+            state:
+              description: The state of this call.
+              type: string
+              enum:
+                - progressing
+                - ringing
+                - active
+                - ended
+        to:
+          description: The destination of the call.
+          type: object
+          properties:
+            is_human:
+              description:
+              type: boolean
+            call_id:
+              description: The unique id of this call.
+              type: string
+            id:
+              description: The phone number or device/ext. Phone numbers will be in E164 notation.
+              type: string
+            user:
+              description: The extension/user id. `null` if a net2phone user is not involved.
+              type: integer
+              format: int32
+              nullable: true
+            domain:
+              description: The customer/company associated with this call. Null if a net2phone domain is not involved on the given endpoint.
+              nullable: true
+            state:
+              description: The state of this call.
+              type: string
+              enum:
+                - progressing
+                - ringing
+                - active
+                - ended
+        time_answer:
+          description: When the end user picked up the call. `null` for ringing event.
+          type: string
+          format: date-time
+          nullable: true
+        time_start:
+          description: When this call initialized.
+          type: string
+          format: date-time
+        by_call_id:
+          description: An intermediary call id. Used in when the call is transferred from one party to another.
+          type: string

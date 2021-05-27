@@ -2432,6 +2432,9 @@
   },
   "webhooks": {
     "call_answered": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call answered",
       "description": "This event is triggered when a Team Member answers an incoming call or when an outgoing call is answered by the dialed destination number",
       "post": {
@@ -2493,6 +2496,9 @@
       }
     },
     "call_blind_transfer": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call blind transfer",
       "description": "This event is issued when a Team Member transfers a call via  blind (cold) transfer",
       "post": {
@@ -2531,6 +2537,9 @@
       }
     },
     "call_blocked": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call blocked",
       "description": "This event is triggered when an incoming call is blocked.<br/>\nIf the number is blocked at the account level only the `user.account_id` field is present - see examples.",
       "post": {
@@ -2628,6 +2637,9 @@
       }
     },
     "call_busy": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call busy",
       "description": "The event is triggered when an outbound call receives a 4xx or 5xx error response to the INVITE indicating the call failed for some reason",
       "post": {
@@ -2666,6 +2678,9 @@
       }
     },
     "call_completed": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call completed",
       "description": "Event is triggered when a call is successfully completed. This event will trigger for both inbound and outbound calls.",
       "post": {
@@ -2729,6 +2744,9 @@
       }
     },
     "call_consultative_transfer": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call consultative_transfer",
       "description": "This event is issued when a Team Member transfers a call via  consultative (warm) transfer",
       "post": {
@@ -2768,6 +2786,9 @@
       }
     },
     "call_forward": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call forward",
       "description": "This event is triggered when a Team Member forwards a call",
       "post": {
@@ -2807,6 +2828,9 @@
       }
     },
     "call_hold": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call hold",
       "description": "This event is triggered when a Team Member puts a call on hold",
       "post": {
@@ -2870,6 +2894,9 @@
       }
     },
     "call_missed": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call missed",
       "description": "This event is triggered when an incoming call isn’t answered by any phone in your net2phone account.\nThe reason field indicates the reason the call was missed and can be `user_did_not_answer` if the Team Member didn’t answer, `user_rejected_call` if the Team Member actively rejected the call, or `user_not_logged_in` if calling another net2phone user who is not logged in",
       "post": {
@@ -2935,6 +2962,9 @@
       }
     },
     "call_park": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call park",
       "description": "This event is triggered when a Team Member parks a call",
       "post": {
@@ -2974,6 +3004,9 @@
       }
     },
     "call_pickup": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call pickup",
       "description": "This notification is triggered when a Team Member uses the Pick Up feature (*21) to answer a call ringing on another Team Members extension",
       "post": {
@@ -3017,6 +3050,9 @@
       }
     },
     "call_recorded": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call recorded",
       "description": "This event is triggered when an inbound or outbound call has been successfully recorded.",
       "post": {
@@ -3056,6 +3092,9 @@
       }
     },
     "call_recording_failed": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call recording failed",
       "description": "This event is triggered when a call fails to record",
       "post": {
@@ -3095,6 +3134,9 @@
       }
     },
     "call_resume": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call resume",
       "description": "This event is triggered when a Team Member resumes a call",
       "post": {
@@ -3158,6 +3200,9 @@
       }
     },
     "call_rg_queue_completed": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call ring group queue completed",
       "description": "The event is issued when a call in a RG completes by either being answered in a Tier or the caller hangs up.",
       "post": {
@@ -3213,6 +3258,9 @@
       }
     },
     "call_rg_queue_entered": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call ring group queue entered",
       "description": "The event is issued when a call enters a RG with call queue enabled",
       "post": {
@@ -3268,6 +3316,9 @@
       }
     },
     "call_rg_queue_tier": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call ring group queue sent to tier",
       "description": "The event is issued when a call waiting in a RG with call queue enabled enters a Tier which results in calls being sent to TM in that Tier.",
       "post": {
@@ -3323,6 +3374,9 @@
       }
     },
     "call_ringing": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call ringing",
       "description": "This event is triggered when a call is ringing. This event will trigger for both inbound and outbound calls and is typically followed by by a `call_answered` or `call_missed` event",
       "post": {
@@ -3384,6 +3438,9 @@
       }
     },
     "call_unpark": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Call unpark",
       "description": "This event is triggered when a Team Member unparks a call. NOTE The team member that unparks a call will also get a call_answered event",
       "post": {
@@ -3423,6 +3480,9 @@
       }
     },
     "emergency_call": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Emergency call",
       "description": "This event is triggered when a call is placed to an emergency serivce",
       "post": {
@@ -3461,6 +3521,9 @@
       }
     },
     "message_received": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Message Received",
       "description": "This event is triggered when a Team Member or Account receives a message",
       "post": {
@@ -3504,6 +3567,9 @@
       }
     },
     "voicemail_missed": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Voicemail missed",
       "description": "This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>\nThe reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time",
       "post": {
@@ -3569,6 +3635,9 @@
       }
     },
     "voicemail_notify": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Voicemail notify",
       "description": "This event is triggered when an incoming call is sent to a Team Member’s voicemail but the caller doesn’t leave a voicemail.  A common scenario for this would be the case where the callers hangs up before leaving a voicemail.<br/>\nThe reason field describes the reason for the caller didn’t leave a voicemail can can be either `caller_hungup` if the caller disconnected before recording a message or `vm_disabled` if the Team Member’s VM account was disabled at the time",
       "post": {
@@ -3608,6 +3677,9 @@
       }
     },
     "voicemail_received": {
+      "tags": [
+        "Webhooks"
+      ],
       "summary": "Voicemail received",
       "description": "A voicemail was left for a net2phone user. This event will trigger when an incoming (only) call is not answered by any phone in your net2phone account and a voicemail is recorded.",
       "post": {
