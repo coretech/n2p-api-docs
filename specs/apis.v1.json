@@ -140,46 +140,6 @@
         ]
       }
     },
-    "/calls/{callId}/": {
-      "delete": {
-        "summary": "Terminate an Active Call",
-        "description": "Terminate the call with the provided id",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Accept"
-          },
-          {
-            "$ref": "#/components/parameters/callId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/InvalidVersion"
-          },
-          "429": {
-            "$ref": "#/components/responses/RateLimitExceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        },
-        "tags": [
-          "Calls"
-        ]
-      }
-    },
     "/cdrs/": {
       "get": {
         "summary": "Account CDRs",

@@ -17,37 +17,12 @@ paths:
       responses:
         201:
           description: Success
-  /calls/{callId}/:
-    delete:
-      summary: Terminate an Active Call
-      description: Terminate the call with the provided id
-      parameters:
-        - $ref: "#/components/parameters/callId"
-      responses:
-        204:
-          description: Success
-#  /calls/{callId}/answer/:
-#    put:
-#      summary: Answer a Call
-#      description: Answer a call with a given id on a given device.
-#      parameters:
-#        - $ref: "#/components/parameters/callId"
-#        - $ref: "#/components/parameters/to"
-#      responses:
-#        201:
-#          description: Success
-#  /calls/{callId}/reject/:
-#    put:
-#      summary: Reject a Call
-#      description: Reject a call with a given id.
+#  /calls/{callId}/:
+#    delete:
+#      summary: Terminate an Active Call
+#      description: Terminate the call with the provided id
 #      parameters:
 #        - $ref: "#/components/parameters/callId"
 #      responses:
-#        201:
+#        204:
 #          description: Success
-
-    # TODO [i1] get example data
-#  /calls/users/active/:
-#    get:
-#  /calls/users/{userId}/active/:
-#    get:
