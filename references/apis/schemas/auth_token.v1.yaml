@@ -1,0 +1,45 @@
+auth_token:
+  title: Authenticated
+  description: Access and refresh Tokens
+  type: object
+  properties:
+    refresh_token:
+      description: A token which can be used to obtain a new `access_token` or `jwt_token` depending on the `grant_type`.
+      type: string
+    jwt_token:
+      description: The jwt token used to authenticate requests.
+      type: string
+    access_token:
+      description: The token used to authenticate requests.
+      type: string
+    scope:
+      description: The permission level for this Access Token
+      type: string
+      enum:
+        - Basic User
+        - Office Manager
+        - Call Center Supervisor
+        - Call Center User
+    token_type:
+      description: The type of token
+      type: string
+      enum:
+        - Bearer
+    expires_in:
+      description: How many seconds until the Access Token expires.
+      type: integer
+      format: i32
+    expires:
+      description: When the Access Token will expire. Date Time is UTC and in ISO-8601 format.
+      type: string
+      format: date-time
+    user_id:
+      description: The unique ID of the user associated with this login
+      type: string
+    account_id:
+      deprecated: true
+      description: Will always be `null` for net2phone users.
+      type: string
+      enum:
+        - null
+

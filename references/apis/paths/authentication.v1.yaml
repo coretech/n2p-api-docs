@@ -1,0 +1,35 @@
+tags:
+  - name: Authentication
+    description: Net2Phone API uses the industry-standard OAuth 2.0 for authorization. For a full review of authentication see [authentication](/authentication)
+paths:
+  /oauth/authorize/:
+    get:
+      summary: Authorization Code Grant
+      description: |-
+        The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.
+        For the full authentication flow see [authentication](/authentication#authorization-code-grant)
+      parameters:
+        - $ref: "#/components/parameters/response_type"
+        - $ref: "#/components/parameters/redirect_uri"
+        - $ref: "#/components/parameters/client_id"
+        - $ref: "#/components/parameters/state"
+      responses:
+        200:
+  /oauth/token/:
+    post:
+      summary: Access and Refresh Tokens
+      description: Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.
+      parameters:
+        - $ref: "#/components/parameters/grant_type"
+        - $ref: "#/components/parameters/client_id"
+        - $ref: "#/components/parameters/client_secret"
+        - $ref: "#/components/parameters/state"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/auth_token"
+              examples:
+                example:
+                  $ref: "#/components/examples/auth_token"

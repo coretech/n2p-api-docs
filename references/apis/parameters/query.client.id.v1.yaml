@@ -1,0 +1,7 @@
+client_id:
+  name: client_id
+  in: query
+  required: true
+  description: The id of the client. The unique identifier for your application.
+  schema:
+    type: string

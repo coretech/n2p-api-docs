@@ -1,0 +1,6 @@
+state:
+  name: state
+  in: query
+  description: '**recommended** A value used by the client to maintain state between the request and the callback. Used to help prevent cross-site request forgery.'
+  schema:
+    type: string

@@ -17,6 +17,10 @@
       "description": "Get details of the account"
     },
     {
+      "name": "Authentication",
+      "description": "Net2Phone API uses the industry-standard OAuth 2.0 for authorization. For a full review of authentication see [authentication](/authentication)"
+    },
+    {
       "name": "Calls",
       "description": "Control your phone calls; List Active, Place, Answer, and Terminate your calls."
     },
@@ -87,6 +91,114 @@
           {
             "$ref": "#/components/parameters/Accept"
           }
+        ]
+      }
+    },
+    "/oauth/authorize/": {
+      "get": {
+        "summary": "Authorization Code Grant",
+        "description": "The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\nFor the full authentication flow see [authentication](/authentication#authorization-code-grant)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/response_type"
+          },
+          {
+            "$ref": "#/components/parameters/redirect_uri"
+          },
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/state"
+          }
+        ],
+        "responses": {
+          "200": null,
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/oauth/token/": {
+      "post": {
+        "summary": "Access and Refresh Tokens",
+        "description": "Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/grant_type"
+          },
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/client_secret"
+          },
+          {
+            "$ref": "#/components/parameters/state"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auth_token"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/auth_token"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Authentication"
         ]
       }
     },
@@ -915,6 +1027,64 @@
           }
         }
       },
+      "auth_token": {
+        "title": "Authenticated",
+        "description": "Access and refresh Tokens",
+        "type": "object",
+        "properties": {
+          "refresh_token": {
+            "description": "A token which can be used to obtain a new `access_token` or `jwt_token` depending on the `grant_type`.",
+            "type": "string"
+          },
+          "jwt_token": {
+            "description": "The jwt token used to authenticate requests.",
+            "type": "string"
+          },
+          "access_token": {
+            "description": "The token used to authenticate requests.",
+            "type": "string"
+          },
+          "scope": {
+            "description": "The permission level for this Access Token",
+            "type": "string",
+            "enum": [
+              "Basic User",
+              "Office Manager",
+              "Call Center Supervisor",
+              "Call Center User"
+            ]
+          },
+          "token_type": {
+            "description": "The type of token",
+            "type": "string",
+            "enum": [
+              "Bearer"
+            ]
+          },
+          "expires_in": {
+            "description": "How many seconds until the Access Token expires.",
+            "type": "integer",
+            "format": "i32"
+          },
+          "expires": {
+            "description": "When the Access Token will expire. Date Time is UTC and in ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "user_id": {
+            "description": "The unique ID of the user associated with this login",
+            "type": "string"
+          },
+          "account_id": {
+            "deprecated": true,
+            "description": "Will always be `null` for net2phone users.",
+            "type": "string",
+            "enum": [
+              null
+            ]
+          }
+        }
+      },
       "call": {
         "title": "Create Call",
         "type": "object",
@@ -1739,6 +1909,15 @@
           "format": "int32"
         }
       },
+      "client_id": {
+        "name": "client_id",
+        "in": "query",
+        "required": true,
+        "description": "The secret provided for your client application.",
+        "schema": {
+          "type": "string"
+        }
+      },
       "cursor": {
         "name": "cursor",
         "in": "query",
@@ -1827,6 +2006,40 @@
           "default": false
         }
       },
+      "state": {
+        "name": "state",
+        "in": "query",
+        "description": "**recommended** A value used by the client to maintain state between the request and the callback. Used to help prevent cross-site request forgery.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "grant_type": {
+        "name": "grant_type",
+        "in": "query",
+        "required": true,
+        "description": "The type of grant being performed.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "authorization_code",
+            "refresh_token",
+            "password"
+          ]
+        }
+      },
+      "response_type": {
+        "name": "response_type",
+        "in": "query",
+        "required": true,
+        "description": "The type of grant response to be performed.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "code"
+          ]
+        }
+      },
       "type": {
         "name": "type",
         "in": "query",
@@ -1838,6 +2051,15 @@
             "outgoing",
             "on net"
           ]
+        }
+      },
+      "redirect_uri": {
+        "name": "redirect_uri",
+        "in": "query",
+        "required": true,
+        "description": "The redirect URI used to authenticate this user.",
+        "schema": {
+          "type": "string"
         }
       },
       "user": {
@@ -1908,6 +2130,20 @@
           "report_generation": true,
           "call_center_web_header": false,
           "voice_signature": true
+        }
+      },
+      "auth_token": {
+        "value": {
+          "domain": "yourdomain.com",
+          "user_id": "110",
+          "account_id": null,
+          "access_token": "6ca982bf-5f34-7e09-480b-7ca5d6246e5c",
+          "expires": "2021-05-03T10:19:37.822793",
+          "expires_in": 1094,
+          "token_type": "Bearer",
+          "jwt_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODc5NzU0NTgsImlSHORTENED",
+          "scope": "Basic User",
+          "refresh_token": "YRjxLpsjRqL7zYuKstXogqioA_P3Z4fiEuga0NCVRcDSc8cy_9msxg"
         }
       },
       "call": {

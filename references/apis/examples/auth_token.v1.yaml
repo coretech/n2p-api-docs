@@ -1,0 +1,12 @@
+auth_token:
+  value:
+    domain: yourdomain.com
+    user_id: '110'
+    account_id:
+    access_token: 6ca982bf-5f34-7e09-480b-7ca5d6246e5c
+    expires: '2021-05-03T10:19:37.822793'
+    expires_in: 1094
+    token_type: Bearer
+    jwt_token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODc5NzU0NTgsImlSHORTENED
+    scope: Basic User
+    refresh_token: YRjxLpsjRqL7zYuKstXogqioA_P3Z4fiEuga0NCVRcDSc8cy_9msxg
