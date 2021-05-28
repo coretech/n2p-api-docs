@@ -10,6 +10,7 @@
     "build:apis": "yarn build:spec apis",
     "build:webhooks": "yarn build:spec webhooks",
     "start": "yarn serve & yarn watch",
+    "start:apis": "yarn serve & yarn watch:apis",
     "watch": "yarn watch:apis & yarn watch:webhooks",
     "watch:apis": "nodemon --config .config/nodemon.apis.json",
     "watch:webhooks": "nodemon --config .config/nodemon.webhooks.json",

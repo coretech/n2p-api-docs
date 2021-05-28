@@ -71,7 +71,7 @@ function buildBase(): void {
   print('Building base...', false)
   const baseSpec = readFile(path.join(__dirname, 'base-spec.json'))
 
-  const infoFile = path.join(docsPath, 'info.yaml')
+  const infoFile = path.join(docsPath, 'spec.yaml')
   const info = readFile(infoFile)
 
   if (!info) {
@@ -79,7 +79,7 @@ function buildBase(): void {
   }
 
   Object.assign(outSpec, baseSpec)
-  Object.assign(outSpec.info, info)
+  Object.assign(outSpec, info)
 
   if (info.version) {
     outSpec.info.version = info.version.toString()
@@ -116,6 +116,10 @@ function buildResponses() {
   shell.cd('./responses')
 
   const responseNames = getSpecFiles()
+
+  if (!outSpec.components.responses) {
+    outSpec.components.responses = {}
+  }
 
   responseNames.forEach(responseName => {
     const response = readSpecFile(responseName)
@@ -154,6 +158,10 @@ function dirToComponents(directory: string) {
   shell.cd(directory)
 
   const specNames = getSpecFiles()
+
+  if (!outSpec.components[directory]) {
+    outSpec.components[directory] = {}
+  }
 
   getSpecFiles().forEach(specName => {
     const spec = readSpecFile(specName)
