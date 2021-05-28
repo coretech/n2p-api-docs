@@ -1,8 +1,6 @@
 import shell from 'shelljs';
 import path from 'path';
-import chalk from 'chalk';
 import fs from 'fs';
-import yaml from 'js-yaml';
 import {
   quit,
   print,
@@ -32,10 +30,6 @@ let outSpec: any = {};
 let docsPath: string;
 let sharedResponses: any = {};
 
-/**
- *
- * @param opts
- */
 function main() {
   const directoryArg = process.argv[ 2 ] as string
   if (directoryArg) {
@@ -69,7 +63,7 @@ function main() {
  */
 function buildBase(): void {
   print('Building base...', false)
-  const baseSpec = readFile(path.join(__dirname, 'base-spec.json'))
+  const baseSpec = readFile(specBase)
 
   const infoFile = path.join(docsPath, 'spec.yaml')
   const info = readFile(infoFile)
@@ -157,8 +151,6 @@ function dirToComponents(directory: string) {
 
   shell.cd(directory)
 
-  const specNames = getSpecFiles()
-
   if (!outSpec.components[directory]) {
     outSpec.components[directory] = {}
   }
@@ -190,7 +182,7 @@ function buildPaths() {
     return
   }
 
-  specNames.forEach((specName, index) => {
+  specNames.forEach((specName) => {
     const spec = readSpecFile(specName)
 
     if (!spec) return
@@ -256,7 +248,7 @@ function buildWebhooks() {
     return
   }
 
-  specNames.forEach((specName, i) => {
+  specNames.forEach((specName) => {
     const spec = readSpecFile(specName)
 
     if (!spec) return
