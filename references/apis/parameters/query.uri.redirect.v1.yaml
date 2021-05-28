@@ -1,0 +1,7 @@
+redirect_uri:
+  name: redirect_uri
+  in: query
+  required: true
+  description: The redirect URI used to authenticate this user.
+  schema:
+    type: string

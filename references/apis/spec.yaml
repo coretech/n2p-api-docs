@@ -1,0 +1,23 @@
+info:
+  title: net2phone integrate apis
+  description: <h2>Introduction</h2>This is going to be a really cool description
+  version: '1.8.0'
+servers:
+  - url: https://integrate.versature.com/api
+    description: Production netphone integrate API endpoint
+#components:
+#  schemas:
+#    securitySchemes:
+#      oauth:
+#        type: oath
+#        flow: accessCode
+#        authorizationUrl: https://example.com/oauth/authorize
+#        tokenUrl: https://example.com/oauth/token
+#        description: Authorization header using the Bearer scheme.
+#        scopes:
+#          openid: OpenID
+#          email: Email
+#          profile: Profile
+#          api: API
+#security:
+#  - oauth: []

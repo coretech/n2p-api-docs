@@ -1,0 +1,11 @@
+grant_type:
+  name: grant_type
+  in: query
+  required: true
+  description: The type of grant being performed.
+  schema:
+    type: string
+    enum:
+      - authorization_code
+      - refresh_token
+      - password

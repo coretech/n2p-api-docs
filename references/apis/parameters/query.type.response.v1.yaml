@@ -1,0 +1,9 @@
+response_type:
+  name: response_type
+  in: query
+  required: true
+  description: The type of grant response to be performed.
+  schema:
+    type: string
+    enum:
+      - code
