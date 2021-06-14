@@ -16,7 +16,7 @@ Once you have logged into the developer portal, you will be able to "Add New App
   
 ### 3. Select Your Authentication Flow
     
-Select the **Client Credential Grant** flow for this tutorial. The Client Credential Grant authentication flow will provide API access to your entire domain. The authentication flow which is required for your integration will be based on the type of application you will are building. The supported authentication types, and their use case are outlined on our [authentication page](./authentication.md).
+Select the **Client Credential Grant** flow for this tutorial. The Client Credential Grant authentication flow will provide API access to your entire domain. The authentication flow which is required for your integration will be based on the type of application you will are building. The supported authentication types, and their use case are outlined on our [authentication page](/authentication).
 
 ![select auth flow](assets/images/getting-started-3.png "select auth flow")
 
