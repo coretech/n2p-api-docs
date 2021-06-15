@@ -17,6 +17,10 @@ paths:
       responses:
         201:
           description: Success
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 1/second, 15/minute
 #  /calls/{callId}/:
 #    delete:
 #      summary: Terminate an Active Call
