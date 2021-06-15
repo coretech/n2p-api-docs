@@ -123,7 +123,7 @@ function buildResponses() {
     // flatten
     let { schema } = response.content['application/json']
     if (schema['allOf']) {
-      schema = flattenAllOf(schema['allOf'], shell.pwd().toString())
+      schema = flattenAllOf(schema['allOf'])
       response.content['application/json'].schema = {
         type: 'object',
         properties: schema,
@@ -222,6 +222,17 @@ function buildPaths() {
           method.parameters = []
         }
         method.parameters.unshift({$ref: '#/components/parameters/Accept'})
+        // IF WE WANT RATE LIMIT EXCEEDED TO HAVE EXACT DATA
+        // get rate limits
+        // let rateLimit: string;
+        // Object.keys(method.responses).forEach(response => {
+        //   if (Number.parseInt(response) < 300) {
+        //     rateLimit = method.responses[response]?.headers?.['x-RateLimit-Limit']?.description
+        //   }
+        // })
+        // if (rateLimit) {
+        //   console.log(rateLimit)
+        // }
         // update original path
         path[methodName] = method
       })
@@ -255,7 +266,7 @@ function buildWebhooks() {
 
     let properties: {}
     if (spec['allOf']) {
-      properties = flattenAllOf(spec[ 'allOf' ], shell.pwd().toString())
+      properties = flattenAllOf(spec[ 'allOf' ])
     }
 
     // build webhook

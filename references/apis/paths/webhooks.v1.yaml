@@ -17,6 +17,10 @@ paths:
                 $ref: "#/components/examples/webhook_settings"
       responses:
         202:
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 1/second, 5/minute
           description: Accepted
           content:
             application/json:
@@ -34,6 +38,10 @@ paths:
         - $ref: "#/components/parameters/subscriptionId"
       responses:
         204:
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 1/second, 5/minute
           description: The webhook subscription was deleted successfully.
     get:
       summary: |-
@@ -43,6 +51,10 @@ paths:
         - $ref: "#/components/parameters/subscriptionId"
       responses:
         200:
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 1/second, 5/minute
           content:
             application/json:
               schema:

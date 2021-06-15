@@ -116,7 +116,15 @@
           }
         ],
         "responses": {
-          "200": null,
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "3/second, 60/minute"
+              }
+            },
+            "description": "Success"
+          },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
           },
@@ -164,6 +172,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "3/second, 60/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -222,7 +236,13 @@
         },
         "responses": {
           "201": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 15/minute"
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -276,6 +296,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "5/second, 15/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -358,6 +384,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "5/second, 15/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -440,6 +472,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "5/second, 15/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -525,6 +563,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "5/second, 15/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -620,6 +664,12 @@
         "summary": "Get details list of all users of an account",
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 15/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -679,6 +729,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 15/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -722,6 +778,12 @@
         "summary": "Get the user details for the authenticated user.",
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 15/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -784,6 +846,12 @@
         },
         "responses": {
           "202": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 5/minute"
+              }
+            },
             "description": "Accepted",
             "content": {
               "application/json": {
@@ -840,6 +908,12 @@
         ],
         "responses": {
           "204": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 5/minute"
+              }
+            },
             "description": "The webhook subscription was deleted successfully."
           },
           "401": {
@@ -877,6 +951,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 5/minute"
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1811,26 +1891,22 @@
             "schema": {
               "type": "object",
               "properties": {
-                "status": {
-                  "type": "integer",
-                  "format": "int32",
-                  "required": true,
-                  "enum": [
-                    429
-                  ]
-                },
                 "message": {
-                  "type": "string",
-                  "required": true,
-                  "enum": [
-                    ""
-                  ]
+                  "type": "string"
                 }
               }
             },
-            "example": {
-              "status": 429,
-              "message": ""
+            "examples": {
+              "rate limit per second exceeded": {
+                "value": {
+                  "message": "1 per 1 second"
+                }
+              },
+              "rate limit per minute exceeded": {
+                "value": {
+                  "message": "1 per 1 minute"
+                }
+              }
             }
           }
         }

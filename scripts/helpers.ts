@@ -35,7 +35,7 @@ export const readFile = (path: string) => {
   return parser(file)
 }
 
-export const flattenAllOf = (allOf: Array<{ '$ref': string} | { properties: object}>, basePath: string) => {
+export const flattenAllOf = (allOf: Array<{ '$ref': string} | { properties: object}>, basePath: string = shell.pwd().toString()) => {
   let properties = {}
 
   allOf.reverse().forEach(refObj => {

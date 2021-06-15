@@ -4,17 +4,14 @@ summary: Requests to this endpoint are limited to a certain rate. If you have ex
 content:
   application/json:
     schema:
-      allOf:
-        - $ref: ./base/response.error.v1.yaml
-        - properties:
-            status:
-              type: integer
-              enum:
-                - 429
-            message:
-              type: string
-              enum:
-                - ''
-    example:
-      status: 429
-      message: ''
+      type: object
+      properties:
+        message:
+          type: string
+    examples:
+      rate limit per second exceeded:
+        value:
+          message: 1 per 1 second
+      rate limit per minute exceeded:
+        value:
+          message: 1 per 1 minute

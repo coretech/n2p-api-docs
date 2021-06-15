@@ -7,6 +7,10 @@ paths:
       summary: Get details list of all users of an account
       responses:
         200:
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 1/second, 15/minute
           content:
             application/json:
               schema:
@@ -23,6 +27,10 @@ paths:
         - $ref: "#/components/parameters/userId"
       responses:
         200:
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 1/second, 15/minute
           content:
             application/json:
               schema:
@@ -35,6 +43,10 @@ paths:
       summary: Get the user details for the authenticated user.
       responses:
         200:
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 1/second, 15/minute
           content:
             application/json:
               schema:

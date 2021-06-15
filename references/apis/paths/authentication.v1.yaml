@@ -15,6 +15,10 @@ paths:
         - $ref: "#/components/parameters/state"
       responses:
         200:
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 3/second, 60/minute
   /oauth/token/:
     post:
       summary: Access and Refresh Tokens
@@ -26,6 +30,10 @@ paths:
         - $ref: "#/components/parameters/state"
       responses:
         200:
+          headers:
+            x-RateLimit-Limit:
+              type: string
+              description: 3/second, 60/minute
           content:
             application/json:
               schema:
