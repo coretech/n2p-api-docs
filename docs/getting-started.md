@@ -32,12 +32,12 @@ Now that you have a Client Id and Client Secret you can obtain an Access Token *
 
 #### Request
 
-```http request
+```bash
 curl -X POST \
 https://integrate.versature.com/api/oauth/token/ \
--dgrant_type=client_credentials \
--dclient_id=5768900281106432 \
--dclient_secret=DZHkGtVGA0U90VOfGVrX4MzJZABqVgbDbjkd0JacpSNZX870z3
+-d grant_type=client_credentials \
+-d client_id=5768900281106432 \
+-d client_secret=DZHkGtVGA0U90VOfGVrX4MzJZABqVgbDbjkd0JacpSNZX870z3
 ```
 
 #### Response
