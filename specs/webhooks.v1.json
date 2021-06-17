@@ -1023,7 +1023,7 @@
             "deprecated": true
           },
           "slot": {
-            "type": "number",
+            "type": "string",
             "description": "Parking slot number"
           }
         }
@@ -1909,7 +1909,7 @@
             "deprecated": true
           },
           "slot": {
-            "type": "number",
+            "type": "string",
             "description": "Parking slot number"
           }
         }
@@ -2992,7 +2992,7 @@
                       "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
                       "call_id": "818787cc58e3043c4b4721ed0c157735",
                       "call_source": "normal",
-                      "slot": 1
+                      "slot": "1"
                     }
                   }
                 }
@@ -3468,7 +3468,7 @@
                       "call_leg_id": "c461419d34b1e66fb7ec5e15e0dc5202",
                       "call_id": "818787cc58e3043c4b4721ed0c157735",
                       "call_source": "normal",
-                      "slot": 1
+                      "slot": "1"
                     }
                   }
                 }

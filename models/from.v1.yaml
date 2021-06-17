@@ -1,5 +1,0 @@
-title: from
-type: object
-properties:
-  id:
-    type: string
