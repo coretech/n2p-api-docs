@@ -35,4 +35,4 @@ examples:
       call_source: normal
       voicemail: true
       audio_message_id: 123456789
-      audio_message_url: https://net2phone.com/api/voice-mail/32062
+      audio_message_url: https://app.net2phone.com/api/voice-mail/32062
