@@ -1,0 +1,101 @@
+{
+  "header": {
+    "right": [
+      {
+        "type": "item",
+        "title": {
+          "en": "Getting Started"
+        },
+        "external": false,
+        "uri": "/getting-started"
+      },
+      {
+        "type": "item",
+        "title": {
+          "en": "Authentication"
+        },
+        "external": false,
+        "uri": "/authentication"
+      },
+      {
+        "type": "item",
+        "title": {
+          "en": "Subscriptions"
+        },
+        "external": false,
+        "uri": "/subscriptions"
+      },
+      {
+        "type": "item",
+        "title": {
+          "en": "API Docs"
+        },
+        "external": false,
+        "uri": "/docs/apis"
+      },
+      {
+        "type": "item",
+        "title": {
+          "en": "Unite webhooks"
+        },
+        "external": false,
+        "uri": "/docs/webhooks"
+      }
+    ]
+  },
+  "sidebar": [],
+  "footer": {
+    "content": [
+      {
+        "type": "section",
+        "title": {
+          "en": "Tools"
+        },
+        "items": [
+          {
+            "type": "item",
+            "title": {
+              "en": "Zapier"
+            },
+            "external": false,
+            "uri": "/zapier"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "title": {
+          "en": "Resources"
+        },
+        "items": [
+          {
+            "type": "item",
+            "title": {
+              "en": "The importance of innovation"
+            },
+            "external": true,
+            "uri": "https://info.net2phone.com/blog/why-innovation-is-important-in-unified-communications"
+          }
+        ]
+      }
+    ],
+    "legal": [
+      {
+        "type": "item",
+        "title": {
+          "en": "Privacy Policy"
+        },
+        "external": false,
+        "uri": "/privacy-policy"
+      },
+      {
+        "type": "item",
+        "title": {
+          "en": "Terms of Service"
+        },
+        "external": false,
+        "uri": "/terms-of-service"
+      }
+    ]
+  }
+}
