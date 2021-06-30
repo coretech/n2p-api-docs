@@ -4,3 +4,6 @@ properties:
   audio_message_id:
     type: number
     description: ID of the audio message for a call recording or voicemail
+  audio_message_url:
+    type: string
+    description: Url to access the audio message of a call recording or voicemail
