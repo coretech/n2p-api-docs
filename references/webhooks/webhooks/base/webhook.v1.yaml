@@ -58,6 +58,7 @@ properties:
     description: |-
       Describes a unique identifier for the leg of a call that has multiple legs.
       For example, if a single call is answered, put on hold, and then transferred via consultative transfer to another Team Member, each leg of the call will have a unique call_leg_id, but  a common call_id
+    deprecated: true
   call_id:
     type: string
     minLength: 32
