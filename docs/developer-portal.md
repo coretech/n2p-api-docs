@@ -20,6 +20,14 @@ For the documentation and blog entries the markdown format is utilized to provid
 
 All documentation is open and public, on top of that standard net2phone authentication is used to provide for better user experience, and in the future to provide a way for users to make real api calls directly from the Portal (similar to Postman) using the OAS specification and OAuth2.0 the same as the end user would use in their applications.
 
+### What have we done so far
+
+We’ve created specs for publicly available webhooks consolidating Confluence pages, google docs, developer knowledge, and real word data to create the single source of truth that is continuously updated. The APIv1 specs were created from an even more complex mess of sources to contain only the endpoints that are available to all end users regardless of provider (4psa, versature, unite, and 3.0).
+
+The portal has been built with versioning in mind and whenever APIv2 is available for the public the documentation will already be available in the Portal with users being automatically directed to the correct version for them.
+
+We’ve had a good start with a few markdown documents but learned that the current tooling is not great for SEO or real world performance which also affects SEO and user experience so we are working to overhaul the underlying architecture the Portal uses to make it lightning fast and make the Portal a marketing funnel as well.
+
 ### What is currently available:
 
 - API v1 (formerly known as Integrate API) documentation
