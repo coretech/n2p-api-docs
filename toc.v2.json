@@ -51,6 +51,14 @@
             },
             "external": true,
             "uri": "https://info.net2phone.com/blog/why-innovation-is-important-in-unified-communications"
+          },
+          {
+            "type": "item",
+            "title": {
+              "en": "net2phone Developer Portal Launch"
+            },
+            "external": false,
+            "uri": "/developer-portal"
           }
         ]
       }
