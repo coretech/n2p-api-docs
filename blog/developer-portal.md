@@ -64,8 +64,8 @@ We’ve had a good start with a few markdown documents but learned that the curr
 
 ### Support & Product Owners
 
-_Product Owner:_ Shimon Detwiler  
-_Developer Contact:_ Avi Charlop [github](https://github.com/acharlop)  
-_Email contact:_ [integrations@net2phone.com](mailto:integrations@net2phone.com)
+**Product Owner:** Shimon Detwiler  
+**Developer Contact:** Avi Charlop [github](https://github.com/acharlop)  
+**Email contact:** [integrations@net2phone.com](mailto:integrations@net2phone.com)
 
-_Updated:_ July 8th, 2021
+**Updated:** July 8th, 2021
