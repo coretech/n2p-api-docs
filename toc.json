@@ -127,6 +127,51 @@
           },
           "uri": "/zapier",
           "image": "/assets/images/integrations/zapier.png"
+        },
+        {
+          "type": "item",
+          "title": {
+            "en": "Google Chrome Extension"
+          },
+          "external": true,
+          "uri": "https://net2phone.com/cloud-pbx/google-chrome-extension/",
+          "image": "/assets/images/integrations/chrome-extension.png"
+        },
+        {
+          "type": "item",
+          "title": {
+            "en": "Salesforce"
+          },
+          "external": true,
+          "uri": "https://net2phone.com/cloud-pbx/salesforce-integration/",
+          "image": "/assets/images/integrations/salesforce.jpeg"
+        },
+        {
+          "type": "item",
+          "title": {
+            "en": "Zoho"
+          },
+          "external": true,
+          "uri": "https://net2phone.com/cloud-pbx/zoho/",
+          "image": "/assets/images/integrations/zoho.png"
+        },
+        {
+          "type": "item",
+          "title": {
+            "en": "Slack"
+          },
+          "external": true,
+          "uri": "https://net2phone.com/cloud-pbx/slack-integration/",
+          "image": "/assets/images/integrations/slack.png"
+        },
+        {
+          "type": "item",
+          "title": {
+            "en": "Microsoft Teams"
+          },
+          "external": true,
+          "uri": "https://net2phone.com/cloud-pbx/microsoft-teams-integration/",
+          "image": "/assets/images/integrations/ms-teams.png"
         }
       ]
     },
