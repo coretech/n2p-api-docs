@@ -3,9 +3,9 @@
     {
       "type": "item",
       "title": {
-        "en": "Integrations"
+        "en": "APIs"
       },
-      "uri": "/integrations"
+      "uri": "/apis"
     },
     {
       "type": "item",
@@ -17,16 +17,16 @@
     {
       "type": "item",
       "title": {
-        "en": "Documentation"
+        "en": "Integrations"
       },
-      "uri": "/documentation"
+      "uri": "/integrations"
     },
     {
       "type": "item",
       "title": {
-        "en": "Apis"
+        "en": "Documentation"
       },
-      "uri": "/apis"
+      "uri": "/documentation"
     }
   ],
   "footer": [
@@ -92,7 +92,7 @@
             "en": "net2phone Developer Portal Launch"
           },
           "uri": "/developer-portal",
-          "image": "/assets/images/developer.png"
+          "image": "/assets/images/blog/dev-portal.jpg"
         },
         {
           "type": "item",
@@ -178,7 +178,7 @@
     {
       "type": "section",
       "title": {
-        "en": "Apis"
+        "en": "APIs"
       },
       "uri": "/apis",
       "items": [
