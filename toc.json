@@ -141,9 +141,8 @@
           "title": {
             "en": "Salesforce"
           },
-          "external": true,
-          "uri": "https://net2phone.com/cloud-pbx/salesforce-integration/",
-          "image": "/assets/images/integrations/salesforce.jpeg"
+          "uri": "/salesforce",
+          "image": "/assets/images/integrations/salesforce/cover.jpeg"
         },
         {
           "type": "item",
