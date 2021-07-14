@@ -133,9 +133,8 @@
           "title": {
             "en": "Google Chrome Extension"
           },
-          "external": true,
-          "uri": "https://net2phone.com/cloud-pbx/google-chrome-extension/",
-          "image": "/assets/images/integrations/chrome-extension.png"
+          "uri": "/google-chrome-extension",
+          "image": "/assets/images/integrations/chrome-extension/cover.png"
         },
         {
           "type": "item",
