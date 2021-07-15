@@ -1,3 +1,21 @@
+---
+title: net2phone Google Chrome™ Extension
+slug: google-chrome-extension
+description: The net2phone Google Chrome™ extension dialer connects seamlessly to your net2phone account so you can dial calls directly from your browser.
+time:
+  published: 2020-10-30T16:17:09+00:00
+  modified: 2020-10-30T16:17:09+00:00
+tags: chrome, extension, dialer, calling
+author:
+  name: net2phone
+  twitter_handle: net2phone
+image:
+  url: assets/images/integrations/chrome-extension/image-1.png
+  height: 1702
+  width: 2560
+  alt: Make calls with net2phone from your browser
+---
+
 # Google Chrome™ Extension For net2phone's PBX Phone System
 
 The net2phone Google Chrome™ extension dialer connects seamlessly to your net2phone account so you can dial calls directly from your browser.
