@@ -1,3 +1,21 @@
+---
+title: Salesforce Integration
+slug: salesforce-integration
+description: Experience world-class phone and communication services directly inside of Salesforce with seamless integration from net2phone.
+time:
+  published: 2021-02-15T15:09:53+00:00
+  modified: 2021-02-15T15:09:53+00:00
+tags: salesforce, integration
+author:
+  name: net2phone
+  twitter_handle: net2phone
+image:
+  url: /assets/images/integrations/salesforce/cover-2.png
+  height: 1300
+  width: 1800
+  alt: Salesforce with seamless integration from net2phone
+---
+
 # Salesforce Integration
 
 net2phone just made it easier to communicate with your leads with our Salesforce business phone integration.

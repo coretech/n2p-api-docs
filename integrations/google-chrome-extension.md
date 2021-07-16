@@ -10,7 +10,7 @@ author:
   name: net2phone
   twitter_handle: net2phone
 image:
-  url: assets/images/integrations/chrome-extension/image-1.png
+  url: /assets/images/integrations/chrome-extension/image-1.png
   height: 1702
   width: 2560
   alt: Make calls with net2phone from your browser
