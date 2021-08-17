@@ -1,0 +1,6 @@
+description:
+type: object
+properties:
+  duration:
+    type: number
+    description: Length of time in seconds from the last hold event

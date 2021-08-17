@@ -3,6 +3,7 @@ allOf:
   - $ref: ./base/user.v1.yaml
   - $ref: ./base/reason-resume.v1.yaml
   - $ref: ./base/c2c-info.v1.yaml
+  - $ref: ./base/hold-duration.v1.yaml
   - properties:
       event:
         type: string
@@ -28,6 +29,7 @@ examples:
       call_leg_id: c461419d34b1e66fb7ec5e15e0dc5202
       call_id: 818787cc58e3043c4b4721ed0c157735
       call_source: normal
+      hold_duration: 10
   click2call example:
     value:
       id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
