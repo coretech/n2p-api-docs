@@ -1,0 +1,2629 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "net2phone integrate apis",
+    "description": "Check out the documentation for instructions on getting started [here](/documentation/getting-started)",
+    "version": "1.9.0"
+  },
+  "servers": [
+    {
+      "url": "https://integrate.versature.com/api",
+      "description": "Production netphone integrate API endpoint"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Accounts",
+      "description": "Get details of the account"
+    },
+    {
+      "name": "Authentication",
+      "description": "Net2Phone API uses the industry-standard OAuth 2.0 for authorization. For a full review of authentication see [authentication](/authentication)"
+    },
+    {
+      "name": "Calls",
+      "description": "Control your phone calls; List Active, Place, Answer, and Terminate your calls."
+    },
+    {
+      "name": "CDRs",
+      "description": "Get a list of the Call Detail Records (CDR's) for a specific member of your company or for the entire company. Filter your calls by Inbound, Outbound, Missed and get calls for a specific date range. If no CDRs are found for the query the repsonse will be empty."
+    },
+    {
+      "name": "Endpoints",
+      "description": "List of available endpoints"
+    },
+    {
+      "name": "Users",
+      "description": "Get a list of the Users for your company or details aobut a specific user."
+    },
+    {
+      "name": "Webhooks",
+      "description": "Subscribe and receive webhook updates for the events you are interested in. Provide a URI which can receive POST requests. When updates occur your endpoint will then be notified. (All notifications requests contain JSON.)"
+    }
+  ],
+  "paths": {
+    "/accounts/services/": {
+      "get": {
+        "summary": "Account services settings",
+        "description": "List of reports and general account settings",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/account_settings"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/account_settings"
+                  },
+                  "default": {
+                    "$ref": "#/components/examples/account_settings_default"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ]
+      }
+    },
+    "/oauth/authorize/": {
+      "get": {
+        "summary": "Authorization Code Grant",
+        "description": "The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\n\nFor the full authentication flow see [authentication](/authentication#authorization-code-grant)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/response_type"
+          },
+          {
+            "$ref": "#/components/parameters/redirect_uri"
+          },
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/state"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "3/second, 60/minute"
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/oauth/authorize/n2p": {
+      "get": {
+        "summary": "Authorization Code Grant with SAML for Unite",
+        "description": "**Server-Side Application Authentication**\n\nThe authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\n\n**Before you begin you must obtain a Client Id and Secret:** [getting started](/documentation/getting-started).\n\nOnce you have provided your redirect uri to us and have obtained your Client Id and Client Secret; direct the authenticating user to: `https://integrate.versature.com/api/oauth/authorize/n2p/` be sure to include the required arguments with your request (See below for arguments).",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/state"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "3/second, 60/minute"
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/oauth/logout": {
+      "get": {
+        "summary": "Logout",
+        "description": "**Server-Side Application Authentication**\n\nLogout endpoint. It will revoke the token and clear the session.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/access_token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "3/second, 20/minute"
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/oauth/token/": {
+      "post": {
+        "summary": "Access and Refresh Tokens",
+        "description": "Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/grant_type"
+          },
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/client_secret"
+          },
+          {
+            "$ref": "#/components/parameters/state"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "3/second, 60/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auth_token"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/auth_token"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/calls/": {
+      "post": {
+        "summary": "Place a Call",
+        "description": "Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/call"
+              },
+              "examples": {
+                "example": {
+                  "$ref": "#/components/examples/call"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 15/minute"
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Calls"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ]
+      }
+    },
+    "/cdrs/": {
+      "get": {
+        "summary": "Account CDRs",
+        "description": "Get list of all cdrs on the account",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/start_date"
+          },
+          {
+            "$ref": "#/components/parameters/end_date"
+          },
+          {
+            "$ref": "#/components/parameters/cursor"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "5/second, 15/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cdrs"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/cdrs"
+                  },
+                  "recordings example": {
+                    "$ref": "#/components/examples/cdrs_with_recordings"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "CDRs"
+        ]
+      }
+    },
+    "/cdrs/users/": {
+      "get": {
+        "summary": "User CDRs",
+        "description": "Get list of all user cdrs on the account",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/start_date"
+          },
+          {
+            "$ref": "#/components/parameters/end_date"
+          },
+          {
+            "$ref": "#/components/parameters/cursor"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "$ref": "#/components/parameters/max_duration"
+          },
+          {
+            "$ref": "#/components/parameters/min_duration"
+          },
+          {
+            "$ref": "#/components/parameters/phone_number"
+          },
+          {
+            "$ref": "#/components/parameters/recording_available"
+          },
+          {
+            "$ref": "#/components/parameters/type"
+          },
+          {
+            "$ref": "#/components/parameters/user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "5/second, 15/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cdrs"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/cdrs"
+                  },
+                  "recordings example": {
+                    "$ref": "#/components/examples/cdrs_with_recordings"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "CDRs"
+        ]
+      }
+    },
+    "/cdrs/users/current/": {
+      "get": {
+        "summary": "Current user CDRs",
+        "description": "Get list of all cdrs on the account for the current user",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/start_date"
+          },
+          {
+            "$ref": "#/components/parameters/end_date"
+          },
+          {
+            "$ref": "#/components/parameters/cursor"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "$ref": "#/components/parameters/max_duration"
+          },
+          {
+            "$ref": "#/components/parameters/min_duration"
+          },
+          {
+            "$ref": "#/components/parameters/phone_number"
+          },
+          {
+            "$ref": "#/components/parameters/recording_available"
+          },
+          {
+            "$ref": "#/components/parameters/type"
+          },
+          {
+            "$ref": "#/components/parameters/user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "5/second, 15/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cdrs"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/cdrs"
+                  },
+                  "recordings example": {
+                    "$ref": "#/components/examples/cdrs_with_recordings"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "CDRs"
+        ]
+      }
+    },
+    "/cdrs/users/{userId}/": {
+      "get": {
+        "summary": "User CDRs by ID",
+        "description": "Get list of all cdrs on the account for the current user",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          },
+          {
+            "$ref": "#/components/parameters/start_date"
+          },
+          {
+            "$ref": "#/components/parameters/end_date"
+          },
+          {
+            "$ref": "#/components/parameters/cursor"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "$ref": "#/components/parameters/max_duration"
+          },
+          {
+            "$ref": "#/components/parameters/min_duration"
+          },
+          {
+            "$ref": "#/components/parameters/phone_number"
+          },
+          {
+            "$ref": "#/components/parameters/recording_available"
+          },
+          {
+            "$ref": "#/components/parameters/type"
+          },
+          {
+            "$ref": "#/components/parameters/user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "5/second, 15/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cdrs"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/cdrs"
+                  },
+                  "recordings example": {
+                    "$ref": "#/components/examples/cdrs_with_recordings"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "CDRs"
+        ]
+      }
+    },
+    "/available/endpoint/": {
+      "get": {
+        "summary": "Endpoints list",
+        "description": "Get list of avialable endpoints",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/endpoints"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/endpoints"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Endpoints"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ]
+      }
+    },
+    "/users/": {
+      "get": {
+        "summary": "Get details list of all users of an account",
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 15/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/user"
+                  }
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/users"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ]
+      }
+    },
+    "/users/{userId}/": {
+      "get": {
+        "summary": "Get the user details. If provided the id will be used to get a specific user. If not specified the authenticated user details will be returned. If you wish to retrieve all users across your domain use the \"all\" argument.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 15/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/user"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users/current/": {
+      "get": {
+        "summary": "Get the user details for the authenticated user.",
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 15/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/user"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ]
+      }
+    },
+    "/subscriptions/": {
+      "post": {
+        "summary": "Creates a webhook subscription for the requested events.\nWhen an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/webhook_settings"
+              },
+              "examples": {
+                "example": {
+                  "$ref": "#/components/examples/webhook_settings"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 5/minute"
+              }
+            },
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/webhook_subscription"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/webhook_subscription"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/": {
+      "delete": {
+        "summary": "Delete a webhook subscription with the given id. Updates will no longer be sent the subscription endpoint.\nNote: Users can only delete subscriptions that they created.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 5/minute"
+              }
+            },
+            "description": "The webhook subscription was deleted successfully."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "get": {
+        "summary": "Get the webhook subscription details for the given id. Can be used to verify subscribed events as well the subscription expiry date/time.\nNote: Users can only read subscriptions that they created.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "1/second, 5/minute"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/webhook_subscription"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#/components/examples/webhook_subscription"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "account_settings": {
+        "title": "Account Settings",
+        "description": "Details for the settings for the account",
+        "type": "object",
+        "properties": {
+          "report_generation_settings": {
+            "type": "object",
+            "properties": {
+              "call_queue_split": {
+                "description": "Call queue split report will be generated",
+                "type": "string",
+                "nullable": true,
+                "enum": [
+                  "True",
+                  "False"
+                ]
+              },
+              "call_queue": {
+                "description": "Call queue report will be generated",
+                "type": "string",
+                "nullable": true,
+                "enum": [
+                  "True",
+                  "False"
+                ]
+              },
+              "call_queue_agent": {
+                "description": "Call queue agent report will be generated",
+                "type": "string",
+                "nullable": true,
+                "enum": [
+                  "True",
+                  "False"
+                ]
+              },
+              "reports": {
+                "description": "List of all enabled reports",
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "properties": {
+                    "gmt_offset": {
+                      "description": "GMT offset for the report",
+                      "type": "number"
+                    },
+                    "name": {
+                      "description": "Name of the report",
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "interval": {
+                      "description": "Interval for the report",
+                      "type": "number"
+                    },
+                    "queue": {
+                      "description": "ID of the queue",
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "key": {
+                      "description": "Unique ID of the report",
+                      "type": "string",
+                      "pattern": "/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/gm"
+                    },
+                    "timezone": {
+                      "description": "Timezone of the report",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of the report",
+                      "type": "string",
+                      "enum": [
+                        "call_queue_split_report",
+                        "call_queue_agent_report",
+                        "call_queue_report"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "long_term_recording_storage": {
+            "description": "Long term recording storage enabled",
+            "type": "boolean",
+            "default": false
+          },
+          "performance_wallboards": {
+            "description": "Performance wallboards enabled",
+            "type": "boolean",
+            "default": false
+          },
+          "report_generation": {
+            "description": "Report generation enabled",
+            "type": "boolean",
+            "default": false
+          },
+          "call_center_web_header": {
+            "description": "Call center web header enabled",
+            "type": "boolean",
+            "default": false
+          },
+          "voice_signature": {
+            "description": "Voice signature enabled",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "auth_token": {
+        "title": "Authenticated",
+        "description": "Access and refresh Tokens",
+        "type": "object",
+        "properties": {
+          "refresh_token": {
+            "description": "A token which can be used to obtain a new `access_token` or `jwt_token` depending on the `grant_type`.",
+            "type": "string"
+          },
+          "jwt_token": {
+            "description": "The jwt token used to authenticate requests.",
+            "type": "string"
+          },
+          "access_token": {
+            "description": "The token used to authenticate requests.",
+            "type": "string"
+          },
+          "scope": {
+            "description": "The permission level for this Access Token",
+            "type": "string",
+            "enum": [
+              "Basic User",
+              "Office Manager",
+              "Call Center Supervisor",
+              "Call Center User"
+            ]
+          },
+          "token_type": {
+            "description": "The type of token",
+            "type": "string",
+            "enum": [
+              "Bearer"
+            ]
+          },
+          "expires_in": {
+            "description": "How many seconds until the Access Token expires.",
+            "type": "integer",
+            "format": "i32"
+          },
+          "expires": {
+            "description": "When the Access Token will expire. Date Time is UTC and in ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "user_id": {
+            "description": "The unique ID of the user associated with this login",
+            "type": "string"
+          },
+          "account_id": {
+            "deprecated": true,
+            "description": "Will always be `null` for net2phone users.",
+            "type": "string",
+            "enum": [
+              null
+            ]
+          }
+        }
+      },
+      "call": {
+        "title": "Create Call",
+        "type": "object",
+        "description": "Body of create call request",
+        "properties": {
+          "to": {
+            "type": "string",
+            "required": true,
+            "description": "The destination for this call. (Phone number, sip address)"
+          },
+          "from": {
+            "type": "string",
+            "description": "Where this call originates. Will default to current authenticated user if a value is not provided."
+          },
+          "auto_answer": {
+            "type": "boolean",
+            "default": false,
+            "description": "Auto Answer - Should this caller side be auto answered. (May not be supported by the answering device)."
+          },
+          "automatic_number_identification": {
+            "type": "boolean",
+            "description": "Auto number identification -",
+            "nullable": true
+          },
+          "caller_id_number": {
+            "type": "string",
+            "description": "Number to show as the call id",
+            "nullable": true
+          }
+        }
+      },
+      "cdrs": {
+        "title": "CDRs",
+        "description": "List of CDRs that meet the query parameters",
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "description": "The cursor/index from which to continue a previous request from",
+            "type": "string"
+          },
+          "more": {
+            "description": "True if there is more data available. If True use the cursor to request the next batch of data.",
+            "type": "boolean"
+          },
+          "result": {
+            "description": "A list of CDR data",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "properties": {
+                "start_time": {
+                  "description": "Date and time the call was started (in UTC).",
+                  "type": "string"
+                },
+                "answer_time": {
+                  "description": "Date and time the call was answered (in UTC).",
+                  "type": "string"
+                },
+                "end_time": {
+                  "description": "Date and time the call was ended (in UTC).",
+                  "type": "string"
+                },
+                "duration": {
+                  "description": "How many seconds the call lasted.",
+                  "type": "number"
+                },
+                "call_type": {
+                  "description": "The type of call.",
+                  "type": "string",
+                  "enum": [
+                    "Incoming",
+                    "Outgoing",
+                    "On Net"
+                  ]
+                },
+                "domain": {
+                  "description": "Domain associated with this call.",
+                  "type": "string"
+                },
+                "has_recording_been_analyzed": {
+                  "description": "Has cdr been processed for transcription and/or redaction",
+                  "type": "boolean"
+                },
+                "to": {
+                  "description": "The destination side of the call.",
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "description": "The user@domain for the user associated with a call leg.",
+                      "type": "string"
+                    },
+                    "domain": {
+                      "description": "Domain associated with this call.",
+                      "type": "string"
+                    },
+                    "e164": {
+                      "description": "The e164 phone number associated with a call leg.",
+                      "type": "string"
+                    },
+                    "user": {
+                      "description": "The extension of the user associated with this call leg.",
+                      "type": "string"
+                    },
+                    "recordings": {
+                      "description": "A collection of recordings associated with a call leg",
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "status": {
+                            "description": "The status for of this recording.",
+                            "type": "object",
+                            "properties": {
+                              "message": {
+                                "description": "Associated message for the status.",
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "name": {
+                                "description": "The name/state for a given recording.",
+                                "type": "string",
+                                "enum": [
+                                  "Processing",
+                                  "Available",
+                                  "No Recording",
+                                  "Deleted",
+                                  "Archived",
+                                  "Ignored"
+                                ]
+                              },
+                              "processing_error": {
+                                "description": "True if there was an error in processing the recording",
+                                "type": "boolean",
+                                "default": false
+                              },
+                              "time": {
+                                "description": "Time of recording",
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            },
+                            "is_processed": {
+                              "description": "Has recording been processed",
+                              "type": "boolean"
+                            },
+                            "url": {
+                              "description": "A url to download the recording from",
+                              "type": "string"
+                            },
+                            "is_available": {
+                              "description": "True if a recording is available for download",
+                              "type": "boolean"
+                            },
+                            "processing_error": {
+                              "description": "True if there was an error in processing the recording",
+                              "type": "boolean"
+                            },
+                            "recording_id": {
+                              "description": "A unique id for a given recording",
+                              "type": "string"
+                            },
+                            "has_recording_been_analyzed": {
+                              "description": "Has the recording been processed",
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "has_recording_been_analyzed": {
+                      "description": "Has the recording been processed.",
+                      "type": "boolean"
+                    },
+                    "uri": {
+                      "description": "The connected origination/termination device or number in full sip uri format.",
+                      "type": "string"
+                    },
+                    "call_id": {
+                      "description": "The unique identifier for one side of the call.",
+                      "type": "string"
+                    }
+                  }
+                },
+                "from": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "description": "The user@domain for the user associated with a call leg.",
+                      "type": "string"
+                    },
+                    "domain": {
+                      "description": "Domain associated with this call.",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "The name of the user associated with a call leg.",
+                      "type": "string"
+                    },
+                    "recordings": {
+                      "description": "A collection of recordings associated with a call leg",
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "status": {
+                            "description": "The status for of this recording.",
+                            "type": "object",
+                            "properties": {
+                              "message": {
+                                "description": "Associated message for the status.",
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "name": {
+                                "description": "The name/state for a given recording.",
+                                "type": "string",
+                                "enum": [
+                                  "Processing",
+                                  "Available",
+                                  "No Recording",
+                                  "Deleted",
+                                  "Archived",
+                                  "Ignored"
+                                ]
+                              },
+                              "processing_error": {
+                                "description": "True if there was an error in processing the recording",
+                                "type": "boolean",
+                                "default": false
+                              },
+                              "time": {
+                                "description": "Time of recording",
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            },
+                            "is_processed": {
+                              "description": "Has recording been processed",
+                              "type": "boolean"
+                            },
+                            "url": {
+                              "description": "A url to download the recording from",
+                              "type": "string"
+                            },
+                            "is_available": {
+                              "description": "True if a recording is available for download",
+                              "type": "boolean"
+                            },
+                            "processing_error": {
+                              "description": "True if there was an error in processing the recording",
+                              "type": "boolean"
+                            },
+                            "recording_id": {
+                              "description": "A unique id for a given recording",
+                              "type": "string"
+                            },
+                            "has_recording_been_analyzed": {
+                              "description": "Has the recording been processed",
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "user": {
+                      "description": "The extension of the user associated with this call leg.",
+                      "type": "string"
+                    },
+                    "e164": {
+                      "description": "The e164 phone number associated with a call leg.",
+                      "type": "string"
+                    },
+                    "has_recording_been_analyzed": {
+                      "description": "Has the recording been processed.",
+                      "type": "boolean"
+                    },
+                    "uri": {
+                      "description": "The connected origination/termination device or number in full sip uri format.",
+                      "type": "string"
+                    },
+                    "call_id": {
+                      "description": "The unique identifier for one side of the call.",
+                      "type": "string"
+                    }
+                  }
+                },
+                "by": {
+                  "description": "The by side of the call.",
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "description": "The user@domain for the user associated with a call leg",
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "domain": {
+                      "description": "Domain associated with this call.",
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "user": {
+                      "description": "The extension of the user associated with this call leg.",
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "value": {
+                      "description": "The sip address or e164 number associated with a call leg",
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "endpoints": {
+        "title": "Available endpoints",
+        "description": "List of available endpoints",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "description": "Endpoint descriptions",
+          "type": "string",
+          "enum": [
+            "password_grant",
+            "refresh_token_grant",
+            "place_call",
+            "read_subscription",
+            "delete_subscription",
+            "create_subscription",
+            "refresh_subscription",
+            "cdrs"
+          ]
+        }
+      },
+      "user": {
+        "title": "User Details",
+        "type": "object",
+        "description": "Details of the user",
+        "required": [
+          "username",
+          "user",
+          "first_name",
+          "last_name",
+          "email",
+          "time_zone",
+          "scope"
+        ],
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The user identifier"
+          },
+          "user": {
+            "type": "string",
+            "description": "The user's extension"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "The first name of the user"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "The last name of the user"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the user"
+          },
+          "domain": {
+            "type": "string",
+            "description": "The domain for the user"
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "The time zone this user resides in"
+          },
+          "scope": {
+            "type": "string",
+            "description": "The role of this user",
+            "enum": [
+              "Basic User",
+              "Office Manager",
+              "Call Center Supervisor",
+              "Call Center User"
+            ]
+          }
+        }
+      },
+      "webhook_call": {
+        "title": "Call Webhook",
+        "description": "A call subscription will result in Post request to your subscribed endpoint on call state changes for the subscribed user and company. The ringing event will show one side as `ringing` and the other as `progressing`.\n* `progressing` - call is waiting for the other side\n* `ringing` - endpoint is ringing\n* `active` - call is up\n* `ended` - call terminated",
+        "type": "object",
+        "properties": {
+          "calls": {
+            "type": "object",
+            "properties": {
+              "on_net": {
+                "description": "If call was between net2phone sip devices.",
+                "type": "boolean"
+              },
+              "from": {
+                "desciption": "Where the call originated",
+                "type": "object",
+                "properties": {
+                  "call_id": {
+                    "description": "The unique id of this call.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "The phone number or device/ext. Phone numbers will be in E164 notation.",
+                    "type": "string"
+                  },
+                  "user": {
+                    "description": "The extension/user id. `null` if a net2phone user is not involved.",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "name": {
+                    "description": "Name of the extension/user",
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "domain": {
+                    "description": "The customer/company associated with this call. Null if a net2phone domain is not involved on the given endpoint.",
+                    "nullable": true
+                  },
+                  "state": {
+                    "description": "The state of this call.",
+                    "type": "string",
+                    "enum": [
+                      "progressing",
+                      "ringing",
+                      "active",
+                      "ended"
+                    ]
+                  }
+                }
+              },
+              "to": {
+                "description": "The destination of the call.",
+                "type": "object",
+                "properties": {
+                  "is_human": {
+                    "description": null,
+                    "type": "boolean"
+                  },
+                  "call_id": {
+                    "description": "The unique id of this call.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "The phone number or device/ext. Phone numbers will be in E164 notation.",
+                    "type": "string"
+                  },
+                  "user": {
+                    "description": "The extension/user id. `null` if a net2phone user is not involved.",
+                    "type": "integer",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "domain": {
+                    "description": "The customer/company associated with this call. Null if a net2phone domain is not involved on the given endpoint.",
+                    "nullable": true
+                  },
+                  "state": {
+                    "description": "The state of this call.",
+                    "type": "string",
+                    "enum": [
+                      "progressing",
+                      "ringing",
+                      "active",
+                      "ended"
+                    ]
+                  }
+                }
+              },
+              "time_answer": {
+                "description": "When the end user picked up the call. `null` for ringing event.",
+                "type": "string",
+                "format": "date-time",
+                "nullable": true
+              },
+              "time_start": {
+                "description": "When this call initialized.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "by_call_id": {
+                "description": "An intermediary call id. Used in when the call is transferred from one party to another.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "webhook_settings": {
+        "required": [
+          "post_uri"
+        ],
+        "type": "object",
+        "properties": {
+          "post_uri": {
+            "type": "string",
+            "description": "The endpoint which is notified when an event occurs.",
+            "format": "uri"
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of seconds until the webhook subscription expires",
+            "default": 7200,
+            "maximum": 604800
+          },
+          "calls": {
+            "type": "boolean",
+            "description": "Subscribe to call events",
+            "default": false
+          },
+          "cdrs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Subscribe to CDR events"
+          },
+          "recordings": {
+            "type": "boolean",
+            "description": "Subscribe to recording events",
+            "default": false
+          },
+          "user": {
+            "type": "string",
+            "description": "One or more users to subscribe to. Omit to subscribe to all users webhooks.\nAppend multiple times to subscribe to multiple users.",
+            "default": "*"
+          }
+        }
+      },
+      "webhook_subscription": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "required": true,
+            "description": "The unique id of this subscription",
+            "format": "int32"
+          },
+          "post_uri": {
+            "type": "string",
+            "description": "The endpoint which is notified when an event occurs.",
+            "format": "uri"
+          },
+          "events": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "calls",
+                    "cdrs",
+                    "recordings"
+                  ]
+                },
+                "user": {
+                  "type": "string",
+                  "required": true,
+                  "default": "*"
+                }
+              }
+            }
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Indicates if subscription is enabled"
+          }
+        }
+      },
+      "call_answered": {
+        "type": "object",
+        "title": "Call Ringing",
+        "description": "Call ringing webhook event."
+      },
+      "call_completed": {
+        "type": "object",
+        "title": "Call Ringing",
+        "description": "Call ringing webhook event."
+      },
+      "call_ringing": {
+        "type": "object",
+        "title": "Call Ringing",
+        "description": "Call ringing webhook event."
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    401
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "Invalid Vendor"
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 401,
+              "message": "Invalid Vendor"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    403
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "Access Forbidden, you do not have the correct permissions."
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 403,
+              "message": "Access Forbidden, you do not have the correct permissions."
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    404
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "Resource does not exist."
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 404,
+              "message": "Resource does not exist."
+            }
+          }
+        }
+      },
+      "InvalidVersion": {
+        "description": "Invalid Version",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    422
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "An invalid version number was provided."
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 422,
+              "message": "An invalid version number was provided."
+            }
+          }
+        }
+      },
+      "RateLimitExceeded": {
+        "description": "Rate Limit Exceeded",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "rate limit per second exceeded": {
+                "value": {
+                  "message": "1 per 1 second"
+                }
+              },
+              "rate limit per minute exceeded": {
+                "value": {
+                  "message": "1 per 1 minute"
+                }
+              }
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "required": true,
+                  "enum": [
+                    500
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "required": true,
+                  "enum": [
+                    "An error occurred while marshalling the response."
+                  ]
+                }
+              }
+            },
+            "example": {
+              "status": 500,
+              "message": "An error occurred while marshalling the response."
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Accept": {
+        "name": "Accept",
+        "required": true,
+        "in": "header",
+        "description": "The media type and version which is acceptable for the response",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "application/vnd.integrate.v1.9.0+json"
+          ]
+        }
+      },
+      "callId": {
+        "name": "callId",
+        "in": "path",
+        "description": "The ID of the call",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subscriptionId": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "The ID of the subscription",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "userId": {
+        "name": "userId",
+        "in": "path",
+        "description": "Id of the user",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "client_id": {
+        "name": "client_id",
+        "in": "query",
+        "required": true,
+        "description": "The secret provided for your client application.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "cursor": {
+        "name": "cursor",
+        "in": "query",
+        "description": "The cursor/index from which to continue a previous request from",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "end_date": {
+        "name": "end_date",
+        "in": "query",
+        "description": "Get calls which ended after this time. In UTC if timezone not specified. If no start date is provided resutls for calls after this end date will be returned.",
+        "schema": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "start_date": {
+        "name": "start_date",
+        "in": "query",
+        "description": "Get calls which started after this time. In UTC if timezone not specified.",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "max_duration": {
+        "name": "max_duration",
+        "in": "query",
+        "description": "Filter cdrs by maximum duration",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "nullable": true
+        }
+      },
+      "min_duration": {
+        "name": "min_duration",
+        "in": "query",
+        "description": "Filter cdrs by minimum duration",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "nullable": true
+        }
+      },
+      "limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "number of returned items",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 10
+        }
+      },
+      "page_size": {
+        "name": "page_size",
+        "in": "query",
+        "description": "number of returned items",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 10
+        }
+      },
+      "phone_number": {
+        "name": "phone_number",
+        "in": "query",
+        "description": "Flter cdrs by phone number used",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "recording_available": {
+        "name": "recording_available",
+        "in": "query",
+        "description": "Filter cdrs to only include ones with recordings",
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "state": {
+        "name": "state",
+        "in": "query",
+        "description": "**recommended** A value used by the client to maintain state between the request and the callback. Used to help prevent cross-site request forgery.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "grant_type": {
+        "name": "grant_type",
+        "in": "query",
+        "required": true,
+        "description": "The type of grant being performed.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "authorization_code",
+            "refresh_token",
+            "password"
+          ]
+        }
+      },
+      "response_type": {
+        "name": "response_type",
+        "in": "query",
+        "required": true,
+        "description": "The type of grant response to be performed.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "code"
+          ]
+        }
+      },
+      "type": {
+        "name": "type",
+        "in": "query",
+        "description": "The type of phone call which took place.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "incoming",
+            "outgoing",
+            "on net"
+          ]
+        }
+      },
+      "redirect_uri": {
+        "name": "redirect_uri",
+        "in": "query",
+        "required": true,
+        "description": "The redirect URI used to authenticate this user.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "user": {
+        "name": "user",
+        "in": "query",
+        "description": "The user/extension to retrieve the call records for. Append multiple times to filter by multiple users.",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "headers": {},
+    "examples": {
+      "account_settings_default": {
+        "value": {
+          "report_generation_settings": {
+            "call_queue_split": null,
+            "call_queue": null,
+            "call_queue_agent": null,
+            "reports": null
+          },
+          "long_term_recording_storage": false,
+          "performance_wallboards": false,
+          "report_generation": false,
+          "call_center_web_header": false,
+          "voice_signature": false
+        }
+      },
+      "account_settings": {
+        "value": {
+          "report_generation_settings": {
+            "call_queue_split": "True",
+            "call_queue": "True",
+            "call_queue_agent": "True",
+            "reports": [
+              {
+                "gmt_offset": 4,
+                "name": null,
+                "interval": 30,
+                "queue": "8814",
+                "key": "646907a3-0a1b-4a19-b03b-2962a65e4dc9",
+                "timezone": "US/Eastern",
+                "type": "call_queue_split_report"
+              },
+              {
+                "gmt_offset": 0,
+                "name": "Test report",
+                "interval": 30,
+                "queue": "8814",
+                "key": "54ed5415-7536-bd71-c3fc-02e64b190170",
+                "timezone": "Pacific/Niue",
+                "type": "call_queue_agent_report"
+              },
+              {
+                "gmt_offset": 0,
+                "name": "New Report",
+                "interval": 0,
+                "queue": null,
+                "key": "c4c88231-c02d-435a-9f52-7c07d25cf4af",
+                "timezone": "Pacific/Niue",
+                "type": "call_queue_report"
+              }
+            ]
+          },
+          "long_term_recording_storage": true,
+          "performance_wallboards": false,
+          "report_generation": true,
+          "call_center_web_header": false,
+          "voice_signature": true
+        }
+      },
+      "auth_token": {
+        "value": {
+          "domain": "yourdomain.com",
+          "user_id": "110",
+          "account_id": null,
+          "access_token": "6ca982bf-5f34-7e09-480b-7ca5d6246e5c",
+          "expires": "2021-05-03T10:19:37.822793",
+          "expires_in": 1094,
+          "token_type": "Bearer",
+          "jwt_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODc5NzU0NTgsImlSHORTENED",
+          "scope": "Basic User",
+          "refresh_token": "YRjxLpsjRqL7zYuKstXogqioA_P3Z4fiEuga0NCVRcDSc8cy_9msxg"
+        }
+      },
+      "call": {
+        "value": {
+          "to": "+16133246100",
+          "from": "100@mydomain.com",
+          "caller_id_number": null,
+          "auto_answer": true,
+          "automatic_number_identification": null
+        }
+      },
+      "cdrs_with_recordings": {
+        "value": {
+          "cursor": "asdfasdfasdfasdf#asdfasdfs==",
+          "more": true,
+          "result": [
+            {
+              "to": {
+                "domain": null,
+                "user": null,
+                "has_recording_been_analyzed": false,
+                "value": "+16133246100",
+                "call_id": "20210503030052031111-436c626c08717949a56705103ea809c0"
+              },
+              "domain": "yourdomain.com",
+              "from": {
+                "domain": "yourdomain.com",
+                "name": "Jane Doe",
+                "recordings": [
+                  {
+                    "status": {
+                      "message": null,
+                      "name": "Available",
+                      "processing_error": false,
+                      "time": "Monday, 3 Jun 2018 19:05:45 -0000"
+                    },
+                    "is_processed": true,
+                    "url": "https://versature-integrate.appspot.com/api/recordings/93bc0b9a43a6458acced84a6fc4cf270/recording/",
+                    "is_available": true,
+                    "processing_error": false,
+                    "recording_id": "93bc0b9a43a6458acced84a6fc4cf270",
+                    "has_recording_been_analyzed": false
+                  }
+                ],
+                "user": "101",
+                "has_recording_been_analyzed": false,
+                "uri": "sip:16133246100@yourdomain.com",
+                "value": "+16133246100",
+                "call_id": "20180503030052031111-436c626c08717949a56705103ea809c0"
+              },
+              "end_time": "2018-05-03T15:08:01+00:00",
+              "answer_time": "2018-05-03T14:02:49+00:00",
+              "duration": 312,
+              "start_time": "2018-05-03T14:02:45+00:00",
+              "has_recording_been_analyzed": false,
+              "call_type": "Outgoing"
+            }
+          ]
+        }
+      },
+      "cdrs": {
+        "value": [
+          {
+            "duration": 111,
+            "start_time": "2021-05-01T03:00:49+00:00",
+            "end_time": "2021-05-01T03:02:54+00:00",
+            "to": {
+              "domain": "yourdomain.com",
+              "e164": "+16133246100",
+              "user": null,
+              "call_id": "20210503030052031111-436c626c08717949a56705103ea809c0"
+            },
+            "from": {
+              "domain": "yourdomain.com",
+              "call_id": "20210503030052031111-06f03fea68d5e32ff07831a419fdfcab",
+              "e164": "+16133246111",
+              "user": "111",
+              "name": "John Doe"
+            }
+          }
+        ]
+      },
+      "endpoints": {
+        "value": [
+          "password_grant",
+          "refresh_token_grant",
+          "place_call",
+          "read_subscription",
+          "delete_subscription",
+          "create_subscription",
+          "refresh_subscription",
+          "cdrs"
+        ]
+      },
+      "user": {
+        "value": {
+          "username": "110@example.com",
+          "user": "100",
+          "domain": "example.com",
+          "last_name": "Smith",
+          "first_name": "John",
+          "email": "noreply@versature.com",
+          "time_zone": "Canada/Eastern",
+          "scope": "Office Manager"
+        }
+      },
+      "users": {
+        "value": [
+          {
+            "username": "110@example.com",
+            "user": "100",
+            "domain": "example.com",
+            "last_name": "Smith",
+            "first_name": "John",
+            "email": "noreply@versature.com",
+            "time_zone": "US/Pacific",
+            "scope": "Basic User"
+          },
+          {
+            "username": "220@example.com",
+            "user": "220",
+            "domain": "example.com",
+            "last_name": "Brown",
+            "first_name": "Jane",
+            "email": "yesreply@versature.com",
+            "time_zone": "US/Eastern",
+            "scope": "Office Manager"
+          }
+        ]
+      },
+      "webhook_call_answered": {
+        "value": {
+          "on_net": false,
+          "from": {
+            "user": null,
+            "state": "active",
+            "name": null,
+            "domain": null,
+            "id": "+16133246100",
+            "call_id": "ea5537bf1fd8eb53e8b435592f86a539"
+          },
+          "to": {
+            "is_human": true,
+            "state": "active",
+            "id": "126",
+            "domain": "yourdomain.com",
+            "user": "126",
+            "call_id": "ac68b6fb9072dd2aa32b5e9098330b72"
+          },
+          "time_answer": "2021-11-24 13:50:22",
+          "time_start": "2021-11-24 13:50:12",
+          "by_call_id": null
+        }
+      },
+      "webhook_call_completed": {
+        "value": {
+          "on_net": false,
+          "from": {
+            "user": "120",
+            "state": "ended",
+            "name": "John Doe",
+            "domain": "yourdomain.com",
+            "id": "+16133246100",
+            "call_id": "ea5537bf1fd8eb53e8b435592f86a539"
+          },
+          "to": {
+            "is_human": true,
+            "state": "ended",
+            "id": "126",
+            "domain": "yourdomain.com",
+            "user": "126",
+            "call_id": "ac68b6fb9072dd2aa32b5e9098330b72"
+          },
+          "time_answer": "2021-11-24 13:50:22",
+          "time_start": "2021-11-24 13:50:12",
+          "by_call_id": null
+        }
+      },
+      "webhook_call_ringing": {
+        "value": {
+          "on_net": false,
+          "from": {
+            "user": null,
+            "state": "progressing",
+            "name": null,
+            "domain": null,
+            "id": "+16133246100",
+            "call_id": "ea5537bf1fd8eb53e8b435592f86a539"
+          },
+          "to": {
+            "is_human": true,
+            "state": "ringing",
+            "id": "126",
+            "domain": "yourdomain.com",
+            "user": "126",
+            "call_id": "ac68b6fb9072dd2aa32b5e9098330b72"
+          },
+          "time_answer": null,
+          "time_start": "2021-11-24 13:50:12",
+          "by_call_id": null
+        }
+      },
+      "webhook_settings": {
+        "value": {
+          "post_uri": "https://mydomain.com/webhooks",
+          "expires_in": 604800,
+          "calls": false,
+          "cdrs": false,
+          "recordings": true,
+          "user": "*"
+        }
+      },
+      "webhook_subscription": {
+        "value": {
+          "id": 12345,
+          "post_uri": "https://mydomain.com/webhooks",
+          "expires": "2021-04-29T11:45:11.110000",
+          "events": [
+            {
+              "type": "cdrs",
+              "user": "*"
+            },
+            {
+              "type": "recordings",
+              "user": "201"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "webhooks": {
+    "call_answered": {
+      "tags": [
+        "Webhooks"
+      ],
+      "summary": "Call Ringing",
+      "description": "Call ringing webhook event.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/webhook_call"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#components/examples/webhook_call_answered"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_completed": {
+      "tags": [
+        "Webhooks"
+      ],
+      "summary": "Call Ringing",
+      "description": "Call ringing webhook event.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/webhook_call"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#components/examples/webhook_call_completed"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "call_ringing": {
+      "tags": [
+        "Webhooks"
+      ],
+      "summary": "Call Ringing",
+      "description": "Call ringing webhook event.",
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/webhook_call"
+                },
+                "examples": {
+                  "example": {
+                    "$ref": "#components/examples/webhook_call_ringing"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
