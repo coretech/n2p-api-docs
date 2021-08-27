@@ -1,0 +1,7 @@
+refresh_token:
+  name: refresh_token
+  in: query
+  required: false
+  description: The token used to obtain a new Access Token for the user.
+  schema:
+    type: string

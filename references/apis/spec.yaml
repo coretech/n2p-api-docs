@@ -1,10 +1,12 @@
 info:
   title: net2phone integrate apis
-  description: <h2>Introduction</h2>This is going to be a really cool description
-  version: '1.8.0'
+  description: Check out the documentation for instructions on getting started [here](/documentation/getting-started)
+  version: "1.9.0"
 servers:
   - url: https://integrate.versature.com/api
     description: Production netphone integrate API endpoint
+  # - url: https://versature-integrate-2-test.appspot.com/api
+  #   description: Developement environment API endpoint
 #components:
 #  schemas:
 #    securitySchemes:

@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "net2phone integrate apis",
-    "description": "<h2>Introduction</h2>This is going to be a really cool description",
-    "version": "1.8.0"
+    "description": "Check out the documentation for instructions on getting started [here](/documentation/getting-started)",
+    "version": "1.9.0"
   },
   "servers": [
     {
@@ -97,7 +97,7 @@
     "/oauth/authorize/": {
       "get": {
         "summary": "Authorization Code Grant",
-        "description": "The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\nFor the full authentication flow see [authentication](/authentication#authorization-code-grant)",
+        "description": "The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\n\nFor the full authentication flow see [authentication](/authentication#authorization-code-grant)",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -149,10 +149,108 @@
         ]
       }
     },
+    "/oauth/authorize/n2p": {
+      "get": {
+        "summary": "Authorization Code Grant with SAML for Unite",
+        "description": "**Server-Side Application Authentication**\n\nThe authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\n\n**Before you begin you must obtain a Client Id and Secret:** [getting started](/documentation/getting-started).\n\nOnce you have provided your redirect uri to us and have obtained your Client Id and Client Secret; direct the authenticating user to: `/api/oauth/authorize/n2p/` be sure to include the required arguments with your request (See below for arguments).",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/state"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "3/second, 60/minute"
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/oauth/logout": {
+      "get": {
+        "summary": "Logout",
+        "description": "**Server-Side Application Authentication**\n\nLogout endpoint. It will revoke the token and clear the session.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Accept"
+          },
+          {
+            "$ref": "#/components/parameters/client_id"
+          },
+          {
+            "$ref": "#/components/parameters/access_token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-RateLimit-Limit": {
+                "type": "string",
+                "description": "3/second, 20/minute"
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/InvalidVersion"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
     "/oauth/token/": {
       "post": {
         "summary": "Access and Refresh Tokens",
-        "description": "Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.",
+        "description": "Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.\n\n`client_secret` is required when using `grant_type = authorization_code`,  \n`refresh_token` is required when using `grant_type = refresh_token`",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -165,6 +263,9 @@
           },
           {
             "$ref": "#/components/parameters/client_secret"
+          },
+          {
+            "$ref": "#/components/parameters/refresh_token"
           },
           {
             "$ref": "#/components/parameters/state"
@@ -1952,7 +2053,7 @@
         "schema": {
           "type": "string",
           "enum": [
-            "application/vnd.integrate.v1.8.0+json"
+            "application/vnd.integrate.v1.9.0+json"
           ]
         }
       },
@@ -1985,10 +2086,28 @@
           "format": "int32"
         }
       },
+      "access_token": {
+        "name": "access_token",
+        "in": "query",
+        "required": true,
+        "description": "The token used to authenticate requests.",
+        "schema": {
+          "type": "string"
+        }
+      },
       "client_id": {
         "name": "client_id",
         "in": "query",
         "required": true,
+        "description": "The id of the client. The unique identifier for your application.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "client_secret": {
+        "name": "client_secret",
+        "in": "query",
+        "required": false,
         "description": "The secret provided for your client application.",
         "schema": {
           "type": "string"
@@ -2080,6 +2199,15 @@
         "schema": {
           "type": "boolean",
           "default": false
+        }
+      },
+      "refresh_token": {
+        "name": "refresh_token",
+        "in": "query",
+        "required": false,
+        "description": "The token used to obtain a new Access Token for the user.",
+        "schema": {
+          "type": "string"
         }
       },
       "state": {
