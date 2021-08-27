@@ -1,0 +1,7 @@
+access_token:
+  name: access_token
+  in: query
+  required: true
+  description: The token used to authenticate requests.
+  schema:
+    type: string

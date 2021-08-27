@@ -152,7 +152,7 @@
     "/oauth/authorize/n2p": {
       "get": {
         "summary": "Authorization Code Grant with SAML for Unite",
-        "description": "**Server-Side Application Authentication**\n\nThe authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\n\n**Before you begin you must obtain a Client Id and Secret:** [getting started](/documentation/getting-started).\n\nOnce you have provided your redirect uri to us and have obtained your Client Id and Client Secret; direct the authenticating user to: `https://integrate.versature.com/api/oauth/authorize/n2p/` be sure to include the required arguments with your request (See below for arguments).",
+        "description": "**Server-Side Application Authentication**\n\nThe authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\n\n**Before you begin you must obtain a Client Id and Secret:** [getting started](/documentation/getting-started).\n\nOnce you have provided your redirect uri to us and have obtained your Client Id and Client Secret; direct the authenticating user to: `/api/oauth/authorize/n2p/` be sure to include the required arguments with your request (See below for arguments).",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -210,7 +210,7 @@
             "$ref": "#/components/parameters/client_id"
           },
           {
-            "$ref": "#/components/parameters/acess_token"
+            "$ref": "#/components/parameters/access_token"
           }
         ],
         "responses": {
@@ -250,7 +250,7 @@
     "/oauth/token/": {
       "post": {
         "summary": "Access and Refresh Tokens",
-        "description": "Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.",
+        "description": "Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.\n\n`client_secret` is required when using `grant_type = authorization_code`,  \n`refresh_token` is required when using `grant_type = refresh_token`",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -263,6 +263,9 @@
           },
           {
             "$ref": "#/components/parameters/client_secret"
+          },
+          {
+            "$ref": "#/components/parameters/refresh_token"
           },
           {
             "$ref": "#/components/parameters/state"
@@ -2096,6 +2099,15 @@
         "name": "client_id",
         "in": "query",
         "required": true,
+        "description": "The id of the client. The unique identifier for your application.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "client_secret": {
+        "name": "client_secret",
+        "in": "query",
+        "required": false,
         "description": "The secret provided for your client application.",
         "schema": {
           "type": "string"
@@ -2187,6 +2199,15 @@
         "schema": {
           "type": "boolean",
           "default": false
+        }
+      },
+      "refresh_token": {
+        "name": "refresh_token",
+        "in": "query",
+        "required": false,
+        "description": "The token used to obtain a new Access Token for the user.",
+        "schema": {
+          "type": "string"
         }
       },
       "state": {

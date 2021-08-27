@@ -6,6 +6,7 @@
     "serve": "http-server --port=8080 --cors=*",
     "postserve": "pkill -f http-server",
     "publish:gh": "ts-node ./scripts/publish-gh-pages.ts",
+    "publish:prod": "yarn build && yarn publish:gh",
     "build:spec": "ts-node ./scripts/build-spec.ts",
     "build": "yarn build:apis && yarn build:webhooks",
     "build:apis": "yarn build:spec apis",
