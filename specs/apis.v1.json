@@ -97,7 +97,7 @@
     "/oauth/authorize/": {
       "get": {
         "summary": "Authorization Code Grant",
-        "description": "The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\n\nFor the full authentication flow see [authentication](/authentication#authorization-code-grant)",
+        "description": "The authorization code grant is used for server-side applications for which source code is not exposed and for which the confidentiality of the applications Client Id and Client Secret can be maintained. This is a redirection based flow and as such a redirection uri must be registered and provided when authenticating. When access is requested via this flow the user is directed to a login page where they must authenticate and grant access to the server-side application.\n\nFor the full authentication flow see [authentication](/documentation/authentication#authorization-code-grant)",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
