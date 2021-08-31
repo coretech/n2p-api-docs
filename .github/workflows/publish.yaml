@@ -1,0 +1,42 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: jfrog 🔏
+        run: |
+          curl -u${{ secrets.JFROG_USERNAME }}:${{ secrets.JFROG_TOKEN }} https://idt.jfrog.io/artifactory/api/npm/auth > .npmrc
+          echo "email=${{ secrets.JFROG_USERNAME }}" >> .npmrc
+          echo "registry=https://idt.jfrog.io/idt/api/npm/n2p-npm/" >> .npmrc
+
+      - name: Install 💾
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          cache: "yarn"
+      - run: yarn --frozen-lockfile --ignore-scripts
+
+      - name: Build 🏗️
+        run: yarn build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: specs # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch besides for .jekyll and CNAME
