@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
     "title": "net2phone integrate apis",
     "description": "Check out the documentation for instructions on getting started [here](/documentation/getting-started)",
@@ -119,7 +119,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -168,7 +167,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -217,7 +215,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "3/second, 20/minute"
               }
             },
@@ -275,7 +272,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -340,7 +336,6 @@
             "description": "Success",
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 15/minute"
               }
             }
@@ -399,7 +394,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
@@ -487,7 +481,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
@@ -575,7 +568,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
@@ -666,7 +658,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
@@ -767,7 +758,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
@@ -832,7 +822,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
@@ -881,7 +870,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
@@ -949,7 +937,6 @@
           "202": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
@@ -1011,7 +998,6 @@
           "204": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
@@ -1054,7 +1040,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
@@ -1270,10 +1255,12 @@
         "title": "Create Call",
         "type": "object",
         "description": "Body of create call request",
+        "required": [
+          "to"
+        ],
         "properties": {
           "to": {
             "type": "string",
-            "required": true,
             "description": "The destination for this call. (Phone number, sip address)"
           },
           "from": {
@@ -1668,7 +1655,7 @@
                 "type": "boolean"
               },
               "from": {
-                "desciption": "Where the call originated",
+                "description": "Where the call originated",
                 "type": "object",
                 "properties": {
                   "call_id": {
@@ -1804,10 +1791,12 @@
       },
       "webhook_subscription": {
         "type": "object",
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "integer",
-            "required": true,
             "description": "The unique id of this subscription",
             "format": "int32"
           },
@@ -1820,10 +1809,13 @@
             "type": "array",
             "uniqueItems": true,
             "items": {
+              "required": [
+                "type",
+                "user"
+              ],
               "properties": {
                 "type": {
                   "type": "string",
-                  "required": true,
                   "enum": [
                     "calls",
                     "cdrs",
@@ -1832,7 +1824,6 @@
                 },
                 "user": {
                   "type": "string",
-                  "required": true,
                   "default": "*"
                 }
               }
@@ -1867,18 +1858,20 @@
           "application/json": {
             "schema": {
               "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
-                  "required": true,
                   "enum": [
                     401
                   ]
                 },
                 "message": {
                   "type": "string",
-                  "required": true,
                   "enum": [
                     "Invalid Vendor"
                   ]
@@ -1898,18 +1891,20 @@
           "application/json": {
             "schema": {
               "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
-                  "required": true,
                   "enum": [
                     403
                   ]
                 },
                 "message": {
                   "type": "string",
-                  "required": true,
                   "enum": [
                     "Access Forbidden, you do not have the correct permissions."
                   ]
@@ -1929,18 +1924,20 @@
           "application/json": {
             "schema": {
               "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
-                  "required": true,
                   "enum": [
                     404
                   ]
                 },
                 "message": {
                   "type": "string",
-                  "required": true,
                   "enum": [
                     "Resource does not exist."
                   ]
@@ -1960,18 +1957,20 @@
           "application/json": {
             "schema": {
               "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
-                  "required": true,
                   "enum": [
                     422
                   ]
                 },
                 "message": {
                   "type": "string",
-                  "required": true,
                   "enum": [
                     "An invalid version number was provided."
                   ]
@@ -2018,18 +2017,20 @@
           "application/json": {
             "schema": {
               "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
-                  "required": true,
                   "enum": [
                     500
                   ]
                 },
                 "message": {
                   "type": "string",
-                  "required": true,
                   "enum": [
                     "An error occurred while marshalling the response."
                   ]
