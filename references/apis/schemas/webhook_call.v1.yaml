@@ -15,7 +15,7 @@ webhook_call:
           description: If call was between net2phone sip devices.
           type: boolean
         from:
-          desciption: Where the call originated
+          description: Where the call originated
           type: object
           properties:
             call_id:

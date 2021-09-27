@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
     "title": "net2phone integrate apis",
     "description": "Check out the documentation for instructions on getting started [here](/documentation/getting-started)",

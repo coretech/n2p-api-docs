@@ -1,9 +1,10 @@
 webhook_subscription:
   type: object
+  required:
+    - id
   properties:
     id:
       type: integer
-      required: true
       description: The unique id of this subscription
       format: int32
     post_uri:
@@ -14,17 +15,18 @@ webhook_subscription:
       type: array
       uniqueItems: true
       items:
+        required:
+          - type
+          - user
         properties:
           type:
             type: string
-            required: true
             enum:
               - calls
               - cdrs
               - recordings
           user:
             type: string
-            required: true
             default: "*"
     enabled:
       type: boolean

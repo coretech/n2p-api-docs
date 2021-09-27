@@ -18,7 +18,6 @@ paths:
         200:
           headers:
             x-RateLimit-Limit:
-              type: string
               description: 3/second, 60/minute
   /oauth/authorize/n2p:
     get:
@@ -38,7 +37,6 @@ paths:
         200:
           headers:
             x-RateLimit-Limit:
-              type: string
               description: 3/second, 60/minute
   /oauth/logout:
     get:
@@ -54,7 +52,6 @@ paths:
         200:
           headers:
             x-RateLimit-Limit:
-              type: string
               description: 3/second, 20/minute
   /oauth/token/:
     post:
@@ -62,7 +59,7 @@ paths:
       description: |-
         Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.
 
-        `client_secret` is required when using `grant_type = authorization_code`,  
+        `client_secret` is required when using `grant_type = authorization_code`,
         `refresh_token` is required when using `grant_type = refresh_token`
       parameters:
         - $ref: "#/components/parameters/grant_type"
@@ -74,7 +71,6 @@ paths:
         200:
           headers:
             x-RateLimit-Limit:
-              type: string
               description: 3/second, 60/minute
           content:
             application/json:
