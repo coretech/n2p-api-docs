@@ -119,6 +119,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -167,6 +168,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -215,6 +217,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "3/second, 20/minute"
               }
             },
@@ -272,6 +275,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -336,6 +340,7 @@
             "description": "Success",
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "1/second, 15/minute"
               }
             }
@@ -394,6 +399,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
@@ -481,6 +487,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
@@ -568,6 +575,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
@@ -658,6 +666,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
@@ -758,6 +767,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
@@ -822,6 +832,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
@@ -870,6 +881,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
@@ -937,6 +949,7 @@
           "202": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
@@ -998,6 +1011,7 @@
           "204": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
@@ -1040,6 +1054,7 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
+                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
@@ -1255,12 +1270,10 @@
         "title": "Create Call",
         "type": "object",
         "description": "Body of create call request",
-        "required": [
-          "to"
-        ],
         "properties": {
           "to": {
             "type": "string",
+            "required": true,
             "description": "The destination for this call. (Phone number, sip address)"
           },
           "from": {
@@ -1655,7 +1668,7 @@
                 "type": "boolean"
               },
               "from": {
-                "description": "Where the call originated",
+                "desciption": "Where the call originated",
                 "type": "object",
                 "properties": {
                   "call_id": {
@@ -1791,12 +1804,10 @@
       },
       "webhook_subscription": {
         "type": "object",
-        "required": [
-          "id"
-        ],
         "properties": {
           "id": {
             "type": "integer",
+            "required": true,
             "description": "The unique id of this subscription",
             "format": "int32"
           },
@@ -1809,13 +1820,10 @@
             "type": "array",
             "uniqueItems": true,
             "items": {
-              "required": [
-                "type",
-                "user"
-              ],
               "properties": {
                 "type": {
                   "type": "string",
+                  "required": true,
                   "enum": [
                     "calls",
                     "cdrs",
@@ -1824,6 +1832,7 @@
                 },
                 "user": {
                   "type": "string",
+                  "required": true,
                   "default": "*"
                 }
               }
