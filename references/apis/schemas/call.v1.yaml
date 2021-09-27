@@ -2,10 +2,11 @@ call:
   title: Create Call
   type: object
   description: Body of create call request
+  required:
+    - to
   properties:
     to:
       type: string
-      required: true
       description: The destination for this call. (Phone number, sip address)
     from:
       type: string

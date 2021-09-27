@@ -9,7 +9,6 @@ paths:
         200:
           headers:
             x-RateLimit-Limit:
-              type: string
               description: 1/second, 15/minute
           content:
             application/json:
@@ -29,7 +28,6 @@ paths:
         200:
           headers:
             x-RateLimit-Limit:
-              type: string
               description: 1/second, 15/minute
           content:
             application/json:
@@ -45,7 +43,6 @@ paths:
         200:
           headers:
             x-RateLimit-Limit:
-              type: string
               description: 1/second, 15/minute
           content:
             application/json:

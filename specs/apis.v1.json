@@ -1858,20 +1858,18 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
+                  "required": true,
                   "enum": [
                     401
                   ]
                 },
                 "message": {
                   "type": "string",
+                  "required": true,
                   "enum": [
                     "Invalid Vendor"
                   ]
@@ -1891,20 +1889,18 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
+                  "required": true,
                   "enum": [
                     403
                   ]
                 },
                 "message": {
                   "type": "string",
+                  "required": true,
                   "enum": [
                     "Access Forbidden, you do not have the correct permissions."
                   ]
@@ -1924,20 +1920,18 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
+                  "required": true,
                   "enum": [
                     404
                   ]
                 },
                 "message": {
                   "type": "string",
+                  "required": true,
                   "enum": [
                     "Resource does not exist."
                   ]
@@ -1957,20 +1951,18 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
+                  "required": true,
                   "enum": [
                     422
                   ]
                 },
                 "message": {
                   "type": "string",
+                  "required": true,
                   "enum": [
                     "An invalid version number was provided."
                   ]
@@ -2017,20 +2009,18 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
               "properties": {
                 "status": {
                   "type": "integer",
                   "format": "int32",
+                  "required": true,
                   "enum": [
                     500
                   ]
                 },
                 "message": {
                   "type": "string",
+                  "required": true,
                   "enum": [
                     "An error occurred while marshalling the response."
                   ]

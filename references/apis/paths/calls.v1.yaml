@@ -19,7 +19,6 @@ paths:
           description: Success
           headers:
             x-RateLimit-Limit:
-              type: string
               description: 1/second, 15/minute
 #  /calls/{callId}/:
 #    delete:
