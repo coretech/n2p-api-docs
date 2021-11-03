@@ -20,6 +20,10 @@ auth_token:
         - Office Manager
         - Call Center Supervisor
         - Call Center User
+        - admin
+        - regular
+        - primary
+        - anonymous
     token_type:
       description: The type of token
       type: string

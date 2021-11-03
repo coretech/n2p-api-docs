@@ -40,3 +40,7 @@ user:
         - Office Manager
         - Call Center Supervisor
         - Call Center User
+        - admin
+        - regular
+        - primary
+        - anonymous
