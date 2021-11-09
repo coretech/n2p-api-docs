@@ -2,7 +2,7 @@ description: Forbidden
 name: Forbidden
 summary: Your permission level was insufficient to access the requested resource and/or perform the given action.
 content:
-  application/json:
+  application/vnd.integrate.v1.9.0+json:
     schema:
       allOf:
         - $ref: ./base/response.error.v1.yaml

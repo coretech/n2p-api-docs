@@ -53,6 +53,7 @@ function main() {
   dirToComponents('headers')
   dirToComponents('schemas')
   dirToComponents('examples')
+  dirToComponents('securitySchemes')
   buildPaths();
   buildWebhooks();
   saveSpecFile();
@@ -121,10 +122,10 @@ function buildResponses() {
     if (!response) return
 
     // flatten
-    let { schema } = response.content['application/json']
+    let { schema } = response.content['application/vnd.integrate.v1.9.0+json']
     if (schema['allOf']) {
       schema = flattenAllOf(schema['allOf'])
-      response.content['application/json'].schema = {
+      response.content['application/vnd.integrate.v1.9.0+json'].schema = {
         type: 'object',
         properties: schema,
       }
@@ -176,6 +177,7 @@ function buildPaths() {
 
   // build endpoints
   const specNames = getSpecFiles()
+  print(String(specNames))
 
   if (!specNames.length) {
     finish('skipped')
@@ -222,6 +224,7 @@ function buildPaths() {
           method.parameters = []
         }
         method.parameters.unshift({$ref: '#/components/parameters/Accept'})
+        // method.parameters.unshift({$ref: '#/components/parameters/Authorization'})
         // IF WE WANT RATE LIMIT EXCEEDED TO HAVE EXACT DATA
         // get rate limits
         // let rateLimit: string;
@@ -242,6 +245,7 @@ function buildPaths() {
     })
 
     Object.assign(outSpec.paths, spec.paths)
+    console.log(outSpec)
   })
 
   finish('done')
@@ -271,24 +275,26 @@ function buildWebhooks() {
 
     // build webhook
     outSpec.webhooks[specName] = {
-      tags: ['Webhooks'],
-      summary: spec['summary'],
-      description: spec['description'],
+      tags: ["Webhooks"],
+      summary: spec["summary"],
+      description: spec["description"],
       post: {
         responses: {
           200: {
             content: {
-              'application/json': {
+              "application/json": {
                 schema: {
-                  '$ref': spec['allOf'] ? `#/components/schemas/${specName}` : spec['properties'].$ref
+                  $ref: spec["allOf"]
+                    ? `#/components/schemas/${specName}`
+                    : spec["properties"].$ref,
                 },
-                examples: spec['examples'] // TODO separate out examples
-              }
-            }
-          }
-        }
-      }
-    }
+                examples: spec["examples"], // TODO separate out examples
+              },
+            },
+          },
+        },
+      },
+    };
     // build schema
     outSpec.components.schemas[specName] = {
       type: 'object',

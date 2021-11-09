@@ -2,7 +2,7 @@ description: Rate Limit Exceeded
 name: RateLimitExceeded
 summary: Requests to this endpoint are limited to a certain rate. If you have exceeded this rate check the endpoints limit and try again after a cool down period.
 content:
-  application/json:
+  application/vnd.integrate.v1.9.0+json:
     schema:
       type: object
       properties:

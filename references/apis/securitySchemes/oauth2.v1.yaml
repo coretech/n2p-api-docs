@@ -1,0 +1,11 @@
+password:
+  type: oauth2
+  description: Add your net2phone credentials below in order to get a token and test the API. Please choose `Request Body` in the dropbox before clicking the button.
+  x-client-id: 5757033240330240 # integrate test
+  # x-client-id: 5126610649874432 # integrate prod
+  x-client-secret: 93jb5brAT2qj7JhhxKTfqbrdH8Em5o0FSPupN4N0h05ZnSbmgi # integrate test
+  # x-client-secret: LAwJ4AqpjyiAahJYqVcKEguxPf5pbFR8HS7iRds6Wt1f1ll5xw # integrate prod
+  flows: 
+    password:
+      tokenUrl: /oauth/token/
+      # scopes: {}

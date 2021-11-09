@@ -1,6 +1,6 @@
 tags:
   - name: Users
-    description: Get a list of the Users for your company or details aobut a specific user.
+    description: Get a list of the Users for your company or details about a specific user.
 paths:
   /users/:
     get:
@@ -11,7 +11,7 @@ paths:
             x-RateLimit-Limit:
               description: 1/second, 15/minute
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 type: array
                 items:
@@ -30,7 +30,7 @@ paths:
             x-RateLimit-Limit:
               description: 1/second, 15/minute
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/user"
               examples:
@@ -45,7 +45,7 @@ paths:
             x-RateLimit-Limit:
               description: 1/second, 15/minute
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/user"
               examples:

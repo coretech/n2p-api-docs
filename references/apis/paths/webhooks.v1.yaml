@@ -9,7 +9,7 @@ paths:
         When an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.
       requestBody:
         content:
-          application/json:
+          application/vnd.integrate.v1.9.0+json:
             schema:
               $ref: "#/components/schemas/webhook_settings"
             examples:
@@ -22,7 +22,7 @@ paths:
               description: 1/second, 5/minute
           description: Accepted
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/webhook_subscription"
               examples:
@@ -53,7 +53,7 @@ paths:
             x-RateLimit-Limit:
               description: 1/second, 5/minute
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/webhook_subscription"
               examples:

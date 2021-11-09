@@ -17,7 +17,7 @@ paths:
             x-RateLimit-Limit:
               description: 5/second, 15/minute
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/cdrs"
               examples:
@@ -46,7 +46,7 @@ paths:
             x-RateLimit-Limit:
               description: 5/second, 15/minute
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/cdrs"
               examples:
@@ -75,7 +75,7 @@ paths:
             x-RateLimit-Limit:
               description: 5/second, 15/minute
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/cdrs"
               examples:
@@ -105,7 +105,7 @@ paths:
             x-RateLimit-Limit:
               description: 5/second, 15/minute
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/cdrs"
               examples:

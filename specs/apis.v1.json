@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
     "title": "net2phone integrate apis",
     "description": "Check out the documentation for instructions on getting started [here](/documentation/getting-started)",
@@ -34,7 +34,7 @@
     },
     {
       "name": "Users",
-      "description": "Get a list of the Users for your company or details aobut a specific user."
+      "description": "Get a list of the Users for your company or details about a specific user."
     },
     {
       "name": "Webhooks",
@@ -49,7 +49,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/account_settings"
                 },
@@ -119,7 +119,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -168,7 +167,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -217,7 +215,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "3/second, 20/minute"
               }
             },
@@ -250,7 +247,7 @@
     "/oauth/token/": {
       "post": {
         "summary": "Access and Refresh Tokens",
-        "description": "Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.\n\n`client_secret` is required when using `grant_type = authorization_code`,  \n`refresh_token` is required when using `grant_type = refresh_token`",
+        "description": "Use the Authentication Code provided in the redirect along with your applications Client Id and Client Secret to obtain an Access and Refresh Token for the user.\n\n`client_secret` is required when using `grant_type = authorization_code`,\n`refresh_token` is required when using `grant_type = refresh_token`",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -275,7 +272,6 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "3/second, 60/minute"
               }
             },
@@ -323,7 +319,7 @@
         "description": "Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.",
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/vnd.integrate.v1.9.0+json": {
               "schema": {
                 "$ref": "#/components/schemas/call"
               },
@@ -340,7 +336,6 @@
             "description": "Success",
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 15/minute"
               }
             }
@@ -399,12 +394,11 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/cdrs"
                 },
@@ -487,12 +481,11 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/cdrs"
                 },
@@ -575,12 +568,11 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/cdrs"
                 },
@@ -666,12 +658,11 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "5/second, 15/minute"
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/cdrs"
                 },
@@ -714,11 +705,12 @@
     "/available/endpoint/": {
       "get": {
         "summary": "Endpoints list",
-        "description": "Get list of avialable endpoints",
+        "description": "Get list of available endpoints",
+        "security": [],
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/endpoints"
                 },
@@ -767,12 +759,11 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -832,12 +823,11 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/user"
                 },
@@ -881,12 +871,11 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 15/minute"
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/user"
                 },
@@ -933,7 +922,7 @@
         "summary": "Creates a webhook subscription for the requested events.\nWhen an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.",
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/vnd.integrate.v1.9.0+json": {
               "schema": {
                 "$ref": "#/components/schemas/webhook_settings"
               },
@@ -949,13 +938,12 @@
           "202": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
             "description": "Accepted",
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/webhook_subscription"
                 },
@@ -1011,7 +999,6 @@
           "204": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
@@ -1054,12 +1041,11 @@
           "200": {
             "headers": {
               "x-RateLimit-Limit": {
-                "type": "string",
                 "description": "1/second, 5/minute"
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#/components/schemas/webhook_subscription"
                 },
@@ -1232,7 +1218,11 @@
               "Basic User",
               "Office Manager",
               "Call Center Supervisor",
-              "Call Center User"
+              "Call Center User",
+              "admin",
+              "regular",
+              "primary",
+              "anonymous"
             ]
           },
           "token_type": {
@@ -1270,10 +1260,12 @@
         "title": "Create Call",
         "type": "object",
         "description": "Body of create call request",
+        "required": [
+          "to"
+        ],
         "properties": {
           "to": {
             "type": "string",
-            "required": true,
             "description": "The destination for this call. (Phone number, sip address)"
           },
           "from": {
@@ -1650,7 +1642,11 @@
               "Basic User",
               "Office Manager",
               "Call Center Supervisor",
-              "Call Center User"
+              "Call Center User",
+              "admin",
+              "regular",
+              "primary",
+              "anonymous"
             ]
           }
         }
@@ -1668,7 +1664,7 @@
                 "type": "boolean"
               },
               "from": {
-                "desciption": "Where the call originated",
+                "description": "Where the call originated",
                 "type": "object",
                 "properties": {
                   "call_id": {
@@ -1804,10 +1800,12 @@
       },
       "webhook_subscription": {
         "type": "object",
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "integer",
-            "required": true,
             "description": "The unique id of this subscription",
             "format": "int32"
           },
@@ -1820,10 +1818,13 @@
             "type": "array",
             "uniqueItems": true,
             "items": {
+              "required": [
+                "type",
+                "user"
+              ],
               "properties": {
                 "type": {
                   "type": "string",
-                  "required": true,
                   "enum": [
                     "calls",
                     "cdrs",
@@ -1832,7 +1833,6 @@
                 },
                 "user": {
                   "type": "string",
-                  "required": true,
                   "default": "*"
                 }
               }
@@ -1843,28 +1843,13 @@
             "description": "Indicates if subscription is enabled"
           }
         }
-      },
-      "call_answered": {
-        "type": "object",
-        "title": "Call Ringing",
-        "description": "Call ringing webhook event."
-      },
-      "call_completed": {
-        "type": "object",
-        "title": "Call Ringing",
-        "description": "Call ringing webhook event."
-      },
-      "call_ringing": {
-        "type": "object",
-        "title": "Call Ringing",
-        "description": "Call ringing webhook event."
       }
     },
     "responses": {
       "Unauthorized": {
         "description": "Unauthorized",
         "content": {
-          "application/json": {
+          "application/vnd.integrate.v1.9.0+json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -1895,7 +1880,7 @@
       "Forbidden": {
         "description": "Forbidden",
         "content": {
-          "application/json": {
+          "application/vnd.integrate.v1.9.0+json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -1926,7 +1911,7 @@
       "NotFound": {
         "description": "Not Found",
         "content": {
-          "application/json": {
+          "application/vnd.integrate.v1.9.0+json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -1957,7 +1942,7 @@
       "InvalidVersion": {
         "description": "Invalid Version",
         "content": {
-          "application/json": {
+          "application/vnd.integrate.v1.9.0+json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -1988,7 +1973,7 @@
       "RateLimitExceeded": {
         "description": "Rate Limit Exceeded",
         "content": {
-          "application/json": {
+          "application/vnd.integrate.v1.9.0+json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -2015,7 +2000,7 @@
       "InternalServerError": {
         "description": "Internal Server Error",
         "content": {
-          "application/json": {
+          "application/vnd.integrate.v1.9.0+json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -2054,6 +2039,18 @@
           "type": "string",
           "enum": [
             "application/vnd.integrate.v1.9.0+json"
+          ]
+        }
+      },
+      "Authorization": {
+        "name": "Authorization",
+        "required": true,
+        "in": "header",
+        "description": "The bearer token",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "Bearer 0l9k8j7h6g5f4d3s2a1"
           ]
         }
       },
@@ -2577,83 +2574,25 @@
           ]
         }
       }
-    }
-  },
-  "webhooks": {
-    "call_answered": {
-      "tags": [
-        "Webhooks"
-      ],
-      "summary": "Call Ringing",
-      "description": "Call ringing webhook event.",
-      "post": {
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#components/schemas/webhook_call"
-                },
-                "examples": {
-                  "example": {
-                    "$ref": "#components/examples/webhook_call_answered"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     },
-    "call_completed": {
-      "tags": [
-        "Webhooks"
-      ],
-      "summary": "Call Ringing",
-      "description": "Call ringing webhook event.",
-      "post": {
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#components/schemas/webhook_call"
-                },
-                "examples": {
-                  "example": {
-                    "$ref": "#components/examples/webhook_call_completed"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "call_ringing": {
-      "tags": [
-        "Webhooks"
-      ],
-      "summary": "Call Ringing",
-      "description": "Call ringing webhook event.",
-      "post": {
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#components/schemas/webhook_call"
-                },
-                "examples": {
-                  "example": {
-                    "$ref": "#components/examples/webhook_call_ringing"
-                  }
-                }
-              }
-            }
+    "securitySchemes": {
+      "password": {
+        "type": "oauth2",
+        "description": "Add your net2phone credentials below in order to get a token and test the API. Please choose `Request Body` in the dropbox before clicking the button.",
+        "x-client-id": 5757033240330240,
+        "x-client-secret": "93jb5brAT2qj7JhhxKTfqbrdH8Em5o0FSPupN4N0h05ZnSbmgi",
+        "flows": {
+          "password": {
+            "tokenUrl": "/oauth/token/"
           }
         }
       }
     }
-  }
+  },
+  "webhooks": {},
+  "security": [
+    {
+      "password": []
+    }
+  ]
 }

@@ -2,7 +2,7 @@ description: Unauthorized
 name: Unauthorized
 summary: The associated `vendor` was not found.
 content:
-  application/json:
+  application/vnd.integrate.v1.9.0+json:
     schema:
       allOf:
         - $ref: ./base/response.error.v1.yaml
