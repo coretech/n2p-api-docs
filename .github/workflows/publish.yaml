@@ -31,7 +31,7 @@ jobs:
       - run: yarn --frozen-lockfile --ignore-scripts
 
       - name: Build 🏗️
-        run: yarn build:all
+        run: yarn build:ci
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
