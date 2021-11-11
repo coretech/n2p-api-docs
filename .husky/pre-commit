@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 build_spec () {
-  [ -z "$1" ] && yarn build || yarn build:$1
+  [ -z "$1" ] && yarn build:all || yarn build:$1
   git add "$(dirname "$0")/../specs"
 }
 
