@@ -9,6 +9,7 @@
     "build:apis": "yarn build apis",
     "build:webhooks": "yarn build webhooks",
     "build:all": "run-p build:apis build:webhooks",
+    "build:ci": "run-s build:apis build:webhooks",
     "start": "run-p serve watch",
     "start:apis": "run-p serve watch:apis",
     "watch": "run-p watch:apis watch:webhooks",
