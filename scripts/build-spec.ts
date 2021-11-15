@@ -1,6 +1,6 @@
-import shell from 'shelljs';
-import path from 'path';
-import fs from 'fs';
+import shell from 'shelljs'
+import path from 'path'
+import fs from 'fs'
 import {
   quit,
   print,
@@ -10,30 +10,37 @@ import {
   getSpecFiles,
 } from './helpers'
 
-const basePath = path.join(__dirname, '../');
-const specBase = path.join(__dirname, 'base-spec.json');
+const basePath = path.join(__dirname, '../')
+const specBase = path.join(__dirname, 'base-spec.json')
 
-process.chdir(basePath);
+process.chdir(basePath)
 
 interface Options {
   directory: string
+  outDir: string
   version: string
 }
 
 const options: Options = {
   directory: 'webhooks',
+  outDir: 'specs',
   version: 'v1',
-};
+}
 
 // global vars
-let outSpec: any = {};
-let docsPath: string;
-let sharedResponses: any = {};
+const outSpec: any = {}
+let docsPath: string
+const sharedResponses: any = {}
 
 function main() {
-  const directoryArg = process.argv[ 2 ] as string
+  const directoryArg = process.argv[2] as string
   if (directoryArg) {
     options.directory = directoryArg
+  }
+
+  const outDirArg = process.argv[3] as string
+  if (outDirArg) {
+    options.outDir = outDirArg
   }
 
   const { directory } = options
@@ -43,19 +50,19 @@ function main() {
   // get path exists
   docsPath = path.join(basePath, 'references/', directory)
   if (!shell.test('-d', docsPath)) {
-    quit('Directory does not exist', docsPath);
+    quit('Directory does not exist', docsPath)
   }
   shell.cd(docsPath)
 
-  buildBase();
+  buildBase()
   buildResponses()
   dirToComponents('parameters')
   dirToComponents('headers')
   dirToComponents('schemas')
   dirToComponents('examples')
-  buildPaths();
-  buildWebhooks();
-  saveSpecFile();
+  buildPaths()
+  buildWebhooks()
+  saveSpecFile()
 }
 
 /**
@@ -83,16 +90,20 @@ function buildBase(): void {
 }
 
 function saveSpecFile(): void {
-  const { directory } = options
+  const { directory, version, outDir } = options
 
-  print(`Saving spec file`)
+  print('Saving spec file')
+  
+  const dir = path.join(basePath, outDir)
+  
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir)
+  }
 
-  const outFile = path.join(basePath,
-    `./specs/${directory}.${options.version}.json`
-  );
+  const outFile = path.join(dir, `${directory}.${options.version}.json`)
 
-  fs.writeFileSync(outFile, JSON.stringify(outSpec, null, 2));
-  print(`Successfully wrote ${outFile}`, true, 'greenBright');
+  fs.writeFileSync(outFile, JSON.stringify(outSpec, null, 2))
+  print(`Successfully wrote ${outFile}`, true, 'greenBright')
 }
 
 function finish(reason: string) {
@@ -101,8 +112,8 @@ function finish(reason: string) {
 }
 
 function buildResponses() {
-  print(`building responses...`, false)
-  if (!shell.test('-d', `./responses`)) {
+  print('building responses...', false)
+  if (!shell.test('-d', './responses')) {
     finish('skipped')
     return
   }
@@ -115,7 +126,7 @@ function buildResponses() {
     outSpec.components.responses = {}
   }
 
-  responseNames.forEach(responseName => {
+  responseNames.forEach((responseName) => {
     const response = readSpecFile(responseName)
 
     if (!response) return
@@ -132,11 +143,13 @@ function buildResponses() {
     // build components.responses
     outSpec.components.responses[response.name] = {
       description: response.description,
-      content: response.content
+      content: response.content,
     }
 
     // build shared for reuse
-    sharedResponses[responseName.split('.')[1]] = { $ref: `#/components/responses/${response.name}`}
+    sharedResponses[responseName.split('.')[1]] = {
+      $ref: `#/components/responses/${response.name}`,
+    }
   })
 
   finish('done')
@@ -155,7 +168,7 @@ function dirToComponents(directory: string) {
     outSpec.components[directory] = {}
   }
 
-  getSpecFiles().forEach(specName => {
+  getSpecFiles().forEach((specName) => {
     const spec = readSpecFile(specName)
     if (!spec) return
     Object.assign(outSpec.components[directory], spec)
@@ -165,7 +178,7 @@ function dirToComponents(directory: string) {
 }
 
 function buildPaths() {
-  print(`building endpoints...`, false)
+  print('building endpoints...', false)
   if (!shell.test('-d', './paths')) {
     finish('skipped')
     return
@@ -200,11 +213,11 @@ function buildPaths() {
     }
 
     // process paths
-    Object.keys(spec.paths).forEach(pathName => {
+    Object.keys(spec.paths).forEach((pathName) => {
       // get path
       const path = spec.paths[pathName]
       // loop through methods
-      Object.keys(path).forEach(methodName => {
+      Object.keys(path).forEach((methodName) => {
         const method = path[methodName]
         // add tag to path if not exists
         if (!method.tags && tag) {
@@ -221,10 +234,10 @@ function buildPaths() {
         if (!method.parameters) {
           method.parameters = []
         }
-        method.parameters.unshift({$ref: '#/components/parameters/Accept'})
+        method.parameters.unshift({ $ref: '#/components/parameters/Accept' })
         // IF WE WANT RATE LIMIT EXCEEDED TO HAVE EXACT DATA
         // get rate limits
-        // let rateLimit: string;
+        // let rateLimit: string
         // Object.keys(method.responses).forEach(response => {
         //   if (Number.parseInt(response) < 300) {
         //     rateLimit = method.responses[response]?.headers?.['x-RateLimit-Limit']?.description
@@ -248,7 +261,7 @@ function buildPaths() {
 }
 
 function buildWebhooks() {
-  print(`building webhooks...`, false)
+  print('building webhooks...', false)
   shell.cd('./webhooks')
 
   // get all tags
@@ -266,7 +279,7 @@ function buildWebhooks() {
 
     let properties: {}
     if (spec['allOf']) {
-      properties = flattenAllOf(spec[ 'allOf' ])
+      properties = flattenAllOf(spec['allOf'])
     }
 
     // build webhook
@@ -280,14 +293,16 @@ function buildWebhooks() {
             content: {
               'application/json': {
                 schema: {
-                  '$ref': spec['allOf'] ? `#/components/schemas/${specName}` : spec['properties'].$ref
+                  $ref: spec['allOf']
+                    ? `#/components/schemas/${specName}`
+                    : spec['properties'].$ref,
                 },
-                examples: spec['examples'] // TODO separate out examples
-              }
-            }
-          }
-        }
-      }
+                examples: spec['examples'], // TODO separate out examples
+              },
+            },
+          },
+        },
+      },
     }
     // build schema
     outSpec.components.schemas[specName] = {
@@ -295,12 +310,12 @@ function buildWebhooks() {
       title: spec['summary'],
       description: spec['description'],
       properties,
-    };
-  });
+    }
+  })
 
   finish('done')
 }
 
 (function () {
-  main();
-})();
+  main()
+})()
