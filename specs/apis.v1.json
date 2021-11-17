@@ -1631,7 +1631,7 @@
           },
           "time_zone": {
             "type": "string",
-            "description": "The time zone this user resides in (NetSapiens users only)"
+            "description": "The time zone this user resides in"
           },
           "scope": {
             "type": "string",
