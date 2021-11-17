@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "https://integrate.versature.com/api",
-      "description": "Production netphone integrate API endpoint"
+      "url": "https://versature-integrate-2-test.appspot.com/api",
+      "description": "Developement environment API endpoint"
     }
   ],
   "tags": [
@@ -49,7 +49,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/vnd.integrate.v1.9.0+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/account_settings"
                 },
@@ -319,7 +319,7 @@
         "description": "Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.",
         "requestBody": {
           "content": {
-            "application/vnd.integrate.v1.9.0+json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/call"
               },
@@ -398,7 +398,7 @@
               }
             },
             "content": {
-              "application/vnd.integrate.v1.9.0+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/cdrs"
                 },
@@ -485,7 +485,7 @@
               }
             },
             "content": {
-              "application/vnd.integrate.v1.9.0+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/cdrs"
                 },
@@ -572,7 +572,7 @@
               }
             },
             "content": {
-              "application/vnd.integrate.v1.9.0+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/cdrs"
                 },
@@ -662,7 +662,7 @@
               }
             },
             "content": {
-              "application/vnd.integrate.v1.9.0+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/cdrs"
                 },
@@ -710,7 +710,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/vnd.integrate.v1.9.0+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/endpoints"
                 },
@@ -763,7 +763,7 @@
               }
             },
             "content": {
-              "application/vnd.integrate.v1.9.0+json": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -922,7 +922,7 @@
         "summary": "Creates a webhook subscription for the requested events.\nWhen an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.",
         "requestBody": {
           "content": {
-            "application/vnd.integrate.v1.9.0+json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/webhook_settings"
               },
@@ -2578,9 +2578,9 @@
     "securitySchemes": {
       "password": {
         "type": "oauth2",
-        "description": "Add your net2phone credentials below in order to get a token and test the API. Please choose `Request Body` in the dropbox before clicking the button.",
-        "x-client-id": 5757033240330240,
-        "x-client-secret": "93jb5brAT2qj7JhhxKTfqbrdH8Em5o0FSPupN4N0h05ZnSbmgi",
+        "description": "Add your net2phone credentials below in order to get a token and test the API. Please choose `Request Body` in the dropbox before clicking the `Get Token` button.",
+        "x-client-id": 5679792816914432,
+        "x-client-secret": "IErkNrO3R7Cti6YZiiqFp3OWxSpfnhkwkDVppqPFq57HjkgLkt",
         "flows": {
           "password": {
             "tokenUrl": "/oauth/token/"
