@@ -8,7 +8,6 @@ user:
     - first_name
     - last_name
     - email
-    - time_zone
     - scope
   properties:
     username:
@@ -31,7 +30,7 @@ user:
       description: The domain for the user
     time_zone:
       type: string
-      description: The time zone this user resides in
+      description: The time zone this user resides in (NetSapiens users only)
     scope:
       type: string
       description: The role of this user
