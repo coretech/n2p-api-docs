@@ -31,7 +31,7 @@ info:
 
     <h3> 3. API Request </h3>
 
-    Once you have an Access Token you can make API Requests against the net2phone API. Below is an example of how to request the `Current User` endpoint using your **Access Token** in the Authorization header.
+    Once you have an **Access Token**, you can make API requests against the net2phone API. Below is an example of how to request the `Current User` endpoint using your **Access Token** in the Authorization header. 
 
     *Note. Pay attention to the Accept header which is used for API versioning.*
 
@@ -61,7 +61,7 @@ info:
 
     <h3> 4. What's Next? </h3>
 
-    Now that you have a feel for Net2Phone API we recommend that you:
+    Now that you have a feel for the net2phone API, we recommend that you:
       - Have a look through our [API Documentation](/explore/apis#servers) to see all the data that is available to you.
       - Review the [Authentication Documentation](#overview--authentication) to ensure you select the authentication flow which is best for your application.
 
@@ -72,9 +72,9 @@ info:
 
     # Authentication
 
-    The net2phone API uses the industry-standard OAuth 2.0 for authorization. If you are unfamiliar with this protocol, please take a moment to do so by visiting [OAuth 2.0](https://oauth.net/2/).
+    The net2phone API uses the industry-standard OAuth 2.0 for authorization. If you are unfamiliar with this protocol, please take a moment to do so by visiting <a href="https://oauth.net/2/" target="_blank">OAuth 2.0</a>.
 
-    On the [same page](https://oauth.net/code/), you will find libraries in different languages that will help to implement OAuth 2.0 based auth.
+    On the <a href="https://oauth.net/code/" target="_blank">same page</a>, you will find libraries in different languages that will help to implement OAuth 2.0 based auth.
 
     <h3>Table of Contents</h3>
 
@@ -89,7 +89,7 @@ info:
       - [Access Token](#access-token)
       - [Refresh Token](#refresh-token)
         - [Authentication Steps](#authentication-steps-3)
-      - [Responses](#responses)
+      - [Token Response](#responses)
     
     <h2 id="choosing-the-authentication-flow"> Choosing The Authentication Flow </h2>
 
@@ -106,7 +106,7 @@ info:
     
     In this type of grant, your server-side application changes an Authorization Code for an **Access Token**. To use this flow, you will need to fill out the form and register a redirect URL with N2P to acquire the **Client ID** and **Client Secret**.
 
-    Once that is done, your application will direct users to the authorization endpoint with their **Client ID** and **redirect URL** where they will be able to authenticate with their N2P credentials. After being authenticated, the users will be redirected to your **redirect URL** and a unique code will be provided. Your backend server will use this code along with your **Client ID**, **Client Secret**, and **redirect URL** to obtain an **Access** and **Refresh Token** for the authenticated user.
+    Once that is done, your application will direct users to the authorization endpoint with their **Client ID** and **redirect URL** where they will be able to authenticate with their net2phone credentials. After being authenticated, the users will be redirected to your **redirect URL** and a unique code will be provided. Your backend server will use this code along with your **Client ID**, **Client Secret**, and **redirect URL** to obtain an **Access** and **Refresh Token** for the authenticated user.
 
     ![Authorization Code Grant Diagram](/images/documentation/auth/authorization-code-grant.png)
 
@@ -177,7 +177,7 @@ info:
     
     <h2 id="resource-owner-password"> Resource Owner Password </h2>
 
-    If you are creating a backend service, please contact us to create a **special admin user** and be able to use the Password Authentication Flow. If you have access to [net2phone web app](https://app.net2phone.com/), you can simply create admin users there. So, in this case, you can use an existing one or create a new one just for this purpose.
+    If you are creating a backend service, please contact us to create a **special admin user** and be able to use the Password Authentication Flow. If you have access to the [net2phone web app](https://app.net2phone.com/), you can simply create admin users there. So, in this case, you can use an existing one or create a new one just for this purpose.
 
     NOTE. This flow is **NOT** supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the **Authorization Code Grant** flow.
 
@@ -219,8 +219,8 @@ info:
     | Field | Type | Description |
     | -------- | ------------------- | ------------------- |
     | response_type | string | Use the value `token` |
-    | client_id | string | Your integration unique client ID |
-    | redirect_uri | string | Your redirect url |
+    | client_id | string | Your integration unique Client ID |
+    | redirect_uri | string | Your redirect URL |
     
     So, the redirect endpoint will end up looking like this:
     
@@ -247,20 +247,21 @@ info:
 
     It's a specific string created by the net2phone server to inform the net2phone API that the client has been authorized to access the endpoints and perform actions according to its scope.
 
-    <h3 id="refresh_token"> Refresh Token </h3>
+    <h3 id="refresh-token"> Refresh Token </h3>
 
     As the name implies, this token allows obtaining a new **Access Token** without re-entering the client’s credentials.
 
     *Note. In this case, the Authorization header takes the B64 encoded string of the Client ID and Client Secret with a colon (`:`) in between as the Bearer token. So it will be like this: `base64_encode(client_id:client_secret)`.*
 
     *Example:*
+
     *a. regular string (before encoding): `1234567890:JgsSbZQfw6CVPaIJpkjfTTvPGfBq1sBAWVpGvaRlEt0TAuvfO0`*
 
     *b. b64 string (after encoding): `MTIzNDU2Nzg5MDpKZ3NTYlpRZnc2Q1ZQYUlKcGtqZlRUdlBHZkJxMXNCQVdWcEd2YVJsRXQwVEF1dmZPMA==`*
 
     <h4 id="authentication-steps-3"> Authentication Steps </h4>
 
-    Your integration will POST a request to the following endpoint with the grant type and the refresh_token.
+    Your integration will POST a request to the following endpoint with the **grant_type** and the **refresh_token**.
 
     ```bash
     curl -X "POST" "https://integrate.versature.com/api/oauth/token/" \
