@@ -2,7 +2,7 @@ description: Internal Server Error
 name: InternalServerError
 summary: An error occurred while marshalling the response.
 content:
-  application/vnd.integrate.v1.9.0+json:
+  application/json:
     schema:
       allOf:
         - $ref: ./base/response.error.v1.yaml

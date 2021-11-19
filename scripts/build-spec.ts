@@ -123,10 +123,10 @@ function buildResponses() {
     if (!response) return
 
     // flatten
-    let { schema } = response.content['application/vnd.integrate.v1.9.0+json']
+    let { schema } = response.content['application/json']
     if (schema['allOf']) {
       schema = flattenAllOf(schema['allOf'])
-      response.content['application/vnd.integrate.v1.9.0+json'].schema = {
+      response.content['application/json'].schema = {
         type: 'object',
         properties: schema,
       }

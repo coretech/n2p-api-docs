@@ -2,7 +2,7 @@ description: Not Found
 name: NotFound
 summary: The `id` was not found.
 content:
-  application/vnd.integrate.v1.9.0+json:
+  application/json:
     schema:
       allOf:
         - $ref: ./base/response.error.v1.yaml

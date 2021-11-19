@@ -49,7 +49,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#components/schemas/account_settings"
                 },
@@ -276,7 +276,7 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#components/schemas/auth_token"
                 },
@@ -319,7 +319,7 @@
         "description": "Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.",
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/vnd.integrate.v1.9.0+json": {
               "schema": {
                 "$ref": "#components/schemas/call"
               },
@@ -399,7 +399,7 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#components/schemas/cdrs"
                 },
@@ -486,7 +486,7 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#components/schemas/cdrs"
                 },
@@ -573,7 +573,7 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#components/schemas/cdrs"
                 },
@@ -663,7 +663,7 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#components/schemas/cdrs"
                 },
@@ -711,7 +711,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "$ref": "#components/schemas/endpoints"
                 },
@@ -764,7 +764,7 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -923,7 +923,7 @@
         "summary": "Creates a webhook subscription for the requested events.\nWhen an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.",
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/vnd.integrate.v1.9.0+json": {
               "schema": {
                 "$ref": "#components/schemas/webhook_settings"
               },
@@ -1861,7 +1861,7 @@
       "Unauthorized": {
         "description": "Unauthorized",
         "content": {
-          "application/vnd.integrate.v1.9.0+json": {
+          "application/json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -1892,7 +1892,7 @@
       "Forbidden": {
         "description": "Forbidden",
         "content": {
-          "application/vnd.integrate.v1.9.0+json": {
+          "application/json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -1923,7 +1923,7 @@
       "NotFound": {
         "description": "Not Found",
         "content": {
-          "application/vnd.integrate.v1.9.0+json": {
+          "application/json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -1954,7 +1954,7 @@
       "InvalidVersion": {
         "description": "Invalid Version",
         "content": {
-          "application/vnd.integrate.v1.9.0+json": {
+          "application/json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -1985,7 +1985,7 @@
       "RateLimitExceeded": {
         "description": "Rate Limit Exceeded",
         "content": {
-          "application/vnd.integrate.v1.9.0+json": {
+          "application/json": {
             "schema": {
               "type": "object",
               "properties": {
@@ -2012,7 +2012,7 @@
       "InternalServerError": {
         "description": "Internal Server Error",
         "content": {
-          "application/vnd.integrate.v1.9.0+json": {
+          "application/json": {
             "schema": {
               "type": "object",
               "properties": {
