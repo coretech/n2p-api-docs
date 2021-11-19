@@ -10,10 +10,10 @@ paths:
 
         For the full authentication flow see [authentication](/documentation/authentication#authorization-code-grant)
       parameters:
-        - $ref: "#/components/parameters/response_type"
-        - $ref: "#/components/parameters/redirect_uri"
-        - $ref: "#/components/parameters/client_id"
-        - $ref: "#/components/parameters/state"
+        - $ref: "#components/parameters/response_type"
+        - $ref: "#components/parameters/redirect_uri"
+        - $ref: "#components/parameters/client_id"
+        - $ref: "#components/parameters/state"
       responses:
         200:
           headers:
@@ -31,8 +31,8 @@ paths:
 
         Once you have provided your redirect uri to us and have obtained your Client Id and Client Secret; direct the authenticating user to: `/api/oauth/authorize/n2p/` be sure to include the required arguments with your request (See below for arguments).
       parameters:
-        - $ref: "#/components/parameters/client_id"
-        - $ref: "#/components/parameters/state"
+        - $ref: "#components/parameters/client_id"
+        - $ref: "#components/parameters/state"
       responses:
         200:
           headers:
@@ -46,8 +46,8 @@ paths:
 
         Logout endpoint. It will revoke the token and clear the session.
       parameters:
-        - $ref: "#/components/parameters/client_id"
-        - $ref: "#/components/parameters/access_token"
+        - $ref: "#components/parameters/client_id"
+        - $ref: "#components/parameters/access_token"
       responses:
         200:
           headers:
@@ -62,11 +62,11 @@ paths:
         `client_secret` is required when using `grant_type = authorization_code`,
         `refresh_token` is required when using `grant_type = refresh_token`
       parameters:
-        - $ref: "#/components/parameters/grant_type"
-        - $ref: "#/components/parameters/client_id"
-        - $ref: "#/components/parameters/client_secret"
-        - $ref: "#/components/parameters/refresh_token"
-        - $ref: "#/components/parameters/state"
+        - $ref: "#components/parameters/grant_type"
+        - $ref: "#components/parameters/client_id"
+        - $ref: "#components/parameters/client_secret"
+        - $ref: "#components/parameters/refresh_token"
+        - $ref: "#components/parameters/state"
       responses:
         200:
           headers:
@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/auth_token"
+                $ref: "#components/schemas/auth_token"
               examples:
                 example:
-                  $ref: "#/components/examples/auth_token"
+                  $ref: "#components/examples/auth_token"

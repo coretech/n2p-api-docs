@@ -54,6 +54,7 @@ function main() {
   dirToComponents('schemas')
   dirToComponents('examples')
   dirToComponents('securitySchemes')
+  dirToComponents('callbacks')
   buildPaths();
   buildWebhooks();
   saveSpecFile();
@@ -253,6 +254,11 @@ function buildPaths() {
 
 function buildWebhooks() {
   print(`building webhooks...`, false)
+  if (!shell.test("-d", `./webhooks`)) {
+    finish("skipped");
+    return;
+  }
+  
   shell.cd('./webhooks')
 
   // get all tags

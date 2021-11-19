@@ -10,10 +10,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/call"
+              $ref: "#components/schemas/call"
             examples:
               example:
-                $ref: "#/components/examples/call"
+                $ref: "#components/examples/call"
       responses:
         201:
           description: Success
@@ -25,7 +25,7 @@ paths:
 #      summary: Terminate an Active Call
 #      description: Terminate the call with the provided id
 #      parameters:
-#        - $ref: "#/components/parameters/callId"
+#        - $ref: "#components/parameters/callId"
 #      responses:
 #        204:
 #          description: Success
