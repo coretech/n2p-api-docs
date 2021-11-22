@@ -112,7 +112,7 @@ info:
 
     <h3 id="authentication-steps"> Authentication Steps </h3>
 
-    1. A user clicks the Login link within your application
+    1. A user clicks the Login link within your application.
     2. Redirect the user to the authorization endpoint `https://integrate.versature.com/oauth/authorize/` with the following parameters:
       
     <table>
@@ -153,13 +153,15 @@ info:
     https://integrate.versature.com/api/oauth/authorize/?response_type=code&client_id=0123456789&redirect_uri=https://www.example.com/callback/&state=a0b1c2d3e4f5g6h7i8j9
     ```
 
-    3. The user will authenticate with their N2P credentials and allow the access
+    3. The user will be prompted to authenticate with their N2P credentials and allow the access:
 
     ![Login Screen](/images/documentation/auth/login-screen.png)
 
-    4. The user will then be redirected to your redirect URL with a temporary code (valid for 60 seconds only) and the state (if supplied).
+    4. The user will authenticate and consent the access.
+    
+    5. The user will then be redirected to your redirect URL with a temporary code (valid for 60 seconds only) and the state (if supplied).
 
-    5. Your integration will then request an **Access Token** and a **Refresh Token** for the user with a POST request the following endpoint with your **Client ID**, **code**, **redirect URL**, and **grant_type**:
+    6. Your integration will then request an **Access Token** and a **Refresh Token** for the user with a POST request the following endpoint with your **Client ID**, **code**, **redirect URL**, and **grant_type**:
     
     ```bash
     curl -X "POST" "https://integrate.versature.com/api/oauth/token/" \
@@ -172,6 +174,8 @@ info:
     }'
     ```
 
+    7. Your application will receive the **Access Token** and the **Refresh Token**.
+
     <br />
     <hr />
     
@@ -179,15 +183,15 @@ info:
 
     If you are creating a backend service, please contact us to create a **special admin user** and be able to use the Password Authentication Flow. If you have access to the [net2phone web app](https://app.net2phone.com/), you can simply create admin users there. So, in this case, you can use an existing one or create a new one just for this purpose.
 
-    NOTE. This flow is **NOT** supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the **Authorization Code Grant** flow.
+    NOTES:
+    - This flow is **NOT** supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the **Authorization Code Grant** flow.
+    - Store the **special admin user** username and password securely in the backend service configuration.
 
     ![Resource Owner Password Grant Diagram](/images/documentation/auth/password-grant.png)
 
     <h3 id="authentication-steps-1"> Authentication Steps </h3>
 
-    1. Contact [net2phone](mailto:integrations@net2phone.com) to create a special admin user or, if you have access to [net2phone web app](https://app.net2phone.com/), you can simply create admin users there.
-    2. Stores the username and password securely in the backend service configuration.
-    3. To obtain the **Access Token**, your integration will POST a request to the following endpoint with the special admin user **username**, **password**, **client_id**, **client_secret**, and **grant_type**:
+    1. To obtain the **Access Token**, your integration will POST a request to the following endpoint with the special admin user **username**, **password**, **client_id**, **client_secret**, and **grant_type**:
 
     ```bash
     curl -X "POST" "https://integrate.versature.com/api/oauth/token/" \
@@ -201,6 +205,8 @@ info:
     }'
     ```
 
+    2. Your application will receive the **Access Token** and the **Refresh Token**.
+
     <br />
     <hr />
 
@@ -212,7 +218,7 @@ info:
 
     <h3 id="authentication-steps-2"> Authentication Steps </h3>
 
-    1. A user clicks the Login link within your application
+    1. A user clicks the Login link within your application.
 
     2. Redirect the user to the authorization endpoint `https://integrate.versature.com/oauth/authorize/` with the following parameters:
       
@@ -228,11 +234,13 @@ info:
     https://integrate.versature.com/api/oauth/authorize/?response_type=token&client_id=0123456789&redirect_uri=https://www.example.com/callback/
     ```
 
-    3. The user will authenticate with their N2P credentials and allow the access
+    3. The user will be prompted to authenticate with their N2P credentials and allow the access:
 
     ![Login Screen](/images/documentation/auth/login-screen.png)
 
-    4. The user will then be redirected to your redirect URL with the Access Token in the URL fragment.
+    4. The user will authenticate and consent the access.
+
+    5. The user will then be redirected to your redirect URL with the **Access Token** in the URL fragment.
     Example:
     ```
     https://www.example.com/callback/#user_id=5067&access_token=fIYYaIaHkCgcaKpiM4-pKzzraojwPlUkNwGwPCptkjIED-tbBMX0miI40BJ8F-biTDZ3VfD-fwycrn-Guf9cTdFxqZ3ChxrvswldmUenyWPoxLQaNNXy10bhp4KCCIN92KN3954axuTAxZE8&expires=2021-11-04T20%3A08%3A16.326311&expires_in=3597
