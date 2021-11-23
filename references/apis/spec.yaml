@@ -181,17 +181,17 @@ info:
     
     <h2 id="resource-owner-password"> Resource Owner Password </h2>
 
-    If you are creating a backend service, please contact us to create a **special admin user** and be able to use the Password Authentication Flow. If you have access to the [net2phone web app](https://app.net2phone.com/), you can simply create admin users there. So, in this case, you can use an existing one or create a new one just for this purpose.
+    If you are creating a backend service you can use the Password Authentication Flow.
 
     NOTES:
     - This flow is **NOT** supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the **Authorization Code Grant** flow.
-    - Store the **special admin user** username and password securely in the backend service configuration.
+    - Store the **admin user** username and password securely in the backend service configuration.
 
     ![Resource Owner Password Grant Diagram](/images/documentation/auth/password-grant.png)
 
     <h3 id="authentication-steps-1"> Authentication Steps </h3>
 
-    1. To obtain the **Access Token**, your integration will POST a request to the following endpoint with the special admin user **username**, **password**, **client_id**, **client_secret**, and **grant_type**:
+    1. To obtain the **Access Token**, your integration will POST a request to the following endpoint with the admin user **username**, **password**, **client_id**, **client_secret**, and **grant_type**:
 
     ```bash
     curl -X "POST" "https://integrate.versature.com/api/oauth/token/" \
