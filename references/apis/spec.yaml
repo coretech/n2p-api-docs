@@ -161,7 +161,7 @@ info:
     
     5. The user will then be redirected to your redirect URL with a temporary code (valid for 60 seconds only) and the state (if supplied).
 
-    6. Your integration will then request an **Access Token** and a **Refresh Token** for the user with a POST request the following endpoint with your **Client ID**, **code**, **redirect URL**, and **grant_type**:
+    6. Your integration will then request an **Access Token** and a **Refresh Token** for the user with a POST request the following endpoint with your **client_id**, **code**, **redirect_uri**, and **grant_type**:
     
     ```bash
     curl -X "POST" "https://integrate.versature.com/api/oauth/token/" \
@@ -308,10 +308,10 @@ info:
 
   version: "1.9.0"
 servers:
-  - url: https://integrate.versature.com/api
-    description: Production net2phone integrate API endpoint
-  # - url: https://versature-integrate-2-test.appspot.com/api
-  #   description: Test net2phone integrate API endpoint
+  # - url: https://integrate.versature.com/api
+  #   description: Production net2phone integrate API endpoint
+  - url: https://versature-integrate-2-test.appspot.com/api
+    description: Test net2phone integrate API endpoint
 
   #   description: Developement environment API endpoint
 #components:
@@ -330,4 +330,3 @@ servers:
 #          api: API
 security:
   - password: []
-#  - oauth: []
