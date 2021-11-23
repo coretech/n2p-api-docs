@@ -1,0 +1,9 @@
+Authorization:
+  name: Authorization
+  required: true
+  in: header
+  description: The bearer token
+  schema:
+    type: string
+    enum:
+      - Bearer 0l9k8j7h6g5f4d3s2a1

@@ -22,7 +22,7 @@
     },
     {
       "name": "CDRs",
-      "description": "Get a list of the Call Detail Records (CDR's) for a specific member of your company or for the entire company. Filter your calls by Inbound, Outbound, Missed and get calls for a specific date range. If no CDRs are found for the query the repsonse will be empty."
+      "description": "Get a list of the Call Detail Records (CDR's) for a specific member of your company or for the entire company. Filter your calls by Inbound, Outbound, Missed and get calls for a specific date range. If no CDRs are found for the query the response will be empty."
     },
     {
       "name": "Endpoints",
@@ -30,7 +30,7 @@
     },
     {
       "name": "Users",
-      "description": "Get a list of the Users for your company or details aobut a specific user."
+      "description": "Get a list of the Users for your company or details about a specific user."
     },
     {
       "name": "Webhooks",
@@ -45,16 +45,16 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/account_settings"
+                  "$ref": "#components/schemas/account_settings"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/account_settings"
+                    "$ref": "#components/examples/account_settings"
                   },
                   "default": {
-                    "$ref": "#/components/examples/account_settings_default"
+                    "$ref": "#components/examples/account_settings_default"
                   }
                 }
               }
@@ -96,13 +96,13 @@
         "description": "Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.",
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/vnd.integrate.v1.9.0+json": {
               "schema": {
-                "$ref": "#/components/schemas/call"
+                "$ref": "#components/schemas/call"
               },
               "examples": {
                 "example": {
-                  "$ref": "#/components/examples/call"
+                  "$ref": "#components/examples/call"
                 }
               }
             }
@@ -148,23 +148,24 @@
     },
     "/cdrs/": {
       "get": {
-        "summary": "Account CDRs",
-        "description": "Get list of all cdrs on the account",
+        "deprecated": true,
+        "summary": "Account CDRs (Termination Date: March 31, 2022)",
+        "description": "Get list of all CDRs on the account",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#/components/parameters/start_date"
+            "$ref": "#components/parameters/start_date"
           },
           {
-            "$ref": "#/components/parameters/end_date"
+            "$ref": "#components/parameters/end_date"
           },
           {
-            "$ref": "#/components/parameters/cursor"
+            "$ref": "#components/parameters/cursor"
           },
           {
-            "$ref": "#/components/parameters/limit"
+            "$ref": "#components/parameters/limit"
           }
         ],
         "responses": {
@@ -175,16 +176,16 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/cdrs"
+                  "$ref": "#components/schemas/cdrs"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/cdrs"
+                    "$ref": "#components/examples/cdrs"
                   },
                   "recordings example": {
-                    "$ref": "#/components/examples/cdrs_with_recordings"
+                    "$ref": "#components/examples/cdrs_with_recordings"
                   }
                 }
               }
@@ -224,34 +225,34 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#/components/parameters/start_date"
+            "$ref": "#components/parameters/start_date"
           },
           {
-            "$ref": "#/components/parameters/end_date"
+            "$ref": "#components/parameters/end_date"
           },
           {
-            "$ref": "#/components/parameters/cursor"
+            "$ref": "#components/parameters/cursor"
           },
           {
-            "$ref": "#/components/parameters/page_size"
+            "$ref": "#components/parameters/page_size"
           },
           {
-            "$ref": "#/components/parameters/max_duration"
+            "$ref": "#components/parameters/max_duration"
           },
           {
-            "$ref": "#/components/parameters/min_duration"
+            "$ref": "#components/parameters/min_duration"
           },
           {
-            "$ref": "#/components/parameters/phone_number"
+            "$ref": "#components/parameters/phone_number"
           },
           {
-            "$ref": "#/components/parameters/recording_available"
+            "$ref": "#components/parameters/recording_available"
           },
           {
-            "$ref": "#/components/parameters/type"
+            "$ref": "#components/parameters/type"
           },
           {
-            "$ref": "#/components/parameters/user"
+            "$ref": "#components/parameters/user"
           }
         ],
         "responses": {
@@ -262,16 +263,16 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/cdrs"
+                  "$ref": "#components/schemas/cdrs"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/cdrs"
+                    "$ref": "#components/examples/cdrs"
                   },
                   "recordings example": {
-                    "$ref": "#/components/examples/cdrs_with_recordings"
+                    "$ref": "#components/examples/cdrs_with_recordings"
                   }
                 }
               }
@@ -311,34 +312,34 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#/components/parameters/start_date"
+            "$ref": "#components/parameters/start_date"
           },
           {
-            "$ref": "#/components/parameters/end_date"
+            "$ref": "#components/parameters/end_date"
           },
           {
-            "$ref": "#/components/parameters/cursor"
+            "$ref": "#components/parameters/cursor"
           },
           {
-            "$ref": "#/components/parameters/page_size"
+            "$ref": "#components/parameters/page_size"
           },
           {
-            "$ref": "#/components/parameters/max_duration"
+            "$ref": "#components/parameters/max_duration"
           },
           {
-            "$ref": "#/components/parameters/min_duration"
+            "$ref": "#components/parameters/min_duration"
           },
           {
-            "$ref": "#/components/parameters/phone_number"
+            "$ref": "#components/parameters/phone_number"
           },
           {
-            "$ref": "#/components/parameters/recording_available"
+            "$ref": "#components/parameters/recording_available"
           },
           {
-            "$ref": "#/components/parameters/type"
+            "$ref": "#components/parameters/type"
           },
           {
-            "$ref": "#/components/parameters/user"
+            "$ref": "#components/parameters/user"
           }
         ],
         "responses": {
@@ -349,16 +350,16 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/cdrs"
+                  "$ref": "#components/schemas/cdrs"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/cdrs"
+                    "$ref": "#components/examples/cdrs"
                   },
                   "recordings example": {
-                    "$ref": "#/components/examples/cdrs_with_recordings"
+                    "$ref": "#components/examples/cdrs_with_recordings"
                   }
                 }
               }
@@ -398,37 +399,37 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#/components/parameters/userId"
+            "$ref": "#components/parameters/userId"
           },
           {
-            "$ref": "#/components/parameters/start_date"
+            "$ref": "#components/parameters/start_date"
           },
           {
-            "$ref": "#/components/parameters/end_date"
+            "$ref": "#components/parameters/end_date"
           },
           {
-            "$ref": "#/components/parameters/cursor"
+            "$ref": "#components/parameters/cursor"
           },
           {
-            "$ref": "#/components/parameters/page_size"
+            "$ref": "#components/parameters/page_size"
           },
           {
-            "$ref": "#/components/parameters/max_duration"
+            "$ref": "#components/parameters/max_duration"
           },
           {
-            "$ref": "#/components/parameters/min_duration"
+            "$ref": "#components/parameters/min_duration"
           },
           {
-            "$ref": "#/components/parameters/phone_number"
+            "$ref": "#components/parameters/phone_number"
           },
           {
-            "$ref": "#/components/parameters/recording_available"
+            "$ref": "#components/parameters/recording_available"
           },
           {
-            "$ref": "#/components/parameters/type"
+            "$ref": "#components/parameters/type"
           },
           {
-            "$ref": "#/components/parameters/user"
+            "$ref": "#components/parameters/user"
           }
         ],
         "responses": {
@@ -439,16 +440,16 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/cdrs"
+                  "$ref": "#components/schemas/cdrs"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/cdrs"
+                    "$ref": "#components/examples/cdrs"
                   },
                   "recordings example": {
-                    "$ref": "#/components/examples/cdrs_with_recordings"
+                    "$ref": "#components/examples/cdrs_with_recordings"
                   }
                 }
               }
@@ -486,13 +487,13 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/endpoints"
+                  "$ref": "#components/schemas/endpoints"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/endpoints"
+                    "$ref": "#components/examples/endpoints"
                   }
                 }
               }
@@ -539,16 +540,16 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/user"
+                    "$ref": "#components/schemas/user"
                   }
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/users"
+                    "$ref": "#components/examples/users"
                   }
                 }
               }
@@ -592,7 +593,7 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#/components/parameters/userId"
+            "$ref": "#components/parameters/userId"
           }
         ],
         "responses": {
@@ -603,13 +604,13 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/user"
+                  "$ref": "#components/schemas/user"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/user"
+                    "$ref": "#components/examples/user"
                   }
                 }
               }
@@ -651,13 +652,13 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/user"
+                  "$ref": "#components/schemas/user"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/user"
+                    "$ref": "#components/examples/user"
                   }
                 }
               }
@@ -698,13 +699,13 @@
         "summary": "Creates a webhook subscription for the requested events.\nWhen an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.",
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/vnd.integrate.v1.9.0+json": {
               "schema": {
-                "$ref": "#/components/schemas/webhook_settings"
+                "$ref": "#components/schemas/webhook_settings"
               },
               "examples": {
                 "example": {
-                  "$ref": "#/components/examples/webhook_settings"
+                  "$ref": "#components/examples/webhook_settings"
                 }
               }
             }
@@ -719,13 +720,13 @@
             },
             "description": "Accepted",
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/webhook_subscription"
+                  "$ref": "#components/schemas/webhook_subscription"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/webhook_subscription"
+                    "$ref": "#components/examples/webhook_subscription"
                   }
                 }
               }
@@ -750,6 +751,17 @@
             "$ref": "#/components/responses/InternalServerError"
           }
         },
+        "callbacks": {
+          "CallRinging": {
+            "$ref": "#components/callbacks/call_ringing"
+          },
+          "CallAnswered": {
+            "$ref": "#components/callbacks/call_answered"
+          },
+          "CallCompleted": {
+            "$ref": "#components/callbacks/call_completed"
+          }
+        },
         "tags": [
           "Webhooks"
         ],
@@ -768,7 +780,7 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#/components/parameters/subscriptionId"
+            "$ref": "#components/parameters/subscriptionId"
           }
         ],
         "responses": {
@@ -810,7 +822,7 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#/components/parameters/subscriptionId"
+            "$ref": "#components/parameters/subscriptionId"
           }
         ],
         "responses": {
@@ -821,13 +833,13 @@
               }
             },
             "content": {
-              "application/json": {
+              "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/webhook_subscription"
+                  "$ref": "#components/schemas/webhook_subscription"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#/components/examples/webhook_subscription"
+                    "$ref": "#components/examples/webhook_subscription"
                   }
                 }
               }
@@ -1618,21 +1630,6 @@
             "description": "Indicates if subscription is enabled"
           }
         }
-      },
-      "call_answered": {
-        "type": "object",
-        "title": "Call Ringing",
-        "description": "Call ringing webhook event."
-      },
-      "call_completed": {
-        "type": "object",
-        "title": "Call Ringing",
-        "description": "Call ringing webhook event."
-      },
-      "call_ringing": {
-        "type": "object",
-        "title": "Call Ringing",
-        "description": "Call ringing webhook event."
       }
     },
     "responses": {
@@ -1829,6 +1826,18 @@
           "type": "string",
           "enum": [
             "application/vnd.integrate.v1.9.0+json"
+          ]
+        }
+      },
+      "Authorization": {
+        "name": "Authorization",
+        "required": true,
+        "in": "header",
+        "description": "The bearer token",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "Bearer 0l9k8j7h6g5f4d3s2a1"
           ]
         }
       },
@@ -2352,78 +2361,94 @@
           ]
         }
       }
-    }
-  },
-  "webhooks": {
-    "call_answered": {
-      "tags": [
-        "Webhooks"
-      ],
-      "summary": "Call Ringing",
-      "description": "Call ringing webhook event.",
-      "post": {
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#components/schemas/webhook_call"
-                },
-                "examples": {
-                  "example": {
-                    "$ref": "#components/examples/webhook_call_answered"
-                  }
-                }
-              }
-            }
+    },
+    "securitySchemes": {
+      "password": {
+        "type": "oauth2",
+        "description": "Add your net2phone credentials below in order to get a token and test the API. Please choose `Request Body` in the dropbox before clicking the `Get Token` button.",
+        "x-client-id": 5126610649874432,
+        "x-client-secret": "LAwJ4AqpjyiAahJYqVcKEguxPf5pbFR8HS7iRds6Wt1f1ll5xw",
+        "flows": {
+          "password": {
+            "tokenUrl": "/oauth/token/"
           }
         }
       }
     },
-    "call_completed": {
-      "tags": [
-        "Webhooks"
-      ],
-      "summary": "Call Ringing",
-      "description": "Call ringing webhook event.",
-      "post": {
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#components/schemas/webhook_call"
-                },
-                "examples": {
-                  "example": {
-                    "$ref": "#components/examples/webhook_call_completed"
+    "callbacks": {
+      "call_answered": {
+        "{$request.query.post_uri}": {
+          "post": {
+            "requestBody": {
+              "description": "This event is triggered when a call is answered.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#components/schemas/webhook_call"
+                  },
+                  "examples": {
+                    "example": {
+                      "$ref": "#components/examples/webhook_call_answered"
+                    }
                   }
                 }
+              }
+            },
+            "responses": {
+              "default": {
+                "description": "The response of the webhook endpoint is discarded, webhook requests are never retried."
               }
             }
           }
         }
-      }
-    },
-    "call_ringing": {
-      "tags": [
-        "Webhooks"
-      ],
-      "summary": "Call Ringing",
-      "description": "Call ringing webhook event.",
-      "post": {
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#components/schemas/webhook_call"
-                },
-                "examples": {
-                  "example": {
-                    "$ref": "#components/examples/webhook_call_ringing"
+      },
+      "call_completed": {
+        "{$request.query.post_uri}": {
+          "post": {
+            "requestBody": {
+              "description": "This event is triggered when a call is completed.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#components/schemas/webhook_call"
+                  },
+                  "examples": {
+                    "example": {
+                      "$ref": "#components/examples/webhook_call_completed"
+                    }
                   }
                 }
+              }
+            },
+            "responses": {
+              "default": {
+                "description": "The response of the webhook endpoint is discarded, webhook requests are never retried."
+              }
+            }
+          }
+        }
+      },
+      "call_ringing": {
+        "{$request.query.post_uri}": {
+          "post": {
+            "requestBody": {
+              "description": "This event is triggered when a call is ringing.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#components/schemas/webhook_call"
+                  },
+                  "examples": {
+                    "example": {
+                      "$ref": "#components/examples/webhook_call_ringing"
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "default": {
+                "description": "The response of the webhook endpoint is discarded, webhook requests are never retried."
               }
             }
           }
@@ -2431,6 +2456,7 @@
       }
     }
   },
+  "webhooks": {},
   "security": [
     {
       "password": []

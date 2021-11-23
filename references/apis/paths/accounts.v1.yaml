@@ -9,11 +9,11 @@ paths:
       responses:
         200:
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#/components/schemas/account_settings"
+                $ref: "#components/schemas/account_settings"
               examples:
                 example:
-                  $ref: "#/components/examples/account_settings"
+                  $ref: "#components/examples/account_settings"
                 default:
-                  $ref: "#/components/examples/account_settings_default"
+                  $ref: "#components/examples/account_settings_default"
