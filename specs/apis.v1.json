@@ -306,7 +306,7 @@
     "/cdrs/users/current/": {
       "get": {
         "summary": "Current user CDRs",
-        "description": "Get list of all cdrs on the account for the current user",
+        "description": "Get list of all CDRs on the account for the current user",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -393,7 +393,7 @@
     "/cdrs/users/{userId}/": {
       "get": {
         "summary": "User CDRs by ID",
-        "description": "Get list of all cdrs on the account for the current user",
+        "description": "Get list of all CDRs on the account for the current user",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"

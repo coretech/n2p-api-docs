@@ -58,7 +58,7 @@ paths:
   /cdrs/users/current/:
     get:
       summary: Current user CDRs
-      description: Get list of all cdrs on the account for the current user
+      description: Get list of all CDRs on the account for the current user
       parameters:
         - $ref: "#components/parameters/start_date"
         - $ref: "#components/parameters/end_date"
@@ -87,7 +87,7 @@ paths:
   /cdrs/users/{userId}/:
     get:
       summary: User CDRs by ID
-      description: Get list of all cdrs on the account for the current user
+      description: Get list of all CDRs on the account for the current user
       parameters:
         - $ref: "#components/parameters/userId"
         - $ref: "#components/parameters/start_date"
