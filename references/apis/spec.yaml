@@ -13,6 +13,26 @@ info:
     table {
       margin: 20px auto !important;
     }
+    .note {
+      background-color: #DDEBFF;
+      border-left: 5px solid #0095FF;
+      padding: 2px 5px;
+    }
+    div.note {
+      padding: 2px 5px;
+      margin-top: 10px;
+    }
+    div.note > ul {
+      padding-inline-start: 15px;
+      margin-block: unset;
+    }
+    div.note > ul > p {
+      padding-inline-start: unset;
+      margin-left: -17px;
+    }
+    div.note > ul > li {
+      margin-left: 20px;
+    }
     </style>
 
     # Getting Started
@@ -33,7 +53,7 @@ info:
 
     Once you have an **Access Token**, you can make API requests against the net2phone API. Below is an example of how to request the `Current User` endpoint using your **Access Token** in the Authorization header. 
 
-    *Note. Pay attention to the Accept header which is used for API versioning.*
+    <p class="note">NOTE. Pay attention to the Accept header which is used for API versioning.</p>
 
     <h4> Request </h4>
 
@@ -80,15 +100,11 @@ info:
 
     - [Choosing The Authentication Flow](#choosing-the-authentication-flow)
     - [Authorization Code Grant](#authorization-code-grant)
-      - [Authentication Steps](#authentication-steps)
     - [Resource Owner Password](#resource-owner-password)
-      - [Authentication Steps](#authentication-steps-1)
     - [Implicit](#implicit)
-      - [Authentication Steps](#authentication-steps-2)
     - [Token Types](#token-types)
       - [Access Token](#access-token)
       - [Refresh Token](#refresh-token)
-        - [Authentication Steps](#authentication-steps-3)
       - [Token Response](#responses)
     
     <h2 id="choosing-the-authentication-flow"> Choosing The Authentication Flow </h2>
@@ -161,17 +177,17 @@ info:
     
     5. The user will then be redirected to your redirect URL with a temporary code (valid for 60 seconds only) and the state (if supplied).
 
-    6. Your integration will then request an **Access Token** and a **Refresh Token** for the user with a POST request the following endpoint with your **client_id**, **code**, **redirect_uri**, and **grant_type**:
+    6. Your integration will then request an **Access Token** and a **Refresh Token** for the user with a POST request the following endpoint with your **Client ID**, **code**, **redirect URL**, and **grant_type**:
     
     ```bash
     curl -X "POST" "https://integrate.versature.com/api/oauth/token/" \
         -H 'Content-Type: application/json' \
         -d $'{
-      "client_id": "1234567890",
-      "code": "a1b2c3d4e5f6g7h8i9j0",
-      "redirect_uri": "https://developer.net2phone.com/",
-      "grant_type": "authorization_code"
-    }'
+              "client_id": "1234567890",
+              "code": "a1b2c3d4e5f6g7h8i9j0",
+              "redirect_uri": "https://developer.net2phone.com/",
+              "grant_type": "authorization_code"
+            }'
     ```
 
     7. Your application will receive the **Access Token** and the **Refresh Token**.
@@ -183,9 +199,13 @@ info:
 
     If you are creating a backend service you can use the Password Authentication Flow.
 
-    NOTES:
-    - This flow is **NOT** supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the **Authorization Code Grant** flow.
-    - Store the **admin user** username and password securely in the backend service configuration.
+    <div class="note">
+      <ul> 
+        <p>NOTES:</p>
+        <li>This flow is <strong>NOT</strong> supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the <strong>Authorization Code Grant</strong> flow.</li>
+        <li>Store the <strong>admin user</strong> username and password securely in the backend service configuration.</li>
+      </ul>
+    </div>
 
     ![Resource Owner Password Grant Diagram](/images/documentation/auth/password-grant.png)
 
@@ -197,12 +217,12 @@ info:
     curl -X "POST" "https://integrate.versature.com/api/oauth/token/" \
         -H 'Content-Type: application/json' \
         -d $'{
-      "client_id": "1234567890",
-      "username": "5067",
-      "password": "your_awesome_password!",
-      "client_secret": "JgsSbZQfw6CVPaIJpkjfTTvPGfBq1sBAWVpGvaRlEt0TAuvfO0",
-      "grant_type": "password"
-    }'
+              "client_id": "1234567890",
+              "username": "5067",
+              "password": "your_awesome_password!",
+              "client_secret": "JgsSbZQfw6CVPaIJpkjfTTvPGfBq1sBAWVpGvaRlEt0TAuvfO0",
+              "grant_type": "password"
+            }'
     ```
 
     2. Your application will receive the **Access Token** and the **Refresh Token**.
@@ -259,13 +279,13 @@ info:
 
     As the name implies, this token allows obtaining a new **Access Token** without re-entering the client’s credentials.
 
-    *Note. In this case, the Authorization header takes the B64 encoded string of the Client ID and Client Secret with a colon (`:`) in between as the Bearer token. So it will be like this: `base64_encode(client_id:client_secret)`.*
+    <p class="note">NOTE. In this case, the Authorization header takes the B64 encoded string of the Client ID and Client Secret with a colon (<code>:</code>) in between as the Bearer token. So it will be like this: <code>base64_encode(client_id:client_secret)</code>.</p>
 
-    *Example:*
+    Example:
 
-    *a. regular string (before encoding): `1234567890:JgsSbZQfw6CVPaIJpkjfTTvPGfBq1sBAWVpGvaRlEt0TAuvfO0`*
+    a. regular string (before encoding): `1234567890:JgsSbZQfw6CVPaIJpkjfTTvPGfBq1sBAWVpGvaRlEt0TAuvfO0`
 
-    *b. b64 string (after encoding): `MTIzNDU2Nzg5MDpKZ3NTYlpRZnc2Q1ZQYUlKcGtqZlRUdlBHZkJxMXNCQVdWcEd2YVJsRXQwVEF1dmZPMA==`*
+    b. b64 string (after encoding): `MTIzNDU2Nzg5MDpKZ3NTYlpRZnc2Q1ZQYUlKcGtqZlRUdlBHZkJxMXNCQVdWcEd2YVJsRXQwVEF1dmZPMA==`
 
     <h4 id="authentication-steps-3"> Authentication Steps </h4>
 
@@ -276,12 +296,12 @@ info:
         -H 'Authorization: Bearer <B64 ENCODED CREDENTIALS>' \
         -H 'Content-Type: application/json; charset=utf-8' \
         -d $'{
-      "refresh_token": "ABC382SH4028FKWNF7WGSKWI",
-      "grant_type": "refresh_token"
-    }'
+              "refresh_token": "ABC382SH4028FKWNF7WGSKWI",
+              "grant_type": "refresh_token"
+            }'
     ```
 
-    *Note. New **Access Tokens** can be obtained upon expiry with the use of the Refresh Token grant. Once the **Refresh Token** expires, users will have to re-authenticate to obtain a new set of Tokens.*
+    <p class="note">NOTE. New <strong>Access Tokens</strong> can be obtained upon expiry with the use of the Refresh Token grant. Once the <strong>Refresh Token</strong> expires, users will have to re-authenticate to obtain a new set of Tokens.</p>
 
     <h3 id="responses"> Token Response </h3>
 
@@ -298,20 +318,20 @@ info:
     ```json
     HTTP/1.1 200 OK
     {
-    "user_id": "123",
-    "access_token": "0l9k8j7h6g5f4d3s2a1", 
-    "expires": "2021-10-15T15:44:54.058887", 
-    "expires_in": 3599, 
-    "refresh_token": "a1b2c3d4e5"
+      "user_id": "123",
+      "access_token": "0l9k8j7h6g5f4d3s2a1", 
+      "expires": "2021-10-15T15:44:54.058887", 
+      "expires_in": 3599, 
+      "refresh_token": "a1b2c3d4e5"
     }
     ```
 
   version: "1.9.0"
 servers:
-  # - url: https://integrate.versature.com/api
-  #   description: Production net2phone integrate API endpoint
-  - url: https://versature-integrate-2-test.appspot.com/api
-    description: Test net2phone integrate API endpoint
+  - url: https://integrate.versature.com/api
+    description: Production net2phone integrate API endpoint
+  # - url: https://versature-integrate-2-test.appspot.com/api
+  #   description: Test net2phone integrate API endpoint
 
   #   description: Developement environment API endpoint
 #components:
@@ -330,3 +350,4 @@ servers:
 #          api: API
 security:
   - password: []
+#  - oauth: []
