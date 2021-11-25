@@ -31,7 +31,7 @@ info:
       padding-inline-start: 15px;
       margin-block: unset;
     }
-    div.note > ul > span {
+    div.note > ul > p {
       padding-inline-start: unset;
       margin-left: -17px;
     }
@@ -58,7 +58,7 @@ info:
 
     Once you have an **Access Token**, you can make API requests against the net2phone API. Below is an example of how to request the `Current User` endpoint using your **Access Token** in the Authorization header. 
 
-    <p class="note"><span class="warning">&#9888;&#65039;</span> Pay attention to the Accept header which is used for API versioning.</p>
+    <p class="note">Pay attention to the Accept header which is used for API versioning.</p>
 
     #### Request
 
@@ -199,7 +199,6 @@ info:
     If you are creating a backend service you can use the Password Authentication Flow.
 
     <div class="note">
-      <p><span class="warning">&#9888;&#65039;</span>Please note:</p>
       <ul> 
         <li>This flow is <strong>NOT</strong> supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the <strong>Authorization Code Grant</strong> flow.</li>
         <li>Store the <strong>admin user</strong> username and password securely in the backend service configuration.</li>
@@ -273,8 +272,7 @@ info:
     As the name implies, this token allows obtaining a new **Access Token** without re-entering the client’s credentials.
 
     <div class="note">
-      <p><span class="warning">&#9888;&#65039;</span>
-      In this case, the Authorization header takes the B64 encoded string of the Client ID and Client Secret with a colon (<code>:</code>) in between as the Bearer token. So it will be like this: <code>base64_encode(client_id:client_secret)</code>.</p>
+      <p>In this case, the Authorization header takes the B64 encoded string of the Client ID and Client Secret with a colon (<code>:</code>) in between as the Bearer token. So it will be like this: <code>base64_encode(client_id:client_secret)</code>.</p>
 
       <p>Example:</p>
       <ul>
@@ -297,7 +295,7 @@ info:
             }'
     ```
 
-    <p class="note"><span class="warning">&#9888;&#65039;</span> New <strong>Access Tokens</strong> can be obtained upon expiry with the use of the Refresh Token grant. Once the <strong>Refresh Token</strong> expires, users will have to re-authenticate to obtain a new set of Tokens.</p>
+    <p class="note">New <strong>Access Tokens</strong> can be obtained upon expiry with the use of the Refresh Token grant. Once the <strong>Refresh Token</strong> expires, users will have to re-authenticate to obtain a new set of Tokens.</p>
 
     <h3 id="token-response">Token Response</h3>
 
@@ -324,10 +322,10 @@ info:
 
   version: "1.9.0"
 servers:
-  - url: https://integrate.versature.com/api
-    description: Production net2phone integrate API endpoint
-  # - url: https://versature-integrate-2-test.appspot.com/api
-  #   description: Test net2phone integrate API endpoint
+  # - url: https://integrate.versature.com/api
+  #   description: Production net2phone integrate API endpoint
+  - url: https://versature-integrate-2-test.appspot.com/api
+    description: Test net2phone integrate API endpoint
 
   #   description: Developement environment API endpoint
 #components:
