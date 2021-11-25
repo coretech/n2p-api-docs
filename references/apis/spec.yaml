@@ -13,10 +13,15 @@ info:
     table {
       margin: 20px auto !important;
     }
+    .warning {
+      font-size: 1.3rem !important;
+      vertical-align: bottom;
+    }
     .note {
       background-color: #DDEBFF;
       border-left: 5px solid #0095FF;
       padding: 2px 5px;
+      color: #444 !important;
     }
     div.note {
       padding: 2px 5px;
@@ -26,7 +31,7 @@ info:
       padding-inline-start: 15px;
       margin-block: unset;
     }
-    div.note > ul > p {
+    div.note > ul > span {
       padding-inline-start: unset;
       margin-left: -17px;
     }
@@ -41,21 +46,21 @@ info:
 
     To obtain the credentials needed for authentication and make your first request against our API, follow the steps below. And if you have any issues along the way, please reach out to [integrations@net2phone.com](mailto:integrations@net2phone.com) and we will be glad to help.
 
-    <h3> 1. Fill The Form </h3>
+    ### 1. Fill The Form
 
     The first thing you will need is credentials for your application. The required application credentials consist of a **Client ID** and **Client Secret** which can be created by filling up the contact form on our home page. You'll have an option to provide a `Redirect URL` to your application. Make sure to access our [Authentication Documentation](#overview--authentication) to decide if you need that.
 
-    <h3> 2. Client Id and Client Secret </h3>
+    ### 2. Client Id and Client Secret
 
     You will shortly receive an email from us with the credentials you need. These keys are unique to your application. Please keep your **Client Secret** hidden. You will exchange these keys for an **Access Token** that will permit you to make requests against the net2phone API. You may have to use only **Client Id** or both **Id** and **Secret**.
 
-    <h3> 3. API Request </h3>
+    ### 3. API Request
 
     Once you have an **Access Token**, you can make API requests against the net2phone API. Below is an example of how to request the `Current User` endpoint using your **Access Token** in the Authorization header. 
 
-    <p class="note">NOTE. Pay attention to the Accept header which is used for API versioning.</p>
+    <p class="note"><span class="warning">&#9888;&#65039;</span> Pay attention to the Accept header which is used for API versioning.</p>
 
-    <h4> Request </h4>
+    #### Request
 
     ```bash
     curl -X "GET" "https://integrate.versature.com/api/users/current/" \
@@ -64,7 +69,7 @@ info:
     -H 'Content-Type: application/json; charset=utf-8'
     ```
 
-    <h4> Response </h4>
+    #### Response
 
     ```json
     HTTP/1.1 200 OK
@@ -79,7 +84,7 @@ info:
     }
     ```
 
-    <h3> 4. What's Next? </h3>
+    ### 4. What's Next?
 
     Now that you have a feel for the net2phone API, we recommend that you:
       - Have a look through our [API Documentation](/explore/apis#servers) to see all the data that is available to you.
@@ -96,16 +101,16 @@ info:
 
     On the <a href="https://oauth.net/code/" target="_blank">same page</a>, you will find libraries in different languages that will help to implement OAuth 2.0 based auth.
 
-    <h3>Table of Contents</h3>
+    ### Table of Content
 
     - [Choosing The Authentication Flow](#choosing-the-authentication-flow)
-    - [Authorization Code Grant](#authorization-code-grant)
-    - [Resource Owner Password](#resource-owner-password)
-    - [Implicit](#implicit)
+      - [Authorization Code Grant](#authorization-code-grant)
+      - [Resource Owner Password](#resource-owner-password)
+      - [Implicit](#implicit)
     - [Token Types](#token-types)
       - [Access Token](#access-token)
       - [Refresh Token](#refresh-token)
-      - [Token Response](#responses)
+      - [Token Response](#token-response)
     
     <h2 id="choosing-the-authentication-flow"> Choosing The Authentication Flow </h2>
 
@@ -115,10 +120,7 @@ info:
     | Resource Owner Password Flow | Background service (machine-to-machine) | A background job that processes all account CDRs each month and exports it to an email |
     | Implicit Flow | Front-end only applications or native apps | A React Single Page application that gets a list of all calls for a specific user and allows the user to filter and download it |
     
-    <br />
-    <hr />
-    
-    <h2 id="authorization-code-grant"> Authorization Code Grant </h2>
+    <h3 id="authorization-code-grant">Authorization Code Grant</h3>
     
     In this type of grant, your server-side application changes an Authorization Code for an **Access Token**. To use this flow, you will need to fill out the form and register a redirect URL with N2P to acquire the **Client ID** and **Client Secret**.
 
@@ -126,7 +128,7 @@ info:
 
     ![Authorization Code Grant Diagram](/images/documentation/auth/authorization-code-grant.png)
 
-    <h3 id="authentication-steps"> Authentication Steps </h3>
+    #### Authentication Steps
 
     1. A user clicks the Login link within your application.
     2. Redirect the user to the authorization endpoint `https://integrate.versature.com/oauth/authorize/` with the following parameters:
@@ -191,17 +193,14 @@ info:
     ```
 
     7. Your application will receive the **Access Token** and the **Refresh Token**.
-
-    <br />
-    <hr />
     
-    <h2 id="resource-owner-password"> Resource Owner Password </h2>
+    <h3 id="resource-owner-password">Resource Owner Password</h3>
 
     If you are creating a backend service you can use the Password Authentication Flow.
 
     <div class="note">
+      <p><span class="warning">&#9888;&#65039;</span>Please note:</p>
       <ul> 
-        <p>NOTES:</p>
         <li>This flow is <strong>NOT</strong> supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the <strong>Authorization Code Grant</strong> flow.</li>
         <li>Store the <strong>admin user</strong> username and password securely in the backend service configuration.</li>
       </ul>
@@ -209,7 +208,7 @@ info:
 
     ![Resource Owner Password Grant Diagram](/images/documentation/auth/password-grant.png)
 
-    <h3 id="authentication-steps-1"> Authentication Steps </h3>
+    #### Authentication Steps
 
     1. To obtain the **Access Token**, your integration will POST a request to the following endpoint with the admin user **username**, **password**, **client_id**, **client_secret**, and **grant_type**:
 
@@ -227,16 +226,13 @@ info:
 
     2. Your application will receive the **Access Token** and the **Refresh Token**.
 
-    <br />
-    <hr />
-
-    <h2 id="implicit"> Implicit </h2>
+    <h3 id="implicit">Implicit</h3>
 
     In this flow, your front-end application will redirect the user to the net2phone authorization endpoint. The user will add his credentials and give permission to the application. Then they will be redirected to your redirect URL with the **Access Token** in the URL fragment.
 
     ![Implicit Grant Diagram](/images/documentation/auth/implicit-grant.png)
 
-    <h3 id="authentication-steps-2"> Authentication Steps </h3>
+    #### Authentication Steps
 
     1. A user clicks the Login link within your application.
 
@@ -266,28 +262,28 @@ info:
     https://www.example.com/callback/#user_id=5067&access_token=fIYYaIaHkCgcaKpiM4-pKzzraojwPlUkNwGwPCptkjIED-tbBMX0miI40BJ8F-biTDZ3VfD-fwycrn-Guf9cTdFxqZ3ChxrvswldmUenyWPoxLQaNNXy10bhp4KCCIN92KN3954axuTAxZE8&expires=2021-11-04T20%3A08%3A16.326311&expires_in=3597
     ```
 
-    <br />
-    <hr />
-
     <h2 id="token-types"> Token Types </h2>
 
-    <h3 id="access-token"> Access Token </h3>
+    <h3 id="access-token">Access Token</h3>
 
     It's a specific string created by the net2phone server to inform the net2phone API that the client has been authorized to access the endpoints and perform actions according to its scope.
 
-    <h3 id="refresh-token"> Refresh Token </h3>
+    <h3 id="refresh-token">Refresh Token</h3>
 
     As the name implies, this token allows obtaining a new **Access Token** without re-entering the client’s credentials.
 
-    <p class="note">NOTE. In this case, the Authorization header takes the B64 encoded string of the Client ID and Client Secret with a colon (<code>:</code>) in between as the Bearer token. So it will be like this: <code>base64_encode(client_id:client_secret)</code>.</p>
+    <div class="note">
+      <p><span class="warning">&#9888;&#65039;</span>
+      In this case, the Authorization header takes the B64 encoded string of the Client ID and Client Secret with a colon (<code>:</code>) in between as the Bearer token. So it will be like this: <code>base64_encode(client_id:client_secret)</code>.</p>
 
-    Example:
+      <p>Example:</p>
+      <ul>
+        <li>regular string (before encoding): <code>1234567890:JgsSbZQfw6CVPaIJpkjfTTvPGfBq1sBAWVpGvaRlEt0TAuvfO0</code></li>
+        <li>b64 string (after encoding): <code>MTIzNDU2Nzg5MDpKZ3NTYlpRZnc2Q1ZQYUlKcGtqZlRUdlBHZkJxMXNCQVdWcEd2YVJsRXQwVEF1dmZPMA==</code></li>
+      </ul>
+    </div>
 
-    a. regular string (before encoding): `1234567890:JgsSbZQfw6CVPaIJpkjfTTvPGfBq1sBAWVpGvaRlEt0TAuvfO0`
-
-    b. b64 string (after encoding): `MTIzNDU2Nzg5MDpKZ3NTYlpRZnc2Q1ZQYUlKcGtqZlRUdlBHZkJxMXNCQVdWcEd2YVJsRXQwVEF1dmZPMA==`
-
-    <h4 id="authentication-steps-3"> Authentication Steps </h4>
+    #### Authentication Steps
 
     Your integration will POST a request to the following endpoint with the **grant_type** and the **refresh_token**.
 
@@ -301,9 +297,9 @@ info:
             }'
     ```
 
-    <p class="note">NOTE. New <strong>Access Tokens</strong> can be obtained upon expiry with the use of the Refresh Token grant. Once the <strong>Refresh Token</strong> expires, users will have to re-authenticate to obtain a new set of Tokens.</p>
+    <p class="note"><span class="warning">&#9888;&#65039;</span> New <strong>Access Tokens</strong> can be obtained upon expiry with the use of the Refresh Token grant. Once the <strong>Refresh Token</strong> expires, users will have to re-authenticate to obtain a new set of Tokens.</p>
 
-    <h3 id="responses"> Token Response </h3>
+    <h3 id="token-response">Token Response</h3>
 
     All flows' responses will contain:
 
