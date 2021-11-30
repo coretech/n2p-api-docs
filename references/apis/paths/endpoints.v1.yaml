@@ -12,7 +12,7 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/endpoints"
+                $ref: "#/components/schemas/endpoints"
               examples:
                 example:
-                  $ref: "#components/examples/endpoints"
+                  $ref: "#/components/examples/endpoints"

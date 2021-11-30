@@ -11,10 +11,10 @@ paths:
         content:
           application/vnd.integrate.v1.9.0+json:
             schema:
-              $ref: "#components/schemas/webhook_settings"
+              $ref: "#/components/schemas/webhook_settings"
             examples:
               example:
-                $ref: "#components/examples/webhook_settings"
+                $ref: "#/components/examples/webhook_settings"
       responses:
         202:
           headers:
@@ -24,24 +24,24 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/webhook_subscription"
+                $ref: "#/components/schemas/webhook_subscription"
               examples:
                 example:
-                  $ref: "#components/examples/webhook_subscription"
+                  $ref: "#/components/examples/webhook_subscription"
       callbacks:
         CallRinging:
-          $ref: "#components/callbacks/call_ringing"
+          $ref: "#/components/callbacks/call_ringing"
         CallAnswered:
-          $ref: "#components/callbacks/call_answered"
+          $ref: "#/components/callbacks/call_answered"
         CallCompleted:
-          $ref: "#components/callbacks/call_completed"
+          $ref: "#/components/callbacks/call_completed"
   /subscriptions/{subscriptionId}/:
     delete:
       summary: |-
         Delete a webhook subscription with the given id. Updates will no longer be sent the subscription endpoint.
         Note: Users can only delete subscriptions that they created.
       parameters:
-        - $ref: "#components/parameters/subscriptionId"
+        - $ref: "#/components/parameters/subscriptionId"
       responses:
         204:
           headers:
@@ -53,7 +53,7 @@ paths:
         Get the webhook subscription details for the given id. Can be used to verify subscribed events as well the subscription expiry date/time.
         Note: Users can only read subscriptions that they created.
       parameters:
-        - $ref: "#components/parameters/subscriptionId"
+        - $ref: "#/components/parameters/subscriptionId"
       responses:
         200:
           headers:
@@ -62,7 +62,7 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/webhook_subscription"
+                $ref: "#/components/schemas/webhook_subscription"
               examples:
                 example:
-                  $ref: "#components/examples/webhook_subscription"
+                  $ref: "#/components/examples/webhook_subscription"

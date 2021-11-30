@@ -8,10 +8,10 @@ paths:
       summary: "Account CDRs (Termination Date: March 31, 2022)"
       description: Get list of all CDRs on the account
       parameters:
-        - $ref: "#components/parameters/start_date"
-        - $ref: "#components/parameters/end_date"
-        - $ref: "#components/parameters/cursor"
-        - $ref: "#components/parameters/limit"
+        - $ref: "#/components/parameters/start_date"
+        - $ref: "#/components/parameters/end_date"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       responses:
         200:
           headers:
@@ -20,27 +20,27 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/cdrs"
+                $ref: "#/components/schemas/cdrs"
               examples:
                 example:
-                  $ref: "#components/examples/cdrs"
+                  $ref: "#/components/examples/cdrs"
                 recordings example:
-                  $ref: "#components/examples/cdrs_with_recordings"
+                  $ref: "#/components/examples/cdrs_with_recordings"
   /cdrs/users/:
     get:
       summary: User CDRs
       description: Get list of all user cdrs on the account
       parameters:
-        - $ref: "#components/parameters/start_date"
-        - $ref: "#components/parameters/end_date"
-        - $ref: "#components/parameters/cursor"
-        - $ref: "#components/parameters/page_size"
-        - $ref: "#components/parameters/max_duration"
-        - $ref: "#components/parameters/min_duration"
-        - $ref: "#components/parameters/phone_number"
-        - $ref: "#components/parameters/recording_available"
-        - $ref: "#components/parameters/type"
-        - $ref: "#components/parameters/user"
+        - $ref: "#/components/parameters/start_date"
+        - $ref: "#/components/parameters/end_date"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/page_size"
+        - $ref: "#/components/parameters/max_duration"
+        - $ref: "#/components/parameters/min_duration"
+        - $ref: "#/components/parameters/phone_number"
+        - $ref: "#/components/parameters/recording_available"
+        - $ref: "#/components/parameters/type"
+        - $ref: "#/components/parameters/user"
       responses:
         200:
           headers:
@@ -49,27 +49,27 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/cdrs"
+                $ref: "#/components/schemas/cdrs"
               examples:
                 example:
-                  $ref: "#components/examples/cdrs"
+                  $ref: "#/components/examples/cdrs"
                 recordings example:
-                  $ref: "#components/examples/cdrs_with_recordings"
+                  $ref: "#/components/examples/cdrs_with_recordings"
   /cdrs/users/current/:
     get:
       summary: Current user CDRs
       description: Get list of all cdrs on the account for the current user
       parameters:
-        - $ref: "#components/parameters/start_date"
-        - $ref: "#components/parameters/end_date"
-        - $ref: "#components/parameters/cursor"
-        - $ref: "#components/parameters/page_size"
-        - $ref: "#components/parameters/max_duration"
-        - $ref: "#components/parameters/min_duration"
-        - $ref: "#components/parameters/phone_number"
-        - $ref: "#components/parameters/recording_available"
-        - $ref: "#components/parameters/type"
-        - $ref: "#components/parameters/user"
+        - $ref: "#/components/parameters/start_date"
+        - $ref: "#/components/parameters/end_date"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/page_size"
+        - $ref: "#/components/parameters/max_duration"
+        - $ref: "#/components/parameters/min_duration"
+        - $ref: "#/components/parameters/phone_number"
+        - $ref: "#/components/parameters/recording_available"
+        - $ref: "#/components/parameters/type"
+        - $ref: "#/components/parameters/user"
       responses:
         200:
           headers:
@@ -78,28 +78,28 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/cdrs"
+                $ref: "#/components/schemas/cdrs"
               examples:
                 example:
-                  $ref: "#components/examples/cdrs"
+                  $ref: "#/components/examples/cdrs"
                 recordings example:
-                  $ref: "#components/examples/cdrs_with_recordings"
+                  $ref: "#/components/examples/cdrs_with_recordings"
   /cdrs/users/{userId}/:
     get:
       summary: User CDRs by ID
       description: Get list of all cdrs on the account for the current user
       parameters:
-        - $ref: "#components/parameters/userId"
-        - $ref: "#components/parameters/start_date"
-        - $ref: "#components/parameters/end_date"
-        - $ref: "#components/parameters/cursor"
-        - $ref: "#components/parameters/page_size"
-        - $ref: "#components/parameters/max_duration"
-        - $ref: "#components/parameters/min_duration"
-        - $ref: "#components/parameters/phone_number"
-        - $ref: "#components/parameters/recording_available"
-        - $ref: "#components/parameters/type"
-        - $ref: "#components/parameters/user"
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/start_date"
+        - $ref: "#/components/parameters/end_date"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/page_size"
+        - $ref: "#/components/parameters/max_duration"
+        - $ref: "#/components/parameters/min_duration"
+        - $ref: "#/components/parameters/phone_number"
+        - $ref: "#/components/parameters/recording_available"
+        - $ref: "#/components/parameters/type"
+        - $ref: "#/components/parameters/user"
       responses:
         200:
           headers:
@@ -108,9 +108,9 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/cdrs"
+                $ref: "#/components/schemas/cdrs"
               examples:
                 example:
-                  $ref: "#components/examples/cdrs"
+                  $ref: "#/components/examples/cdrs"
                 recordings example:
-                  $ref: "#components/examples/cdrs_with_recordings"
+                  $ref: "#/components/examples/cdrs_with_recordings"

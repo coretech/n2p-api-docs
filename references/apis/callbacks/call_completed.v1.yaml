@@ -6,10 +6,10 @@ call_completed:
         content:
           application/json:
             schema:
-              $ref: "#components/schemas/webhook_call"
+              $ref: "#/components/schemas/webhook_call"
             examples:
               example:
-                $ref: "#components/examples/webhook_call_completed"
+                $ref: "#/components/examples/webhook_call_completed"
       responses:
         default: 
             description: The response of the webhook endpoint is discarded, webhook requests are never retried.

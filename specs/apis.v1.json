@@ -51,14 +51,14 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/account_settings"
+                  "$ref": "#/components/schemas/account_settings"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/account_settings"
+                    "$ref": "#/components/examples/account_settings"
                   },
                   "default": {
-                    "$ref": "#components/examples/account_settings_default"
+                    "$ref": "#/components/examples/account_settings_default"
                   }
                 }
               }
@@ -103,16 +103,16 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/response_type"
+            "$ref": "#/components/parameters/response_type"
           },
           {
-            "$ref": "#components/parameters/redirect_uri"
+            "$ref": "#/components/parameters/redirect_uri"
           },
           {
-            "$ref": "#components/parameters/client_id"
+            "$ref": "#/components/parameters/client_id"
           },
           {
-            "$ref": "#components/parameters/state"
+            "$ref": "#/components/parameters/state"
           }
         ],
         "responses": {
@@ -157,10 +157,10 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/client_id"
+            "$ref": "#/components/parameters/client_id"
           },
           {
-            "$ref": "#components/parameters/state"
+            "$ref": "#/components/parameters/state"
           }
         ],
         "responses": {
@@ -205,10 +205,10 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/client_id"
+            "$ref": "#/components/parameters/client_id"
           },
           {
-            "$ref": "#components/parameters/access_token"
+            "$ref": "#/components/parameters/access_token"
           }
         ],
         "responses": {
@@ -253,19 +253,19 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/grant_type"
+            "$ref": "#/components/parameters/grant_type"
           },
           {
-            "$ref": "#components/parameters/client_id"
+            "$ref": "#/components/parameters/client_id"
           },
           {
-            "$ref": "#components/parameters/client_secret"
+            "$ref": "#/components/parameters/client_secret"
           },
           {
-            "$ref": "#components/parameters/refresh_token"
+            "$ref": "#/components/parameters/refresh_token"
           },
           {
-            "$ref": "#components/parameters/state"
+            "$ref": "#/components/parameters/state"
           }
         ],
         "responses": {
@@ -278,11 +278,11 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/auth_token"
+                  "$ref": "#/components/schemas/auth_token"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/auth_token"
+                    "$ref": "#/components/examples/auth_token"
                   }
                 }
               }
@@ -321,11 +321,11 @@
           "content": {
             "application/vnd.integrate.v1.9.0+json": {
               "schema": {
-                "$ref": "#components/schemas/call"
+                "$ref": "#/components/schemas/call"
               },
               "examples": {
                 "example": {
-                  "$ref": "#components/examples/call"
+                  "$ref": "#/components/examples/call"
                 }
               }
             }
@@ -379,16 +379,16 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/start_date"
+            "$ref": "#/components/parameters/start_date"
           },
           {
-            "$ref": "#components/parameters/end_date"
+            "$ref": "#/components/parameters/end_date"
           },
           {
-            "$ref": "#components/parameters/cursor"
+            "$ref": "#/components/parameters/cursor"
           },
           {
-            "$ref": "#components/parameters/limit"
+            "$ref": "#/components/parameters/limit"
           }
         ],
         "responses": {
@@ -401,14 +401,14 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/cdrs"
+                  "$ref": "#/components/schemas/cdrs"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/cdrs"
+                    "$ref": "#/components/examples/cdrs"
                   },
                   "recordings example": {
-                    "$ref": "#components/examples/cdrs_with_recordings"
+                    "$ref": "#/components/examples/cdrs_with_recordings"
                   }
                 }
               }
@@ -448,34 +448,34 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/start_date"
+            "$ref": "#/components/parameters/start_date"
           },
           {
-            "$ref": "#components/parameters/end_date"
+            "$ref": "#/components/parameters/end_date"
           },
           {
-            "$ref": "#components/parameters/cursor"
+            "$ref": "#/components/parameters/cursor"
           },
           {
-            "$ref": "#components/parameters/page_size"
+            "$ref": "#/components/parameters/page_size"
           },
           {
-            "$ref": "#components/parameters/max_duration"
+            "$ref": "#/components/parameters/max_duration"
           },
           {
-            "$ref": "#components/parameters/min_duration"
+            "$ref": "#/components/parameters/min_duration"
           },
           {
-            "$ref": "#components/parameters/phone_number"
+            "$ref": "#/components/parameters/phone_number"
           },
           {
-            "$ref": "#components/parameters/recording_available"
+            "$ref": "#/components/parameters/recording_available"
           },
           {
-            "$ref": "#components/parameters/type"
+            "$ref": "#/components/parameters/type"
           },
           {
-            "$ref": "#components/parameters/user"
+            "$ref": "#/components/parameters/user"
           }
         ],
         "responses": {
@@ -488,14 +488,14 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/cdrs"
+                  "$ref": "#/components/schemas/cdrs"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/cdrs"
+                    "$ref": "#/components/examples/cdrs"
                   },
                   "recordings example": {
-                    "$ref": "#components/examples/cdrs_with_recordings"
+                    "$ref": "#/components/examples/cdrs_with_recordings"
                   }
                 }
               }
@@ -535,34 +535,34 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/start_date"
+            "$ref": "#/components/parameters/start_date"
           },
           {
-            "$ref": "#components/parameters/end_date"
+            "$ref": "#/components/parameters/end_date"
           },
           {
-            "$ref": "#components/parameters/cursor"
+            "$ref": "#/components/parameters/cursor"
           },
           {
-            "$ref": "#components/parameters/page_size"
+            "$ref": "#/components/parameters/page_size"
           },
           {
-            "$ref": "#components/parameters/max_duration"
+            "$ref": "#/components/parameters/max_duration"
           },
           {
-            "$ref": "#components/parameters/min_duration"
+            "$ref": "#/components/parameters/min_duration"
           },
           {
-            "$ref": "#components/parameters/phone_number"
+            "$ref": "#/components/parameters/phone_number"
           },
           {
-            "$ref": "#components/parameters/recording_available"
+            "$ref": "#/components/parameters/recording_available"
           },
           {
-            "$ref": "#components/parameters/type"
+            "$ref": "#/components/parameters/type"
           },
           {
-            "$ref": "#components/parameters/user"
+            "$ref": "#/components/parameters/user"
           }
         ],
         "responses": {
@@ -575,14 +575,14 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/cdrs"
+                  "$ref": "#/components/schemas/cdrs"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/cdrs"
+                    "$ref": "#/components/examples/cdrs"
                   },
                   "recordings example": {
-                    "$ref": "#components/examples/cdrs_with_recordings"
+                    "$ref": "#/components/examples/cdrs_with_recordings"
                   }
                 }
               }
@@ -622,37 +622,37 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/userId"
+            "$ref": "#/components/parameters/userId"
           },
           {
-            "$ref": "#components/parameters/start_date"
+            "$ref": "#/components/parameters/start_date"
           },
           {
-            "$ref": "#components/parameters/end_date"
+            "$ref": "#/components/parameters/end_date"
           },
           {
-            "$ref": "#components/parameters/cursor"
+            "$ref": "#/components/parameters/cursor"
           },
           {
-            "$ref": "#components/parameters/page_size"
+            "$ref": "#/components/parameters/page_size"
           },
           {
-            "$ref": "#components/parameters/max_duration"
+            "$ref": "#/components/parameters/max_duration"
           },
           {
-            "$ref": "#components/parameters/min_duration"
+            "$ref": "#/components/parameters/min_duration"
           },
           {
-            "$ref": "#components/parameters/phone_number"
+            "$ref": "#/components/parameters/phone_number"
           },
           {
-            "$ref": "#components/parameters/recording_available"
+            "$ref": "#/components/parameters/recording_available"
           },
           {
-            "$ref": "#components/parameters/type"
+            "$ref": "#/components/parameters/type"
           },
           {
-            "$ref": "#components/parameters/user"
+            "$ref": "#/components/parameters/user"
           }
         ],
         "responses": {
@@ -665,14 +665,14 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/cdrs"
+                  "$ref": "#/components/schemas/cdrs"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/cdrs"
+                    "$ref": "#/components/examples/cdrs"
                   },
                   "recordings example": {
-                    "$ref": "#components/examples/cdrs_with_recordings"
+                    "$ref": "#/components/examples/cdrs_with_recordings"
                   }
                 }
               }
@@ -713,11 +713,11 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/endpoints"
+                  "$ref": "#/components/schemas/endpoints"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/endpoints"
+                    "$ref": "#/components/examples/endpoints"
                   }
                 }
               }
@@ -768,12 +768,12 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#components/schemas/user"
+                    "$ref": "#/components/schemas/user"
                   }
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/users"
+                    "$ref": "#/components/examples/users"
                   }
                 }
               }
@@ -817,7 +817,7 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/userId"
+            "$ref": "#/components/parameters/userId"
           }
         ],
         "responses": {
@@ -830,11 +830,11 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/user"
+                  "$ref": "#/components/schemas/user"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/user"
+                    "$ref": "#/components/examples/user"
                   }
                 }
               }
@@ -878,11 +878,11 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/user"
+                  "$ref": "#/components/schemas/user"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/user"
+                    "$ref": "#/components/examples/user"
                   }
                 }
               }
@@ -925,11 +925,11 @@
           "content": {
             "application/vnd.integrate.v1.9.0+json": {
               "schema": {
-                "$ref": "#components/schemas/webhook_settings"
+                "$ref": "#/components/schemas/webhook_settings"
               },
               "examples": {
                 "example": {
-                  "$ref": "#components/examples/webhook_settings"
+                  "$ref": "#/components/examples/webhook_settings"
                 }
               }
             }
@@ -946,11 +946,11 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/webhook_subscription"
+                  "$ref": "#/components/schemas/webhook_subscription"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/webhook_subscription"
+                    "$ref": "#/components/examples/webhook_subscription"
                   }
                 }
               }
@@ -977,13 +977,13 @@
         },
         "callbacks": {
           "CallRinging": {
-            "$ref": "#components/callbacks/call_ringing"
+            "$ref": "#/components/callbacks/call_ringing"
           },
           "CallAnswered": {
-            "$ref": "#components/callbacks/call_answered"
+            "$ref": "#/components/callbacks/call_answered"
           },
           "CallCompleted": {
-            "$ref": "#components/callbacks/call_completed"
+            "$ref": "#/components/callbacks/call_completed"
           }
         },
         "tags": [
@@ -1004,7 +1004,7 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/subscriptionId"
+            "$ref": "#/components/parameters/subscriptionId"
           }
         ],
         "responses": {
@@ -1046,7 +1046,7 @@
             "$ref": "#/components/parameters/Accept"
           },
           {
-            "$ref": "#components/parameters/subscriptionId"
+            "$ref": "#/components/parameters/subscriptionId"
           }
         ],
         "responses": {
@@ -1059,11 +1059,11 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/schemas/webhook_subscription"
+                  "$ref": "#/components/schemas/webhook_subscription"
                 },
                 "examples": {
                   "example": {
-                    "$ref": "#components/examples/webhook_subscription"
+                    "$ref": "#/components/examples/webhook_subscription"
                   }
                 }
               }
@@ -2609,11 +2609,11 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#components/schemas/webhook_call"
+                    "$ref": "#/components/schemas/webhook_call"
                   },
                   "examples": {
                     "example": {
-                      "$ref": "#components/examples/webhook_call_answered"
+                      "$ref": "#/components/examples/webhook_call_answered"
                     }
                   }
                 }
@@ -2635,11 +2635,11 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#components/schemas/webhook_call"
+                    "$ref": "#/components/schemas/webhook_call"
                   },
                   "examples": {
                     "example": {
-                      "$ref": "#components/examples/webhook_call_completed"
+                      "$ref": "#/components/examples/webhook_call_completed"
                     }
                   }
                 }
@@ -2661,11 +2661,11 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#components/schemas/webhook_call"
+                    "$ref": "#/components/schemas/webhook_call"
                   },
                   "examples": {
                     "example": {
-                      "$ref": "#components/examples/webhook_call_ringing"
+                      "$ref": "#/components/examples/webhook_call_ringing"
                     }
                   }
                 }
