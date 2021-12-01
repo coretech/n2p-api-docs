@@ -6,7 +6,6 @@ paths:
     get:
       summary: Endpoints list
       description: Get list of available endpoints
-      security: []
       responses:
         200:
           content:

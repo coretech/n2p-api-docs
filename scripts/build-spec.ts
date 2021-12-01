@@ -271,7 +271,7 @@ function buildWebhooks() {
     finish("skipped");
     return;
   }
-  
+
   shell.cd('./webhooks')
 
   // get all tags
@@ -313,7 +313,7 @@ function buildWebhooks() {
           },
         },
       },
-    };
+    }
     // build schema
     outSpec.components.schemas[specName] = {
       type: 'object',
