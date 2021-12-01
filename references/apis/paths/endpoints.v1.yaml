@@ -5,7 +5,7 @@ paths:
   /available/endpoint/:
     get:
       summary: Endpoints list
-      description: Get list of avialable endpoints
+      description: Get list of available endpoints
       responses:
         200:
           content:
