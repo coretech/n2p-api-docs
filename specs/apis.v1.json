@@ -22,7 +22,7 @@
     },
     {
       "name": "CDRs",
-      "description": "Get a list of the Call Detail Records (CDR's) for a specific member of your company or for the entire company. Filter your calls by Inbound, Outbound, Missed and get calls for a specific date range. If no CDRs are found for the query the repsonse will be empty."
+      "description": "Get a list of the Call Detail Records (CDR's) for a specific member of your company or for the entire company. Filter your calls by Inbound, Outbound, Missed and get calls for a specific date range. If no CDRs are found for the query the response will be empty."
     },
     {
       "name": "Endpoints",
@@ -148,8 +148,9 @@
     },
     "/cdrs/": {
       "get": {
-        "summary": "Account CDRs",
-        "description": "Get list of all cdrs on the account",
+        "deprecated": true,
+        "summary": "Account CDRs (Termination Date: March 31, 2022)",
+        "description": "Get list of all CDRs on the account",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -305,7 +306,7 @@
     "/cdrs/users/current/": {
       "get": {
         "summary": "Current user CDRs",
-        "description": "Get list of all cdrs on the account for the current user",
+        "description": "Get list of all CDRs on the account for the current user",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -392,7 +393,7 @@
     "/cdrs/users/{userId}/": {
       "get": {
         "summary": "User CDRs by ID",
-        "description": "Get list of all cdrs on the account for the current user",
+        "description": "Get list of all CDRs on the account for the current user",
         "parameters": [
           {
             "$ref": "#/components/parameters/Accept"
@@ -1379,7 +1380,6 @@
           "first_name",
           "last_name",
           "email",
-          "time_zone",
           "scope"
         ],
         "properties": {
@@ -1944,7 +1944,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 1,
-          "maximum": 1000,
+          "maximum": 100,
           "default": 10
         }
       },
@@ -1956,7 +1956,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 1,
-          "maximum": 1000,
+          "maximum": 100,
           "default": 10
         }
       },
