@@ -1,4 +1,4 @@
-password:
+versatureOauth:
   type: oauth2
   description: Add your net2phone credentials below in order to get a token and test the API. Please choose `Request Body` in the dropbox before clicking the `Get Token` button.
   x-client-id: 5679792816914432 # integrate test

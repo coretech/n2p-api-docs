@@ -15,15 +15,15 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/user"
+                  $ref: "#/components/schemas/user"
               examples:
                 example:
-                  $ref: "#components/examples/users"
+                  $ref: "#/components/examples/users"
   /users/{userId}/:
     get:
       summary: Get the user details. If provided the id will be used to get a specific user. If not specified the authenticated user details will be returned. If you wish to retrieve all users across your domain use the "all" argument.
       parameters:
-        - $ref: "#components/parameters/userId"
+        - $ref: "#/components/parameters/userId"
       responses:
         200:
           headers:
@@ -32,10 +32,10 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/user"
+                $ref: "#/components/schemas/user"
               examples:
                 example:
-                  $ref: "#components/examples/user"
+                  $ref: "#/components/examples/user"
   /users/current/:
     get:
       summary: Get the user details for the authenticated user.
@@ -47,7 +47,7 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/schemas/user"
+                $ref: "#/components/schemas/user"
               examples:
                 example:
-                  $ref: "#components/examples/user"
+                  $ref: "#/components/examples/user"
