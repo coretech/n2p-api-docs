@@ -20,6 +20,10 @@ paths:
           headers:
             x-RateLimit-Limit:
               description: 1/second, 15/minute
+          content:
+            application/vnd.integrate.v1.9.0+json:
+              schema:
+                $ref: "#components/parameters/Accept"
 #  /calls/{callId}/:
 #    delete:
 #      summary: Terminate an Active Call

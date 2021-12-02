@@ -272,7 +272,6 @@ function buildWebhooks() {
     finish("skipped");
     return;
   }
-  
 
   shell.cd('./webhooks')
 
@@ -305,11 +304,11 @@ function buildWebhooks() {
             content: {
               "application/json": {
                 schema: {
-                  $ref: spec['allOf']
+                  $ref: spec["allOf"]
                     ? `#/components/schemas/${specName}`
-                    : spec['properties'].$ref,
+                    : spec["properties"].$ref,
                 },
-                examples: spec['examples'], // TODO separate out examples
+                examples: spec["examples"], // TODO separate out examples
               },
             },
           },

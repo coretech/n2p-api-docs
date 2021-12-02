@@ -199,6 +199,7 @@ info:
     If you are creating a backend service you can use the Password Authentication Flow.
 
     <div class="note">
+      <p>Please note:</p>
       <ul> 
         <li>This flow is <strong>NOT</strong> supposed to be used for interactive/user authentication. If you want to request a net2phone username/password from users, please use the <strong>Authorization Code Grant</strong> flow.</li>
         <li>Store the <strong>admin user</strong> username and password securely in the backend service configuration.</li>
@@ -328,7 +329,7 @@ servers:
     description: Test net2phone integrate API endpoint
 
   #   description: Developement environment API endpoint
-#components:
+#/components:
 #  schemas:
 #    securitySchemes:
 #      oauth:
@@ -343,5 +344,4 @@ servers:
 #          profile: Profile
 #          api: API
 security:
-  - password: []
-#  - oauth: []
+  - versatureOauth: []
