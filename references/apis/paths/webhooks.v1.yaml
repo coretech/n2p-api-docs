@@ -9,7 +9,7 @@ paths:
         When an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.
       requestBody:
         content:
-          application/vnd.integrate.v1.9.0+json:
+          application/json:
             schema:
               $ref: "#/components/schemas/webhook_settings"
             examples:
@@ -48,6 +48,10 @@ paths:
             x-RateLimit-Limit:
               description: 1/second, 5/minute
           description: The webhook subscription was deleted successfully.
+          content:
+            application/vnd.integrate.v1.9.0+json:
+              schema:
+                $ref: "#components/parameters/Accept"
     get:
       summary: |-
         Get the webhook subscription details for the given id. Can be used to verify subscribed events as well the subscription expiry date/time.

@@ -344,5 +344,4 @@ servers:
 #          profile: Profile
 #          api: API
 security:
-  - password: []
-#  - oauth: []
+  - versatureOauth: []

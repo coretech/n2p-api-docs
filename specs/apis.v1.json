@@ -96,7 +96,7 @@
         "description": "Place a call from the provided user/device to a given destination. Destination can be sip address or any valid phone number. E164 format is recommended.",
         "requestBody": {
           "content": {
-            "application/vnd.integrate.v1.9.0+json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/call"
               },
@@ -114,6 +114,13 @@
             "headers": {
               "x-RateLimit-Limit": {
                 "description": "1/second, 15/minute"
+              }
+            },
+            "content": {
+              "application/vnd.integrate.v1.9.0+json": {
+                "schema": {
+                  "$ref": "#components/parameters/Accept"
+                }
               }
             }
           },
@@ -699,7 +706,7 @@
         "summary": "Creates a webhook subscription for the requested events.\nWhen an event occurs to which you are subscribed a POST request will be set to your post_uri with a JSON body indicating what occurred.",
         "requestBody": {
           "content": {
-            "application/vnd.integrate.v1.9.0+json": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/webhook_settings"
               },
@@ -790,7 +797,14 @@
                 "description": "1/second, 5/minute"
               }
             },
-            "description": "The webhook subscription was deleted successfully."
+            "description": "The webhook subscription was deleted successfully.",
+            "content": {
+              "application/vnd.integrate.v1.9.0+json": {
+                "schema": {
+                  "$ref": "#components/parameters/Accept"
+                }
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -1829,18 +1843,6 @@
           ]
         }
       },
-      "Authorization": {
-        "name": "Authorization",
-        "required": true,
-        "in": "header",
-        "description": "The bearer token",
-        "schema": {
-          "type": "string",
-          "enum": [
-            "Bearer 0l9k8j7h6g5f4d3s2a1"
-          ]
-        }
-      },
       "callId": {
         "name": "callId",
         "in": "path",
@@ -2338,9 +2340,9 @@
         "value": {
           "post_uri": "https://mydomain.com/webhooks",
           "expires_in": 604800,
-          "calls": false,
+          "calls": true,
           "cdrs": false,
-          "recordings": true,
+          "recordings": false,
           "user": "*"
         }
       },
@@ -2363,7 +2365,7 @@
       }
     },
     "securitySchemes": {
-      "password": {
+      "versatureOauth": {
         "type": "oauth2",
         "description": "Add your net2phone credentials below in order to get a token and test the API. Please choose `Request Body` in the dropbox before clicking the `Get Token` button.",
         "x-client-id": 5126610649874432,
@@ -2459,7 +2461,7 @@
   "webhooks": {},
   "security": [
     {
-      "password": []
+      "versatureOauth": []
     }
   ]
 }
