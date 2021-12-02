@@ -51,7 +51,7 @@ paths:
           content:
             application/vnd.integrate.v1.9.0+json:
               schema:
-                $ref: "#components/parameters/Accept"
+                $ref: "#/components/parameters/Accept"
     get:
       summary: |-
         Get the webhook subscription details for the given id. Can be used to verify subscribed events as well the subscription expiry date/time.

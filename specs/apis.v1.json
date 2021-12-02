@@ -119,7 +119,7 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/parameters/Accept"
+                  "$ref": "#/components/parameters/Accept"
                 }
               }
             }
@@ -801,7 +801,7 @@
             "content": {
               "application/vnd.integrate.v1.9.0+json": {
                 "schema": {
-                  "$ref": "#components/parameters/Accept"
+                  "$ref": "#/components/parameters/Accept"
                 }
               }
             }
