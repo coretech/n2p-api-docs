@@ -60,9 +60,11 @@ function main() {
   dirToComponents('headers')
   dirToComponents('schemas')
   dirToComponents('examples')
-  buildPaths()
-  buildWebhooks()
-  saveSpecFile()
+  dirToComponents('securitySchemes')
+  dirToComponents('callbacks')
+  buildPaths();
+  buildWebhooks();
+  saveSpecFile();
 }
 
 /**
@@ -189,6 +191,7 @@ function buildPaths() {
 
   // build endpoints
   const specNames = getSpecFiles()
+  print(String(specNames))
 
   if (!specNames.length) {
     finish('skipped')
@@ -234,7 +237,8 @@ function buildPaths() {
         if (!method.parameters) {
           method.parameters = []
         }
-        method.parameters.unshift({ $ref: '#/components/parameters/Accept' })
+        method.parameters.unshift({$ref: '#/components/parameters/Accept'})
+        // method.parameters.unshift({$ref: '#/components/parameters/Authorization'})
         // IF WE WANT RATE LIMIT EXCEEDED TO HAVE EXACT DATA
         // get rate limits
         // let rateLimit: string
@@ -255,13 +259,19 @@ function buildPaths() {
     })
 
     Object.assign(outSpec.paths, spec.paths)
+    console.log(outSpec)
   })
 
   finish('done')
 }
 
 function buildWebhooks() {
-  print('building webhooks...', false)
+  print(`building webhooks...`, false)
+  if (!shell.test("-d", `./webhooks`)) {
+    finish("skipped");
+    return;
+  }
+
   shell.cd('./webhooks')
 
   // get all tags
@@ -284,20 +294,20 @@ function buildWebhooks() {
 
     // build webhook
     outSpec.webhooks[specName] = {
-      tags: ['Webhooks'],
-      summary: spec['summary'],
-      description: spec['description'],
+      tags: ["Webhooks"],
+      summary: spec["summary"],
+      description: spec["description"],
       post: {
         responses: {
           200: {
             content: {
-              'application/json': {
+              "application/json": {
                 schema: {
-                  $ref: spec['allOf']
+                  $ref: spec["allOf"]
                     ? `#/components/schemas/${specName}`
-                    : spec['properties'].$ref,
+                    : spec["properties"].$ref,
                 },
-                examples: spec['examples'], // TODO separate out examples
+                examples: spec["examples"], // TODO separate out examples
               },
             },
           },

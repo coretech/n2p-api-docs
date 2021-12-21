@@ -1,0 +1,15 @@
+call_answered:
+  '{$request.query.post_uri}':
+    post:
+      requestBody: 
+        description: This event is triggered when a call is answered.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/webhook_call"
+            examples:
+              example:
+                $ref: "#/components/examples/webhook_call_answered"
+      responses:
+        default: 
+            description: The response of the webhook endpoint is discarded, webhook requests are never retried.

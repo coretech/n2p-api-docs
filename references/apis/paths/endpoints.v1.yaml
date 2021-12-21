@@ -9,7 +9,7 @@ paths:
       responses:
         200:
           content:
-            application/json:
+            application/vnd.integrate.v1.9.0+json:
               schema:
                 $ref: "#/components/schemas/endpoints"
               examples:

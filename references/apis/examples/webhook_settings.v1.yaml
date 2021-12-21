@@ -2,7 +2,7 @@ webhook_settings:
   value:
     post_uri: https://mydomain.com/webhooks
     expires_in: 604800
-    calls: false
+    calls: true
     cdrs: false
-    recordings: true
+    recordings: false
     user: "*"
