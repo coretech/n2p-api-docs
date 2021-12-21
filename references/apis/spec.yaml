@@ -44,7 +44,7 @@ info:
 
     The net2phone API is an HTTP web service that provides programmatic access to selected features of your net2phone account. It empowers you with the ability to create your integrations using our communication data resources, for example, call data records that contain details about phone calls.
 
-    To obtain the credentials needed for authentication and make your first request against our API, follow the steps below. And if you have any issues along the way, please reach out to [integrations@net2phone.com](mailto:integrations@net2phone.com) and we will be glad to help.
+    To obtain the credentials needed for authentication and make your first request against our API, follow the steps below. And if you have any issues along the way, please reach out to [support@net2phone.com](mailto:support@net2phone.com) and we will be glad to help.
 
     ### 1. Fill The Form
 
